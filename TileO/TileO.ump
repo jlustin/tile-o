@@ -1,4 +1,5 @@
 namespace ca.mcgill.ecse223.tileo.model;
+//test comment
 
 class TileO {
 	StateType { Designing {} Playing {} Ended {}}
