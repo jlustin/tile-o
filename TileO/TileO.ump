@@ -1,5 +1,6 @@
 namespace ca.mcgill.ecse223.tileo.model;
 
+//test yinjun 
 class TileO {
 	StateType { Designing {} Playing {} Ended {}}
 	1 <@>- * SpecificGame game;
