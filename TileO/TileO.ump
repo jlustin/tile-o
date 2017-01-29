@@ -1,64 +1,115 @@
 namespace ca.mcgill.ecse223.tileo.model;
 
-class TileO {
-	StateType { Designing {} Playing {} Ended {}}
-	1 <@>- * SpecificGame game;
+
+class TileO	{
+	Integer number_of_players;
 }
 
-class SpecificGame {
-	
+class User{
+	* <@>- 1 Designer;
+	* <@>- 1 Player;
 }
 
-class User {
-
-}
-
-class Player {
+class Designer	{
 	isA User;
+	1 designer -- 1 TileO game;
 }
 
-class Designer {
+class Player	{
 	isA User;
+	2..4 players -- 1 SpecificGame boardGame;
+	1 player -- 1 PlayingPiece avatar;
 }
 
-class Element {
-
-}
-
-class Location {
-	Integer xComponent;
-	Integer yComponent;
-}
-
-class Tile {
-	colour;
-	Location location;
-	Boolean isBeingSteppedOn;
-	Boolean hasBeenVisited;
+class PlayingPiece	{
+	isA Element;
+	String color;
+	Boolean myTurn;
 	
-}
-
-class HiddenTile {
-	isA Tile;
-}
-
-class ActionTile {
-	isA Tile;
-}
-
-class NormalTile {
-	isA Tile;
-}
-
-class Deck {
-	Integer numberOfCards;
-	ActionCard topCard;
+	Integer xStart;
+	Integer yStart;
+	Integer xCurrent;
+	Integer yCurrent;
 	
+	Boolean canDrawCard;
 }
 
-class ActionCard {
-	ActionCardType { DiceRoll {} Connection {} Removal {} Move {} TurnLoss {} }
-	effect;
+class SpecificGame	{
+	1 boardGame -- * Element gameElement;
+	isA TileO;
+	Integer roundNumber;
+}
+
+class Element	{
+	Integer quantity;
+}
+
+class Die	{
+	isA Element;
+	Integer number_of_faces;
+	Integer roller_number;
+}
+
+class Deck	{
+	isA Element;
+	1 deck <@>- 32 ActionCard actionCards;
+	Integer numberOf;
+}
+
+class Board	{
+	isA Element;
+	
+	1 board <@>- * ConnectionPiece;
+	1 board <@>- * Tile tiles;
+	
+	Integer numberOfTiles;
+	Integer xAxis_size;
+	Integer yAxis_size;
+	String totalSize;
+}
+
+class ConnectionPiece	{
+	* -- 1 Tile;
+	Boolean isVisible;
+}
+
+class Tile	{
+	String color;
+	Integer xLocation;
+	Integer yLocation;
+	Boolean isRightConnected;
+	Boolean isLeftConnected;
+	Boolean isTopConnected;
+	Boolean isBotConnected;
+	Boolean isOccupied;
+	Boolean isVisited;
+}
+
+class HiddenTile{
+	isA Tile;
+}
+
+class ActionTile{
+	isA Tile;
+	Boolean isNormal;
+	Integer turnsLeft;
+}
+
+class NormalTile{
+	isA Tile;
 }
 
 
+
+
+
+
+class ActionCard	{
+	actionCardType{
+		diceRoll{}
+		connection{}
+		removal{}
+		move{}
+		turnLoss{}
+	};
+}
