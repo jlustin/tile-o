@@ -2,7 +2,13 @@ namespace ca.mcgill.ecse223.tileo.model;
 
 
 class TileO	{
-	Integer number_of_players;
+	Integer numberOfPlayers;
+	state;
+	1 -- 1 GameState;
+}
+
+class GameState {
+	GameStateType { Start{} Playing{} Designing{} End{} }
 }
 
 class User{
@@ -11,12 +17,10 @@ class User{
 }
 
 class Designer	{
-	isA User;
 	1 designer -- 1 TileO game;
 }
 
 class Player	{
-	isA User;
 	2..4 players -- 1 SpecificGame boardGame;
 	1 player -- 1 PlayingPiece avatar;
 }
@@ -46,14 +50,20 @@ class Element	{
 
 class Die	{
 	isA Element;
-	Integer number_of_faces;
-	Integer roller_number;
+	Integer numberOfFaces;
+	Integer rollResult;
 }
 
 class Deck	{
 	isA Element;
 	1 deck <@>- 32 ActionCard actionCards;
-	Integer numberOf;
+	Integer numberOfCards;
+	topCard;
+}
+
+class ActionCard{
+	effect;
+	ActionCardType { DiceRoll{} Correction{} Removal{} Move{} TurnLoss{} }
 }
 
 class Board	{
@@ -63,14 +73,16 @@ class Board	{
 	1 board <@>- * Tile tiles;
 	
 	Integer numberOfTiles;
+	Integer numberOfCases;
 	Integer xAxis_size;
 	Integer yAxis_size;
 	String totalSize;
 }
 
 class ConnectionPiece	{
-	* -- 1 Tile;
+	0..4 connections -- 1 Tile;
 	Boolean isVisible;
+	Integer numberOfConnectedTiles;
 }
 
 class Tile	{
@@ -98,32 +110,3 @@ class ActionTile{
 class NormalTile{
 	isA Tile;
 }
-
-
-
-
-
-
-class ActionCard	{
-	actionCardType{
-		diceRoll{}
-		connection{}
-		removal{}
-		move{}
-		turnLoss{}
-	};
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
