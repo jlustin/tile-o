@@ -11,18 +11,19 @@ class GameState {
 	GameStateType { Start{} Playing{} Designing{} End{} }
 }
 
-class User{
-	* <@>- 1 Designer;
-	* <@>- 1 Player;
+class User{	
 }
 
 class Designer	{
 	1 designer -- 1 TileO game;
+	isA User;
 }
 
 class Player	{
 	2..4 players -- 1 SpecificGame boardGame;
 	1 player -- 1 PlayingPiece avatar;
+	isA User;
+	Integer playerNumber;
 }
 
 class PlayingPiece	{
