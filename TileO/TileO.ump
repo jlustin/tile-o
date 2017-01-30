@@ -1,5 +1,5 @@
 namespace ca.mcgill.ecse223.tileo.model;
-
+//17:52
 
 class TileO	{
 	Integer numberOfPlayers;
@@ -30,10 +30,8 @@ class PlayingPiece	{
 	String color;
 	Boolean myTurn;
 	
-	Integer xStart;
-	Integer yStart;
-	Integer xCurrent;
-	Integer yCurrent;
+	Location startLocation;
+	Location currentLocation;
 	
 	Boolean canDrawCard;
 }
@@ -76,9 +74,9 @@ class Board	{
 	
 	Integer numberOfTiles;
 	Integer numberOfCases;
-	Integer xAxis_size;
-	Integer yAxis_size;
-	String totalSize;
+	Integer xAxisSize;
+	Integer yAxisSize;
+	//String totalSize; is this necessary? - CM
 }
 
 class ConnectionPiece	{
@@ -89,14 +87,13 @@ class ConnectionPiece	{
 
 class Tile	{
 	String color;
-	Integer xLocation;
-	Integer yLocation;
+	Location location;
 	Boolean isRightConnected;
 	Boolean isLeftConnected;
 	Boolean isTopConnected;
 	Boolean isBotConnected;
 	Boolean isOccupied;
-	Boolean isVisited;
+	Boolean hasBeenVisited;
 }
 
 class HiddenTile{
@@ -111,4 +108,9 @@ class ActionTile{
 
 class NormalTile{
 	isA Tile;
+}
+
+class Location {
+	Integer xComponent;
+	Integer yComponent;
 }
