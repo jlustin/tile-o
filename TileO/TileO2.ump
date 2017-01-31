@@ -1,6 +1,6 @@
 namespace ca.mcgill.ecse223.tileo.model;
 
-9:02PM
+//912pm
 
 class User{
 }
@@ -130,7 +130,7 @@ class Tile{
 }
 
 class ConnectionPiece{
-	0..2 -- 1 Tile;	//can only be connected to 0 OR 2 tiles
+	//0..2 -- 1 Tile;	//can only be connected to 0 OR 2 tiles
 	
 	lazy Boolean isUsed;
 	Location location;

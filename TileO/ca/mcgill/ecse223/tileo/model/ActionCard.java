@@ -1,0 +1,128 @@
+/*PLEASE DO NOT EDIT THIS CODE*/
+/*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
+
+package ca.mcgill.ecse223.tileo.model;
+
+// line 79 "../../../../../TileO2.ump"
+public class ActionCard
+{
+
+  //------------------------
+  // MEMBER VARIABLES
+  //------------------------
+
+  //ActionCard Attributes
+  private String effect;
+
+  //ActionCard State Machines
+  public enum ActionCardType { dieRoll, connection, removal, teleport, turnLoss }
+  private ActionCardType actionCardType;
+
+  //ActionCard Associations
+  private Deck deck;
+
+  //------------------------
+  // CONSTRUCTOR
+  //------------------------
+
+  public ActionCard(String aEffect, Deck aDeck)
+  {
+    effect = aEffect;
+    boolean didAddDeck = setDeck(aDeck);
+    if (!didAddDeck)
+    {
+      throw new RuntimeException("Unable to create actionCard due to deck");
+    }
+    setActionCardType(ActionCardType.dieRoll);
+  }
+
+  //------------------------
+  // INTERFACE
+  //------------------------
+
+  public boolean setEffect(String aEffect)
+  {
+    boolean wasSet = false;
+    effect = aEffect;
+    wasSet = true;
+    return wasSet;
+  }
+
+  /**
+   * will depend on what type of card it is
+   */
+  public String getEffect()
+  {
+    return effect;
+  }
+
+  public String getActionCardTypeFullName()
+  {
+    String answer = actionCardType.toString();
+    return answer;
+  }
+
+  public ActionCardType getActionCardType()
+  {
+    return actionCardType;
+  }
+
+  public boolean setActionCardType(ActionCardType aActionCardType)
+  {
+    actionCardType = aActionCardType;
+    return true;
+  }
+
+  public Deck getDeck()
+  {
+    return deck;
+  }
+
+  public boolean setDeck(Deck aDeck)
+  {
+    boolean wasSet = false;
+    //Must provide deck to actionCard
+    if (aDeck == null)
+    {
+      return wasSet;
+    }
+
+    //deck already at maximum (32)
+    if (aDeck.numberOfActionCards() >= Deck.maximumNumberOfActionCards())
+    {
+      return wasSet;
+    }
+    
+    Deck existingDeck = deck;
+    deck = aDeck;
+    if (existingDeck != null && !existingDeck.equals(aDeck))
+    {
+      boolean didRemove = existingDeck.removeActionCard(this);
+      if (!didRemove)
+      {
+        deck = existingDeck;
+        return wasSet;
+      }
+    }
+    deck.addActionCard(this);
+    wasSet = true;
+    return wasSet;
+  }
+
+  public void delete()
+  {
+    Deck placeholderDeck = deck;
+    this.deck = null;
+    placeholderDeck.removeActionCard(this);
+  }
+
+
+  public String toString()
+  {
+    String outputString = "";
+    return super.toString() + "["+
+            "effect" + ":" + getEffect()+ "]" + System.getProperties().getProperty("line.separator") +
+            "  " + "deck = "+(getDeck()!=null?Integer.toHexString(System.identityHashCode(getDeck())):"null")
+     + outputString;
+  }
+}
