@@ -34,7 +34,7 @@ class SpecificGame{
 	
 	1 boardgame -- 1 Element;
 	
-	Integer numberOfPlayers;	//must be between 2 and 4 ( This may be deleted?)
+	Integer numberOfPlayers;
 	GameStateType { 
 		Designing{}
 		Playing{}  
@@ -176,12 +176,12 @@ class Location{
 //It will also vertically alternate between tile, connection piece, tile, both axis starting at 0. Here is an example below
 //tiles are tiles
 //CP are connection pieces
-//		0	1	2	3	4	5	6
-//	0	tile	CP	tile	CP	tile	CP	tile	
+//		0		1		2		3		4		5		6
+//	0	tile	CP		tile	CP		tile	CP	tile	
 //	1	CP		CP		CP		CP
-//	2	tile	CP	tile	CP	tile	CP	tile
+//	2	tile	CP		tile	CP		tile	CP	tile
 //	3	CP		CP		CP		CP
-//	4	tile	CP	tile	CP	tile	CP	tile
+//	4	tile	CP		tile	CP		tile	CP	tile
 //	5	CP		CP		CP		CP
-//	6	tile	CP	tile	CP	tile	CP	tile
+//	6	tile	CP		tile	CP		tile	CP	tile
 

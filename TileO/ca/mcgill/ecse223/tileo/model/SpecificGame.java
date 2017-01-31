@@ -66,9 +66,6 @@ public class SpecificGame extends TileO
     return wasSet;
   }
 
-  /**
-   * must be between 2 and 4 ( This may be deleted?)
-   */
   public int getNumberOfPlayers()
   {
     return numberOfPlayers;
