@@ -6,7 +6,7 @@ package ca.mcgill.ecse223.tileo.model;
 /**
  * this type of tile will grant the player the action of drawCard
  */
-// line 153 "../../../../../TileO.ump"
+// line 155 "../../../../../TileO.ump"
 public class ActionTile
 {
 
@@ -23,9 +23,9 @@ public class ActionTile
   // CONSTRUCTOR
   //------------------------
 
-  public ActionTile(boolean aIsNormal, int aTurnsBeforeAction)
+  public ActionTile(int aTurnsBeforeAction)
   {
-    isNormal = aIsNormal;
+    resetIsNormal();
     turnsBeforeAction = aTurnsBeforeAction;
     resetTurnCounter();
   }
@@ -40,6 +40,14 @@ public class ActionTile
     isNormal = aIsNormal;
     wasSet = true;
     return wasSet;
+  }
+
+  public boolean resetIsNormal()
+  {
+    boolean wasReset = false;
+    isNormal = getDefaultIsNormal();
+    wasReset = true;
+    return wasReset;
   }
 
   public boolean setTurnCounter(int aTurnCounter)
@@ -61,6 +69,11 @@ public class ActionTile
   public boolean getIsNormal()
   {
     return isNormal;
+  }
+
+  public boolean getDefaultIsNormal()
+  {
+    return false;
   }
 
   /**

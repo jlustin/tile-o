@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * When a normal tile is instantiated, a Tile will be instantiated. Basically, a Normal Tile is always a Tile. ActionTile and HiddenTile are ‘’special’’ Tiles.
  */
-// line 121 "../../../../../TileO.ump"
+// line 123 "../../../../../TileO.ump"
 public class Tile
 {
 
@@ -33,9 +33,9 @@ public class Tile
   // CONSTRUCTOR
   //------------------------
 
-  public Tile(String aColor, Location aLocationOfTile, Board aBoard)
+  public Tile(Location aLocationOfTile, Board aBoard)
   {
-    color = aColor;
+    resetColor();
     locationOfTile = aLocationOfTile;
     isRightConnected = false;
     isLeftConnected = false;
@@ -61,6 +61,14 @@ public class Tile
     color = aColor;
     wasSet = true;
     return wasSet;
+  }
+
+  public boolean resetColor()
+  {
+    boolean wasReset = false;
+    color = getDefaultColor();
+    wasReset = true;
+    return wasReset;
   }
 
   public boolean setLocationOfTile(Location aLocationOfTile)
@@ -125,6 +133,11 @@ public class Tile
   public String getColor()
   {
     return color;
+  }
+
+  public String getDefaultColor()
+  {
+    return "white";
   }
 
   public Location getLocationOfTile()

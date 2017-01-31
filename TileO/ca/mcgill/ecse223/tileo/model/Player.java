@@ -2,6 +2,7 @@
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
+import java.util.*;
 
 /**
  * Person who plays the game by means of turns, each player has a number and is related to his or her respective playing piece
@@ -9,6 +10,12 @@ package ca.mcgill.ecse223.tileo.model;
 // line 15 "../../../../../TileO.ump"
 public class Player extends User
 {
+
+  //------------------------
+  // STATIC VARIABLES
+  //------------------------
+
+  private static Map<Integer, Player> playersByPlayerNumber = new HashMap<Integer, Player>();
 
   //------------------------
   // MEMBER VARIABLES
@@ -27,13 +34,16 @@ public class Player extends User
   // CONSTRUCTOR
   //------------------------
 
-  public Player(int aPlayerNumber, boolean aCanDrawCard, boolean aWillLoseNextTurn, PlayingPiece aAvatar)
+  public Player(int aPlayerNumber, PlayingPiece aAvatar)
   {
     super();
-    playerNumber = aPlayerNumber;
     resetMyTurn();
-    canDrawCard = aCanDrawCard;
-    willLoseNextTurn = aWillLoseNextTurn;
+    resetCanDrawCard();
+    resetWillLoseNextTurn();
+    if (!setPlayerNumber(aPlayerNumber))
+    {
+      throw new RuntimeException("Cannot create due to duplicate playerNumber");
+    }
     if (aAvatar == null || aAvatar.getPlayer() != null)
     {
       throw new RuntimeException("Unable to create Player due to aAvatar");
@@ -41,13 +51,13 @@ public class Player extends User
     avatar = aAvatar;
   }
 
-  public Player(int aPlayerNumber, boolean aCanDrawCard, boolean aWillLoseNextTurn, SpecificGame aBoardgameForAvatar, String aColorForAvatar, Location aStartLocationForAvatar, Location aCurrentLocationForAvatar)
+  public Player(int aPlayerNumber, SpecificGame aBoardgameForAvatar, String aColorForAvatar, Location aStartLocationForAvatar, Location aCurrentLocationForAvatar)
   {
     super();
     playerNumber = aPlayerNumber;
     resetMyTurn();
-    canDrawCard = aCanDrawCard;
-    willLoseNextTurn = aWillLoseNextTurn;
+    resetCanDrawCard();
+    resetWillLoseNextTurn();
     avatar = new PlayingPiece(aBoardgameForAvatar, aColorForAvatar, aStartLocationForAvatar, aCurrentLocationForAvatar, this);
   }
 
@@ -58,8 +68,16 @@ public class Player extends User
   public boolean setPlayerNumber(int aPlayerNumber)
   {
     boolean wasSet = false;
+    Integer anOldPlayerNumber = getPlayerNumber();
+    if (hasWithPlayerNumber(aPlayerNumber)) {
+      return wasSet;
+    }
     playerNumber = aPlayerNumber;
     wasSet = true;
+    if (anOldPlayerNumber != null) {
+      playersByPlayerNumber.remove(anOldPlayerNumber);
+    }
+    playersByPlayerNumber.put(aPlayerNumber, this);
     return wasSet;
   }
 
@@ -87,6 +105,14 @@ public class Player extends User
     return wasSet;
   }
 
+  public boolean resetCanDrawCard()
+  {
+    boolean wasReset = false;
+    canDrawCard = getDefaultCanDrawCard();
+    wasReset = true;
+    return wasReset;
+  }
+
   public boolean setWillLoseNextTurn(boolean aWillLoseNextTurn)
   {
     boolean wasSet = false;
@@ -95,12 +121,30 @@ public class Player extends User
     return wasSet;
   }
 
+  public boolean resetWillLoseNextTurn()
+  {
+    boolean wasReset = false;
+    willLoseNextTurn = getDefaultWillLoseNextTurn();
+    wasReset = true;
+    return wasReset;
+  }
+
   /**
    * Can take values from 1 to 4
    */
   public int getPlayerNumber()
   {
     return playerNumber;
+  }
+
+  public static Player getWithPlayerNumber(int aPlayerNumber)
+  {
+    return playersByPlayerNumber.get(aPlayerNumber);
+  }
+
+  public static boolean hasWithPlayerNumber(int aPlayerNumber)
+  {
+    return getWithPlayerNumber(aPlayerNumber) != null;
   }
 
   /**
@@ -124,9 +168,19 @@ public class Player extends User
     return canDrawCard;
   }
 
+  public boolean getDefaultCanDrawCard()
+  {
+    return false;
+  }
+
   public boolean getWillLoseNextTurn()
   {
     return willLoseNextTurn;
+  }
+
+  public boolean getDefaultWillLoseNextTurn()
+  {
+    return false;
   }
 
   public boolean isMyTurn()
@@ -151,6 +205,7 @@ public class Player extends User
 
   public void delete()
   {
+    playersByPlayerNumber.remove(getPlayerNumber());
     PlayingPiece existingAvatar = avatar;
     avatar = null;
     if (existingAvatar != null)

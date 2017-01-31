@@ -17,10 +17,10 @@ class Player{
 	
 	1 -- 1 PlayingPiece avatar;
 
-	Integer playerNumber; 		//Can take values from 1 to 4
+	unique Integer playerNumber; 		//Can take values from 1 to 4
 	defaulted Boolean myTurn = false;	//Turns true when it is that player’s turn
-Boolean canDrawCard;		//if the player lands on an action tile, he or she can draw a card
-	Boolean willLoseNextTurn;		/*if someone picks a loseTurn actionCard, it will set it to true
+	defaulted Boolean canDrawCard = false;		//if the player lands on an action tile, he or she can draw a card
+	defaulted Boolean willLoseNextTurn = false;		/*if someone picks a loseTurn actionCard, it will set it to true
 					next time myTurn becomes true for  his player, willLoseNextTurn 	will be checked	*/
 }
 
@@ -35,6 +35,7 @@ class SpecificGame{
 	1 boardgame -- 1 Element;
 	
 	Integer numberOfPlayers;
+	
 	GameStateType { 
 		Designing{}
 		Playing{}  
@@ -49,7 +50,7 @@ class Element{
 class PlayingPiece{
 	isA Element;
 
-	String color;
+	unique String color;
 	defaulted Boolean isMoving = false;	//while isMoving is true, will not check the tile the player visits as occupied or visited. Thus, if a player only passes by an ActionTile, it will not activate its effect.
 	//while isMoving is true, it will pass by tiles, but not visit them; thus, only the final tile landed on will turn black									
 	defaulted Integer stepsDone = 0;	//counter that will increment each time you step on a tile
@@ -79,7 +80,7 @@ class Deck{
 	Integer numberOfTeleportCards;
 	Integer numberOfTurnLossCards;
 	//number of cards == 32
-	ActionCard topCard;	//will have a method that will choose a random card depending cards in the deck
+	lazy ActionCard topCard;	//will have a method that will choose a random card depending cards in the deck
 }
 /* 32 action cards that form the deck. There are 5 types of action cards and each card has a different effect, enumerated in the action card type. */
 class ActionCard{
@@ -90,7 +91,7 @@ class ActionCard{
 		Teleport{}
 		TurnLoss{}
 		};
-	String effect;	//will depend on what type of card it is. Just a textual description of the effect. 
+	String effect = "Unspecified";	//will depend on what type of card it is. Just a textual description of the effect. 
 }
 
 /* Board specifies the size of the specific game, X-axis size and Y-axis size indicate the dimension of the whole board,which is a subclass of the Element class. This way, an origin can also be set to ease locations of the elements. The board also contains the Tiles and Connection Piece. */
@@ -100,8 +101,9 @@ class Board{
 	1 <@>- * Tile;
 	1 <@>- * ConnectionPiece;
 	
-	Integer xAxisSize;
-	Integer yAxisSize;
+	immutable Integer xAxisSize;
+	immutable Integer yAxisSize;
+	//assuming that the board size cannot be modified during gameplay
 	//size is location of any piece
 }
 
@@ -121,7 +123,7 @@ class PackOfConnectionPieces{
 class Tile {
 	1 -- 0..4 ConnectionPiece; //One tile can only connect to the max 4 connection piece
 	
-	String color;	//WHITE if it has not been stepped on, and BLACK if visited
+	defaulted String color = "white";	//WHITE if it has not been stepped on, and BLACK if visited
 	
 	Location locationOfTile;
 	//the x AND y location for tiles must be even
@@ -151,7 +153,7 @@ class HiddenTile{
 
 //this type of tile will grant the player the action of drawCard
 class ActionTile{
-	Boolean isNormal;
+	defaulted Boolean isNormal = false;
 	//normal means that it acts as a Normal Tile.
 	
 	//will have a method that will draw a (top) card from the deck

@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * A deck of 32 action cards, having different numbers of cards of each type. The deck is defined by the top card of the stack, which is the card drawn by a player when he/she lands on an action tile. This top card will be determined by a drawCard method to be implemented later
  */
-// line 70 "../../../../../TileO.ump"
+// line 71 "../../../../../TileO.ump"
 public class Deck extends Element
 {
 
@@ -40,7 +40,7 @@ public class Deck extends Element
   // CONSTRUCTOR
   //------------------------
 
-  public Deck(SpecificGame aBoardgame, int aNumberOfDieRollCards, int aNumberOfConnectionCards, int aNumberOfRemovalCards, int aNumberOfTeleportCards, int aNumberOfTurnLossCards, ActionCard aTopCard)
+  public Deck(SpecificGame aBoardgame, int aNumberOfDieRollCards, int aNumberOfConnectionCards, int aNumberOfRemovalCards, int aNumberOfTeleportCards, int aNumberOfTurnLossCards)
   {
     super(aBoardgame);
     numberOfDieRollCards = aNumberOfDieRollCards;
@@ -48,7 +48,6 @@ public class Deck extends Element
     numberOfRemovalCards = aNumberOfRemovalCards;
     numberOfTeleportCards = aNumberOfTeleportCards;
     numberOfTurnLossCards = aNumberOfTurnLossCards;
-    topCard = aTopCard;
     actionCards = new ArrayList<ActionCard>();
   }
 
@@ -189,7 +188,7 @@ public class Deck extends Element
     return 32;
   }
 
-  public ActionCard addActionCard(String aEffect)
+  public ActionCard addActionCard()
   {
     if (numberOfActionCards() >= maximumNumberOfActionCards())
     {
@@ -197,7 +196,7 @@ public class Deck extends Element
     }
     else
     {
-      return new ActionCard(aEffect, this);
+      return new ActionCard(this);
     }
   }
 

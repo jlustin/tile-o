@@ -2,13 +2,20 @@
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
+import java.util.*;
 
 /**
  * The playing piece represents the player inside a specific game. It is an element of a specific game. Each player is associated with a specific color. This is also the game piece that is moving and interacting with the other Elements while the GameState is playing
  */
-// line 49 "../../../../../TileO.ump"
+// line 50 "../../../../../TileO.ump"
 public class PlayingPiece extends Element
 {
+
+  //------------------------
+  // STATIC VARIABLES
+  //------------------------
+
+  private static Map<String, PlayingPiece> playingpiecesByColor = new HashMap<String, PlayingPiece>();
 
   //------------------------
   // MEMBER VARIABLES
@@ -31,11 +38,14 @@ public class PlayingPiece extends Element
   public PlayingPiece(SpecificGame aBoardgame, String aColor, Location aStartLocation, Location aCurrentLocation, Player aPlayer)
   {
     super(aBoardgame);
-    color = aColor;
     resetIsMoving();
     resetStepsDone();
     startLocation = aStartLocation;
     currentLocation = aCurrentLocation;
+    if (!setColor(aColor))
+    {
+      throw new RuntimeException("Cannot create due to duplicate color");
+    }
     if (aPlayer == null || aPlayer.getAvatar() != null)
     {
       throw new RuntimeException("Unable to create PlayingPiece due to aPlayer");
@@ -43,7 +53,7 @@ public class PlayingPiece extends Element
     player = aPlayer;
   }
 
-  public PlayingPiece(SpecificGame aBoardgame, String aColor, Location aStartLocation, Location aCurrentLocation, int aPlayerNumberForPlayer, boolean aCanDrawCardForPlayer, boolean aWillLoseNextTurnForPlayer)
+  public PlayingPiece(SpecificGame aBoardgame, String aColor, Location aStartLocation, Location aCurrentLocation, int aPlayerNumberForPlayer)
   {
     super(aBoardgame);
     color = aColor;
@@ -51,7 +61,7 @@ public class PlayingPiece extends Element
     resetStepsDone();
     startLocation = aStartLocation;
     currentLocation = aCurrentLocation;
-    player = new Player(aPlayerNumberForPlayer, aCanDrawCardForPlayer, aWillLoseNextTurnForPlayer, this);
+    player = new Player(aPlayerNumberForPlayer, this);
   }
 
   //------------------------
@@ -61,8 +71,16 @@ public class PlayingPiece extends Element
   public boolean setColor(String aColor)
   {
     boolean wasSet = false;
+    String anOldColor = getColor();
+    if (hasWithColor(aColor)) {
+      return wasSet;
+    }
     color = aColor;
     wasSet = true;
+    if (anOldColor != null) {
+      playingpiecesByColor.remove(anOldColor);
+    }
+    playingpiecesByColor.put(aColor, this);
     return wasSet;
   }
 
@@ -119,6 +137,16 @@ public class PlayingPiece extends Element
     return color;
   }
 
+  public static PlayingPiece getWithColor(String aColor)
+  {
+    return playingpiecesByColor.get(aColor);
+  }
+
+  public static boolean hasWithColor(String aColor)
+  {
+    return getWithColor(aColor) != null;
+  }
+
   /**
    * while isMoving is true, will not check the tile the player visits as occupied or visited. Thus, if a player only passes by an ActionTile, it will not activate its effect.
    */
@@ -171,6 +199,7 @@ public class PlayingPiece extends Element
 
   public void delete()
   {
+    playingpiecesByColor.remove(getColor());
     Player existingPlayer = player;
     player = null;
     if (existingPlayer != null)
