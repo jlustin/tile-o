@@ -1,18 +1,19 @@
 namespace ca.mcgill.ecse223.tileo.model;
 
+9:02PM
 
 class User{
 }
 
 class Designer{
-	1 <@>- SpecificGame;
+	1 <@>- 1 SpecificGame;
 	isA User;
 }
 
 class Player{
 	isA User;
 	
-	2..4 -- PlayingPiece avatar;
+	1 -- 1 PlayingPiece avatar;
 
 	Integer playerNumber;
 	defaulted Boolean myTurn = false;	//only turns true once isMoving is false
@@ -28,8 +29,9 @@ class TileO{
 class SpecificGame{
 	isA TileO;
 	
-	1 boardgame -- Element;
+	1 boardgame -- 1 Element;
 	
+	Integer numberOfPlayers;	//must be between 2 and 4
 	GameStateType { 
 		Designing{}
 		Playing{}  
@@ -64,7 +66,7 @@ class Deck{
 	
 	1 <@>- 32 ActionCard;
 
-	const Integer numberOfCards = 32;
+	const Integer NUMBEROFCARDS = 32;
 	Integer numberOfDieRollCards;
 	Integer numberOfConnectionCards;
 	Integer numberOfRemovalCards;
@@ -128,7 +130,7 @@ class Tile{
 }
 
 class ConnectionPiece{
-	0,2 -- 1 Tile;	//can only be connected to 0 OR 2 tiles
+	0..2 -- 1 Tile;	//can only be connected to 0 OR 2 tiles
 	
 	lazy Boolean isUsed;
 	Location location;
@@ -148,7 +150,7 @@ class ActionTile{
 	//will have a method that will draw a (top) card from the deck
 	
 	immutable Integer turnsBeforeAction;
-	defaulted Integer turnCounter;
+	defaulted Integer turnCounter = 0;
 }
 
 	
