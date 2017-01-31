@@ -6,7 +6,7 @@ package ca.mcgill.ecse223.tileo.model;
 /**
  * this type of tile will grant the player the action of drawCard
  */
-// line 155 "../../../../../TileO.ump"
+// line 154 "../../../../../TileO.ump"
 public class ActionTile
 {
 

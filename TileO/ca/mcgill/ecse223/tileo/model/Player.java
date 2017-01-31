@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Person who plays the game by means of turns, each player has a number and is related to his or her respective playing piece
  */
-// line 15 "../../../../../TileO.ump"
+// line 14 "../../../../../TileO.ump"
 public class Player extends User
 {
 

@@ -6,7 +6,7 @@ package ca.mcgill.ecse223.tileo.model;
 /**
  * see FIGURE 1 at the end of the code for an example
  */
-// line 142 "../../../../../TileO.ump"
+// line 141 "../../../../../TileO.ump"
 public class ConnectionPiece
 {
 

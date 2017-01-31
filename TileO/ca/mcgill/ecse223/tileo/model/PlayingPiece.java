@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * The playing piece represents the player inside a specific game. It is an element of a specific game. Each player is associated with a specific color. This is also the game piece that is moving and interacting with the other Elements while the GameState is playing
  */
-// line 50 "../../../../../TileO.ump"
+// line 49 "../../../../../TileO.ump"
 public class PlayingPiece extends Element
 {
 

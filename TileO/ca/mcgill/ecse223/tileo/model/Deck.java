@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * A deck of 32 action cards, having different numbers of cards of each type. The deck is defined by the top card of the stack, which is the card drawn by a player when he/she lands on an action tile. This top card will be determined by a drawCard method to be implemented later
  */
-// line 71 "../../../../../TileO.ump"
+// line 70 "../../../../../TileO.ump"
 public class Deck extends Element
 {
 

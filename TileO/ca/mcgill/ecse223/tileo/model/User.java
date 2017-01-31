@@ -4,10 +4,9 @@
 package ca.mcgill.ecse223.tileo.model;
 
 /**
- * 1014 group comments
  * this program is used by Users, and Users can be a Designer or a Player
  */
-// line 6 "../../../../../TileO.ump"
+// line 5 "../../../../../TileO.ump"
 public class User
 {
 
