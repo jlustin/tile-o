@@ -3,7 +3,10 @@
 
 package ca.mcgill.ecse223.tileo.model;
 
-// line 41 "../../../../../TileO2.ump"
+/**
+ * Abstract class to specify the existence of some elements in each specific game
+ */
+// line 44 "../../../../../TileO2.ump"
 public class Element
 {
 

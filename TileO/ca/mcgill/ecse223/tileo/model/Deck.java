@@ -4,7 +4,10 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.util.*;
 
-// line 64 "../../../../../TileO2.ump"
+/**
+ * A deck of 32 action cards, having different numbers of cards of each type. The deck is defined by the top card of the stack, which is the card drawn by a player when he/she lands on an action tile. This top card will be determined by a drawCard method to be implemented later
+ */
+// line 70 "../../../../../TileO2.ump"
 public class Deck extends Element
 {
 
@@ -12,6 +15,10 @@ public class Deck extends Element
   // STATIC VARIABLES
   //------------------------
 
+
+  /**
+   * Since there will always be 32 ActionCards in a deck
+   */
   public static final int NUMBEROFCARDS = 32;
 
   //------------------------

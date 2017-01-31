@@ -4,7 +4,10 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.util.*;
 
-// line 90 "../../../../../TileO2.ump"
+/**
+ * Board specifies the size of the specific game, X-axis size and Y-axis size indicate the dimension of the whole board,which is a subclass of the Element class. This way, an origin can also be set to ease locations of the elements. The board also contains the Tiles and Connection Piece.
+ */
+// line 97 "../../../../../TileO2.ump"
 public class Board extends Element
 {
 
@@ -128,9 +131,9 @@ public class Board extends Element
     return 0;
   }
 
-  public Tile addTile(SpecificGame aBoardgame, String aColor, Location aLocationOfTile)
+  public Tile addTile(String aColor, Location aLocationOfTile)
   {
-    return new Tile(aBoardgame, aColor, aLocationOfTile, this);
+    return new Tile(aColor, aLocationOfTile, this);
   }
 
   public boolean addTile(Tile aTile)

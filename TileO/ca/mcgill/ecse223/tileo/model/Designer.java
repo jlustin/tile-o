@@ -3,7 +3,10 @@
 
 package ca.mcgill.ecse223.tileo.model;
 
-// line 8 "../../../../../TileO2.ump"
+/**
+ * Person who designs his or her specific game. The designer will design the initial tiles’ locations, connection pieces, starting positions, etc.
+ */
+// line 10 "../../../../../TileO2.ump"
 public class Designer extends User
 {
 

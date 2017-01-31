@@ -3,8 +3,11 @@
 
 package ca.mcgill.ecse223.tileo.model;
 
-// line 59 "../../../../../TileO2.ump"
-public class Die
+/**
+ * Each game has a die. The designer decides for the number of faces, and the rolled number is determined by a rollingDie method and is used to determine by how many tiles a playing piece moves.
+ */
+// line 63 "../../../../../TileO2.ump"
+public class Die extends Element
 {
 
   //------------------------
@@ -19,8 +22,9 @@ public class Die
   // CONSTRUCTOR
   //------------------------
 
-  public Die(int aNumberOfFaces, int aRolledNumber)
+  public Die(SpecificGame aBoardgame, int aNumberOfFaces, int aRolledNumber)
   {
+    super(aBoardgame);
     numberOfFaces = aNumberOfFaces;
     rolledNumber = aRolledNumber;
   }
@@ -56,7 +60,9 @@ public class Die
   }
 
   public void delete()
-  {}
+  {
+    super.delete();
+  }
 
 
   public String toString()

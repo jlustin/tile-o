@@ -3,7 +3,11 @@
 
 package ca.mcgill.ecse223.tileo.model;
 
-// line 157 "../../../../../TileO2.ump"
+/**
+ * helper class to store the location
+ * The origin will be at the top left corner of the Board. The positive x axis will go to the right while the positive y axis will go down.
+ */
+// line 166 "../../../../../TileO2.ump"
 public class Location
 {
 
@@ -46,13 +50,16 @@ public class Location
   }
 
   /**
-   * helper class to check the location
+   * Horizontal distance from the origin
    */
   public int getXLocation()
   {
     return xLocation;
   }
 
+  /**
+   * Vertical distance from the origin
+   */
   public int getYLocation()
   {
     return yLocation;

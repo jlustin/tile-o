@@ -3,7 +3,10 @@
 
 package ca.mcgill.ecse223.tileo.model;
 
-// line 132 "../../../../../TileO2.ump"
+/**
+ * see FIGURE 1 at the end of the code for an example
+ */
+// line 140 "../../../../../TileO2.ump"
 public class ConnectionPiece
 {
 
@@ -12,7 +15,6 @@ public class ConnectionPiece
   //------------------------
 
   //ConnectionPiece Attributes
-  private boolean isUsed;
   private Location location;
 
   //ConnectionPiece Associations
@@ -25,7 +27,6 @@ public class ConnectionPiece
 
   public ConnectionPiece(Location aLocation, Board aBoard, Tile aTile)
   {
-    isUsed = false;
     location = aLocation;
     boolean didAddBoard = setBoard(aBoard);
     if (!didAddBoard)
@@ -43,14 +44,6 @@ public class ConnectionPiece
   // INTERFACE
   //------------------------
 
-  public boolean setIsUsed(boolean aIsUsed)
-  {
-    boolean wasSet = false;
-    isUsed = aIsUsed;
-    wasSet = true;
-    return wasSet;
-  }
-
   public boolean setLocation(Location aLocation)
   {
     boolean wasSet = false;
@@ -59,22 +52,9 @@ public class ConnectionPiece
     return wasSet;
   }
 
-  /**
-   * 0..2 -- 1 Tile;	//can only be connected to 0 OR 2 tiles
-   */
-  public boolean getIsUsed()
-  {
-    return isUsed;
-  }
-
   public Location getLocation()
   {
     return location;
-  }
-
-  public boolean isIsUsed()
-  {
-    return isUsed;
   }
 
   public Board getBoard()
@@ -151,8 +131,7 @@ public class ConnectionPiece
   public String toString()
   {
     String outputString = "";
-    return super.toString() + "["+
-            "isUsed" + ":" + getIsUsed()+ "]" + System.getProperties().getProperty("line.separator") +
+    return super.toString() + "["+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "location" + "=" + (getLocation() != null ? !getLocation().equals(this)  ? getLocation().toString().replaceAll("  ","    ") : "this" : "null") + System.getProperties().getProperty("line.separator") +
             "  " + "board = "+(getBoard()!=null?Integer.toHexString(System.identityHashCode(getBoard())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "tile = "+(getTile()!=null?Integer.toHexString(System.identityHashCode(getTile())):"null")

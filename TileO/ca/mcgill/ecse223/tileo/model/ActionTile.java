@@ -3,7 +3,10 @@
 
 package ca.mcgill.ecse223.tileo.model;
 
-// line 146 "../../../../../TileO2.ump"
+/**
+ * this type of tile will grant the player the action of drawCard
+ */
+// line 153 "../../../../../TileO2.ump"
 public class ActionTile
 {
 
@@ -61,14 +64,18 @@ public class ActionTile
   }
 
   /**
-   * normal means that it acts as an action tile
+   * normal means that it acts as a Normal Tile.
    * will have a method that will draw a (top) card from the deck
+   * Value set by the designer: number of turns before the the ActionTile is effective again
    */
   public int getTurnsBeforeAction()
   {
     return turnsBeforeAction;
   }
 
+  /**
+   * Will start to count after a player lands on the tile.
+   */
   public int getTurnCounter()
   {
     return turnCounter;

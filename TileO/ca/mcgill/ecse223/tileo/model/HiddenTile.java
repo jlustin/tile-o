@@ -4,7 +4,10 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.util.*;
 
-// line 140 "../../../../../TileO2.ump"
+/**
+ * this type of tile will be turned into Grey when a player lands on it and will end the game
+ */
+// line 146 "../../../../../TileO2.ump"
 public class HiddenTile extends Tile
 {
 
@@ -16,9 +19,9 @@ public class HiddenTile extends Tile
   // CONSTRUCTOR
   //------------------------
 
-  public HiddenTile(SpecificGame aBoardgame, String aColor, Location aLocationOfTile, Board aBoard)
+  public HiddenTile(String aColor, Location aLocationOfTile, Board aBoard)
   {
-    super(aBoardgame, aColor, aLocationOfTile, aBoard);
+    super(aColor, aLocationOfTile, aBoard);
   }
 
   //------------------------

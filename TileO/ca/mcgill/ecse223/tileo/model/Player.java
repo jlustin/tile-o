@@ -3,7 +3,10 @@
 
 package ca.mcgill.ecse223.tileo.model;
 
-// line 13 "../../../../../TileO2.ump"
+/**
+ * Person who plays the game by means of turns, each player has a number and is related to his or her respective playing piece
+ */
+// line 15 "../../../../../TileO2.ump"
 public class Player extends User
 {
 
@@ -92,13 +95,16 @@ public class Player extends User
     return wasSet;
   }
 
+  /**
+   * Can take values from 1 to 4
+   */
   public int getPlayerNumber()
   {
     return playerNumber;
   }
 
   /**
-   * only turns true once isMoving is false
+   * Turns true when it is that player’s turn
    */
   public boolean getMyTurn()
   {
@@ -110,6 +116,9 @@ public class Player extends User
     return false;
   }
 
+  /**
+   * if the player lands on an action tile, he or she can draw a card
+   */
   public boolean getCanDrawCard()
   {
     return canDrawCard;

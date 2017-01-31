@@ -3,7 +3,10 @@
 
 package ca.mcgill.ecse223.tileo.model;
 
-// line 45 "../../../../../TileO2.ump"
+/**
+ * The playing piece represents the player inside a specific game. It is an element of a specific game. Each player is associated with a specific color. This is also the game piece that is moving and interacting with the other Elements while the GameState is playing
+ */
+// line 49 "../../../../../TileO2.ump"
 public class PlayingPiece extends Element
 {
 
@@ -117,7 +120,7 @@ public class PlayingPiece extends Element
   }
 
   /**
-   * while isMoving is true, will not check actionTile
+   * while isMoving is true, will not check the tile the player visits as occupied or visited. Thus, if a player only passes by an ActionTile, it will not activate its effect.
    */
   public boolean getIsMoving()
   {
@@ -130,7 +133,7 @@ public class PlayingPiece extends Element
   }
 
   /**
-   * while isMoving is true, it will pass by tiles, but not visit them
+   * while isMoving is true, it will pass by tiles, but not visit them; thus, only the final tile landed on will turn black
    * counter that will increment each time you step on a tile
    */
   public int getStepsDone()

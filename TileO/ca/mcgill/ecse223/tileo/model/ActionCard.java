@@ -3,7 +3,10 @@
 
 package ca.mcgill.ecse223.tileo.model;
 
-// line 79 "../../../../../TileO2.ump"
+/**
+ * 32 action cards that form the deck. There are 5 types of action cards and each card has a different effect, enumerated in the action card type.
+ */
+// line 85 "../../../../../TileO2.ump"
 public class ActionCard
 {
 
@@ -15,7 +18,7 @@ public class ActionCard
   private String effect;
 
   //ActionCard State Machines
-  public enum ActionCardType { dieRoll, connection, removal, teleport, turnLoss }
+  public enum ActionCardType { DieRoll, Connection, Removal, Teleport, TurnLoss }
   private ActionCardType actionCardType;
 
   //ActionCard Associations
@@ -33,7 +36,7 @@ public class ActionCard
     {
       throw new RuntimeException("Unable to create actionCard due to deck");
     }
-    setActionCardType(ActionCardType.dieRoll);
+    setActionCardType(ActionCardType.DieRoll);
   }
 
   //------------------------
@@ -49,7 +52,7 @@ public class ActionCard
   }
 
   /**
-   * will depend on what type of card it is
+   * will depend on what type of card it is. Just a textual description of the effect.
    */
   public String getEffect()
   {

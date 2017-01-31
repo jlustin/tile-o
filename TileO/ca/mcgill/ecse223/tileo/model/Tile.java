@@ -4,8 +4,11 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.util.*;
 
-// line 112 "../../../../../TileO2.ump"
-public class Tile extends Element
+/**
+ * When a normal tile is instantiated, a Tile will be instantiated. Basically, a Normal Tile is always a Tile. ActionTile and HiddenTile are ‘’special’’ Tiles.
+ */
+// line 121 "../../../../../TileO2.ump"
+public class Tile
 {
 
   //------------------------
@@ -30,9 +33,8 @@ public class Tile extends Element
   // CONSTRUCTOR
   //------------------------
 
-  public Tile(SpecificGame aBoardgame, String aColor, Location aLocationOfTile, Board aBoard)
+  public Tile(String aColor, Location aLocationOfTile, Board aBoard)
   {
-    super(aBoardgame);
     color = aColor;
     locationOfTile = aLocationOfTile;
     isRightConnected = false;
@@ -154,7 +156,7 @@ public class Tile extends Element
   }
 
   /**
-   * isConnected are defaulted to 0
+   * isConnected are defaulted to FALSE
    * if a player is currently on the tile - passing on the tile
    */
   public boolean getTemporarilyVisited()
@@ -206,6 +208,9 @@ public class Tile extends Element
     return aConnectionPiece;
   }
 
+  /**
+   * One tile can only connect to the max 4 connection piece
+   */
   public List<ConnectionPiece> getConnectionPieces()
   {
     List<ConnectionPiece> newConnectionPieces = Collections.unmodifiableList(connectionPieces);
@@ -353,7 +358,6 @@ public class Tile extends Element
     Board placeholderBoard = board;
     this.board = null;
     placeholderBoard.removeTile(this);
-    super.delete();
   }
 
 

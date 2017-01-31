@@ -1,129 +1,191 @@
 namespace ca.mcgill.ecse223.tileo.model;
 
+//
 
-class TileO	{
-	Integer number_of_players;
-}
-
+/* this program is used by Users, and Users can be a Designer or a Player */
 class User{
-	* <@>- 1 Designer;
-	* <@>- 1 Player;
 }
 
-class Designer	{
+/* Person who designs his or her specific game. The designer will design the initial tiles’ locations, connection pieces, starting positions, etc. */
+class Designer{
+	1 <@>- 1 SpecificGame;
 	isA User;
-	1 designer -- 1 TileO game;
 }
-
-class Player	{
+/* Person who plays the game by means of turns, each player has a number and is related to his or her respective playing piece */
+class Player{
 	isA User;
-	2..4 players -- 1 SpecificGame boardGame;
-	1 player -- 1 PlayingPiece avatar;
+	
+	1 -- 1 PlayingPiece avatar;
+
+	Integer playerNumber; //Can take values from 1 to 4
+	defaulted Boolean myTurn = false;	//Turns true when it is that player’s turn
+Boolean canDrawCard;		//if the player lands on an action tile, he or she can draw a card
+	Boolean willLoseNextTurn;		/*if someone picks a loseTurn actionCard, it will set it to true
+					next time myTurn becomes true for  his player, willLoseNextTurn 	will be checked	*/
 }
 
-class PlayingPiece	{
-	isA Element;
-	String color;
-	Boolean myTurn;
-	
-	Integer xStart;
-	Integer yStart;
-	Integer xCurrent;
-	Integer yCurrent;
-	
-	Boolean canDrawCard;
+
+class TileO{
 }
 
-class SpecificGame	{
-	1 boardGame -- * Element gameElement;
+/* The designer designed SpecificGame, the SpecificGame indicates the numbers of players which should be between 2 to 4 players, the SpecificGame is divided into 3 states: Designing state, playing state, ending state. After one player wins the specific game, game ends.*/
+class SpecificGame{
 	isA TileO;
-	Integer roundNumber;
-}
-
-class Element	{
-	Integer quantity;
-}
-
-class Die	{
-	isA Element;
-	Integer number_of_faces;
-	Integer roller_number;
-}
-
-class Deck	{
-	isA Element;
-	1 deck <@>- 32 ActionCard actionCards;
-	Integer numberOf;
-}
-
-class Board	{
-	isA Element;
 	
-	1 board <@>- * ConnectionPiece;
-	1 board <@>- * Tile tiles;
+	1 boardgame -- 1 Element;
 	
-	Integer numberOfTiles;
-	Integer xAxis_size;
-	Integer yAxis_size;
-	String totalSize;
+	Integer numberOfPlayers;	//must be between 2 and 4 ( This may be deleted?)
+	GameStateType { 
+		Designing{}
+		Playing{}  
+		End{} };
+}
+/* Abstract class to specify the existence of some elements in each specific game */
+class Element{
+	
 }
 
-class ConnectionPiece	{
-	* -- 1 Tile;
-	Boolean isVisible;
-}
+/* The playing piece represents the player inside a specific game. It is an element of a specific game. Each player is associated with a specific color. This is also the game piece that is moving and interacting with the other Elements while the GameState is playing*/
+class PlayingPiece{
+	isA Element;
 
-class Tile	{
 	String color;
-	Integer xLocation;
-	Integer yLocation;
-	Boolean isRightConnected;
-	Boolean isLeftConnected;
-	Boolean isTopConnected;
-	Boolean isBotConnected;
-	Boolean isOccupied;
-	Boolean isVisited;
+	defaulted Boolean isMoving = false;	//while isMoving is true, will not check actionTile
+	//while isMoving is true, it will pass by tiles, but not visit them									
+	defaulted Integer stepsDone = 0;	//counter that will increment each time you step on a tile
+										//once your steps done == rolled number, isMoving will turn to false
+										
+	Location startLocation;
+	Location currentLocation;
+	//There will be a moving method for the player to change location
+}
+/* Each game has a die. The designer decides for the number of faces, and the rolled number is determined by a rollingDie method and is used to determine by how many tiles a playing piece moves. */
+class Die{
+	isA Element;
+	Integer numberOfFaces;
+	Integer rolledNumber;	/*will be given by a method that will give a random number between 1 and the number of Faces*/
 }
 
+/* A deck of 32 action cards, having different numbers of cards of each type. The deck is defined by the top card of the stack, which is the card drawn by a player when he/she lands on an action tile. This top card will be determined by a drawCard method to be implemented later */ 
+class Deck{
+	isA Element;
+	
+	1 <@>- 32 ActionCard;
+
+	const Integer NUMBEROFCARDS = 32; // Since there will always be 32 ActionCards in a deck
+	Integer numberOfDieRollCards;
+	Integer numberOfConnectionCards;
+	Integer numberOfRemovalCards;
+	Integer numberOfTeleportCards;
+	Integer numberOfTurnLossCards;
+	//number of cards == 32
+	ActionCard topCard;	//will have a method that will choose a random card depending cards in the deck
+}
+/* 32 action cards that form the deck. There are 5 types of action cards and each card has a different effect, enumerated in the action card type. */
+class ActionCard{
+	ActionCardType{
+		DieRoll{}
+		Connection{}
+		Removal{}
+		Teleport{}
+		TurnLoss{}
+		};
+	String effect;	//will depend on what type of card it is. Just a textual description of the effect. 
+}
+
+/* Board specifies the size of the specific game, X-axis size and Y-axis size indicate the dimension of the whole board,which is a subclass of the Element class. This way, an origin can also be set to ease locations of the elements. The board also contains the Tiles and Connection Piece. */
+class Board{
+	isA Element;
+	
+	1 <@>- * Tile;  //One board can have 
+	1 <@>- * ConnectionPiece;
+	
+	Integer xAxisSize;
+	Integer yAxisSize;
+	//size is location of any piece
+}
+
+/* Pack of extra connection pieces that can be used by the players when he or she draw a Connection card.There are only 32 extra connection pieces in the pack. Players can remove a connection piece and put it in the pack. Players can also use a connection piece from the pack. This will be done by the add/remove connection method*/
+class PackOfConnectionPieces{
+	isA Element;
+	
+	defaulted Integer spareConnectionPieces = 32; //while in the playing state, it starts with 32 pieces
+	
+	/*	If the actioncard is a connection card, we will create a new instance of connectionPiece,
+		and remove one from the count of spareConnectionPieces.
+		If the actioncard is a removeConnection card, we will remove an instance of connectionPiece,
+		and add one to the count of spareConnectionPieces. */
+}
+
+/* When a normal tile is instantiated, a Tile will be instantiated. Basically, a Normal Tile is always a Tile. ActionTile and HiddenTile are ‘’special’’ Tiles. */
+
+class Tile {
+	1 -- 0..4 ConnectionPiece; //One tile can only connect to the max 4 connection piece
+	
+	String color;	//WHITE if it has not been stepped on, and BLACK if visited
+	
+	Location locationOfTile;
+	//the x AND y location for tiles must be even
+	
+	lazy Boolean isRightConnected;
+	lazy Boolean isLeftConnected;
+	lazy Boolean isTopConnected;
+	lazy Boolean isBottomConnected;
+	//isConnected are defaulted to FALSE
+	
+	lazy Boolean temporarilyVisited;	//if a player is currently on the tile - passing on the tile
+	lazy Boolean wasVisited;	//will turn black if it has been landed on
+}
+
+/* see FIGURE 1 at the end of the code for an example */
+class ConnectionPiece{
+	//0..2 -- 1 Tile;	//can only be connected to 0 OR 2 tiles
+	
+
+	Location location;
+	//EITHER x OR y has to be odd, the other has to be even;
+}
+
+//this type of tile will be turned into Grey when a player lands on it and will end the game
 class HiddenTile{
 	isA Tile;
+	
+	//will end the game if stepped on. The player stepping on it will be set to the winner 
 }
 
+//this type of tile will grant the player the action of drawCard
 class ActionTile{
-	isA Tile;
 	Boolean isNormal;
-	Integer turnsLeft;
-}
-
-class NormalTile{
-	isA Tile;
-}
-
-
-
-
-
-
-class ActionCard	{
-	actionCardType{
-		diceRoll{}
-		connection{}
-		removal{}
-		move{}
-		turnLoss{}
-	};
+	//normal means that it acts as a normal Tile.
+	
+	//will have a method that will draw a (top) card from the deck
+	
+	immutable Integer turnsBeforeAction;  // Value set by the designer: number of turns before the the ActionTile is effective again
+	defaulted Integer turnCounter = 0; //Will start to count after a player lands on the tile.
 }
 
 
+//helper class to store the location
+//The origin will be at the top left corner of the Board. The positive x axis will go to the right while the positive y axis will go down.
+class Location{
+	Integer xLocation; //Horizontal distance from the origin
+	Integer yLocation; //Vertical distance from the origin
+}
+	
 
 
 
-
-
-
-
-
-
-
-
+/* FIGURE 1 */
+// When creating our board, we will set up the board so that it alternates horizontally between tile, connection piece, tile, etc
+//It will also vertically alternate between tile, connection piece, tile, both axis starting at 0. Here is an example below
+//tiles are tiles
+//CP are connection pieces
+//		0	1	2	3	4	5	6
+//	0	tile	CP	tile	CP	tile	CP	tile	
+//	1	CP		CP		CP		CP
+//	2	tile	CP	tile	CP	tile	CP	tile
+//	3	CP		CP		CP		CP
+//	4	tile	CP	tile	CP	tile	CP	tile
+//	5	CP		CP		CP		CP
+//	6	tile	CP	tile	CP	tile	CP	tile
 

@@ -3,7 +3,10 @@
 
 package ca.mcgill.ecse223.tileo.model;
 
-// line 5 "../../../../../TileO2.ump"
+/**
+ * this program is used by Users, and Users can be a Designer or a Player
+ */
+// line 6 "../../../../../TileO2.ump"
 public class User
 {
 
