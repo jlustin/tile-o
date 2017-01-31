@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * this type of tile will be turned into Grey when a player lands on it and will end the game
  */
-// line 146 "../../../../../TileO2.ump"
+// line 146 "../../../../../TileO.ump"
 public class HiddenTile extends Tile
 {
 

@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * When a normal tile is instantiated, a Tile will be instantiated. Basically, a Normal Tile is always a Tile. ActionTile and HiddenTile are ‘’special’’ Tiles.
  */
-// line 121 "../../../../../TileO2.ump"
+// line 121 "../../../../../TileO.ump"
 public class Tile
 {
 

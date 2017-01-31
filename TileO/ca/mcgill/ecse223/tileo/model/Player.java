@@ -6,7 +6,7 @@ package ca.mcgill.ecse223.tileo.model;
 /**
  * Person who plays the game by means of turns, each player has a number and is related to his or her respective playing piece
  */
-// line 15 "../../../../../TileO2.ump"
+// line 15 "../../../../../TileO.ump"
 public class Player extends User
 {
 

@@ -6,7 +6,7 @@ package ca.mcgill.ecse223.tileo.model;
 /**
  * The designer designed SpecificGame, the SpecificGame indicates the numbers of players which should be between 2 to 4 players, the SpecificGame is divided into 3 states: Designing state, playing state, ending state. After one player wins the specific game, game ends.
  */
-// line 32 "../../../../../TileO2.ump"
+// line 32 "../../../../../TileO.ump"
 public class SpecificGame extends TileO
 {
 

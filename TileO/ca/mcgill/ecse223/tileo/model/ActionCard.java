@@ -6,7 +6,7 @@ package ca.mcgill.ecse223.tileo.model;
 /**
  * 32 action cards that form the deck. There are 5 types of action cards and each card has a different effect, enumerated in the action card type.
  */
-// line 85 "../../../../../TileO2.ump"
+// line 85 "../../../../../TileO.ump"
 public class ActionCard
 {
 

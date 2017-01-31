@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Board specifies the size of the specific game, X-axis size and Y-axis size indicate the dimension of the whole board,which is a subclass of the Element class. This way, an origin can also be set to ease locations of the elements. The board also contains the Tiles and Connection Piece.
  */
-// line 97 "../../../../../TileO2.ump"
+// line 97 "../../../../../TileO.ump"
 public class Board extends Element
 {
 

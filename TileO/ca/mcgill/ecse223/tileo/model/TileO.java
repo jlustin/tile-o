@@ -3,7 +3,7 @@
 
 package ca.mcgill.ecse223.tileo.model;
 
-// line 28 "../../../../../TileO2.ump"
+// line 28 "../../../../../TileO.ump"
 public class TileO
 {
 

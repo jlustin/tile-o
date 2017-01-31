@@ -6,7 +6,7 @@ package ca.mcgill.ecse223.tileo.model;
 /**
  * Abstract class to specify the existence of some elements in each specific game
  */
-// line 44 "../../../../../TileO2.ump"
+// line 44 "../../../../../TileO.ump"
 public class Element
 {
 
