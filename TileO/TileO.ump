@@ -2,15 +2,16 @@ namespace ca.mcgill.ecse223.tileo.model;
 //17:52
 
 class TileO	{
-	Integer numberOfPlayers;
+	1 <@>- * SpecificGame game;
 	
 }
 
 class GameState {
-	GameStateType { Start{} Playing{} Designing{} End{} }
+	GameStateType { Designing{} Playing{}  End{} }
 }
 
-class User{	
+class User {	
+
 }
 
 class Designer	{
@@ -38,7 +39,8 @@ class PlayingPiece	{
 
 class SpecificGame	{
 	1 boardGame -- * Element gameElement;
-	isA TileO;
+	
+	Integer numberOfPlayers;
 	Integer roundNumber;
 	GameState state;
 	1 -- 1 GameState;
