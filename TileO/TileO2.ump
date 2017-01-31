@@ -1,0 +1,170 @@
+namespace ca.mcgill.ecse223.tileo.model;
+
+
+class User{
+}
+
+class Designer{
+	1 <@>- SpecificGame;
+	isA User;
+}
+
+class Player{
+	isA User;
+	
+	2..4 -- PlayingPiece avatar;
+
+	Integer playerNumber;
+	defaulted Boolean myTurn = false;	//only turns true once isMoving is false
+	Boolean canDrawCard;
+	Boolean willLoseNextTurn;	/*	if someone picks a loseTurn actionCard, it will set it to true
+									next time myTurn becomes true for this player, willLoseNextTurn 
+									will be checked	*/
+}
+
+class TileO{
+}
+
+class SpecificGame{
+	isA TileO;
+	
+	1 boardgame -- Element;
+	
+	GameStateType { 
+		Designing{}
+		Playing{}  
+		End{} };
+}
+
+class Element{
+	
+}
+
+class PlayingPiece{
+	isA Element;
+
+	String color;
+	defaulted Boolean isMoving = false;	//while isMoving is true, will not check actionTile
+	//while isMoving is true, it will pass by tiles, but not visit them									
+	defaulted Integer stepsDone = 0;	//counter that will increment each time you step on a tile
+										//once your steps done == rolled number, isMoving will turn to false
+										
+	Location startLocation;
+	Location currentLocation;
+	//There will be a moving method for the player to change location
+}
+
+class Die{
+	Integer numberOfFaces;
+	Integer rolledNumber;
+}
+
+class Deck{
+	isA Element;
+	
+	1 <@>- 32 ActionCard;
+
+	const Integer numberOfCards = 32;
+	Integer numberOfDieRollCards;
+	Integer numberOfConnectionCards;
+	Integer numberOfRemovalCards;
+	Integer numberOfTeleportCards;
+	Integer numberOfTurnLossCards;
+	//number of cards == 32
+	ActionCard topCard;	//will have a method that will choose a random card depending cards in the deck
+}
+
+class ActionCard{
+	ActionCardType{
+		dieRoll{}
+		connection{}
+		removal{}
+		teleport{}
+		turnLoss{}
+		};
+	String effect;	//will depend on what type of card it is
+}
+
+class Board{
+	isA Element;
+	
+	1 <@>- * Tile;
+	1 <@>- * ConnectionPiece;
+	
+	Integer xAxisSize;
+	Integer yAxisSize;
+	//size is location of any piece
+}
+
+class PackOfConnectionPieces{
+	isA Element;
+	
+	defaulted Integer spareConnectionPieces = 32; //while in the playing state, there is only 32 pieces
+	
+	/*	If the actioncard is a connection card, we will create a new instance of connectionPiece,
+		and remove one from the count of spareConnectionPieces.
+		If the actioncard is a removeConnection card, we will remove an instance of connectionPiece,
+		and add one to the count of spareConnectionPieces. */
+}
+
+class Tile{
+	isA Element;
+	
+	1 -- 0..4 ConnectionPiece;
+	
+	String color;	//WHITE if it has not been stepped on, and BLACK if visited
+	
+	Location locationOfTile;
+	//the x AND y location for tiles must be even
+	
+	lazy Boolean isRightConnected;
+	lazy Boolean isLeftConnected;
+	lazy Boolean isTopConnected;
+	lazy Boolean isBottomConnected;
+	//isConnected are defaulted to 0
+	
+	lazy Boolean temporarilyVisited;	//if a player is currently on the tile - passing on the tile
+	lazy Boolean wasVisited;	//will turn black if it has been landed on
+}
+
+class ConnectionPiece{
+	0,2 -- 1 Tile;	//can only be connected to 0 OR 2 tiles
+	
+	lazy Boolean isUsed;
+	Location location;
+	//EITHER x OR y has to be odd, the other has to be even;
+}
+
+class HiddenTile{
+	isA Tile;
+	
+	//will end the game
+}
+
+class ActionTile{
+	Boolean isNormal;
+	//normal means that it acts as an action tile
+	
+	//will have a method that will draw a (top) card from the deck
+	
+	immutable Integer turnsBeforeAction;
+	defaulted Integer turnCounter;
+}
+
+	
+class Location{
+	//helper class to check the location
+	
+	Integer xLocation;
+	Integer yLocation;
+}
+	
+
+
+
+
+
+
+
+	
+	
