@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
+/*This code was generated using the UMPLE 1.22.0.5146 modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
 import java.util.*;
@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * The playing piece represents the player inside a specific game. It is an element of a specific game. Each player is associated with a specific color. This is also the game piece that is moving and interacting with the other Elements while the GameState is playing
  */
-// line 49 "../../../../../TileO.ump"
+// line 50 "../../../../../TileO.ump"
 public class PlayingPiece extends Element
 {
 
@@ -212,7 +212,7 @@ public class PlayingPiece extends Element
 
   public String toString()
   {
-    String outputString = "";
+	  String outputString = "";
     return super.toString() + "["+
             "color" + ":" + getColor()+ "," +
             "isMoving" + ":" + getIsMoving()+ "," +

@@ -1,12 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
+/*This code was generated using the UMPLE 1.22.0.5146 modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
 
 /**
  * The designer designed SpecificGame, the SpecificGame indicates the numbers of players which should be between 2 to 4 players, the SpecificGame is divided into 3 states: Designing state, playing state, ending state. After one player wins the specific game, game ends.
  */
-// line 31 "../../../../../TileO.ump"
+// line 32 "../../../../../TileO.ump"
 public class SpecificGame extends TileO
 {
 
@@ -118,7 +118,7 @@ public class SpecificGame extends TileO
 
   public String toString()
   {
-    String outputString = "";
+	  String outputString = "";
     return super.toString() + "["+
             "numberOfPlayers" + ":" + getNumberOfPlayers()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "element = "+(getElement()!=null?Integer.toHexString(System.identityHashCode(getElement())):"null") + System.getProperties().getProperty("line.separator") +

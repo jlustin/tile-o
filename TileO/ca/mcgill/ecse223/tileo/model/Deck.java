@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
+/*This code was generated using the UMPLE 1.22.0.5146 modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
 import java.util.*;
@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * A deck of 32 action cards, having different numbers of cards of each type. The deck is defined by the top card of the stack, which is the card drawn by a player when he/she lands on an action tile. This top card will be determined by a drawCard method to be implemented later
  */
-// line 70 "../../../../../TileO.ump"
+// line 71 "../../../../../TileO.ump"
 public class Deck extends Element
 {
 
@@ -257,13 +257,14 @@ public class Deck extends Element
       actionCards.remove(aActionCard);
     }
     
+      
     super.delete();
   }
 
 
   public String toString()
   {
-    String outputString = "";
+	  String outputString = "";
     return super.toString() + "["+
             "numberOfDieRollCards" + ":" + getNumberOfDieRollCards()+ "," +
             "numberOfConnectionCards" + ":" + getNumberOfConnectionCards()+ "," +

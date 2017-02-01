@@ -1,12 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
+/*This code was generated using the UMPLE 1.22.0.5146 modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
 
 /**
  * Pack of extra connection pieces that can be used by the players when he or she draw a Connection card.There are only 32 extra connection pieces in the pack. Players can remove a connection piece and put it in the pack. Players can also use a connection piece from the pack. This will be done by the add/remove connection method
  */
-// line 110 "../../../../../TileO.ump"
+// line 111 "../../../../../TileO.ump"
 public class PackOfConnectionPieces extends Element
 {
 
@@ -68,7 +68,7 @@ public class PackOfConnectionPieces extends Element
 
   public String toString()
   {
-    String outputString = "";
+	  String outputString = "";
     return super.toString() + "["+
             "spareConnectionPieces" + ":" + getSpareConnectionPieces()+ "]"
      + outputString;

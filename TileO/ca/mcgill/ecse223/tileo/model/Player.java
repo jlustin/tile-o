@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
+/*This code was generated using the UMPLE 1.22.0.5146 modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
 import java.util.*;
@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Person who plays the game by means of turns, each player has a number and is related to his or her respective playing piece
  */
-// line 14 "../../../../../TileO.ump"
+// line 15 "../../../../../TileO.ump"
 public class Player extends User
 {
 
@@ -218,7 +218,7 @@ public class Player extends User
 
   public String toString()
   {
-    String outputString = "";
+	  String outputString = "";
     return super.toString() + "["+
             "playerNumber" + ":" + getPlayerNumber()+ "," +
             "myTurn" + ":" + getMyTurn()+ "," +

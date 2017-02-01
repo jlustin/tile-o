@@ -1,12 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
+/*This code was generated using the UMPLE 1.22.0.5146 modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
 
 /**
  * Person who designs his or her specific game. The designer will design the initial tiles’ locations, connection pieces, starting positions, etc.
  */
-// line 9 "../../../../../TileO.ump"
+// line 10 "../../../../../TileO.ump"
 public class Designer extends User
 {
 

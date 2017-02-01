@@ -1,12 +1,12 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
+/*This code was generated using the UMPLE 1.22.0.5146 modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
 
 /**
  * Each game has a die. The designer decides for the number of faces, and the rolled number is determined by a rollingDie method and is used to determine by how many tiles a playing piece moves.
  */
-// line 63 "../../../../../TileO.ump"
+// line 64 "../../../../../TileO.ump"
 public class Die extends Element
 {
 
@@ -67,7 +67,7 @@ public class Die extends Element
 
   public String toString()
   {
-    String outputString = "";
+	  String outputString = "";
     return super.toString() + "["+
             "numberOfFaces" + ":" + getNumberOfFaces()+ "," +
             "rolledNumber" + ":" + getRolledNumber()+ "]"

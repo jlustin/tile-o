@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
+/*This code was generated using the UMPLE 1.22.0.5146 modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
 
@@ -7,7 +7,7 @@ package ca.mcgill.ecse223.tileo.model;
  * helper class to store the location
  * The origin will be at the top left corner of the Board. The positive x axis will go to the right while the positive y axis will go down.
  */
-// line 167 "../../../../../TileO.ump"
+// line 168 "../../../../../TileO.ump"
 public class Location
 {
 
@@ -71,7 +71,7 @@ public class Location
 
   public String toString()
   {
-    String outputString = "";
+	  String outputString = "";
     return super.toString() + "["+
             "xLocation" + ":" + getXLocation()+ "," +
             "yLocation" + ":" + getYLocation()+ "]"

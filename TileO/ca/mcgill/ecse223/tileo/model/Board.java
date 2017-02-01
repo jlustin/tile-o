@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
+/*This code was generated using the UMPLE 1.22.0.5146 modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
 import java.util.*;
@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Board specifies the size of the specific game, X-axis size and Y-axis size indicate the dimension of the whole board,which is a subclass of the Element class. This way, an origin can also be set to ease locations of the elements. The board also contains the Tiles and Connection Piece.
  */
-// line 97 "../../../../../TileO.ump"
+// line 98 "../../../../../TileO.ump"
 public class Board extends Element
 {
 
@@ -263,6 +263,7 @@ public class Board extends Element
       tiles.remove(aTile);
     }
     
+      
     while (connectionPieces.size() > 0)
     {
       ConnectionPiece aConnectionPiece = connectionPieces.get(connectionPieces.size() - 1);
@@ -270,13 +271,14 @@ public class Board extends Element
       connectionPieces.remove(aConnectionPiece);
     }
     
+      
     super.delete();
   }
 
 
   public String toString()
   {
-    String outputString = "";
+	  String outputString = "";
     return super.toString() + "["+
             "xAxisSize" + ":" + getXAxisSize()+ "," +
             "yAxisSize" + ":" + getYAxisSize()+ "]"

@@ -3,6 +3,7 @@ namespace ca.mcgill.ecse223.tileo.model;
 
 /* this program is used by Users, and Users can be a Designer or a Player */
 class User{
+	abstract;
 }
 
 /* Person who designs his or her specific game. The designer will design the initial tiles’ locations, connection pieces, starting positions, etc. */
@@ -42,7 +43,7 @@ class SpecificGame{
 }
 /* Abstract class to specify the existence of some elements in each specific game */
 class Element{
-	
+	abstract;
 }
 
 /* The playing piece represents the player inside a specific game. It is an element of a specific game. Each player is associated with a specific color. This is also the game piece that is moving and interacting with the other Elements while the GameState is playing */
