@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.22.0.5146 modeling language!*/
+/*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
 import java.util.*;
@@ -263,7 +263,6 @@ public class Board extends Element
       tiles.remove(aTile);
     }
     
-      
     while (connectionPieces.size() > 0)
     {
       ConnectionPiece aConnectionPiece = connectionPieces.get(connectionPieces.size() - 1);
@@ -271,14 +270,13 @@ public class Board extends Element
       connectionPieces.remove(aConnectionPiece);
     }
     
-      
     super.delete();
   }
 
 
   public String toString()
   {
-	  String outputString = "";
+    String outputString = "";
     return super.toString() + "["+
             "xAxisSize" + ":" + getXAxisSize()+ "," +
             "yAxisSize" + ":" + getYAxisSize()+ "]"

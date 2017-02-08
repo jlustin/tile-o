@@ -1,5 +1,5 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.22.0.5146 modeling language!*/
+/*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
 
@@ -110,7 +110,7 @@ public class ActionTile
 
   public String toString()
   {
-	  String outputString = "";
+    String outputString = "";
     return super.toString() + "["+
             "isNormal" + ":" + getIsNormal()+ "," +
             "turnsBeforeAction" + ":" + getTurnsBeforeAction()+ "," +
