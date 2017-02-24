@@ -202,7 +202,7 @@ public class Player implements Serializable
   }
 
   // line 22 "../../../../../TileOPersistence.ump"
-   public static  void reinitializeUniquePlayer(List<Player> players){
+   public static void reinitializeUniquePlayer(List<Player> players){
     playersByNumber = new HashMap<Integer, Player>();
 	for(Player player : players) {
 		playersByNumber.put(player.getNumber(), player);

@@ -1,6 +1,7 @@
 package ca.mcgill.ecse223.tileo.application;
 
 import ca.mcgill.ecse223.tileo.model.TileO;
+import ca.mcgill.ecse223.tileo.persistence.PersistenceObjectStream;
 import ca.mcgill.ecse223.tileo.model.Game;
 import ca.mcgill.ecse223.tileo.model.Player;
 
@@ -36,14 +37,14 @@ public class TileOApplication {
 	public static TileO load() {
 		PersistenceObjectStream.setFilename(filename);
 		tileO = (TileO) PersistenceObjectStream.deserialize();
-		// model cannot be loaded - create empty BTMS
+		// model cannot be loaded - create empty TileO
 		if (tileO == null) {
 			tileO = new TileO();
 			Game game = new Game (32, tileO);
 			tileO.setCurrentGame(game);
 		}
 		else {
-			Player.reinitializeUniquePlayer();
+			Player.reinitializeUniquePlayer(tileO.getCurrentGame().getPlayers());
 		}
 		return tileO;
 	}
