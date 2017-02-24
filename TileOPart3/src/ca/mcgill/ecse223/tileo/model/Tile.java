@@ -2,10 +2,12 @@
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
+import java.io.Serializable;
 import java.util.*;
 
-// line 30 "../../../../../TileO (updated Feb10).ump"
-public abstract class Tile
+// line 29 "../../../../../TileOPersistence.ump"
+// line 32 "../../../../../TileO (updated Feb10).ump"
+public abstract class Tile implements Serializable
 {
 
   //------------------------
@@ -262,5 +264,13 @@ public abstract class Tile
             "hasBeenVisited" + ":" + getHasBeenVisited()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "game = "+(getGame()!=null?Integer.toHexString(System.identityHashCode(getGame())):"null")
      + outputString;
-  }
+  }  
+  //------------------------
+  // DEVELOPER CODE - PROVIDED AS-IS
+  //------------------------
+  
+  // line 32 ../../../../../TileOPersistence.ump
+  private static final long serialVersionUID = 4444444444444444444L ;
+
+  
 }

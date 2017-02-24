@@ -2,9 +2,11 @@
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
+import java.io.Serializable;
 import java.util.*;
 
-// line 50 "../../../../../TileO (updated Feb10).ump"
+// line 47 "../../../../../TileOPersistence.ump"
+// line 52 "../../../../../TileO (updated Feb10).ump"
 public class WinTile extends Tile
 {
 
@@ -29,5 +31,13 @@ public class WinTile extends Tile
   {
     super.delete();
   }
+  
+  //------------------------
+  // DEVELOPER CODE - PROVIDED AS-IS
+  //------------------------
+  
+  // line 50 ../../../../../TileOPersistence.ump
+  private static final long serialVersionUID = 7777777777777777777L ;
 
+  
 }
