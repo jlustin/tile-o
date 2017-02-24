@@ -2,6 +2,7 @@ package ca.mcgill.ecse223.tileo.application;
 
 import ca.mcgill.ecse223.tileo.model.TileO;
 import ca.mcgill.ecse223.tileo.persistence.PersistenceObjectStream;
+import ca.mcgill.ecse223.tileo.view.TileODesignPage;
 import ca.mcgill.ecse223.tileo.model.Game;
 import ca.mcgill.ecse223.tileo.model.Player;
 
@@ -16,7 +17,7 @@ public class TileOApplication {
 		// start UI
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TileOPage().setVisible(true);
+                new TileODesignPage().setVisible(true);
             }
         });
         

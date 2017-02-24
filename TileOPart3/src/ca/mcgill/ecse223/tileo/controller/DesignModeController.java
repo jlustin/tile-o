@@ -15,7 +15,6 @@ public class DesignModeController {
 		// According to my feedback from part 2: 
 				/* -2 createGame should add a new game to application and set it as the current game, 
 				 instead of getting the current game; Set mode to "DESIGN".*/
-		
 
 		Game game = new Game(32, null);				//TODO: add TileO, this already creates a Deck and a Die (btw, check Game Class)
 //		TileO.setCurrentGame(game);
@@ -29,14 +28,14 @@ public class DesignModeController {
 	public void connectTwoTiles (Tile selectedTile1, Tile selectedTile2) throws InvalidInputException{
 		TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
-		
 		try
 		{
 			Connection newConnection =  currentGame.addConnection();
 			selectedTile1.addConnection(newConnection);
 			selectedTile2.addConnection(newConnection);
 		}
-		catch (RuntimeException e){
+		catch (RuntimeException e)
+		{
 			throw new InvalidInputException (e.getMessage());
 		}
 	}
@@ -46,7 +45,8 @@ public class DesignModeController {
 		{
 			selectedConnection.delete();
 		}
-		catch (RuntimeException e){
+		catch (RuntimeException e)
+		{
 			throw new InvalidInputException (e.getMessage());
 		}
 	}

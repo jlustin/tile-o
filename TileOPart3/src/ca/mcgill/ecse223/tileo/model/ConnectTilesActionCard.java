@@ -31,6 +31,14 @@ public class ConnectTilesActionCard extends ActionCard
     super.delete();
   }
   
+  public void play (Tile tile1, Tile tile2){
+	  Game currentGame = super.getDeck().getGame();
+	  
+	  Connection newConnection = currentGame.addConnection();
+	  tile1.addConnection(newConnection);
+	  tile2.addConnection(newConnection);
+  }
+  
   //------------------------
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
