@@ -265,8 +265,34 @@ public abstract class Tile implements Serializable
             "  " + "game = "+(getGame()!=null?Integer.toHexString(System.identityHashCode(getGame())):"null")
      + outputString;
   }  
+  
   //------------------------
-  // DEVELOPER CODE - PROVIDED AS-IS
+  public List<Tile> getNeighbors(int number) {
+	  //Create a ArrayList to store the neighbor Tile
+	  List<Tile> neighbors = new ArrayList<Tile>();
+	  int i = 0;
+	  
+	  //If the Tile does not have neighbors, return null
+	  if (numberOfConnections()==0) {
+		  return null;
+	  }
+	  
+	  else {	  
+		  //Pick each connection piece of this Tile
+		  for(i=0;i<numberOfConnections();i++){
+			 Connection tmpConnection = getConnection(i);
+			 
+			 /* Compare first Tile that connect with this connection piece, if the first Tile is not the original one, then this Tile is a neighbor
+			  * of the original Tile,and add it in the neighbor's list. Else, if the first Tile is original Tile, then the second Tile is a neighbor
+			  * of the original Tile,and add the second Tile in the neighbor's list.*/
+			 if((tmpConnection.getTile(0).getX() != this.x)&&(tmpConnection.getTile(0).getY()!= this.y)){
+				 neighbors.add(tmpConnection.getTile(0));
+			 }
+			 else neighbors.add(tmpConnection.getTile(1));			  
+		  }
+		return neighbors;  
+	  }	  
+  }
   //------------------------
   
   // line 32 ../../../../../TileOPersistence.ump
