@@ -1,0 +1,105 @@
+external interface Serializable {}
+
+class TileO {
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 1111111111111111111L; 
+}
+
+class Game {
+  	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 2222222222222222222L;
+	
+}
+
+class Player {
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 3333333333333333333L;
+	
+	public static void reinitializeUniquePlayer(List<Player> players){
+	playersByNumber = new HashMap<Integer, Player>();
+	for(Player player : players) {
+		playersByNumber.put(player.getNumber(), player);
+		}
+	}
+}
+
+class Tile {
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 4444444444444444444;
+}
+
+class ActionTile {
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 5555555555555555555;	
+}
+
+class NormalTile {
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 6666666666666666666;
+}
+
+class WinTile {
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 7777777777777777777;
+}
+
+class Connection {
+	depend java.io.Serializable;
+	isA Serializable;
+    private static final long serialVersionUID = 8888888888888888888;
+}
+
+class Deck {
+	depend java.io.Serializable;
+	isA Serializable;
+ 	private static final long serialVersionUID = 9999999999999999999;
+}
+
+class ActionCard {
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 1010101010101010101;
+}
+
+class RollDieActionCard {
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 2020202020202020202;
+}
+
+class ConnectTilesActionCard {
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 3030303030303030303;
+}
+
+class RemoveConnectionActionCard {
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 4040404040404040404;
+}
+
+class TeleportActionCard {
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 5050505050505050505;
+}
+
+class LoseTurnActionCard {
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 6060606060606060606;
+}
+
+class Die {
+	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 7070707070707070707;	
+}
