@@ -3,6 +3,7 @@
 
 package ca.mcgill.ecse223.tileo.model;
 import java.util.*;
+import java.util.Random;
 
 // line 57 "../../../../../TileO (updated Feb10).ump"
 public class Deck
@@ -201,5 +202,14 @@ public class Deck
       existingGame.delete();
     }
   }
-
+  public void shuffle() {
+	  int i = 0;
+	  Random randomGenerator = new Random();
+	  for (i=0;i<100;i++){
+		  ActionCard firstCard = getCard(0);
+		  int randomInt=randomGenerator.nextInt(32);
+		  boolean cardStatus =  addOrMoveCardAt(firstCard,randomInt);		  
+	  }
+  }
+ 
 }

@@ -3,6 +3,8 @@
 
 package ca.mcgill.ecse223.tileo.model;
 
+import java.util.Random;
+
 // line 88 "../../../../../TileO (updated Feb10).ump"
 public class Die
 {
@@ -49,6 +51,13 @@ public class Die
     {
       existingGame.delete();
     }
+  }
+  
+  public int roll() {
+	  int rollNumber = 0;
+	  Random randomGenerator = new Random();
+	  rollNumber=randomGenerator.nextInt(6)+1;
+	  return rollNumber;
   }
 
 }
