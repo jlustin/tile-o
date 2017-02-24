@@ -36,13 +36,15 @@ public class WinTile extends Tile
   	  Player currentPlayer = currentGame.getCurrentPlayer();
   	 
   	  // set the player's current tile to the tile he has to move to
-  	  //currentPlayer.setCurrentTile(possible tile from Charles);
+  	  // possible moves from Charles
+  	  currentPlayer.setCurrentTile(this);
   	 
   	  currentGame.setMode(Game.Mode.GAME_WON);
   	 
-  	 // set possible tile that player chose hasBeenVisited to true
+  	  // set possible tile that player chose, that it has been visited
+  	  this.setHasBeenVisited(true);
   	 
-  	 
+
   }
 
   public void delete()

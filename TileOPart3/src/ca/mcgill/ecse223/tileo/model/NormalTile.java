@@ -29,38 +29,40 @@ public class NormalTile extends Tile
   
   public void land()
   { 
-	  // get the current game
-	  Game currentGame = getGame();
-	 
-	  // get the current player
-	  Player currentPlayer = currentGame.getCurrentPlayer();
-	 
-	  // set the player's current tile to the tile he has to move to
-	  //currentPlayer.setStartingTile(possible tile from Charles);
-	 
-	  // get the index of the current player
-	  int playerIndex = currentGame.indexOfPlayer(currentPlayer);
-	 
-	  // get the number of players in the game
-	  int numberOfPlayers = currentGame.numberOfPlayers();
-	 
-	  // if it's the last player's turn
-	  if(playerIndex == numberOfPlayers){
-		  
-		  // it is now player 1's turn
-		  Player playerOne = currentGame.getPlayer(0);	 
-		 
-		  currentGame.setCurrentPlayer(playerOne);
-	  }else{
-		  // it is now the next player's turn
-		  Player followingPlayer = currentGame.getPlayer(currentGame.indexOfPlayer(currentPlayer)+1);
-		 
-		  currentGame.setCurrentPlayer(followingPlayer);
-		 
-	  	}
-	 
-	 // set possible tile that player chose to true
-	 
+  	  // get the current game
+  	  Game currentGame = getGame();
+  	 
+  	  // get the current player
+  	  Player currentPlayer = currentGame.getCurrentPlayer();
+  	 
+  	  // set the player's current tile to the tile he has to move to
+  	  // possible moves from Charles
+  	  currentPlayer.setStartingTile(this);
+  	 
+  	  // get the index of the current player
+  	  int playerIndex = currentGame.indexOfPlayer(currentPlayer);
+  	 
+  	  // get the number of players in the game
+  	  int numberOfPlayers = currentGame.numberOfPlayers();
+  	 
+  	  // if it's the last player's turn
+  	  if(playerIndex == numberOfPlayers){
+  		  
+  		  // it is now player 1's turn
+  		  Player playerOne = currentGame.getPlayer(0);	 
+  		 
+  		  currentGame.setCurrentPlayer(playerOne);
+  	  }else{
+  		  // it is now the next player's turn
+  		  Player followingPlayer = currentGame.getPlayer(currentGame.indexOfPlayer(currentPlayer)+1);
+  		 
+  		  currentGame.setCurrentPlayer(followingPlayer);
+  		 
+  	  	}
+  	 
+  	  // set possible tile that player chose, that it has been visited
+  	  this.setHasBeenVisited(true);
+  	 
   }
 
 
