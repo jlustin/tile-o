@@ -25,6 +25,19 @@ public class TeleportActionCard extends ActionCard
   //------------------------
   // INTERFACE
   //------------------------
+  
+  public Game.Mode getActionCardMode() {
+	  return Game.Mode.GAME_TELEPORTACTIONCARD;
+ }
+
+  
+  public void play(Tile tile) {
+	  Deck deck = super.getDeck();	 
+	  Game game = deck.getGame();
+	  Player player = game.getCurrentPlayer(); 
+	  player.setCurrentTile(tile);
+ }
+  
 
   public void delete()
   {

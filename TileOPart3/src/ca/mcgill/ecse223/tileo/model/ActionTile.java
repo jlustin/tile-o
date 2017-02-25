@@ -32,6 +32,54 @@ public class ActionTile extends Tile
   //------------------------
   // INTERFACE
   //------------------------
+  
+  public void land()
+  {
+	  // get current game
+	  Game currentGame = getGame();
+	  
+	  // get current player
+	  Player currentPlayer = currentGame.getCurrentPlayer();
+	  
+	  // set the player's current tile to the tile he has to move to
+	  // possible moves from Charles
+	  currentPlayer.setStartingTile(this);
+	  
+	  // get deck
+	  Deck deck = currentGame.getDeck();
+	  
+	  // get the top card
+	  ActionCard topCard = deck.getCurrentCard();
+	  
+	  Game.Mode currentMode = null;
+	  
+	  
+	  // check what type of action card is topCard
+	  if(topCard instanceof RemoveConnectionActionCard)
+	  {
+		  currentGame.setMode(currentMode.GAME_REMOVECONNECTIONACTIONCARD);
+		  
+	  }else if(topCard instanceof RollDieActionCard)
+	  {
+		  currentGame.setMode(currentMode.GAME_ROLLDIEACTIONCARD);
+		  
+	  }else if(topCard instanceof TeleportActionCard)
+	  {
+		  currentGame.setMode(currentMode.GAME_TELEPORTACTIONCARD);
+		  
+	  }else if(topCard instanceof ConnectTilesActionCard)
+	  {
+		  currentGame.setMode(currentMode.GAME_CONNECTTILESACTIONCARD);
+		  
+	  }else if(topCard instanceof LoseTurnActionCard)
+	  {
+		  currentGame.setMode(currentMode.GAME_LOSETURNACTIONCARD);
+		  
+	  }
+	  
+	// set possible tile that player chose, that it has been visited
+	  this.setHasBeenVisited(true);
+	}
 
   public boolean setTurnsUntilActive(int aTurnsUntilActive)
   {
