@@ -267,30 +267,34 @@ public abstract class Tile implements Serializable
   }  
   
   //------------------------
-  public List<Tile> getNeighbors(int number) {
+  public List<Tile> nextMoves (int moveLeft,Tile previousTile) {
 	  //Create a ArrayList to store the neighbor Tile
-	  List<Tile> neighbors = new ArrayList<Tile>();
+	  List<Tile> possibleMoveTiles =  new ArrayList<Tile>();
 	  int i = 0;
-	  
-	  //If the Tile does not have neighbors, return null
-	  if (numberOfConnections()==0) {
-		  return null;
+      
+	  //If the moveLeft is 1, then add Tile itself into list possibleMoveTiles
+	  if(moveLeft==1) {
+		  possibleMoveTiles.add(this);
+		  return possibleMoveTiles;
 	  }
 	  
-	  else {	  
-		  //Pick each connection piece of this Tile
-		  for(i=0;i<numberOfConnections();i++){
-			 Connection tmpConnection = getConnection(i);
-			 
-			 /* Compare first Tile that connect with this connection piece, if the first Tile is not the original one, then this Tile is a neighbor
-			  * of the original Tile,and add it in the neighbor's list. Else, if the first Tile is original Tile, then the second Tile is a neighbor
-			  * of the original Tile,and add the second Tile in the neighbor's list.*/
-			 if((tmpConnection.getTile(0).getX() != this.x)&&(tmpConnection.getTile(0).getY()!= this.y)){
-				 neighbors.add(tmpConnection.getTile(0));
-			 }
-			 else neighbors.add(tmpConnection.getTile(1));			  
+	  /*If the Tile only has one connection, and it connects with previousTiles, it means this Tile cannot get possible moves anymore,
+	   therefore, add the Tile itself into list possibleMoveTiles*/
+	  if(this.getConnections().size()==1 && (getConnection(0).getTile(0).equals(previousTile)||getConnection(0).getTile(1).equals(previousTile))){
+		  possibleMoveTiles.add(this);
+		  return possibleMoveTiles;
+	  }
+	  
+      //Pick each connection piece of this Tile, check if neibor's Tile  
+	  for(i=0;i<getConnections().size();i++){
+			 Connection nextConnection = getConnection(i);
+			 for(int j=0;j<2;j++){
+				  if((!nextConnection.getTile(j).equals(this))&&(!nextConnection.getTile(j).equals(previousTile))){
+					   possibleMoveTiles = nextConnection.getTile(j).nextMoves(moveLeft-1,this);
+			      }			
+			 }			  
 		  }
-		return neighbors;  
+		  return possibleMoveTiles;  
 	  }	  
   }
   //------------------------

@@ -222,7 +222,24 @@ public class Player implements Serializable
      + outputString;
   }  
   //------------------------
-  // DEVELOPER CODE - PROVIDED AS-IS
+  public List<Tile> getPossibleMoves(int moveLeft) {
+	  List<Tile> possibleMoves = new ArrayList<Tile>();
+	  
+	  if(moveLeft == 0){
+		  possibleMoves.add(currentTile);
+		  return possibleMoves;
+	  }
+	  if(this.currentTile.getNeighbors(moveLeft)==null){
+		  possibleMoves.add(currentTile);
+	  }
+	  
+	  for(int i = 0; i<currentTile.getNeighbors(moveLeft).size();i++){
+		  currentTile.get
+		  
+	  }
+	  
+  }
+  
   //------------------------
   
   // line 19 ../../../../../TileOPersistence.ump
