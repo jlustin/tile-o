@@ -221,22 +221,29 @@ public class Player implements Serializable
             "  " + "game = "+(getGame()!=null?Integer.toHexString(System.identityHashCode(getGame())):"null")
      + outputString;
   }  
+  
+  
   //------------------------
+  
   public List<Tile> getPossibleMoves(int moveLeft) {
 	  List<Tile> possibleMoves = new ArrayList<Tile>();
-	  
-	  if(moveLeft == 0){
-		  possibleMoves.add(currentTile);
-		  return possibleMoves;
+	  Tile neighborTile;
+	  Connection connectionOfTile;
+	  if (currentTile.getConnections().size()==0){
+		  return null;
 	  }
-	  if(this.currentTile.getNeighbors(moveLeft)==null){
-		  possibleMoves.add(currentTile);
-	  }
-	  
-	  for(int i = 0; i<currentTile.getNeighbors(moveLeft).size();i++){
-		  currentTile.get
-		  
-	  }
+	  else{
+		  for(int i = 0;i<currentTile.getConnections().size();i++){
+			  connectionOfTile = currentTile.getConnection(i);
+    	  	  for(int j =0;j<connectionOfTile.getTiles().size();j++){
+    	  		  neighborTile = connectionOfTile.getTile(j);
+    	  		  if (!neighborTile.equals(currentTile)){
+    	  			  possibleMoves.addAll(neighborTile.getNextMoves(moveLeft,currentTile));
+    	  		  }
+    	  	  }
+	      }  	  
+      return possibleMoves;	  
+      }
 	  
   }
   

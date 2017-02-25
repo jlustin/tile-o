@@ -3,6 +3,7 @@
 
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
+import java.util.Random;
 
 // line 101 "../../../../../TileOPersistence.ump"
 // line 90 "../../../../../TileO (updated Feb10).ump"
@@ -54,7 +55,12 @@ public class Die implements Serializable
   }
   
   //------------------------
-  // DEVELOPER CODE - PROVIDED AS-IS
+  public int roll(){
+	int rollNumber;
+	Random randomGenerator = new Random();
+	rollNumber = randomGenerator.nextInt(6)+1;
+	return rollNumber;
+  }
   //------------------------
   
   // line 104 ../../../../../TileOPersistence.ump

@@ -267,10 +267,11 @@ public abstract class Tile implements Serializable
   }  
   
   //------------------------
-  public List<Tile> nextMoves (int moveLeft,Tile previousTile) {
+  public List<Tile> getNextMoves (int moveLeft,Tile previousTile) {
 	  //Create a ArrayList to store the neighbor Tile
 	  List<Tile> possibleMoveTiles =  new ArrayList<Tile>();
 	  int i = 0;
+	  Tile neighborTile;
       
 	  //If the moveLeft is 1, then add Tile itself into list possibleMoveTiles
 	  if(moveLeft==1) {
@@ -285,18 +286,21 @@ public abstract class Tile implements Serializable
 		  return possibleMoveTiles;
 	  }
 	  
-      //Pick each connection piece of this Tile, check if neibor's Tile  
+      //Pick each connection piece that connect to this Tile 
 	  for(i=0;i<getConnections().size();i++){
 			 Connection nextConnection = getConnection(i);
-			 for(int j=0;j<2;j++){
-				  if((!nextConnection.getTile(j).equals(this))&&(!nextConnection.getTile(j).equals(previousTile))){
-					   possibleMoveTiles = nextConnection.getTile(j).nextMoves(moveLeft-1,this);
+			 //Get all neighborTile
+			 for(int j=0;j<2;j++){			
+				 neighborTile = nextConnection.getTile(j);
+				  //If the neighborTile is not the Tile itself and is not the previous Tile,then, recursively call getNextMove in order to get possible moves.
+				  if((!neighborTile.equals(this))&&(!neighborTile.equals(previousTile))){
+					   possibleMoveTiles.addAll(neighborTile.getNextMoves(moveLeft-1,this));
 			      }			
 			 }			  
 		  }
 		  return possibleMoveTiles;  
 	  }	  
-  }
+  
   //------------------------
   
   // line 32 ../../../../../TileOPersistence.ump

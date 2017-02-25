@@ -205,7 +205,16 @@ public class Deck implements Serializable
   }
   
   //------------------------
-  // DEVELOPER CODE - PROVIDED AS-IS
+  public void shuffle(){
+	  ActionCard tmpCard;
+	  Random randomGenerator = new Random();
+	  int randomPosition;
+	  for (int i = 0;i<300;i++){
+		  randomPosition = randomGenerator.nextInt(32);
+		  tmpCard = getCard(0);
+		  addOrMoveCardAt(tmpCard,randomPosition);
+	  }
+  }
   //------------------------
   
   // line 62 ../../../../../TileOPersistence.ump
