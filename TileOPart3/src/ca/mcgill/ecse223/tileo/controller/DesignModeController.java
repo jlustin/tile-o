@@ -1,12 +1,18 @@
 package ca.mcgill.ecse223.tileo.controller;
 
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.model.ActionTile;
+import ca.mcgill.ecse223.tileo.model.ConnectTilesActionCard;
 import ca.mcgill.ecse223.tileo.model.Connection;
+import ca.mcgill.ecse223.tileo.model.Deck;
 import ca.mcgill.ecse223.tileo.model.Game;
 import ca.mcgill.ecse223.tileo.model.Game.Mode;
 import ca.mcgill.ecse223.tileo.model.NormalTile;
 import ca.mcgill.ecse223.tileo.model.Player;
+import ca.mcgill.ecse223.tileo.model.RemoveConnectionActionCard;
+import ca.mcgill.ecse223.tileo.model.RollDieActionCard;
+import ca.mcgill.ecse223.tileo.model.TeleportActionCard;
 import ca.mcgill.ecse223.tileo.model.Tile;
 import ca.mcgill.ecse223.tileo.model.TileO;
 import ca.mcgill.ecse223.tileo.model.WinTile;
@@ -15,7 +21,10 @@ public class DesignModeController {
 	
 
 	//METHODS
-	
+	private static final String rollDieInstruction = "Roll the die for an extra turn. ";
+	private static final String connectTilesInstruction = "Connect two adjacent tiles with a connection piece from the pile of spare connection pieces. "; 
+	private static final String teleportInstruction = "Move your playing piece to an arbitray tile that is not your current tile. ";
+	private static final String removeConnectionInstruction = "Remove a connectio piece from the board and place it in the pile of spare connection pieces. ";
 	
 	//TileType is chosen from UI from a button
 	public static boolean addDesignTile(int x, int y, String TileType) {
@@ -213,6 +222,42 @@ public class DesignModeController {
 			int numberOfRemoveConnectionActionCard,
 			int numberOfTeleportActionCard) throws InvalidInputException {
 		//TODO: CHARLES
+		String error = "";
+		if(numberOfRollDieActionCard+ numberOfConnectTilesActionCard+numberOfRemoveConnectionActionCard
+				+numberOfTeleportActionCard != 32) {
+			error = "The sum of numbers of different types of acton cards should be 32. ";
+		}
+		if (error.length() > 0) {
+			throw new InvalidInputException(error.trim());
+		}
+		try{
+			TileO tileO = TileOApplication.getTileO();
+			Game currentGame = tileO.getCurrentGame();
+			Deck deck = currentGame.getDeck();
+			for(int i = 0; i < numberOfRollDieActionCard;i++){
+				RollDieActionCard rollDieActionCard = new RollDieActionCard(rollDieInstruction,deck);
+				deck.addCard(rollDieActionCard);
+			}
+			for(int j = 0; j < numberOfConnectTilesActionCard;j++) {
+				ConnectTilesActionCard connectTilesActionCard = new ConnectTilesActionCard(connectTilesInstruction,deck);
+				deck.addCard(connectTilesActionCard);
+			}
+			for(int k = 0; k < numberOfRemoveConnectionActionCard;k++){
+				RemoveConnectionActionCard removeConnectionActionCard = new RemoveConnectionActionCard(removeConnectionInstruction,deck);
+				deck.addCard(removeConnectionActionCard);
+			}
+			for(int z = 0; z < numberOfTeleportActionCard;z++) {
+				TeleportActionCard teleportActionCard = new TeleportActionCard(teleportInstruction,deck);
+				deck.addCard(teleportActionCard);
+			}
+		}
+		catch (RuntimeException e) {
+			throw new InvalidInputException(error);
+		}
+		    
+		
+		
+		
 	}
 
 	
