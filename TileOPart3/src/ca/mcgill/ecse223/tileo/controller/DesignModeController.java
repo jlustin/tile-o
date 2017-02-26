@@ -115,13 +115,25 @@ public class DesignModeController {
 	 * Justin
 	 */
 	public void removeConnection (Connection selectedConnection) throws InvalidInputException{
+		TileO tileO = TileOApplication.getTileO();
+		Game currentGame = tileO.getCurrentGame();
+		String error = "";
+		
+		if (currentGame.getCurrentConnectionPieces() <= 0){
+			error = error + "There are no connection pieces in the current game.";
+		}
+		if (error.length() > 0){
+			throw new InvalidInputException (error.trim());
+		}
+		
 		try
 		{
 			selectedConnection.delete();
 		}
 		catch (RuntimeException e)
 		{
-			throw new InvalidInputException (e.getMessage());
+			error = e.getMessage();
+			throw new InvalidInputException (error);
 		}
 	}
 	
