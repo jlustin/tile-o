@@ -77,6 +77,10 @@ class ConnectTilesActionCard {
 
 class RemoveConnectionActionCard {
   isA ActionCard;
+  
+  public void play(Connection connection) {
+  	tile.land();
+  }
 }
 
 class TeleportActionCard {

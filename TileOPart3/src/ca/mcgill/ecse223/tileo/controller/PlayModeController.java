@@ -210,6 +210,7 @@ public class PlayModeController {
 			//play(connection)???
 			//"play() needs to be added to the removeconnectionactioncard class"
 			//add try catch block?
+			((RemoveConnectionActionCard) currentCard).play(connection);
 		}
 		
 		//checks if current player is the last player

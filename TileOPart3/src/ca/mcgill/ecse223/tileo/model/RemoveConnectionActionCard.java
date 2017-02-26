@@ -36,6 +36,10 @@ public class RemoveConnectionActionCard extends ActionCard
     super.delete();
   }
   
+  public void play(Connection connection) {
+	  	tile.land();
+  }
+  
   //------------------------
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
