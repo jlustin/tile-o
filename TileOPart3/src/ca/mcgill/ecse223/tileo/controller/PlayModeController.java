@@ -1,5 +1,7 @@
 package ca.mcgill.ecse223.tileo.controller;
 
+import java.util.List;
+
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.model.ActionCard;
 import ca.mcgill.ecse223.tileo.model.ConnectTilesActionCard;
@@ -39,9 +41,21 @@ public class PlayModeController {
 	 * 3. Land on a tile (basic behavior for hidden, regular, and action tiles)
 	 * Chris
 	 */
-	public void landedOnTile() {
-		//TODO: CHRIS
-	}
+	public void landedOnTile(Tile tile){
+		
+		TileO tileO = TileOApplication.getTileO();
+		Game currentGame = tileO.getCurrentGame();
+		List<Tile> tiles = currentGame.getTiles();
+		if(tiles.contains(tile) == false){
+			
+			
+		}else
+			tile.land();
+		
+		
+		
+		}
+	
 	
 	
 	/*
