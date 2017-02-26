@@ -57,23 +57,25 @@ public class ActionTile extends Tile
 	  // check what type of action card is topCard
 	  if(topCard instanceof RemoveConnectionActionCard)
 	  {
-		  currentGame.setMode(currentMode.GAME_REMOVECONNECTIONACTIONCARD);
+		  
 		  
 	  }else if(topCard instanceof RollDieActionCard)
 	  {
-		  currentGame.setMode(currentMode.GAME_ROLLDIEACTIONCARD);
+		  
 		  
 	  }else if(topCard instanceof TeleportActionCard)
 	  {
-		  currentGame.setMode(currentMode.GAME_TELEPORTACTIONCARD);
+		  currentMode = TeleportActionCard.getActionCardGameMode();
+		  currentGame.setMode(currentMode);
 		  
 	  }else if(topCard instanceof ConnectTilesActionCard)
 	  {
-		  currentGame.setMode(currentMode.GAME_CONNECTTILESACTIONCARD);
+		  currentMode = ConnectTilesActionCard.getActionCardGameMode();
+		  currentGame.setMode(currentMode);
 		  
 	  }else if(topCard instanceof LoseTurnActionCard)
 	  {
-		  currentGame.setMode(currentMode.GAME_LOSETURNACTIONCARD);
+		  
 		  
 	  }
 	  

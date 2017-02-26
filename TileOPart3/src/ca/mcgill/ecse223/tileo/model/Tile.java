@@ -303,6 +303,7 @@ public abstract class Tile implements Serializable
 	  return possibleMoveTiles;  
   }	  
   
+  // Abstract method for land()
   public abstract void land();
   
   //------------------------

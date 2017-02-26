@@ -3,6 +3,7 @@ package ca.mcgill.ecse223.tileo.controller;
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.model.Connection;
 import ca.mcgill.ecse223.tileo.model.Game;
+import ca.mcgill.ecse223.tileo.model.Player;
 import ca.mcgill.ecse223.tileo.model.Tile;
 import ca.mcgill.ecse223.tileo.model.TileO;
 
@@ -111,8 +112,9 @@ public class DesignModeController {
 	 * 7. Identify the starting tile of a player
 	 * Chris
 	 */
-	public void setPlayerStartingTile(Tile aTile) throws InvalidInputException {
+	public void setPlayerStartingTile(Player aPlayer, Tile startingTile) throws InvalidInputException {
 		//TODO: CHRIS
+		
 	}
 	
 	
