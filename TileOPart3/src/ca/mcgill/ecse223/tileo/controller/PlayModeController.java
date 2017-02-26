@@ -91,8 +91,14 @@ public class PlayModeController {
 	 * 7. Action card "Remove a connection piece from the board and place it in the pile of spare connection pieces"
 	 * Li
 	 */
-	public void removeBoardConnection(Connection aConnection) throws InvalidInputException {
+	public void playRemoveConnectionActionCard(Connection connection) throws InvalidInputException {
 		//TODO: LI
+		TileO tileO = new TileOApplication();
+		Game currentGame = tileO.getCurrentGame();
+		//validation check: connection needs to be in connections of currentGame
+		if (connection instanceof currentGame.getConnections()) {
+			
+		}
 	}
 
 	
@@ -100,7 +106,7 @@ public class PlayModeController {
 	 * 8. Action card "Move your playing piece to an arbitrary tile that is not your current tile"
 	 * Victor
 	 */
-	public void teleportPlayer(Tile chosenTile) throws InvalidInputException {
+	public void playTeleportActionCard(Tile tile) throws InvalidInputException {
 		//TODO: VICTORIQUE
 	}
 

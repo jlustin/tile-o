@@ -29,6 +29,7 @@ public class DesignModeController {
 		}
 	}
 	
+	
 	/*
 	 * 2. Place a tile on the game board
 	 * Chris
@@ -36,8 +37,7 @@ public class DesignModeController {
 	public void placeNormalTile(int x, int y) throws InvalidInputException {
 		//TODO: CHRIS
 	}
-	
-	
+		
 	
 	/*
 	 * 3. Remove a tile from the game board
