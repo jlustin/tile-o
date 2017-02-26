@@ -94,7 +94,7 @@ public class PlayModeController {
 	 */
 	public void playRemoveConnectionActionCard(Connection connection) throws InvalidInputException {
 		//TODO: LI
-		TileO tileO = new TileOApplication();
+		TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		currentGame.getConnections();
 		
