@@ -279,10 +279,15 @@ public class DesignModeController {
 	 */
 	public void saveDesign() {
 		//TODO: VICTORIQUE
+		TileOApplication.save();
 	}
 	
 	public void loadDesign(Game aGame) throws InvalidInputException {
 		//TODO: VICTORIQUE
+		TileO tileO = TileOApplication.load();
+		Game game = tileO.getCurrentGame();
+		game.setMode(Game.Mode.DESIGN);
+		
 	}
 	
 	
