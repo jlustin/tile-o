@@ -9,6 +9,8 @@ import ca.mcgill.ecse223.tileo.model.Connection;
 import ca.mcgill.ecse223.tileo.model.Deck;
 import ca.mcgill.ecse223.tileo.model.Game;
 import ca.mcgill.ecse223.tileo.model.Game.Mode;
+import ca.mcgill.ecse223.tileo.model.Player;
+import ca.mcgill.ecse223.tileo.model.RemoveConnectionActionCard;
 import ca.mcgill.ecse223.tileo.model.TeleportActionCard;
 import ca.mcgill.ecse223.tileo.model.Tile;
 import ca.mcgill.ecse223.tileo.model.TileO;
@@ -99,7 +101,7 @@ public class PlayModeController {
 	 */
 	public void playRemoveConnectionActionCard(Connection connection) throws InvalidInputException {
 		//TODO: LI
-		TileO tileO = new TileOApplication();
+		TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		currentGame.getConnections();
 		
@@ -112,10 +114,22 @@ public class PlayModeController {
 		*/
 		Deck deck = currentGame.getDeck();
 		ActionCard currentCard = deck.getCurrentCard();
+		Player currentPlayer = currentGame.getCurrentPlayer();
 		//current card needs to be a remove connection action card
-		if (currentCard.
-						
-						
+		if (currentCard instanceof RemoveConnectionActionCard) {
+			//play(connection)???
+			//"play() needs to be added to the removeconnectionactioncard class"
+		}
+		//checks if current player is the last player
+		if (currentPlayer.getNumber() == currentGame.getPlayers().size()) {
+			//if it is, set the first player to current player
+			currentGame.setCurrentPlayer(Player.getWithNumber(1));
+		}
+		//if it's not, set the next player
+		if (currentPlayer.getNumber() != currentGame.getPlayers().size()) {
+			currentGame.setCurrentPlayer(currentGame.getPlayer(currentGame.indexOfPlayer(currentPlayer)+1));
+		}
+		currentGame.setMode(Mode.GAME);		
 	}
 
 	
