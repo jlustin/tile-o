@@ -70,14 +70,27 @@ public class PlayModeController {
 		TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		Deck deck = currentGame.getDeck();
-		ConnectTilesActionCard connectTilesActionCard = (ConnectTilesActionCard) deck.getCard(0);
+		ConnectTilesActionCard connectTilesActionCard = (ConnectTilesActionCard) deck.getCurrentCard();
+		
+		int x1 = selectedTile1.getX();
+		int y1 = selectedTile1.getY();
+		int x2 = selectedTile2.getX();
+		int y2 = selectedTile2.getY();
 		
 		String error = "";
 		if (currentGame.numberOfTiles() < 2){
 			error = "There are less than 2 tiles in the current game.";
 		}
-		
-		
+		if ((x1 != x2+1 && y1 == y2) || (x1 != x2-1 && y1 == y2)){
+			error = error + "The selected tiles are not adjacent";
+		}
+		if ((y1 != y2+1 && x1 == x2) || (y1 != y2-1 && x1 == x2)){
+			error = error + "The selected tiles are not adjacent";
+		}
+		// Re-check
+		if (currentGame.getCurrentConnectionPieces() < 1){
+			error = error + "There are 0 connection pieces in the game";
+		}
 		
 		try 
 		{
@@ -88,7 +101,8 @@ public class PlayModeController {
 		}
 		catch (RuntimeException e) 
 		{
-			throw new InvalidInputException(e.getMessage());
+			error = e.getMessage();
+			throw new InvalidInputException(error);
 		}
 	}
 	

@@ -35,6 +35,12 @@ public class ConnectTilesActionCard extends ActionCard
   
   public void play (Tile tile1, Tile tile2) throws InvalidInputException {
 	  Game currentGame = super.getDeck().getGame();
+	  String error = "";
+	  
+	  if (super.getDeck().getCurrentCard() != this){
+		  error = "The current card is not a Connect Tiles Action Card.";
+	  }
+	  
 	  
 	  try
 	  {
