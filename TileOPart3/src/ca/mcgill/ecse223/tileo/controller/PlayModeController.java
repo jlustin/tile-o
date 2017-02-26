@@ -282,8 +282,17 @@ public class PlayModeController {
 		//TODO: LI
 		//set mode to "GAME" when loading a game
 		
+		TileO tileO = TileOApplication.getTileO();
+		try {
+			int gameIndex = tileO.indexOfGame(aGame);
+			Game loadedGame = tileO.getGame(gameIndex);
+			
+			return loadedGame;
+		}
+		catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
 		
-		return aGame;
 		
 	}
 
