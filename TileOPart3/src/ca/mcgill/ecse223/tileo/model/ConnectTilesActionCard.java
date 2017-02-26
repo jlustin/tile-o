@@ -50,7 +50,8 @@ public class ConnectTilesActionCard extends ActionCard
 	  }
 	  catch (RuntimeException e) 
 	  {
-			throw new InvalidInputException(e.getMessage());
+		  error = error +e.getMessage();
+		  throw new InvalidInputException(error);
 	  }
   }
   

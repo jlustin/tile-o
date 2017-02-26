@@ -101,7 +101,7 @@ public class PlayModeController {
 		}
 		catch (RuntimeException e) 
 		{
-			error = e.getMessage();
+			error = error + e.getMessage();
 			throw new InvalidInputException(error);
 		}
 	}
