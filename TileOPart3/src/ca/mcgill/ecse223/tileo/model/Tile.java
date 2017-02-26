@@ -303,6 +303,8 @@ public abstract class Tile implements Serializable
 	  return possibleMoveTiles;  
   }	  
   
+  public abstract void land();
+  
   //------------------------
   
   // line 32 ../../../../../TileOPersistence.ump

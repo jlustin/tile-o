@@ -29,7 +29,7 @@ public class TeleportActionCard extends ActionCard
   //------------------------
   
   //@Override <- need to add abstract class to ActionCard
-  public Game.Mode getActionCardGameMode() {
+  public static Game.Mode getActionCardGameMode() {
 	  return Game.Mode.GAME_TELEPORTACTIONCARD;
  }
 
