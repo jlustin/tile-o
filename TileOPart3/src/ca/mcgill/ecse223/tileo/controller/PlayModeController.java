@@ -8,6 +8,7 @@ import ca.mcgill.ecse223.tileo.model.ConnectTilesActionCard;
 import ca.mcgill.ecse223.tileo.model.Connection;
 import ca.mcgill.ecse223.tileo.model.Deck;
 import ca.mcgill.ecse223.tileo.model.Game;
+import ca.mcgill.ecse223.tileo.model.Game.Mode;
 import ca.mcgill.ecse223.tileo.model.TeleportActionCard;
 import ca.mcgill.ecse223.tileo.model.Tile;
 import ca.mcgill.ecse223.tileo.model.TileO;
@@ -98,10 +99,21 @@ public class PlayModeController {
 		//TODO: LI
 		TileO tileO = new TileOApplication();
 		Game currentGame = tileO.getCurrentGame();
+		currentGame.getConnections();
+		
 		//validation check: connection needs to be in connections of currentGame
+		//TODO: to everyone, how the fuck do you do that validation???
+		/*
 		if (connection instanceof currentGame.getConnections()) {
 			
 		}
+		*/
+		Deck deck = currentGame.getDeck();
+		ActionCard currentCard = deck.getCurrentCard();
+		//current card needs to be a remove connection action card
+		if (currentCard.
+						
+						
 	}
 
 	
@@ -133,7 +145,10 @@ public class PlayModeController {
 			throw new InvalidInputException(e.getMessage());
 		}
 		
+		
 		//set mode back to game?
+		//edit added by Li @1:27 pm
+		currentGame.setMode();	//expects the mode "GAME" but i don't know how that works
 	}
 
 	
