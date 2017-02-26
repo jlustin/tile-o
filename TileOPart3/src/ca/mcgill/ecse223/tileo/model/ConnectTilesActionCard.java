@@ -4,6 +4,7 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
+import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 
 // line 77 "../../../../../TileOPersistence.ump"
@@ -40,7 +41,9 @@ public class ConnectTilesActionCard extends ActionCard
 	  if (super.getDeck().getCurrentCard() != this){
 		  error = "The current card is not a Connect Tiles Action Card.";
 	  }
-	  
+	  if (error.length() > 0){
+			throw new InvalidInputException (error.trim());
+	  }
 	  
 	  try
 	  {
@@ -50,7 +53,7 @@ public class ConnectTilesActionCard extends ActionCard
 	  }
 	  catch (RuntimeException e) 
 	  {
-		  error = error +e.getMessage();
+		  error = e.getMessage();
 		  throw new InvalidInputException(error);
 	  }
   }
