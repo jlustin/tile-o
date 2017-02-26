@@ -205,10 +205,14 @@ public class Deck implements Serializable
   }
   
   //------------------------
+  
+  //Method to shuffle all the actionCard in the Deck
   public void shuffle(){
 	  ActionCard tmpCard;
 	  Random randomGenerator = new Random();
 	  int randomPosition;
+	  
+	  //Pick the firstCard of the deck, and add it in a random position in the deck, repeat these steps 300 times.
 	  for (int i = 0;i<300;i++){
 		  randomPosition = randomGenerator.nextInt(32);
 		  tmpCard = getCard(0);

@@ -267,8 +267,10 @@ public abstract class Tile implements Serializable
   }  
   
   //------------------------
+  
+  //Method to get next moves according to the current Tile
   public List<Tile> getNextMoves (int moveLeft,Tile previousTile) {
-	  //Create a ArrayList to store the neighbor Tile
+	  	//Create a ArrayList to store the neighbor Tile
 	  List<Tile> possibleMoveTiles =  new ArrayList<Tile>();
 	  int i = 0;
 	  Tile neighborTile;
@@ -298,8 +300,8 @@ public abstract class Tile implements Serializable
 			      }			
 			 }			  
 		  }
-		  return possibleMoveTiles;  
-	  }	  
+	  return possibleMoveTiles;  
+  }	  
   
   //------------------------
   

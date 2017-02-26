@@ -55,6 +55,8 @@ public class Die implements Serializable
   }
   
   //------------------------
+  
+  //Method to return a random value between 1 to 6.
   public int roll(){
 	int rollNumber;
 	Random randomGenerator = new Random();
