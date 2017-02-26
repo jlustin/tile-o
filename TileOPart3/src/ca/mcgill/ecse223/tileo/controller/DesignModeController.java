@@ -187,9 +187,12 @@ public class DesignModeController {
 	 * 7. Identify the starting tile of a player
 	 * Chris
 	 */
-	public void setPlayerStartingTile(Player aPlayer, Tile startingTile) throws InvalidInputException {
-		//TODO: CHRIS
+	public void setPlayerStartingTile(Player player, Tile startingTile) throws InvalidInputException {
 		
+		// I don't know if this is corect or not
+		player.setStartingTile(startingTile);
+		
+
 	}
 	
 	

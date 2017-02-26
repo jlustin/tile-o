@@ -52,8 +52,6 @@ public class PlayModeController {
 		}else
 			tile.land();
 		
-		
-		
 		}
 	
 	
