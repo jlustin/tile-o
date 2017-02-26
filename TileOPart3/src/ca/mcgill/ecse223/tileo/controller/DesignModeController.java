@@ -10,6 +10,10 @@ public class DesignModeController {
 
 	//METHODS
 	
+	/*
+	 * 1. Create a game with a number of players
+	 * Justin
+	 */
 	public void createGame(int numberOfPlayers) throws InvalidInputException{
 		
 		// According to my feedback from part 2: 
@@ -25,6 +29,36 @@ public class DesignModeController {
 		}
 	}
 	
+	/*
+	 * 3. Remove a tile from the game board
+	 * Lily
+	 */
+	public void removeTileFromGame(Tile aTile) throws InvalidInputException{
+		TileO tileO = new TileOApplication();
+		Game aGame = tileO.getCurrentGame();
+		
+		if (aTile.hasConnections()) {
+			String error = "Cannot delete a tile that has connections.";
+			throw new InvalidInputException(error.trim());
+		}
+		
+		try
+		{
+			if (!aTile.hasConnections()) {
+				aTile.delete();
+			}
+		}
+		
+		catch (RuntimeException e){
+			throw new InvalidInputException (e.getMessage());
+		}
+	}
+	
+	
+	/*
+	 * 4. Connect two tiles with a connection piece
+	 * Justin
+	 */
 	public void connectTwoTiles (Tile selectedTile1, Tile selectedTile2) throws InvalidInputException{
 		TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
@@ -40,6 +74,9 @@ public class DesignModeController {
 		}
 	}
 	
+	/*
+	 * 5. Remove connection between two tiles
+	 */
 	public void removeConnection (Connection selectedConnection) throws InvalidInputException{
 		try
 		{
