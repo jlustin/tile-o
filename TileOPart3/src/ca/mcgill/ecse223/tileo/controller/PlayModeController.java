@@ -127,11 +127,14 @@ public class PlayModeController {
 		Deck deck = currentGame.getDeck();
 		ActionCard currentCard = deck.getCurrentCard();
 		Player currentPlayer = currentGame.getCurrentPlayer();
+		
 		//current card needs to be a remove connection action card
 		if (currentCard instanceof RemoveConnectionActionCard) {
 			//play(connection)???
 			//"play() needs to be added to the removeconnectionactioncard class"
+			//add try catch block?
 		}
+		
 		//checks if current player is the last player
 		if (currentPlayer.getNumber() == currentGame.getPlayers().size()) {
 			//if it is, set the first player to current player
@@ -141,6 +144,7 @@ public class PlayModeController {
 		if (currentPlayer.getNumber() != currentGame.getPlayers().size()) {
 			currentGame.setCurrentPlayer(currentGame.getPlayer(currentGame.indexOfPlayer(currentPlayer)+1));
 		}
+		
 		currentGame.setMode(Mode.GAME);		
 	}
 
@@ -185,11 +189,17 @@ public class PlayModeController {
 	 */
 	public void saveGame() {
 		//TODO: LI
+		//TileO tileO = TileOApplication.getTileO();
+		//Game currentGame = tileO.getCurrentGame();
+		TileOApplication.save();
+		
 	}
 	
 	public Game loadGame(Game aGame) throws InvalidInputException {
 		//TODO: LI
 		//set mode to "GAME" when loading a game
+		
+		
 		return aGame;
 		
 	}
