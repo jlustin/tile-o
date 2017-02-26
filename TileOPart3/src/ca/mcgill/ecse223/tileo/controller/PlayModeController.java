@@ -1,5 +1,6 @@
 package ca.mcgill.ecse223.tileo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
@@ -9,6 +10,8 @@ import ca.mcgill.ecse223.tileo.model.Connection;
 import ca.mcgill.ecse223.tileo.model.Deck;
 import ca.mcgill.ecse223.tileo.model.Game;
 import ca.mcgill.ecse223.tileo.model.Game.Mode;
+import ca.mcgill.ecse223.tileo.model.Die;
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 import ca.mcgill.ecse223.tileo.model.Player;
 import ca.mcgill.ecse223.tileo.model.RemoveConnectionActionCard;
 import ca.mcgill.ecse223.tileo.model.TeleportActionCard;
@@ -25,6 +28,43 @@ public class PlayModeController {
 	 */
 	public void startGame(Game selectedGame) throws InvalidInputException {
 		//TODO: CHARLES
+		String error = "";
+		if(selectedGame.getDeck().numberOfCards()!= 32){
+			error = "The action cards in the Deck must be equal to 32. ";
+		}
+		if(selectedGame.hasWinTile() == false) {
+			error = error+"The winTile does not exist. " ;
+		}
+		for(int i=0 ;i<selectedGame.numberOfPlayers();i++) {
+			if(selectedGame.getPlayer(i).hasStartingTile() == false){
+				error = error+"The player"+(i+1)+" does not have a startingTile. " ;
+			}
+		}
+		if(error.length() > 0) {
+			throw new InvalidInputException(error.trim());
+		}
+		
+		TileO tileO = TileOApplication.getTileO();
+		try {
+			tileO.setCurrentGame(selectedGame);
+			Deck deck = selectedGame.getDeck();
+			deck.shuffle();
+			for(int i = 0 ; i < selectedGame.numberOfTiles();i++){
+				selectedGame.getTiles().get(i).setHasBeenVisited(false);
+			}
+			for(int j = 0; j < selectedGame.numberOfPlayers();j++){
+				Tile startingTile = selectedGame.getPlayer(j).getStartingTile();
+				selectedGame.getPlayers().get(j).setCurrentTile(startingTile);
+				selectedGame.getPlayers().get(j).getCurrentTile().setHasBeenVisited(true);
+			}
+			selectedGame.setCurrentPlayer(selectedGame.getPlayers().get(0));
+			selectedGame.setCurrentConnectionPieces(selectedGame.SpareConnectionPieces);
+			selectedGame.setMode(Mode.GAME);
+		}
+		catch(RuntimeException e){
+			error = e.getMessage();
+			throw new InvalidInputException(error);
+		}		
 	}
 
 	
@@ -32,10 +72,17 @@ public class PlayModeController {
 	 * 2. Take a turn (roll the die, move to new position)
 	 * Charles
 	 */
-	public void moveToTile(Tile chosenTile) throws InvalidInputException {
+	public List<Tile> rollDie(){
 		//TODO: CHARLES
+		TileO tileO = TileOApplication.getTileO(); 
+		Game currentGame = tileO.getCurrentGame();
+		Die die = currentGame.getDie();
+		int number = die.roll();
+		Player currentPlayer = currentGame.getCurrentPlayer();
+		List<Tile> possibleMoves = new ArrayList<Tile>();
+		possibleMoves = currentPlayer.getPossibleMoves(number);
+		return possibleMoves;	
 	}
-
 	
 	/*
 	 * 3. Land on a tile (basic behavior for hidden, regular, and action tiles)
