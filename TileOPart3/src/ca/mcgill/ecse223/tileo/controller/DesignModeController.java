@@ -1,15 +1,51 @@
 package ca.mcgill.ecse223.tileo.controller;
 
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
+import ca.mcgill.ecse223.tileo.model.ActionTile;
 import ca.mcgill.ecse223.tileo.model.Connection;
 import ca.mcgill.ecse223.tileo.model.Game;
+import ca.mcgill.ecse223.tileo.model.NormalTile;
 import ca.mcgill.ecse223.tileo.model.Player;
 import ca.mcgill.ecse223.tileo.model.Tile;
 import ca.mcgill.ecse223.tileo.model.TileO;
+import ca.mcgill.ecse223.tileo.model.WinTile;
 
 public class DesignModeController {
+	
 
 	//METHODS
+	
+	
+	//TileType is chosen from UI from a button
+	public static boolean addDesignTile(int x, int y, String TileType) {
+		
+		Game game = TileOApplication.getTileO().getCurrentGame();
+		
+		if(TileType == "NormalTile")
+		{
+			NormalTile normalTile = new NormalTile(x,y,game);
+            game.addTile(normalTile);
+            return true;
+		}
+		
+		if(TileType == "ActionTile")
+		{
+			ActionTile actionTile = new ActionTile(x,y,game, 3);	//inactivity period fixed at 3 for now (not supposed to implement)
+            game.addTile(actionTile);
+            return true;
+		}
+		
+		if(TileType == "WinTile")
+		{
+			WinTile winTile = new WinTile(x,y,game);
+			game.addTile(winTile);
+			return true;
+		}
+		else
+		return false;
+	}
+	
+	
 	
 	/*
 	 * 1. Create a game with a number of players
