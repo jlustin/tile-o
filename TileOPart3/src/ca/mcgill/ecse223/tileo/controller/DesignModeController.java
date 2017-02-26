@@ -144,6 +144,10 @@ public class DesignModeController {
 		//TODO: VICTORIQUE
 	}
 	
+	public void loadDesign(Game aGame) throws InvalidInputException {
+		//TODO: VICTORIQUE
+	}
+	
 	
 }
 
