@@ -184,6 +184,15 @@ public class DesignModeController {
 	 * CM
 	 */
 	public void createWinTile(int x, int y, Game game) throws InvalidInputException {
+		String error = "";
+		if(game.hasWinTile()){
+			error += "You already have a Win Tile on the board!";
+		}
+		
+		if (error.length() > 0) {
+			throw new InvalidInputException(error.trim());
+		}
+		
 		try {
 			WinTile winTile = new WinTile(x,y,game);
 			game.addTile(winTile);
@@ -200,7 +209,7 @@ public class DesignModeController {
 	 */
 	public void setPlayerStartingTile(Player player, Tile startingTile) throws InvalidInputException {
 		
-		// I don't know if this is corect or not
+		// I don't know if this is correct or not
 		player.setStartingTile(startingTile);
 		
 
