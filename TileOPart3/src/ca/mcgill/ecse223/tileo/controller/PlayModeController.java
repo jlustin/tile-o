@@ -72,6 +72,13 @@ public class PlayModeController {
 		Deck deck = currentGame.getDeck();
 		ConnectTilesActionCard connectTilesActionCard = (ConnectTilesActionCard) deck.getCard(0);
 		
+		String error = "";
+		if (currentGame.numberOfTiles() < 2){
+			error = "There are less than 2 tiles in the current game.";
+		}
+		
+		
+		
 		try 
 		{
 			connectTilesActionCard.play(selectedTile1, selectedTile2);

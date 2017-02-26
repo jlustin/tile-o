@@ -48,6 +48,9 @@ public class ConnectTilesActionCard extends ActionCard
 	  }
   }
   
+	  return Game.Mode.GAME_CONNECTTILESACTIONCARD;
+  }
+  
   //------------------------
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
