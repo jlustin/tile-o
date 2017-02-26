@@ -40,7 +40,7 @@ public class TeleportActionCard extends ActionCard
 	  Player player = game.getCurrentPlayer(); 
 	  player.setCurrentTile(tile);
 	  
-	  //add land()
+	  tile.land();
 	  
 	  //Exception
  }

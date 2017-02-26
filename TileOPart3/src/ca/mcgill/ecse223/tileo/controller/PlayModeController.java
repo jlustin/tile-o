@@ -132,6 +132,7 @@ public class PlayModeController {
 		Game currentGame = tileO.getCurrentGame();
 		Deck deck = currentGame.getDeck();
 		TeleportActionCard teleportcard = (TeleportActionCard) deck.getCurrentCard();
+		deck.setCurrentCard(deck.getCard(deck.indexOfCard(teleportcard)+1));
 
 		try{
 		teleportcard.play(tile);
@@ -141,9 +142,7 @@ public class PlayModeController {
 		}
 		
 		
-		//set mode back to game?
-		//edit added by Li @1:27 pm
-		currentGame.setMode();	//expects the mode "GAME" but i don't know how that works
+	
 	}
 
 	
