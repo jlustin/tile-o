@@ -218,6 +218,9 @@ public class Deck implements Serializable
 		  tmpCard = getCard(0);
 		  addOrMoveCardAt(tmpCard,randomPosition);
 	  }
+	  
+	  //set current card to the first card.
+	  setCurrentCard(getCards().get(0));
   }
   //------------------------
   
