@@ -45,8 +45,8 @@ public class DesignModeController {
 	 * Li
 	 */
 	public void removeTileFromGame(Tile aTile) throws InvalidInputException{
-		TileO tileO = new TileOApplication();
-		Game aGame = tileO.getCurrentGame();
+		TileO tileO = TileOApplication.getTileO();
+		Game currentGame = tileO.getCurrentGame();
 		if (aTile.hasConnections()) {
 			String error = "Cannot delete a tile that has connections.";
 			throw new InvalidInputException(error.trim());
@@ -54,7 +54,9 @@ public class DesignModeController {
 		try
 		{
 			if (!aTile.hasConnections()) {
-				aTile.delete();
+				//TODO: not sure which one to use
+				currentGame.removeTile(aTile);
+				//aTile.delete();
 			}
 		}
 		catch (RuntimeException e){
