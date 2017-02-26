@@ -27,32 +27,28 @@ public class DesignModeController {
 	private static final String removeConnectionInstruction = "Remove a connectio piece from the board and place it in the pile of spare connection pieces. ";
 	
 	//TileType is chosen from UI from a button
-	public static boolean addDesignTile(int x, int y, String TileType) {
+	public void addDesignTile(int x, int y, String TileType) throws InvalidInputException {
 		
 		Game game = TileOApplication.getTileO().getCurrentGame();
+		DesignModeController dmc = new DesignModeController();
 		
 		if(TileType == "NormalTile")
 		{
 			NormalTile normalTile = new NormalTile(x,y,game);
             game.addTile(normalTile);
-            return true;
+            
 		}
 		
 		if(TileType == "ActionTile")
 		{
-			ActionTile actionTile = new ActionTile(x,y,game, 3);	//inactivity period fixed at 3 for now (not supposed to implement)
-            game.addTile(actionTile);
-            return true;
+			dmc.createActionTile(x, y, game);
 		}
 		
 		if(TileType == "WinTile")
-		{
-			WinTile winTile = new WinTile(x,y,game);
-			game.addTile(winTile);
-			return true;
+		{	
+			dmc.createWinTile(x, y, game);
+			
 		}
-		else
-		return false;
 	}
 	
 	
@@ -187,8 +183,14 @@ public class DesignModeController {
 	 * 6. Identify the hidden tile
 	 * CM
 	 */
-	public void createWinTile(int x, int y) throws InvalidInputException {
-		//TODO: CM
+	public void createWinTile(int x, int y, Game game) throws InvalidInputException {
+		try {
+			WinTile winTile = new WinTile(x,y,game);
+			game.addTile(winTile);
+		}
+		catch (RuntimeException e){
+			throw new InvalidInputException (e.getMessage());
+		}
 	}
 	
 	
@@ -209,8 +211,14 @@ public class DesignModeController {
 	 * 8. Identify an action tile (inactivity period not required for this iteration)
 	 * Victor
 	 */
-	public void createActionTile(int x, int y) throws InvalidInputException {
-		//TODO: VICTORIQUE
+	public void createActionTile(int x, int y, Game game) throws InvalidInputException {
+		try{
+			ActionTile actionTile = new ActionTile(x,y,game, 3);	//inactivity period fixed at 3 for now (not supposed to implement)
+	        game.addTile(actionTile);
+		}
+		catch (RuntimeException e){
+			throw new InvalidInputException (e.getMessage());
+		}
 	}
 	
 	
