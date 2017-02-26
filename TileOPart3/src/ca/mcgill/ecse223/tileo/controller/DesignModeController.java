@@ -4,6 +4,7 @@ import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.model.ActionTile;
 import ca.mcgill.ecse223.tileo.model.Connection;
 import ca.mcgill.ecse223.tileo.model.Game;
+import ca.mcgill.ecse223.tileo.model.Game.Mode;
 import ca.mcgill.ecse223.tileo.model.NormalTile;
 import ca.mcgill.ecse223.tileo.model.Player;
 import ca.mcgill.ecse223.tileo.model.Tile;
@@ -52,20 +53,19 @@ public class DesignModeController {
 	 * Justin
 	 */
 	public void createGame(int numberOfPlayers) throws InvalidInputException{
-		
 		// According to my feedback from part 2: 
 				/* -2 createGame should add a new game to application and set it as the current game, 
 				 instead of getting the current game; Set mode to "DESIGN".*/
-
-		Game game = new Game(32, null);				//TODO: add TileO, this already creates a Deck and a Die (btw, check Game Class)
-//		TileO.setCurrentGame(game);
-
+		// Note-to-self: Re-check //
+		TileO tileO = TileOApplication.getTileO();
+		Game game = new Game (0,tileO);
+		tileO.setCurrentGame(game);
+		game.setMode(Mode.DESIGN);
 		
 		for(int playerNumber = 1; playerNumber < numberOfPlayers; playerNumber++){
 			game.addPlayer(playerNumber);
 		}
 	}
-	
 	
 	/*
 	 * 2. Place a tile on the game board
