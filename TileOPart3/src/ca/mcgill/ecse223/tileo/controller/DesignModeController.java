@@ -200,10 +200,14 @@ public class DesignModeController {
 	 */
 	public void setPlayerStartingTile(Player player, Tile startingTile) throws InvalidInputException {
 		
-		// I don't know if this is corect or not
-		player.setStartingTile(startingTile);
+		TileO tileO = TileOApplication.getTileO();
+		Game currentGame = tileO.getCurrentGame();
+		for(int i = 0; i<currentGame.numberOfPlayers(); i++)
+		{
+			player = currentGame.getPlayer(i);
+			player.setStartingTile(startingTile);
+		}
 		
-
 	}
 	
 	
