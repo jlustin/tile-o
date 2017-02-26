@@ -122,13 +122,12 @@ public class PlayModeController {
 				currentGame.setCurrentPlayer(currentGame.getPlayer(currentGame.indexOfPlayer(currentPlayer)+1));
 			}
 			
-			if (deck.numberOfCards() == 0){
+			if (deck.numberOfCards() == 1){
 				deck.shuffle();
-				
 			}
-			
-			deck.setCurrentCard(deck.getCard(deck.indexOfCard(deck.getCurrentCard())+1));
-			
+			else{
+				deck.setCurrentCard(deck.getCard(deck.indexOfCard(deck.getCurrentCard())+1));
+			}
 			
 			currentGame.setMode(Mode.GAME);
 		}
