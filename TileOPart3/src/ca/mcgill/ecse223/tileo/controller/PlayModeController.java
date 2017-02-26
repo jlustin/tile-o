@@ -12,6 +12,37 @@ public class PlayModeController {
 
 	// METHODS
 	
+	/*
+	 * 1. Start a game (shuffle the action cards, place players on board)
+	 * Charles
+	 */
+	
+	
+	/*
+	 * 2. Take a turn (roll the die, move to new position)
+	 * Charles
+	 */
+	
+	/*
+	 * 3. Land on a tile (basic behavior for hidden, regular, and action tiles)
+	 * Chris
+	 */
+	
+	/*
+	 * 4. Take the first card from the deck of cards
+	 * CM
+	 */
+	
+	
+	/*
+	 * 5. Action card "Roll the die for an extra turn"
+	 * CM
+	 */
+	
+	/*
+	 * 6. Action card "Connect two adjacent tiles with a connection piece from the pile of spare connection pieces"
+	 * Justin
+	 */
 	public void playConnectTilesActionCard (Tile selectedTile1, Tile selectedTile2){
 		TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
@@ -35,5 +66,22 @@ public class PlayModeController {
 //			throw new InvalidInputException (e.getMessage());
 //		}
 	}
+	
+	
+	/*
+	 * 7. Action card "Remove a connection piece from the board and place it in the pile of spare connection pieces"
+	 * Li
+	 */
+	
+	/*
+	 * 8. Action card "Move your playing piece to an arbitrary tile that is not your current tile"
+	 * Victor
+	 */
+	
+	/*
+	 * 9. Save and load game to continue playing at a later point
+	 * Li
+	 */
+	
 	
 }

@@ -30,25 +30,32 @@ public class DesignModeController {
 	}
 	
 	/*
+	 * 2. Place a tile on the game board
+	 * Chris
+	 */
+	public void placeNormalTile(int x, int y) throws InvalidInputException {
+		//TODO: CHRIS
+	}
+	
+	
+	
+	/*
 	 * 3. Remove a tile from the game board
-	 * Lily
+	 * Li
 	 */
 	public void removeTileFromGame(Tile aTile) throws InvalidInputException{
 		TileO tileO = new TileOApplication();
 		Game aGame = tileO.getCurrentGame();
-		
 		if (aTile.hasConnections()) {
 			String error = "Cannot delete a tile that has connections.";
 			throw new InvalidInputException(error.trim());
 		}
-		
 		try
 		{
 			if (!aTile.hasConnections()) {
 				aTile.delete();
 			}
 		}
-		
 		catch (RuntimeException e){
 			throw new InvalidInputException (e.getMessage());
 		}
@@ -74,8 +81,10 @@ public class DesignModeController {
 		}
 	}
 	
+	
 	/*
 	 * 5. Remove connection between two tiles
+	 * Justin
 	 */
 	public void removeConnection (Connection selectedConnection) throws InvalidInputException{
 		try
@@ -88,6 +97,52 @@ public class DesignModeController {
 		}
 	}
 	
+	
+	/*
+	 * 6. Identify the hidden tile
+	 * CM
+	 */
+	public void createWinTile(int x, int y) throws InvalidInputException {
+		//TODO: CM
+	}
+	
+	
+	/*
+	 * 7. Identify the starting tile of a player
+	 * Chris
+	 */
+	public void setPlayerStartingTile(Tile aTile) throws InvalidInputException {
+		//TODO: CHRIS
+	}
+	
+	
+	/*
+	 * 8. Identify an action tile (inactivity period not required for this iteration)
+	 * Victor
+	 */
+	public void createActionTile(int x, int y) throws InvalidInputException {
+		//TODO: VICTORIQUE
+	}
+	
+	
+	/*
+	 * 9. Select 32 cards from predefined choices
+	 * Charles
+	 */
+	public void createDeck(int numberOfRollDieActionCard, int numberOfConnectTilesActionCard,
+			int numberOfRemoveConnectionActionCard,
+			int numberOfTeleportActionCard) throws InvalidInputException {
+		//TODO: CHARLES
+	}
+
+	
+	/*
+	 * 10. Save and load the game design
+	 * Victor
+	 */
+	public void saveDesign() {
+		//TODO: VICTORIQUE
+	}
 	
 	
 }
