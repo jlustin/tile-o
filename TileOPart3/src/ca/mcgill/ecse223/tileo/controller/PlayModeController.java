@@ -66,28 +66,23 @@ public class PlayModeController {
 	 * 6. Action card "Connect two adjacent tiles with a connection piece from the pile of spare connection pieces"
 	 * Justin
 	 */
-	public void playConnectTilesActionCard (Tile selectedTile1, Tile selectedTile2){
+	public void playConnectTilesActionCard (Tile selectedTile1, Tile selectedTile2) throws InvalidInputException{
 		TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		Deck deck = currentGame.getDeck();
-		ActionCard currentCard = deck.getCard(0);
+		ConnectTilesActionCard connectTilesActionCard = (ConnectTilesActionCard) deck.getCard(0);
 		
-		ConnectTilesActionCard.play(selectedTile1, selectedTile2);
-		
-		
-//		int usedConnections = currentGame.getCurrentConnectionPieces();
-//		
-//		try 
-//		{
-//			if (usedConnections <= 32){
-//				newConnection =  game.addConnection;
-//				selectedTile1.addConnection(newConnection);
-//				selectedTile2.addConnection(newConnection);
-//			}
-//		}
-//		catch (RuntimeException e){
-//			throw new InvalidInputException (e.getMessage());
-//		}
+		try 
+		{
+			connectTilesActionCard.play(selectedTile1, selectedTile2);
+			currentGame.setCurrentPlayer(currentGame.getPlayer(currentGame.indexOfPlayer(currentGame.getCurrentPlayer())+1));
+			deck.setCurrentCard(deck.getCard(deck.indexOfCard(deck.getCurrentCard())+1));
+			currentGame.setMode(Mode.GAME);
+		}
+		catch (RuntimeException e) 
+		{
+			throw new InvalidInputException(e.getMessage());
+		}
 	}
 	
 	
