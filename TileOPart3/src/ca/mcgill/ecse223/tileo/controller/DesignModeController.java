@@ -92,6 +92,9 @@ public class DesignModeController {
 		if (currentGame.getCurrentConnectionPieces() < 1){
 			error = error + "There are 0 connection pieces in the game";
 		}
+		if (error.length() > 0){
+			throw new InvalidInputException (error.trim());
+		}
 
 		try
 		{
@@ -101,7 +104,7 @@ public class DesignModeController {
 		}
 		catch (RuntimeException e)
 		{
-			error = error + e.getMessage();
+			error = e.getMessage();
 			throw new InvalidInputException (error);
 		}
 	}

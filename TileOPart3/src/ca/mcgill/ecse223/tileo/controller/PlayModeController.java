@@ -85,6 +85,7 @@ public class PlayModeController {
 		Game currentGame = tileO.getCurrentGame();
 		Deck deck = currentGame.getDeck();
 		ConnectTilesActionCard connectTilesActionCard = (ConnectTilesActionCard) deck.getCurrentCard();
+		Player currentPlayer = currentGame.getCurrentPlayer();
 		
 		int x1 = selectedTile1.getX();
 		int y1 = selectedTile1.getY();
@@ -106,16 +107,34 @@ public class PlayModeController {
 			error = error + "There are 0 connection pieces in the game";
 		}
 		
+		if (error.length() > 0){
+			throw new InvalidInputException (error.trim());
+		}
+		
 		try 
 		{
 			connectTilesActionCard.play(selectedTile1, selectedTile2);
-			currentGame.setCurrentPlayer(currentGame.getPlayer(currentGame.indexOfPlayer(currentGame.getCurrentPlayer())+1));
+			
+			if (currentPlayer.getNumber() == currentGame.numberOfPlayers()){
+				currentGame.setCurrentPlayer(Player.getWithNumber(1));
+			}
+			else{
+				currentGame.setCurrentPlayer(currentGame.getPlayer(currentGame.indexOfPlayer(currentPlayer)+1));
+			}
+			
+			if (deck.numberOfCards() == 0){
+				deck.shuffle();
+				
+			}
+			
 			deck.setCurrentCard(deck.getCard(deck.indexOfCard(deck.getCurrentCard())+1));
+			
+			
 			currentGame.setMode(Mode.GAME);
 		}
 		catch (RuntimeException e) 
 		{
-			error = error + e.getMessage();
+			error = e.getMessage();
 			throw new InvalidInputException(error);
 		}
 	}
