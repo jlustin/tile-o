@@ -4,6 +4,8 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+
 // line 89 "../../../../../TileOPersistence.ump"
 // line 82 "../../../../../TileO (updated Feb10).ump"
 public class TeleportActionCard extends ActionCard
@@ -26,16 +28,21 @@ public class TeleportActionCard extends ActionCard
   // INTERFACE
   //------------------------
   
-  public Game.Mode getActionCardMode() {
+  //@Override <- need to add abstract class to ActionCard
+  public Game.Mode getActionCardGameMode() {
 	  return Game.Mode.GAME_TELEPORTACTIONCARD;
  }
 
   
-  public void play(Tile tile) {
-	  Deck deck = super.getDeck();	 
+  public void play(Tile tile) throws InvalidInputException {
+	  Deck deck = this.getDeck();	 
 	  Game game = deck.getGame();
 	  Player player = game.getCurrentPlayer(); 
 	  player.setCurrentTile(tile);
+	  
+	  //add land()
+	  
+	  //Exception
  }
   
 
