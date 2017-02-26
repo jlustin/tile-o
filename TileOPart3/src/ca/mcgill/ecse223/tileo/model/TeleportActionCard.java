@@ -35,11 +35,11 @@ public class TeleportActionCard extends ActionCard
 
   
   public void play(Tile tile) throws InvalidInputException {
-	  Deck deck = this.getDeck();	 
-	  Game game = deck.getGame();
-	  Player player = game.getCurrentPlayer(); 
-	  player.setCurrentTile(tile);
-	  
+	 //  Deck deck = this.getDeck();	 
+	 // Game game = deck.getGame();
+	 // Player player = game.getCurrentPlayer(); 
+	 // player.setCurrentTile(tile);
+	 //EVERYTHING IS IN LAND METHOD...
 	  tile.land();
 	  
 	  //Exception
