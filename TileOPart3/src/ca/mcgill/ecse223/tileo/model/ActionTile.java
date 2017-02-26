@@ -43,44 +43,46 @@ public class ActionTile extends Tile
 	  
 	  // set the player's current tile to the tile he has to move to
 	  // possible moves from Charles
-	  currentPlayer.setStartingTile(this);
+	  currentPlayer.setCurrentTile(this);
 	  
 	  // get deck
 	  Deck deck = currentGame.getDeck();
 	  
 	  // get the top card
-	  ActionCard topCard = deck.getCurrentCard();
+	  ActionCard currentCard = deck.getCurrentCard();
 	  
-	  Game.Mode currentMode = null;
+	  Game.Mode currentMode = currentCard.getActionCardGameMode();
+	  currentGame.setMode(currentMode);
+	  this.setHasBeenVisited(true);
 	  
-	  
+	  //I dont think we need all of this because of ^^^^
 	  // check what type of action card is topCard
-	  if(topCard instanceof RemoveConnectionActionCard)
-	  {
-		  
-		  
-	  }else if(topCard instanceof RollDieActionCard)
-	  {
-		  
-		  
-	  }else if(topCard instanceof TeleportActionCard)
-	  {
-		  currentMode = TeleportActionCard.getActionCardGameMode();
-		  currentGame.setMode(currentMode);
-		  
-	  }else if(topCard instanceof ConnectTilesActionCard)
-	  {
-		  currentMode = ConnectTilesActionCard.getActionCardGameMode();
-		  currentGame.setMode(currentMode);
-		  
-	  }else if(topCard instanceof LoseTurnActionCard)
-	  {
-		  
-		  
-	  }
+//	  if(topCard instanceof RemoveConnectionActionCard)
+//	  {
+//		  
+//		  
+//	  }else if(topCard instanceof RollDieActionCard)
+//	  {
+//		  
+//		  
+//	  }else if(topCard instanceof TeleportActionCard)
+//	  {
+//		  currentMode = TeleportActionCard.getActionCardGameMode();
+//		  currentGame.setMode(currentMode);
+//		  
+//	  }else if(topCard instanceof ConnectTilesActionCard)
+//	  {
+//		  currentMode = ConnectTilesActionCard.getActionCardGameMode();
+//		  currentGame.setMode(currentMode);
+//		  
+//	  }else if(topCard instanceof LoseTurnActionCard)
+//	  {
+//		  
+//		  
+//	  }
 	  
 	// set possible tile that player chose, that it has been visited
-	  this.setHasBeenVisited(true);
+	  
 	}
 
   public boolean setTurnsUntilActive(int aTurnsUntilActive)

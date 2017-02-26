@@ -8,6 +8,11 @@ import java.io.Serializable;
 // line 78 "../../../../../TileO (updated Feb10).ump"
 public class RemoveConnectionActionCard extends ActionCard
 {
+	
+	public Game.Mode getActionCardGameMode() {
+		  return Game.Mode.GAME_REMOVECONNECTIONACTIONCARD;
+	 }
+
 
   //------------------------
   // MEMBER VARIABLES

@@ -101,5 +101,7 @@ public abstract class ActionCard implements Serializable
   // line 68 ../../../../../TileOPersistence.ump
   private static final long serialVersionUID = 1010101010101010101L ;
 
+  public abstract Game.Mode getActionCardGameMode();
+ 
   
 }

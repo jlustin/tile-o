@@ -9,6 +9,10 @@ import java.io.Serializable;
 public class LoseTurnActionCard extends ActionCard
 {
 
+	public Game.Mode getActionCardGameMode() {
+		  return Game.Mode.GAME_LOSETURNACTIONCARD;
+	 }
+
   //------------------------
   // MEMBER VARIABLES
   //------------------------

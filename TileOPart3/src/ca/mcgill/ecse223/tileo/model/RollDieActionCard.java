@@ -9,6 +9,11 @@ import java.io.Serializable;
 public class RollDieActionCard extends ActionCard
 {
 
+	
+	public Game.Mode getActionCardGameMode() {
+		  return Game.Mode.GAME_ROLLDIEACTIONCARD;
+	 }
+
   //------------------------
   // MEMBER VARIABLES
   //------------------------

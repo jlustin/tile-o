@@ -55,7 +55,7 @@ public class ConnectTilesActionCard extends ActionCard
 	  }
   }
   
-  public static Game.Mode getActionCardGameMode() {
+  public Game.Mode getActionCardGameMode() {
 	  return Game.Mode.GAME_CONNECTTILESACTIONCARD;
   }
   
