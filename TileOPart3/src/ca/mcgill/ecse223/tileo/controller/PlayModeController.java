@@ -138,35 +138,39 @@ public class PlayModeController {
 		int y2 = selectedTile2.getY();
 		
 		String error = "";
+		// Check if there are tiles that can be selected in the game
 		if (currentGame.numberOfTiles() < 2){
 			error = "There are less than 2 tiles in the current game.";
 		}
+		// Check if the selected tiles are adjacent
 		if ((x1 != x2+1 && y1 == y2) || (x1 != x2-1 && y1 == y2)){
 			error = error + "The selected tiles are not adjacent";
 		}
 		if ((y1 != y2+1 && x1 == x2) || (y1 != y2-1 && x1 == x2)){
 			error = error + "The selected tiles are not adjacent";
 		}
-		// Re-check
+		// Check if connection pieces are available
 		if (currentGame.getCurrentConnectionPieces() < 1){
 			error = error + "There are 0 connection pieces in the game";
 		}
-		
+		// Check if errors are detected
 		if (error.length() > 0){
 			throw new InvalidInputException (error.trim());
 		}
 		
 		try 
 		{
+			// Connect the two selected tiles
 			connectTilesActionCard.play(selectedTile1, selectedTile2);
 			
+			// Check if current player is last player
 			if (currentPlayer.getNumber() == currentGame.numberOfPlayers()){
 				currentGame.setCurrentPlayer(Player.getWithNumber(1));
 			}
 			else{
 				currentGame.setCurrentPlayer(currentGame.getPlayer(currentGame.indexOfPlayer(currentPlayer)+1));
 			}
-			
+			// Check if current card is the last card
 			if (deck.numberOfCards() == 1){
 				deck.shuffle();
 			}
@@ -174,6 +178,7 @@ public class PlayModeController {
 				deck.setCurrentCard(deck.getCard(deck.indexOfCard(deck.getCurrentCard())+1));
 			}
 			
+			// Set game mode to GAME
 			currentGame.setMode(Mode.GAME);
 		}
 		catch (RuntimeException e) 

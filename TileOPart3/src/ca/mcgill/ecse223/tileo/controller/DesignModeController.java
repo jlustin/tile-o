@@ -58,15 +58,14 @@ public class DesignModeController {
 	 * Justin
 	 */
 	public void createGame(int numberOfPlayers) throws InvalidInputException{
-		// According to my feedback from part 2: 
-				/* -2 createGame should add a new game to application and set it as the current game, 
-				 instead of getting the current game; Set mode to "DESIGN".*/
-		// Note-to-self: Re-check //
 		TileO tileO = TileOApplication.getTileO();
+		// Add a new game to application and set it as current game
 		Game game = new Game (0,tileO);
 		tileO.setCurrentGame(game);
+		// Set mode to "DESIGN"
 		game.setMode(Mode.DESIGN);
 		
+		// Assign player numbers to each player
 		for(int playerNumber = 1; playerNumber < numberOfPlayers; playerNumber++){
 			game.addPlayer(playerNumber);
 		}
@@ -120,25 +119,30 @@ public class DesignModeController {
 		int y2 = selectedTile2.getY();
 		
 		String error = "";
+		// Check if there are tiles that can be selected in the game
 		if (currentGame.numberOfTiles() < 2){
 			error = "There are less than 2 tiles in the current game.";
 		}
+		// Check if the selected tiles are adjacent
 		if ((x1 != x2+1 && y1 == y2) || (x1 != x2-1 && y1 == y2)){
 			error = error + "The selected tiles are not adjacent";
 		}
 		if ((y1 != y2+1 && x1 == x2) || (y1 != y2-1 && x1 == x2)){
 			error = error + "The selected tiles are not adjacent";
 		}
-		// Re-check
-		if (currentGame.getCurrentConnectionPieces() < 1){
-			error = error + "There are 0 connection pieces in the game";
-		}
+//		
+//		if (currentGame.getCurrentConnectionPieces() < 1){
+//			error = error + "There are 0 connection pieces in the game";
+//		}
+		
+		// Check if there is an error
 		if (error.length() > 0){
 			throw new InvalidInputException (error.trim());
 		}
 
 		try
 		{
+			// Create a connection and add the connection to the selected tiles
 			Connection newConnection =  currentGame.addConnection();
 			selectedTile1.addConnection(newConnection);
 			selectedTile2.addConnection(newConnection);
@@ -160,15 +164,18 @@ public class DesignModeController {
 		Game currentGame = tileO.getCurrentGame();
 		String error = "";
 		
+		// Check if there are conneciton pieces in the game
 		if (currentGame.getCurrentConnectionPieces() <= 0){
 			error = error + "There are no connection pieces in the current game.";
 		}
+		// Check if error detected
 		if (error.length() > 0){
 			throw new InvalidInputException (error.trim());
 		}
 		
 		try
 		{
+			// Delete the selected connection
 			selectedConnection.delete();
 		}
 		catch (RuntimeException e)
@@ -209,10 +216,19 @@ public class DesignModeController {
 	 */
 	public void setPlayerStartingTile(Player player, Tile startingTile) throws InvalidInputException {
 		
+<<<<<<< HEAD
 		// I don't know if this is correct or not
 		player.setStartingTile(startingTile);
+=======
+		TileO tileO = TileOApplication.getTileO();
+		Game currentGame = tileO.getCurrentGame();
+		for(int i = 0; i<currentGame.numberOfPlayers(); i++)
+		{
+			player = currentGame.getPlayer(i);
+			player.setStartingTile(startingTile);
+		}
+>>>>>>> origin/master
 		
-
 	}
 	
 	
@@ -284,10 +300,15 @@ public class DesignModeController {
 	 */
 	public void saveDesign() {
 		//TODO: VICTORIQUE
+		TileOApplication.save();
 	}
 	
 	public void loadDesign(Game aGame) throws InvalidInputException {
 		//TODO: VICTORIQUE
+		TileO tileO = TileOApplication.load();
+		Game game = tileO.getCurrentGame();
+		game.setMode(Game.Mode.DESIGN);
+		
 	}
 	
 	

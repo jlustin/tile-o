@@ -4,6 +4,8 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+
 // line 83 "../../../../../TileOPersistence.ump"
 // line 78 "../../../../../TileO (updated Feb10).ump"
 public class RemoveConnectionActionCard extends ActionCard
@@ -36,8 +38,8 @@ public class RemoveConnectionActionCard extends ActionCard
     super.delete();
   }
   
-  public void play(Connection connection) {
-	  	tile.land();
+  public void play(Connection connection) throws InvalidInputException {
+	  	
   }
   
   //------------------------
