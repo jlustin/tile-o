@@ -39,7 +39,7 @@ public class RemoveConnectionActionCard extends ActionCard
   }
   
   public void play(Connection connection) throws InvalidInputException {
-	  	
+	  	//TODO: Li write function for the play??
   }
   
   //------------------------

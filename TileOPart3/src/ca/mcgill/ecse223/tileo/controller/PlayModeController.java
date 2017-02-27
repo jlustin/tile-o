@@ -208,8 +208,7 @@ public class PlayModeController {
 				//current card needs to be a remove connection action card
 				if (currentCard instanceof RemoveConnectionActionCard) {
 					//play(connection)???
-					//"play() needs to be added to the removeconnectionactioncard class"
-					//add try catch block?
+					//"play() needs to be added to the removeconnectionactioncard class"					
 					((RemoveConnectionActionCard) currentCard).play(connection);
 				}
 				
@@ -290,9 +289,7 @@ public class PlayModeController {
 		}
 		catch (RuntimeException e) {
 			throw new InvalidInputException(e.getMessage());
-		}
-		
-		
+		}				
 	}
 
 	
