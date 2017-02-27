@@ -30,6 +30,7 @@ public class DesignModeController {
 	private static final String removeConnectionInstruction = "Remove a connectio piece from the board and place it in the pile of spare connection pieces. ";
 	
 	//TileType is chosen from UI from a button
+	//How to make sure that you don't add 2 tiles at the same location?
 	public void addDesignTile(int x, int y, String TileType) throws InvalidInputException {
 		
 		Game game = TileOApplication.getTileO().getCurrentGame();

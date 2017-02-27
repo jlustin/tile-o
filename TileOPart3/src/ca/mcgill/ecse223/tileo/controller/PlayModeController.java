@@ -107,8 +107,22 @@ public class PlayModeController {
 	 * 4. Take the first card from the deck of cards
 	 * CM
 	 */
-	public void createWinTile(int x, int y) throws InvalidInputException {
-		//TODO: CM
+	public void drawCard() throws InvalidInputException {
+		TileO tileO = TileOApplication.getTileO();
+		Game currentGame = tileO.getCurrentGame();
+		Deck deck = currentGame.getDeck();
+		ActionCard currentCard = deck.getCurrentCard();
+		ActionCard nextCard;
+		
+		if(deck.indexOfCard(currentCard) < 32){
+			nextCard = deck.getCard(deck.indexOfCard(currentCard) + 1);
+		}
+		else{
+			deck.shuffle();
+			nextCard = deck.getCard(0);
+		}
+		deck.setCurrentCard(nextCard);
+		
 	}
 
 	
