@@ -14,6 +14,7 @@ import ca.mcgill.ecse223.tileo.model.Die;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 import ca.mcgill.ecse223.tileo.model.Player;
 import ca.mcgill.ecse223.tileo.model.RemoveConnectionActionCard;
+import ca.mcgill.ecse223.tileo.model.RollDieActionCard;
 import ca.mcgill.ecse223.tileo.model.TeleportActionCard;
 import ca.mcgill.ecse223.tileo.model.Tile;
 import ca.mcgill.ecse223.tileo.model.TileO;
@@ -76,28 +77,31 @@ public class PlayModeController {
 		//TODO: CHARLES
 		TileO tileO = TileOApplication.getTileO(); 
 		Game currentGame = tileO.getCurrentGame();
-		Die die = currentGame.getDie();
-		int number = die.roll();
-		Player currentPlayer = currentGame.getCurrentPlayer();
-		List<Tile> possibleMoves = new ArrayList<Tile>();
-		possibleMoves = currentPlayer.getPossibleMoves(number);
-		return possibleMoves;	
+		
+		return currentGame.rollDie(); //method in Game class
 	}
 	
 	/*
 	 * 3. Land on a tile (basic behavior for hidden, regular, and action tiles)
 	 * Chris
 	 */
-	public void landedOnTile(Tile tile){
+	public void landedOnTile(Tile tile) throws InvalidInputException{
 		
 		TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		List<Tile> tiles = currentGame.getTiles();
 		if(tiles.contains(tile) == false){
+			//wtf
+		}
+		else
+			tile.land(); //if landed on ActionTile/WinTile, set to appropriate mode
+			switch(currentGame.getMode()){
+			case GAME_ROLLDIEACTIONCARD:
+				playRollDieExtraTurn();
+			case GAME_CONNECTTILESACTIONCARD:
+				playConnectTilesActionCard (null, null);
+			}
 			
-			
-		}else
-			tile.land();
 		
 		}
 	
@@ -107,21 +111,24 @@ public class PlayModeController {
 	 * 4. Take the first card from the deck of cards
 	 * CM
 	 */
-	public void drawCard() throws InvalidInputException {
-		TileO tileO = TileOApplication.getTileO();
-		Game currentGame = tileO.getCurrentGame();
+	//Not needed because it is already handled (in the ActionTile Class)
+	
+	public ActionCard drawCard(Game currentGame) {
+		
 		Deck deck = currentGame.getDeck();
-		ActionCard currentCard = deck.getCurrentCard();
+		ActionCard drawnCard = deck.getCurrentCard();
 		ActionCard nextCard;
 		
-		if(deck.indexOfCard(currentCard) < 32){
-			nextCard = deck.getCard(deck.indexOfCard(currentCard) + 1);
+		if(deck.indexOfCard(drawnCard) < 31){ //index range: [0,31]
+			nextCard = deck.getCard(deck.indexOfCard(drawnCard) + 1);
 		}
-		else{
+		else{ //the index of the card must be 31, which is the last card
 			deck.shuffle();
 			nextCard = deck.getCard(0);
 		}
 		deck.setCurrentCard(nextCard);
+		
+		return drawnCard;
 		
 	}
 
@@ -130,8 +137,17 @@ public class PlayModeController {
 	 * 5. Action card "Roll the die for an extra turn"
 	 * CM
 	 */
-	public void rollDieExtraTurn() {
-		//TODO: CM
+	public void playRollDieExtraTurn() {
+		TileO tileO = TileOApplication.getTileO();
+		Game currentGame = tileO.getCurrentGame();
+		
+		//the drawn card needs to be a rollDieActionCard since this method is only called in the appropriate mode
+		RollDieActionCard rollDieActionCard = (RollDieActionCard) drawCard(currentGame);
+		
+		rollDieActionCard.play();
+		
+		currentGame.setMode(Mode.GAME);		
+		
 	}
 
 	
@@ -142,8 +158,9 @@ public class PlayModeController {
 	public void playConnectTilesActionCard (Tile selectedTile1, Tile selectedTile2) throws InvalidInputException{
 		TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
-		Deck deck = currentGame.getDeck();
-		ConnectTilesActionCard connectTilesActionCard = (ConnectTilesActionCard) deck.getCurrentCard();
+		//Deck deck = currentGame.getDeck();
+		ConnectTilesActionCard connectTilesActionCard = (ConnectTilesActionCard) drawCard(currentGame);
+		
 		Player currentPlayer = currentGame.getCurrentPlayer();
 		
 		int x1 = selectedTile1.getX();
@@ -184,13 +201,13 @@ public class PlayModeController {
 			else{
 				currentGame.setCurrentPlayer(currentGame.getPlayer(currentGame.indexOfPlayer(currentPlayer)+1));
 			}
-			// Check if current card is the last card
-			if (deck.numberOfCards() == 1){
-				deck.shuffle();
-			}
-			else{
-				deck.setCurrentCard(deck.getCard(deck.indexOfCard(deck.getCurrentCard())+1));
-			}
+//			// Check if current card is the last card
+//			if (deck.numberOfCards() == 1){
+//				deck.shuffle();
+//			}
+//			else{
+//				deck.setCurrentCard(deck.getCard(deck.indexOfCard(deck.getCurrentCard())+1));
+//			}
 			
 			// Set game mode to GAME
 			currentGame.setMode(Mode.GAME);
@@ -214,8 +231,8 @@ public class PlayModeController {
 		List<Connection> connectionList = currentGame.getConnections();
 		
 		if (connectionList.contains(connection)) {
-			Deck deck = currentGame.getDeck();
-			ActionCard currentCard = deck.getCurrentCard();
+			//Deck deck = currentGame.getDeck();
+			ActionCard currentCard = drawCard(currentGame);
 			//Player currentPlayer = currentGame.getCurrentPlayer();
 			
 			try {
@@ -235,24 +252,6 @@ public class PlayModeController {
 	}
 	
 	
-	//helper method for setting the next player
-	public void setNextPlayer(Game aGame) {
-		List<Player> playerList = aGame.getPlayers();
-		Player currentPlayer = aGame.getCurrentPlayer();
-		int playerIndex = aGame.indexOfPlayer(currentPlayer);
-				
-		//checks if current player is the last player
-		if (playerIndex + 1 == playerList.size()) {
-			//if it is, set the first player to current player
-			aGame.setCurrentPlayer(playerList.get(0));
-		}
-		//if it's not, set the next player
-		else {
-			Player nextPlayer = playerList.get(playerIndex + 1);
-			aGame.setCurrentPlayer(nextPlayer);
-		}		
-	}
-
 	
 	/*
 	 * 8. Action card "Move your playing piece to an arbitrary tile that is not your current tile"
@@ -272,9 +271,11 @@ public class PlayModeController {
 		
 		TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
-		Deck deck = currentGame.getDeck();
-		TeleportActionCard teleportcard = (TeleportActionCard) deck.getCurrentCard();
-		deck.setCurrentCard(deck.getCard(deck.indexOfCard(teleportcard)+1));
+		//TODO remove Deck deck = currentGame.getDeck();
+		
+		TeleportActionCard teleportcard = (TeleportActionCard) drawCard(currentGame);
+		
+		//deck.setCurrentCard(deck.getCard(deck.indexOfCard(teleportcard)+1));
 
 		try{
 		teleportcard.play(tile);
@@ -315,6 +316,25 @@ public class PlayModeController {
 			throw new InvalidInputException(e.getMessage());
 		}				
 	}
+	
+	//helper method for setting the next player
+	public void setNextPlayer(Game aGame) {
+		List<Player> playerList = aGame.getPlayers();
+		Player currentPlayer = aGame.getCurrentPlayer();
+		int playerIndex = aGame.indexOfPlayer(currentPlayer);
+				
+		//checks if current player is the last player
+		if (playerIndex + 1 == playerList.size()) {
+			//if it is, set the first player to current player
+			aGame.setCurrentPlayer(playerList.get(0));
+		}
+		//if it's not, set the next player
+		else {
+			Player nextPlayer = playerList.get(playerIndex + 1);
+			aGame.setCurrentPlayer(nextPlayer);
+		}		
+	}
+
 
 	
 	

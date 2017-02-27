@@ -591,5 +591,16 @@ public class Game implements Serializable
   // line 12 ../../../../../TileOPersistence.ump
   private static final long serialVersionUID = 2222222222222222222L ;
 
+  //added methods
+  public List<Tile> rollDie() {
+	  Die die = getDie();
+	  int number = die.roll();
+	  Player currentPlayer = getCurrentPlayer();
+	  List<Tile> possibleMoves = new ArrayList<Tile>();
+	  possibleMoves = currentPlayer.getPossibleMoves(number);
+	  
+	  return possibleMoves;
+	}
+
   
 }

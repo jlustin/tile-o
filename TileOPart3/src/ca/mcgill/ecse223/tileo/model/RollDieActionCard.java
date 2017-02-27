@@ -36,6 +36,12 @@ public class RollDieActionCard extends ActionCard
     super.delete();
   }
   
+  //TODO need of exception handling?
+  public void play(){
+	  Game currentGame = getDeck().getGame();
+	  currentGame.rollDie();
+  }
+  
   //------------------------
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
