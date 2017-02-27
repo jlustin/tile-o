@@ -1,6 +1,9 @@
 package ca.mcgill.ecse223.tileo.controller;
 
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+
+import java.util.List;
+
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.model.ActionTile;
 import ca.mcgill.ecse223.tileo.model.ConnectTilesActionCard;
@@ -94,10 +97,9 @@ public class DesignModeController {
 		try
 		{
 			if (!aTile.hasConnections()) {
-				//TODO: not sure which one to use
-				currentGame.removeTile(aTile);
-				//aTile.delete();
+				aTile.delete();
 			}
+			//TileOApplication.save();
 		}
 		catch (RuntimeException e){
 			throw new InvalidInputException (e.getMessage());
