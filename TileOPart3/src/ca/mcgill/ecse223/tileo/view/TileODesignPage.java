@@ -90,7 +90,7 @@ public class TileODesignPage extends JFrame {
 		
 		JButton btnRemoveConnections = new JButton("Remove Connections");
 		
-		JButton btnCreateDeck = new JButton("Create Deck");
+		JButton btnCreateDeck = new JButton("Add Deck");
 		btnCreateDeck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DeckPopOut d = new DeckPopOut();
