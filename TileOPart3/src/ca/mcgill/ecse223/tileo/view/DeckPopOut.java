@@ -18,12 +18,12 @@ import javax.swing.border.EmptyBorder;
 public class DeckPopOut extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField teleport;
+	private JTextField connectTiles;
+	private JTextField removeConnection;
+	private JTextField rollDie;
 	private JButton btnCreate;
-	private JLabel lblPle;
+	private JLabel message;
 
 	/**
 	 * Launch the application.
@@ -63,26 +63,28 @@ public class DeckPopOut extends JFrame {
 		
 		JLabel lblNumberOfRolldie = new JLabel("Number of RollDIe Cards:");
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		teleport = new JTextField();
+		teleport.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		connectTiles = new JTextField();
+		connectTiles.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
+		removeConnection = new JTextField();
+		removeConnection.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
+		rollDie = new JTextField();
+		rollDie.setColumns(10);
 		
 		btnCreate = new JButton("Add");
+		
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				close();
 			}
 		});
 		
-		lblPle = new JLabel("The total number of cards must add up to 32.");
+		message = new JLabel("The total number of cards must add up to 32.");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -92,7 +94,7 @@ public class DeckPopOut extends JFrame {
 					.addGap(159))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(87)
-					.addComponent(lblPle)
+					.addComponent(message)
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -107,33 +109,33 @@ public class DeckPopOut extends JFrame {
 							.addComponent(lblNumberOfRemoveconnection, GroupLayout.PREFERRED_SIZE, 278, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-						.addComponent(textField_2, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-						.addComponent(textField, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-						.addComponent(textField_3, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))
+						.addComponent(teleport, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+						.addComponent(connectTiles, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+						.addComponent(removeConnection, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+						.addComponent(rollDie, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))
 					.addGap(82))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(7)
-					.addComponent(lblPle)
+					.addComponent(message)
 					.addGap(26)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNumberOfTeleport)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(teleport, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNumberOfConnecttiles)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
+						.addComponent(connectTiles, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(removeConnection, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNumberOfRemoveconnection, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNumberOfRolldie)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
+						.addComponent(rollDie, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
 					.addComponent(btnCreate)
 					.addContainerGap())
