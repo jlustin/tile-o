@@ -202,7 +202,7 @@ public class PlayModeController {
 		if (connectionList.contains(connection)) {
 			Deck deck = currentGame.getDeck();
 			ActionCard currentCard = deck.getCurrentCard();
-			Player currentPlayer = currentGame.getCurrentPlayer();
+			//Player currentPlayer = currentGame.getCurrentPlayer();
 			
 			try {
 				//current card needs to be a remove connection action card
@@ -234,19 +234,21 @@ public class PlayModeController {
 	
 	
 	//helper method for setting the next player
+	//TODO: check if Player.getNumber returns the index of the player or the playernumber
 	public void setNextPlayer(Game aGame) {
 		List<Player> playerList = aGame.getPlayers();
 		Player currentPlayer = aGame.getCurrentPlayer();
-		int playerIndex = currentPlayer.getNumber();
+		int playerIndex = aGame.indexOfPlayer(currentPlayer);
+		
 		
 		//checks if current player is the last player
-		if (playerIndex == playerList.size()) {
+		if (playerIndex + 1 == playerList.size()) {
 			//if it is, set the first player to current player
-			aGame.setCurrentPlayer(Player.getWithNumber(1));
+			aGame.setCurrentPlayer(playerList.get(0));
 		}
 		//if it's not, set the next player
 		else {
-			Player nextPlayer = Player.getWithNumber(playerIndex + 1);
+			Player nextPlayer = playerList.get(playerIndex + 1);
 			aGame.setCurrentPlayer(nextPlayer);
 		}		
 	}
