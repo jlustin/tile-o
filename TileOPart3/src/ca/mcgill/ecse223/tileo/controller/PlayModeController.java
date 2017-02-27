@@ -199,9 +199,6 @@ public class PlayModeController {
 		Game currentGame = tileO.getCurrentGame();
 		List<Connection> connectionList = currentGame.getConnections();
 		
-		//validation check: connection needs to be in connections of currentGame
-		//TODO: to everyone, how the fuck do you do that validation???
-		
 		if (connectionList.contains(connection)) {
 			Deck deck = currentGame.getDeck();
 			ActionCard currentCard = deck.getCurrentCard();
@@ -230,9 +227,7 @@ public class PlayModeController {
 			catch (RuntimeException e) {
 				throw new InvalidInputException(e.getMessage());	
 			}
-		}
-		
-				
+		}						
 	}
 
 	
@@ -290,7 +285,7 @@ public class PlayModeController {
 		try {
 			int gameIndex = tileO.indexOfGame(aGame);
 			Game loadedGame = tileO.getGame(gameIndex);
-			
+			loadedGame.setMode(Mode.GAME);
 			return loadedGame;
 		}
 		catch (RuntimeException e) {
