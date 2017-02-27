@@ -2,6 +2,8 @@ package ca.mcgill.ecse223.tileo.view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
@@ -19,18 +21,18 @@ public class TileODesignPage extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TileODesignPage frame = new TileODesignPage();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					TileODesignPage frame = new TileODesignPage();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -40,44 +42,80 @@ public class TileODesignPage extends JFrame {
 		refreshData();
 	}
 	
+	public void close() { 
+		this.setVisible(false);
+	    this.dispose();
+	}
+	
 	private void initComponents(){
+								
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		setSize(1000, 800);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JPanel panel = new JPanel();
 		
-		JButton btnNewButton = new JButton("New button");
 		
-		JRadioButton radioButton = new JRadioButton("2");
+		
+		
+		JButton btnOpenNewWindow = new JButton("Add Tiles");
+		btnOpenNewWindow.addActionListener(new ActionListener() {
+			
+	
+			public void actionPerformed(ActionEvent e) {
+				
+				AddTilePopOut te = new AddTilePopOut();
+				te.setVisible(true);
+			}
+
+			
+		});
+		
+		JButton btnRemoveTiles = new JButton("Remove Tile");
+		btnRemoveTiles.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		
+		JButton btnAddConnections = new JButton("Add Connections");
+		btnAddConnections.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		JButton btnRemoveConnections = new JButton("Remove Connections");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(284, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(36)
-							.addComponent(radioButton)))
-					.addContainerGap(81, Short.MAX_VALUE))
+						.addComponent(btnOpenNewWindow, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnRemoveTiles, Alignment.TRAILING)
+						.addComponent(btnAddConnections, Alignment.TRAILING)
+						.addComponent(btnRemoveConnections, Alignment.TRAILING))
+					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(48)
-					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-					.addGap(94)
-					.addComponent(radioButton)
-					.addContainerGap(86, Short.MAX_VALUE))
+					.addContainerGap()
+					.addComponent(btnOpenNewWindow)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnRemoveTiles)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnAddConnections)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnRemoveConnections)
+					.addContainerGap(128, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+		
 
 	private void refreshData(){
 		
