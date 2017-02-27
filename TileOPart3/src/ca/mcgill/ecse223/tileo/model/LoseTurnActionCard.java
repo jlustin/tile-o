@@ -8,7 +8,8 @@ import java.io.Serializable;
 // line 86 "../../../../../TileO (updated Feb10).ump"
 public class LoseTurnActionCard extends ActionCard
 {
-
+	
+	@Override
 	public Game.Mode getActionCardGameMode() {
 		  return Game.Mode.GAME_LOSETURNACTIONCARD;
 	 }

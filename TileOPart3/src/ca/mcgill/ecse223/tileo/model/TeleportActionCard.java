@@ -28,7 +28,7 @@ public class TeleportActionCard extends ActionCard
   // INTERFACE
   //------------------------
   
-  //@Override <- need to add abstract class to ActionCard
+  @Override
   public Game.Mode getActionCardGameMode() {
 	  return Game.Mode.GAME_TELEPORTACTIONCARD;
  }

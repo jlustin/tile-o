@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class RollDieActionCard extends ActionCard
 {
 
-	
+	@Override
 	public Game.Mode getActionCardGameMode() {
 		  return Game.Mode.GAME_ROLLDIEACTIONCARD;
 	 }

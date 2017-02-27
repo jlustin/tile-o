@@ -27,6 +27,7 @@ public class WinTile extends Tile
   // INTERFACE
   //------------------------
   
+  @Override
   public void land()
   { 
   	  // get the current game
