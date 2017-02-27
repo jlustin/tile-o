@@ -210,20 +210,8 @@ public class PlayModeController {
 					//play(connection)???
 					//"play() needs to be added to the removeconnectionactioncard class"					
 					((RemoveConnectionActionCard) currentCard).play(connection);
-				}
-				
-				setNextPlayer(currentGame);
-				/*
-				//checks if current player is the last player
-				if (currentPlayer.getNumber() == currentGame.getPlayers().size()) {
-					//if it is, set the first player to current player
-					currentGame.setCurrentPlayer(Player.getWithNumber(1));
-				}
-				//if it's not, set the next player
-				if (currentPlayer.getNumber() != currentGame.getPlayers().size()) {
-					currentGame.setCurrentPlayer(currentGame.getPlayer(currentGame.indexOfPlayer(currentPlayer)+1));
-				}		
-				*/
+				}				
+				setNextPlayer(currentGame);		
 				currentGame.setMode(Mode.GAME);
 			} 
 			catch (RuntimeException e) {
@@ -234,13 +222,11 @@ public class PlayModeController {
 	
 	
 	//helper method for setting the next player
-	//TODO: check if Player.getNumber returns the index of the player or the playernumber
 	public void setNextPlayer(Game aGame) {
 		List<Player> playerList = aGame.getPlayers();
 		Player currentPlayer = aGame.getCurrentPlayer();
 		int playerIndex = aGame.indexOfPlayer(currentPlayer);
-		
-		
+				
 		//checks if current player is the last player
 		if (playerIndex + 1 == playerList.size()) {
 			//if it is, set the first player to current player
