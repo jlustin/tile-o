@@ -15,6 +15,10 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
+
+import ca.mcgill.ecse223.tileo.controller.DesignModeController;
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+
 public class DeckPopOut extends JFrame {
 
 	private JPanel contentPane;
@@ -24,6 +28,7 @@ public class DeckPopOut extends JFrame {
 	private JTextField rollDie;
 	private JButton btnCreate;
 	private JLabel message;
+	private String error = null;
 
 	/**
 	 * Launch the application.
@@ -78,11 +83,12 @@ public class DeckPopOut extends JFrame {
 		btnCreate = new JButton("Add");
 		
 		btnCreate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
+			public void actionPerformed(ActionEvent evt) {	
+				btnCreateActionPerformed(evt); 
 				close();
 			}
 		});
+		
 		
 		message = new JLabel("The total number of cards must add up to 32.");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -142,5 +148,49 @@ public class DeckPopOut extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+	
+	private void btnCreateActionPerformed(java.awt.event.ActionEvent evt)  {
+		int numberOfTeleportActionCard=0;
+		int numberOfConnectTilesActionCard=0;
+		int numberOfRemoveConnectionActionCard=0;
+		int numberOfRollDieActionCard=0;
+	    error = "";
+		try{
+			numberOfTeleportActionCard = Integer.parseInt(teleport.getText());
+		}
+		catch(NumberFormatException e) {
+			error = "The number of teleport action cards needs to be a numerical value! ";
+		}
+		
+		try{
+			numberOfConnectTilesActionCard = Integer.parseInt(connectTiles.getText());
+		}
+		catch(NumberFormatException e) {
+			error = error+ "The number of connectTiles action cards needs to be a numerical value! ";
+		}
+		try{
+			numberOfRemoveConnectionActionCard = Integer.parseInt(removeConnection.getText());
+		}
+		catch(NumberFormatException e) {
+			error = error+ "The number of removeConnection action cards needs to be a numerical value! ";
+		}
+		try{
+			numberOfRollDieActionCard = Integer.parseInt(rollDie.getText());
+		}
+		catch(NumberFormatException e) {
+			error = error + "The number of rollDie action cards needs to be a numerical value! ";
+		}
+		error.trim();
+		if (error.length() == 0) {
+			
+			DesignModeController dmc = new DesignModeController();
+			try {
+				dmc.createDeck(numberOfRollDieActionCard, numberOfConnectTilesActionCard, numberOfRemoveConnectionActionCard, numberOfTeleportActionCard);
+			} catch (InvalidInputException e) {
+				error = e.getMessage();
+			}
+		}
+	};
+	
 
 }
