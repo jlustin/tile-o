@@ -89,22 +89,42 @@ public class TileODesignPage extends JFrame {
 		});
 		
 		JButton btnRemoveConnections = new JButton("Remove Connections");
+		
+		JButton btnCreateDeck = new JButton("Add Deck");
+		btnCreateDeck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DeckPopOut d = new DeckPopOut();
+				d.setVisible(true);
+			}
+		});
+		
+		JButton btnCreateGame = new JButton("Create Game");
+		btnCreateGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(284, Short.MAX_VALUE)
+					.addContainerGap(1008, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnCreateGame, Alignment.TRAILING)
 						.addComponent(btnOpenNewWindow, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnRemoveTiles, Alignment.TRAILING)
 						.addComponent(btnAddConnections, Alignment.TRAILING)
-						.addComponent(btnRemoveConnections, Alignment.TRAILING))
+						.addComponent(btnRemoveConnections, Alignment.TRAILING)
+						.addComponent(btnCreateDeck, Alignment.TRAILING))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
+					.addComponent(btnCreateGame)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnOpenNewWindow)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnRemoveTiles)
@@ -112,7 +132,9 @@ public class TileODesignPage extends JFrame {
 					.addComponent(btnAddConnections)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnRemoveConnections)
-					.addContainerGap(128, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnCreateDeck)
+					.addContainerGap(458, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

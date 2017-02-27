@@ -263,6 +263,10 @@ public class DesignModeController {
 				+numberOfTeleportActionCard != 32) {
 			error = "The sum of numbers of different types of acton cards should be 32. ";
 		}
+		if(numberOfRollDieActionCard<0|| numberOfConnectTilesActionCard<0||numberOfRemoveConnectionActionCard<0||
+				numberOfTeleportActionCard < 0) {
+			error = error+"The numbers of the cards should bigger than zero. ";
+		}
 		if (error.length() > 0) {
 			throw new InvalidInputException(error.trim());
 		}

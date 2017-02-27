@@ -40,9 +40,27 @@ public class TeleportActionCard extends ActionCard
 	 // Player player = game.getCurrentPlayer(); 
 	 // player.setCurrentTile(tile);
 	 //EVERYTHING IS IN LAND METHOD...
-	  tile.land();
 	  
-	  //Exception
+String error = "";
+	  
+	  // Check if card is a Teleport Card
+	  if (!(super.getDeck().getCurrentCard() instanceof TeleportActionCard)){
+		  error = "The current card is not a Teleport Action Card.";
+	  }
+	  if (error.length() > 0){
+			throw new InvalidInputException (error.trim());
+	  }
+	  
+	  try
+	  {
+		  tile.land();
+	  }
+	  catch (RuntimeException e) 
+	  {
+		  error = e.getMessage();
+		  throw new InvalidInputException(error);
+	  }
+	  
  }
   
 
