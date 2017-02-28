@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.DesignModeController;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+import ca.mcgill.ecse223.tileo.model.Game;
+import ca.mcgill.ecse223.tileo.model.NormalTile;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -88,13 +90,16 @@ public class WelcomePage extends JFrame {
 				chosenNumberOfPlayers =  Integer.parseInt(numberOfPlayers);
 				
 				DesignModeController dmc = new DesignModeController ();
+				
 				try 
 				{
-					System.out.print("" + TileOApplication.getTileO().getCurrentGame()); //TODO: DELETE
+					//System.out.print("" + TileOApplication.getTileO().getCurrentGame()); //TODO: DELETE
 					dmc.createGame(chosenNumberOfPlayers);
-					System.out.print(" " + chosenNumberOfPlayers);
+//					TileOApplication.getTileO().setCurrentGame(newGame);
+					//System.out.print(" " + chosenNumberOfPlayers);
 					TileODesignPage.refreshData();
-					System.out.print("" + TileOApplication.getTileO().getCurrentGame()); //TODO: DELETE
+					
+					//System.out.print("" + TileOApplication.getTileO().getCurrentGame()); //TODO: DELETE
 					close ();
 				}
 				catch (InvalidInputException e){
@@ -107,7 +112,9 @@ public class WelcomePage extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Load existing game by selecting one existing game");
 		
 		JComboBox gameNumberIndexCB = new JComboBox();
-		gameNumberIndexCB.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4"}));
+		String[] games = new String[TileOApplication.getTileO().numberOfGames()];
+		addNums(games, TileOApplication.getTileO().numberOfGames());
+		gameNumberIndexCB.setModel(new DefaultComboBoxModel(games));
 		
 		JLabel lblContinueEditing = new JLabel("");
 		
@@ -122,10 +129,14 @@ public class WelcomePage extends JFrame {
 		loadButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DesignModeController dmc = new DesignModeController();
-				int chosenGameIndex = gameNumberIndexCB.getSelectedIndex() + 1; //getSelected returns 0 for first one
+				int chosenGameIndex = gameNumberIndexCB.getSelectedIndex(); //getSelected returns 0 for first one
 				try {
-					dmc.loadDesign(chosenGameIndex);
-					System.out.print("" + TileOApplication.getTileO().getCurrentGame());
+//					Game newGame =dmc.loadDesign(chosenGameIndex);
+//					new NormalTile(1, 1, newGame);
+					TileOApplication.getTileO().setCurrentGame(dmc.loadDesign(chosenGameIndex));
+					TileODesignPage.refreshData();
+					//System.out.print("" + TileOApplication.getTileO().getCurrentGame());
+					close();
 				} catch (InvalidInputException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -195,6 +206,13 @@ public class WelcomePage extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+	
+	public void addNums(String[] g, int games){
+		for (int i = 1; i<games+1; i++){
+			g[i-1] = String.valueOf(i);			
+		}
+	}
+	
 	public void close() { 
 		this.setVisible(false);
 	    this.dispose();
