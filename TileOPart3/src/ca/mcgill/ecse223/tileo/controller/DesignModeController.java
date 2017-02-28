@@ -37,20 +37,23 @@ public class DesignModeController {
 		String error = "";
 		//DesignModeController dmc = new DesignModeController();
 		if(x>50||y>50) {
-			error = "The cordinate need to be less than 50! ";
+			error = "The coordinate need to be less than 50! ";
 		}
 		if(x<0) {
-			error = error + "The cordinate x need be bigger than 0! ";
+			error = error + "The coordinate x need be bigger than 0! ";
 		}
 		if(y<0) {
-			error = error +  "The cordinate y need be bigger than 0! "; 
+			error = error +  "The coordinate y need be bigger than 0! "; 
 		}
-		if(game.hasWinTile()) {
-			error = error + "The game already has a win tile! ";
-		}
+        for(int i = 0 ; i<game.getTiles().size();i++) {
+        	if(game.getTiles().get(i).getX()==x&&game.getTiles().get(i).getY()==y){
+        		error = error + "The tile already exists. ";
+        	}
+        }
 		if (error.length() > 0) {
 			throw new InvalidInputException(error.trim());
 		}
+		
 		try {
 			if(TileType == "NormalTile")
 			{
@@ -224,8 +227,9 @@ public class DesignModeController {
 		}
 		
 		try {
-			WinTile winTile = new WinTile(x,y,game);
+			WinTile winTile = new WinTile(x,y,game);			
 			game.addTile(winTile);
+			game.setWinTile(winTile);
 		}
 		catch (RuntimeException e){
 			throw new InvalidInputException (e.getMessage());

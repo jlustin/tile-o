@@ -191,7 +191,7 @@ public class AddTilePopOut extends JFrame {
 			chosenXComp = Integer.parseInt(xComponent.getText());
 		}
 		catch(NumberFormatException e){
-			error = error+ "The corrdinate x need to be a numerical value! ";
+			error = error+ "The coordinate x need to be a numerical value! ";
 		}
 		try {
 			chosenYComp = Integer.parseInt(yComponent.getText());
