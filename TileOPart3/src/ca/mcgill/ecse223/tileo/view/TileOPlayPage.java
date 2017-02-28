@@ -64,6 +64,6 @@ public class TileOPlayPage extends JFrame {
 	
 	
 	private void refreshData(){
-		
+		//setContentPane(contentPane);
 	}
 }

@@ -54,6 +54,7 @@ public class TilePanel extends JPanel{
 //		new ActionTile(3,1, game, 2);
 		
 		init(game);
+		
 	}
 	
 	
@@ -61,6 +62,7 @@ public class TilePanel extends JPanel{
 		this.myGame = game;
 		tiles = new HashMap<Rectangle2D, Tile>();
 		connections = new HashMap<Rectangle2D, Connection>();
+		
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -189,6 +191,7 @@ public class TilePanel extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		doDrawing(g);
+		repaint();
 	}
 	
 
