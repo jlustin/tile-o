@@ -1,6 +1,7 @@
 package ca.mcgill.ecse223.tileo.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +21,8 @@ import ca.mcgill.ecse223.tileo.controller.DesignModeController;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 
 public class DeckPopOut extends JFrame {
-
+	
+    private JLabel errorMessage;
 	private JPanel contentPane;
 	private JTextField teleport;
 	private JTextField connectTiles;
@@ -85,12 +87,14 @@ public class DeckPopOut extends JFrame {
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {	
 				btnCreateActionPerformed(evt); 
-				close();
 			}
 		});
 		
 		
 		message = new JLabel("The total number of cards must add up to 32.");
+		
+		errorMessage = new JLabel();
+		errorMessage.setForeground(Color.red);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -115,18 +119,23 @@ public class DeckPopOut extends JFrame {
 							.addComponent(lblNumberOfRemoveconnection, GroupLayout.PREFERRED_SIZE, 278, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(teleport, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-						.addComponent(connectTiles, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-						.addComponent(removeConnection, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-						.addComponent(rollDie, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))
+						.addComponent(teleport, GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+						.addComponent(connectTiles, GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+						.addComponent(removeConnection, GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+						.addComponent(rollDie, GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))
 					.addGap(82))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(errorMessage)
+					.addContainerGap(335, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(7)
 					.addComponent(message)
-					.addGap(26)
+					.addGap(1)
+					.addComponent(errorMessage)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNumberOfTeleport)
 						.addComponent(teleport, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -142,7 +151,7 @@ public class DeckPopOut extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNumberOfRolldie)
 						.addComponent(rollDie, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
 					.addComponent(btnCreate)
 					.addContainerGap())
 		);
@@ -159,20 +168,20 @@ public class DeckPopOut extends JFrame {
 			numberOfTeleportActionCard = Integer.parseInt(teleport.getText());
 		}
 		catch(NumberFormatException e) {
-			error = "The number of teleport action cards needs to be a numerical value! ";
+			error = error + "The number of teleport action cards needs to be a numerical value! ";
 		}
 		
 		try{
 			numberOfConnectTilesActionCard = Integer.parseInt(connectTiles.getText());
 		}
 		catch(NumberFormatException e) {
-			error = error+ "The number of connectTiles action cards needs to be a numerical value! ";
+			error = error + "The number of connectTile action cards needs to be a numerical value! ";
 		}
 		try{
 			numberOfRemoveConnectionActionCard = Integer.parseInt(removeConnection.getText());
 		}
 		catch(NumberFormatException e) {
-			error = error+ "The number of removeConnection action cards needs to be a numerical value! ";
+			error = error + "The number of romoveConnection action cards needs to be a numerical value! ";
 		}
 		try{
 			numberOfRollDieActionCard = Integer.parseInt(rollDie.getText());
@@ -190,7 +199,13 @@ public class DeckPopOut extends JFrame {
 				error = e.getMessage();
 			}
 		}
-	};
-	
-
+		refreshData();
+	}
+	private void refreshData() {
+		errorMessage.setText("<html>"+error+"<html>");
+		DesignModeController dmc = new DesignModeController();
+		if(error == null || error.length()==0){
+			close();
+		}
+	}
 }
