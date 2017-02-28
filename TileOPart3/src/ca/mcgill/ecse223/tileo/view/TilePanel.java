@@ -24,17 +24,6 @@ import java.awt.geom.Rectangle2D;
 
 public class TilePanel extends JPanel{
 
-	//random strokes || gradients
-	final static float dash1[] = {10.0f};
-    final static BasicStroke dashed =
-        new BasicStroke(1.0f,
-                        BasicStroke.CAP_BUTT,
-                        BasicStroke.JOIN_MITER,
-                        10.0f, dash1, 0.0f);
-    
-    GradientPaint redtowhite = new GradientPaint(0,0,Color.RED,100, 0,Color.WHITE);
-	
-	
 	public boolean aTileIsSelected = false;
 	public Tile selectedTile;
 	
@@ -52,6 +41,7 @@ public class TilePanel extends JPanel{
 	private HashMap<Rectangle2D, Tile> tiles;
 	private HashMap<Tile, Rectangle2D> tRectangles;
 	private HashMap<Rectangle2D, Connection> connections;
+//	private HashMap<Connection, Rectangle2D>
 
 	
 	public TilePanel(Game game) {
@@ -220,17 +210,13 @@ public class TilePanel extends JPanel{
 				
 				if (selectedTile != null && selectedTile.equals(aTile)) {
 					aTileIsSelected = true;
-<<<<<<< Updated upstream
-					g2d.setStroke(dashed); //doesn't work. I want to show the tile differently when selected
-=======
 					Rectangle2D rectangle = tRectangles.get(aTile);
 					
 					g2d.setColor(Color.PINK); //doesn't work. I want to show the tile differently when selected
 				
 					g2d.fill(rectangle);
 					
-					
->>>>>>> Stashed changes
+		
 				}
 
 				repaint();
