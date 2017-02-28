@@ -98,13 +98,6 @@ public class TileODesignPage extends JFrame {
 			}
 		});
 		
-		JButton btnCreateGame = new JButton("Create Game");
-		btnCreateGame.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-			}
-		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
