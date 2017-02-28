@@ -12,7 +12,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
-import ca.mcgill.ecse223.tileo.controller.DesignModeController;
+import ca.mcgill.ecse223.tileo.controller.PlayModeController;
 
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -36,7 +36,7 @@ public class TileOPlayPage extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TileODesignPage frame = new TileODesignPage();
+					TileOPlayPage frame = new TileOPlayPage();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,8 +49,6 @@ public class TileOPlayPage extends JFrame {
 	 * Create the frame.
 	 */
 	public TileOPlayPage() {
-		WelcomePage wp = new WelcomePage();
-		wp.setVisible(true);
 		initComponents();
 		refreshData();
 	}
