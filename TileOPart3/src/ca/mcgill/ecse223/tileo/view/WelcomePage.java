@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ca.mcgill.ecse223.tileo.controller.DesignModeController;
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -14,6 +18,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -21,7 +27,13 @@ public class WelcomePage extends JFrame {
 
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-
+	
+	String error;
+	ButtonModel chosenNumber;
+	String numberOfPlayers;
+	int chosenNumberOfPlayers;
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -52,15 +64,44 @@ public class WelcomePage extends JFrame {
 		JLabel lblNewLabel = new JLabel("Create a new game by selecting the number of players");
 		
 		JRadioButton radioButton = new JRadioButton("2");
+		radioButton.setActionCommand("2");
 		buttonGroup.add(radioButton);
 		
 		JRadioButton radioButton_1 = new JRadioButton("3");
+		radioButton_1.setActionCommand("3");
 		buttonGroup.add(radioButton_1);
 		
 		JRadioButton radioButton_2 = new JRadioButton("4");
+		radioButton_2.setActionCommand("4");
 		buttonGroup.add(radioButton_2);
 		
 		JButton btnCreateGame = new JButton("Create Game");
+		btnCreateGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				error = "";
+				chosenNumber = buttonGroup.getSelection();
+				numberOfPlayers = chosenNumber.getActionCommand();
+				chosenNumberOfPlayers =  Integer.parseInt(numberOfPlayers);
+
+				
+//				numberOfPlayers = buttonGroup.toString();
+//				chosenNumberOfPlayers = Integer.parseInt(numberOfPlayers);
+				
+			
+				DesignModeController dmc = new DesignModeController ();
+				try 
+				{
+					dmc.createGame(chosenNumberOfPlayers);
+					System.out.print(" " + chosenNumberOfPlayers);
+					close ();
+				}
+				catch (InvalidInputException e){
+					error = e.getMessage();
+					
+				}
+			}
+		});
 		
 		JLabel lblNewLabel_1 = new JLabel("Load existing game by selecting one existing game");
 		
