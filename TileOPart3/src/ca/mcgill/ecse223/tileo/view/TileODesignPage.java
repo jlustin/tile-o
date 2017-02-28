@@ -105,6 +105,9 @@ public class TileODesignPage extends JFrame {
 		JButton btnAddConnections = new JButton("Add Connections");
 		btnAddConnections.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AddConnectionDesignPopOut acdpo = new AddConnectionDesignPopOut();
+				acdpo.setVisible(true);
+				
 			}
 		});
 		
@@ -239,5 +242,9 @@ public class TileODesignPage extends JFrame {
 		grid.setVisible(true);
 		grid.setSize(700, 720);
 		
+	}
+	
+	public static TilePanel getGrid(){
+		return grid;
 	}
 }
