@@ -25,6 +25,8 @@ public class TilePanel extends JPanel{
 	private List<Rectangle2D> rectangles = new ArrayList<Rectangle2D>();
 	private static final int MINWIDTH = 9;
 	private static final int MINHEIGHT = 9;
+	private static float tileW = 50;
+	private static float tileH = 50;
 	
 	
 	// data element;
@@ -41,7 +43,7 @@ public class TilePanel extends JPanel{
 		new NormalTile(1, 2, game);
 		new NormalTile(1, 1, game);
 		new NormalTile(5, 5, game);
-		new NormalTile(8, 15, game);
+		new NormalTile(8, 10, game);
 		
 		List<Tile> listTiles = game.getTiles();
 		
@@ -64,30 +66,41 @@ public class TilePanel extends JPanel{
 			i=j;
 		}
 		
+		
 		JPanel[][] panelHolder = new JPanel[i][j];
-		GridLayout grid = new GridLayout(i, j, 300/i, 300/j);
+		GridLayout grid = new GridLayout(i, j);
 		//grid.setHgap(i/6);
 		//grid.setVgap(j/6);
 		setLayout(grid);
 		
 		for(int m = 0; m < i; m++) {
-			for(int n = 0; n < j; n++) {
+			for(int n = 0; n < j; n++) {											
 				panelHolder[m][n] = new JPanel();
-				add(panelHolder[m][n]);
-				//panelHolder[m][n].setBorder(BorderFactory.createLineBorder(Color.black));
+				add(panelHolder[m][n]);				
+				panelHolder[m][n].setBorder(BorderFactory.createLineBorder(Color.black));
 				//panelHolder[m][n].setOpaque(true);
-			}
+								 
+			}			
 		}
+		
+		/*
+		tileH = panelHolder[1][1].getHeight();
+		tileW = panelHolder[1][1].getWidth();
+		*/
+		
+		
 		for (Tile aTile: listTiles) {
+			MyTile paint = new MyTile();
 			
 			int x = aTile.getX()-1;
 			int y = aTile.getY()-1;
-			//RectDraw newrect = new RectDraw();
-			panelHolder[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
-			//panelHolder[x][y].
-		}
 			
-		
+			//RectDraw newrect = new RectDraw();
+			//panelHolder[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
+			//panelHolder[x][y].
+			panelHolder[x][y].add(paint);
+		}			
+				
 	}
 	
 	
@@ -110,86 +123,6 @@ public class TilePanel extends JPanel{
 		});		
 	}
 	
-	
-	
-	public void createTile(JPanel panel) {
-		float w = panel.getWidth();
-		float h = panel.getHeight();
-		Rectangle2D rect = new Rectangle2D.Float(0, 0, w, h);
-		
-	}
-
-	
-	/*
-	public void doDrawing(Graphics g) {
-		if (game != null) {
-			TileO tileO = TileOApplication.getTileO();
-			Game currentGame = tileO.getCurrentGame();
-			new NormalTile(1, 2, currentGame);
-			new NormalTile(1, 1, currentGame);
-			new NormalTile(5, 5, currentGame);
-			
-			List<Tile> listTiles = currentGame.getTiles();
-			
-			int i = getXAxis(currentGame);
-			int j = getYAxis(currentGame);
-
-			if (i<MINWIDTH) {
-				i=MINWIDTH;
-			}
-			if (j<MINHEIGHT) {
-				j=MINHEIGHT;
-			}
-			
-			JPanel[][] panelHolder = new JPanel[i][j];
-			GridLayout grid = new GridLayout(i*2 -1, j*2 -1);
-			//grid.setHgap(i/6);
-			//grid.setVgap(j/6);
-			setLayout(grid);
-			
-			for(int m = 0; m < i; m++) {
-				for(int n = 0; n < j; n++) {
-					panelHolder[m][n] = new JPanel();
-					add(panelHolder[m][n]);
-				}
-			}
-			for (Tile aTile: listTiles) {
-				int x = aTile.getX();
-				int y = aTile.getY();
-				panelHolder[x][y].add(newrect);
-				
-			}
-				
-		}
-	}
-	
-	*/
-	
-	private static class RectDraw extends JPanel {
-        /**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-
-		public void paintComponent(Graphics g) {
-        super.paintComponent(g);  
-         g.drawRect(230,80,10,10);  
-         g.setColor(Color.RED);  
-         g.fillRect(230,80,10,10);  
-         }
-
-	}		
-		
-	
-/*
-	public Rectangle2D drawTile(JPanel panelHolder) {
-		int h = panelHolder.getHeight();
-		int w = panelHolder.getWidth();
-		Rectangle2D rectangle = new Rectangle2D.Float(h*(1/6), w*(1/6), w*(2/3), h*(2/3));
-		return rectangle;
-	}
-
-*/	
 	
 	public int getXAxis(Game aGame) {
 		List<Tile> listTiles = aGame.getTiles();
@@ -214,8 +147,36 @@ public class TilePanel extends JPanel{
 			}
 		}
 		
-		return ySize;		
+		return ySize;
 	}
+	
+	public void doDrawing(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g.create();
+		if (game != null) {
+			for (Tile aTile: game.getTiles()) {
+				
+				Rectangle2D rect = new Rectangle2D.Float(0, 0, 50, 50);
+				
+				rectangles.add(rect);
+				tiles.put(rect, aTile);
+				
+				g2d.setColor(Color.BLUE);
+				g2d.fill(rect);
+			}
+			
+		}
+	}
+	
+	
+	
+	public class MyTile extends JPanel {
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			doDrawing(g);
+		}
+		
+	}
+	
 	
 	
 
