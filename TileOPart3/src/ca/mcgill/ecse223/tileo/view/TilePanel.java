@@ -41,7 +41,7 @@ public class TilePanel extends JPanel{
 	private HashMap<Rectangle2D, Tile> tiles;
 	private HashMap<Tile, Rectangle2D> tRectangles;
 	private HashMap<Rectangle2D, Connection> connections;
-//	private HashMap<Connection, Rectangle2D>
+	private HashMap<Connection, Rectangle2D> cRectangles;
 
 	
 	public TilePanel(Game game) {
@@ -79,6 +79,7 @@ public class TilePanel extends JPanel{
 		tiles = new HashMap<Rectangle2D, Tile>();
 		connections = new HashMap<Rectangle2D, Connection>();
 		tRectangles = new HashMap<Tile, Rectangle2D>();
+		cRectangles = new HashMap<Connection, Rectangle2D>();
 		
 		addMouseListener(new MouseAdapter() {
 			@Override
@@ -90,12 +91,14 @@ public class TilePanel extends JPanel{
 					if (rectangle.contains(x, y)) {
 						if(tiles.containsKey(rectangle)){
 							selectedTile = tiles.get(rectangle);
+							selectedConnection = null;
 							System.out.println("A legit tile has been selected. " + "x: " + selectedTile.getX() + " y:" + selectedTile.getY());
 							//System.out.println("number of players");
 							break;
 						}
 						else if(connections.containsKey(rectangle)){
 							selectedConnection = connections.get(rectangle);
+							selectedTile = null;
 							System.out.println("a legit connection has been selected");
 							break;
 						}
@@ -209,6 +212,7 @@ public class TilePanel extends JPanel{
 
 				
 				if (selectedTile != null && selectedTile.equals(aTile)) {
+					//selectedConnection = null;
 					aTileIsSelected = true;
 					Rectangle2D rectangle = tRectangles.get(aTile);
 					
@@ -248,6 +252,7 @@ public class TilePanel extends JPanel{
 								SPACING);
 						rectangles.add(rect);
 						connections.put(rect, aConnection);
+						cRectangles.put(aConnection, rect);
 						g2d.setColor(Color.BLACK);
 						g2d.fill(rect);
 					}					
@@ -262,13 +267,18 @@ public class TilePanel extends JPanel{
 								2*SPACING);
 						rectangles.add(rect);
 						connections.put(rect, aConnection);
+						cRectangles.put(aConnection, rect);
 						g2d.setColor(Color.BLACK);
 						g2d.fill(rect);
 					}										
 				}
 				
 				if (selectedConnection != null && selectedConnection.equals(aConnection)){
+					//selectedTile;
 					aConnectionIsSelected = true;
+					Rectangle2D rectangle = cRectangles.get(aConnection);
+					g2d.setColor(Color.PINK);
+					g2d.fill(rectangle);
 				}
 				
 				repaint();

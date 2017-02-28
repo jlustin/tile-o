@@ -102,13 +102,13 @@ public class TileODesignPage extends JFrame {
 			}
 		});
 		
-		JButton btnAddConnections = new JButton("Add Connections");
+		JButton btnAddConnections = new JButton("Add Connection");
 		btnAddConnections.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		
-		JButton btnRemoveConnections = new JButton("Remove Connections");
+		JButton btnRemoveConnections = new JButton("Remove Connection");
 		btnRemoveConnections.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(grid.aConnectionIsSelected){
