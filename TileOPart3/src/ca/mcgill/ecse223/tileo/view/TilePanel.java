@@ -3,11 +3,13 @@ package ca.mcgill.ecse223.tileo.view;
 import javax.swing.JPanel;
 
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
+import ca.mcgill.ecse223.tileo.model.ActionTile;
 import ca.mcgill.ecse223.tileo.model.Connection;
 import ca.mcgill.ecse223.tileo.model.Game;
 import ca.mcgill.ecse223.tileo.model.NormalTile;
 import ca.mcgill.ecse223.tileo.model.Tile;
 import ca.mcgill.ecse223.tileo.model.TileO;
+import ca.mcgill.ecse223.tileo.model.WinTile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,15 +42,17 @@ public class TilePanel extends JPanel{
 		super();
 		//you guys can add tiles here to try the layout
 		//add the tiles in the same format and only here
-		new NormalTile(1, 1, game);
-		new NormalTile(1, 2, game);
-		new NormalTile(13, 9, game);
-		new NormalTile(10, 10, game);
-		new NormalTile(8, 19, game);
-		new NormalTile(3, 5, game);
-		new NormalTile(17, 13, game);
-		new NormalTile(11, 18, game);
-
+//		new NormalTile(1, 1, game);
+//		new NormalTile(1, 2, game);
+//		new NormalTile(13, 9, game);
+//		new NormalTile(10, 10, game);
+//		new NormalTile(8, 19, game);
+//		new NormalTile(3, 5, game);
+//		new NormalTile(17, 13, game);
+//		new NormalTile(11, 18, game);
+//		new NormalTile(2,1, game);
+//		new ActionTile(3,1, game, 2);
+		
 		init(game);
 	}
 	
@@ -66,13 +70,13 @@ public class TilePanel extends JPanel{
 				for (Rectangle2D rectangle : rectangles) {
 					if (rectangle.contains(x, y)) {
 						selectedTile = tiles.get(rectangle);
-						System.out.println("A legit tile has been selected. " + "x: " + x + " y:" + y);
+						System.out.println("A legit tile has been selected. " + "x: " + selectedTile.getX() + " y:" + selectedTile.getY());
 						break;
 					}
 				}
 				repaint();
 			}
-		});		
+		});
 	}
 	
 	public void setGame(Game game) {
@@ -152,11 +156,22 @@ public class TilePanel extends JPanel{
 				rectangles.add(rect);
 				tiles.put(rect, aTile);
 				
-				g2d.setColor(Color.BLACK);
+				if(aTile instanceof NormalTile){
+					g2d.setColor(Color.BLUE);
+				}
+				
+				if(aTile instanceof WinTile){
+					g2d.setColor(Color.BLACK);
+				}
+				
+				if(aTile instanceof ActionTile){
+					g2d.setColor(Color.RED);
+				}
 				
 				g2d.draw(rect);
 				//if instead you want a full colored tile, uncomment the below and comment the above
-				//g2d.fill(rect);
+				g2d.fill(rect);
+				repaint();
 			}
 			
 			//horizontal

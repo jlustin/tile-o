@@ -34,7 +34,7 @@ public class DesignModeController {
 	public void addDesignTile(int x, int y, String TileType) throws InvalidInputException {
 		
 		Game game = TileOApplication.getTileO().getCurrentGame();
-		DesignModeController dmc = new DesignModeController();
+		//DesignModeController dmc = new DesignModeController();
 		
 		if(TileType == "NormalTile")
 		{
@@ -45,12 +45,12 @@ public class DesignModeController {
 		
 		if(TileType == "ActionTile")
 		{
-			dmc.createActionTile(x, y, game);
+			createActionTile(x, y, game);
 		}
 		
 		if(TileType == "WinTile")
 		{	
-			dmc.createWinTile(x, y, game);
+			createWinTile(x, y, game);
 			
 		}
 	}
