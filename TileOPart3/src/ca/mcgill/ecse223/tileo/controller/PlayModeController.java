@@ -3,6 +3,7 @@ package ca.mcgill.ecse223.tileo.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.model.ActionCard;
 import ca.mcgill.ecse223.tileo.model.ConnectTilesActionCard;
@@ -90,22 +91,25 @@ public class PlayModeController {
 		TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		List<Tile> tiles = currentGame.getTiles();
+	
+		String error = "";
 		if(tiles.contains(tile) == false){
-			//wtf
-		}
-		else
-			tile.land(); //if landed on ActionTile/WinTile, set to appropriate mode
-			switch(currentGame.getMode()){
-			case GAME_ROLLDIEACTIONCARD:
-				playRollDieExtraTurn();
-			case GAME_CONNECTTILESACTIONCARD:
-				playConnectTilesActionCard (null, null);
-			}
-			
 		
+
+			error = "The tile does not exist in the Board.";
 		}
-	
-	
+		if (error.length() > 0){
+			throw new InvalidInputException(error.trim());
+		}
+		try{
+			tile.land();
+
+		}
+		catch(RuntimeException e){
+			throw new InvalidInputException(e.getMessage());
+		}
+	}
+
 	
 	/*
 	 * 4. Take the first card from the deck of cards
@@ -260,15 +264,6 @@ public class PlayModeController {
 	public void playTeleportActionCard(Tile tile) throws InvalidInputException {
 		//TODO: VICTORIQUE
 		
-		//TeleportActionCard.play(tile)
-//		try {
-//			TeleportActionCard.play(tile);
-//		}
-//		catch (RuntimeException e) {
-//			throw new InvalidInputException(e.getMessage());
-//		}
-		
-		
 		TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		//TODO remove Deck deck = currentGame.getDeck();
@@ -277,6 +272,14 @@ public class PlayModeController {
 		
 		//deck.setCurrentCard(deck.getCard(deck.indexOfCard(teleportcard)+1));
 
+		List<Tile> tiles = currentGame.getTiles();
+		String error = "";
+		if(tiles.contains(tile)==false){
+			error = "Please select an existing tile on the board.";
+		}
+		if(error.length() > 0){
+			throw new InvalidInputException(error.trim());
+		}
 		try{
 		teleportcard.play(tile);
 		}
@@ -284,8 +287,6 @@ public class PlayModeController {
 			throw new InvalidInputException(e.getMessage());
 		}
 		
-		
-	
 	}
 
 	
@@ -302,7 +303,7 @@ public class PlayModeController {
 	}
 	
 	public Game loadGame(Game aGame) throws InvalidInputException {
-		//TODO: LI
+		//TODO: LI check if it's load() or this function
 		//set mode to "GAME" when loading a game
 		
 		TileO tileO = TileOApplication.getTileO();
