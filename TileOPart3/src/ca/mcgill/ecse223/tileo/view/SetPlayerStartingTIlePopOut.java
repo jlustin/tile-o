@@ -6,6 +6,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ca.mcgill.ecse223.tileo.controller.DesignModeController;
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+import ca.mcgill.ecse223.tileo.model.NormalTile;
+import ca.mcgill.ecse223.tileo.model.Player;
+import ca.mcgill.ecse223.tileo.model.Tile;
+import ca.mcgill.ecse223.tileo.model.TileO;
+
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -18,6 +28,14 @@ import java.awt.event.ActionEvent;
 public class SetPlayerStartingTIlePopOut extends JFrame {
 
 	private JPanel contentPane;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	
+	String error;
+	ButtonModel chosenNumber;
+	String playerNumber;
+	int chosenPlayerNumber;
+	
+	
 
 	/**
 	 * Launch the application.
@@ -65,6 +83,23 @@ public class SetPlayerStartingTIlePopOut extends JFrame {
 		JButton btnSet = new JButton("Set");
 		btnSet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				error = "";
+				chosenNumber = buttonGroup.getSelection();
+				playerNumber = chosenNumber.getActionCommand();
+				chosenPlayerNumber = Integer.parseInt(playerNumber);
+				
+				
+				try{
+					DesignModeController dmc = new DesignModeController();
+					Player currentPlayer = TileO.getCurrentGame().getPlayer(chosenPlayerNumber-1);
+					NormalTile startingTile = new NormalTile(0,0,null);
+					dmc.setPlayerStartingTile(currentPlayer, startingTile);
+					
+				}catch (InvalidInputException ee){
+					error = ee.getMessage();
+					
+				}
 				close();
 			}
 		});

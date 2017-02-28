@@ -184,20 +184,20 @@ public class AddTilePopOut extends JFrame {
 
 
 		if(chosenTile==null) {
-			error = "Please Selecte Tile Type. ";
+			error = "Please select a Tile Type. ";
 		}
 		
 		try {
 			chosenXComp = Integer.parseInt(xComponent.getText());
 		}
 		catch(NumberFormatException e){
-			error = error+ "The coordinate x need to be a numerical value! ";
+			error = error+ "The coordinate x needs to be a numerical value! ";
 		}
 		try {
 			chosenYComp = Integer.parseInt(yComponent.getText());
 		}
 		catch(NumberFormatException e){
-			error = error + "The coordinate y need to be a numerical value! ";
+			error = error + "The coordinate y needs to be a numerical value! ";
 		}
 		error.trim();
 		if (error.length()==0) {
