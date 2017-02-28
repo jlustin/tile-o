@@ -1,6 +1,7 @@
 package ca.mcgill.ecse223.tileo.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,12 +15,15 @@ import javax.swing.border.EmptyBorder;
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.DesignModeController;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+import ca.mcgill.ecse223.tileo.controller.PlayModeController;
+import ca.mcgill.ecse223.tileo.model.Game;
 
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JRadioButton;
 import javax.swing.JSplitPane;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 
 public class TileODesignPage extends JFrame {
 
@@ -29,6 +33,9 @@ public class TileODesignPage extends JFrame {
 	
 	
 	private JPanel contentPane;
+	private JComboBox<Game> selectedGameComboBox;
+	private String error;
+	JLabel errorMessage;
 
 	/**
 	 * Launch the application.
@@ -102,7 +109,7 @@ public class TileODesignPage extends JFrame {
 			}
 		});
 		
-		JButton btnAddConnections = new JButton("Add Connections");
+		JButton btnAddConnections = new JButton("Add Connection");
 		btnAddConnections.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddConnectionDesignPopOut acdpo = new AddConnectionDesignPopOut();
@@ -111,7 +118,7 @@ public class TileODesignPage extends JFrame {
 			}
 		});
 		
-		JButton btnRemoveConnections = new JButton("Remove Connections");
+		JButton btnRemoveConnections = new JButton("Remove Connection");
 		btnRemoveConnections.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(grid.aConnectionIsSelected){
@@ -159,7 +166,10 @@ public class TileODesignPage extends JFrame {
 		
 		JButton btnStartGame = new JButton("Start Game");
 		
-		JComboBox comboBox = new JComboBox();
+		selectedGameComboBox = new JComboBox<Game>(new Game[0]);
+		
+		errorMessage = new JLabel("errorMessage");
+		errorMessage.setForeground(Color.RED);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -184,10 +194,13 @@ public class TileODesignPage extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addComponent(btnSetStartingTile)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(selectedGameComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnStartGame)
-					.addContainerGap(146, Short.MAX_VALUE))
+					.addContainerGap(187, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(errorMessage)
+					.addContainerGap(565, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -210,8 +223,10 @@ public class TileODesignPage extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnSetStartingTile)
 						.addComponent(btnStartGame)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(585, Short.MAX_VALUE))
+						.addComponent(selectedGameComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addComponent(errorMessage)
+					.addContainerGap(551, Short.MAX_VALUE))
 		);
 		//contentPane.setLayout(gl_contentPane);
 		
@@ -247,4 +262,26 @@ public class TileODesignPage extends JFrame {
 	public static TilePanel getGrid(){
 		return grid;
 	}
+
+	public void startGamePerformed(java.awt.event.ActionEvent evt) {
+		error = "";
+		if(selectedGameComboBox.getModel().getSelectedItem()==null){
+			error = "Please Selecte A Game To Start. ";
+		}
+		error.trim();
+		try{
+			PlayModeController pmc = new PlayModeController();
+			Game selectedGame = (Game) selectedGameComboBox.getModel().getSelectedItem();
+			pmc.startGame(selectedGame);
+		}catch (InvalidInputException e) {
+			error = e.getMessage();
+		}
+		displayPlayBoard();
+	}
+	public void displayPlayBoard() {
+		errorMessage.setText(error);
+		if(error==null||error.length()==0){
+		}
+    }
+
 }
