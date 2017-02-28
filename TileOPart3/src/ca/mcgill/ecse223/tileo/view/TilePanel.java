@@ -159,6 +159,13 @@ public class TilePanel extends JPanel{
 				//g2d.fill(rect);
 			}
 			
+			//horizontal
+//			for (Tile aTile: myGame.getTiles()){
+//				for(Tile bTile: myGame.getTiles()){
+//					
+//				}
+//			}
+			
 		}
 	}
 	
