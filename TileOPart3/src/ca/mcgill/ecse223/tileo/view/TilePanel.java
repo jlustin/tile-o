@@ -31,6 +31,7 @@ public class TilePanel extends JPanel{
 	private HashMap<Rectangle2D, Tile> tiles;
 	private HashMap<Rectangle2D, Connection> connections;
 	private Tile selectedTile;
+	private Connection selectedConnection;
 	
 	
 	
@@ -152,6 +153,7 @@ public class TilePanel extends JPanel{
 				tiles.put(rect, aTile);
 				
 				g2d.setColor(Color.BLACK);
+				
 				g2d.draw(rect);
 				//if instead you want a full colored tile, uncomment the below and comment the above
 				//g2d.fill(rect);
