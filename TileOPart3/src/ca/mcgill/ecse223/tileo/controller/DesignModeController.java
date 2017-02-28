@@ -325,14 +325,29 @@ public class DesignModeController {
 		TileOApplication.save();
 	}
 	
-	public void loadDesign(Game aGame) throws InvalidInputException {
-		//TODO: VICTORIQUE
-		TileO tileO = TileOApplication.load();
-		Game game = tileO.getCurrentGame();
-		game.setMode(Game.Mode.DESIGN);
-		
-	}
+//	public void loadDesign(Game aGame) throws InvalidInputException {
+//		//TODO: VICTORIQUE
+//		TileO tileO = TileOApplication.load();
+//		Game game = tileO.getCurrentGame();
+//		game.setMode(Game.Mode.DESIGN);
+//		
+//	}
 	
+	public Game loadDesign(int index) throws InvalidInputException{
+		try{
+    	Game selectedGame = TileOApplication.getTileO().getGame(index);
+    	selectedGame.setMode(Mode.DESIGN);
+    	return selectedGame;
+		}
+		catch (RuntimeException e)
+		{
+			throw new InvalidInputException(e.getMessage());
+		}
+//    	TileOApplication.getTileO().setCurrentGame(selectedGame);
+////    	if (selectedGame.getMode() == Mode.DESIGN){
+////    		TileOApplication.getTileO().setCurrentGame(selectedGame);
+////    	}
+	}
 	
 }
 

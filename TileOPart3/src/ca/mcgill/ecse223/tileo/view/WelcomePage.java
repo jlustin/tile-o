@@ -23,6 +23,7 @@ import javax.swing.ButtonModel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
 
 public class WelcomePage extends JFrame {
 
@@ -55,6 +56,7 @@ public class WelcomePage extends JFrame {
 	 * Create the frame.
 	 */
 	public WelcomePage() {
+		setResizable(false);
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 605, 462);
@@ -104,7 +106,8 @@ public class WelcomePage extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("Load existing game by selecting one existing game");
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox gameNumberIndexCB = new JComboBox();
+		gameNumberIndexCB.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4"}));
 		
 		JLabel lblContinueEditing = new JLabel("");
 		
@@ -114,9 +117,24 @@ public class WelcomePage extends JFrame {
 				close();
 			}
 		});
+		
+		JButton loadButton = new JButton("Load");
+		loadButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DesignModeController dmc = new DesignModeController();
+				int chosenGameIndex = gameNumberIndexCB.getSelectedIndex() + 1; //getSelected returns 0 for first one
+				try {
+					dmc.loadDesign(chosenGameIndex);
+					System.out.print("" + TileOApplication.getTileO().getCurrentGame());
+				} catch (InvalidInputException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(107)
 					.addComponent(radioButton)
@@ -126,27 +144,31 @@ public class WelcomePage extends JFrame {
 					.addComponent(radioButton_2)
 					.addGap(116)
 					.addComponent(btnCreateGame)
-					.addContainerGap(132, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(355, Short.MAX_VALUE)
-					.addComponent(lblNewLabel_1)
-					.addGap(164))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(345, Short.MAX_VALUE)
-					.addComponent(lblNewLabel)
-					.addGap(153))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(494, Short.MAX_VALUE)
-					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(271))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(505, Short.MAX_VALUE)
+					.addContainerGap(93, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(385, Short.MAX_VALUE)
 					.addComponent(lblContinueEditing)
 					.addGap(210))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(511, Short.MAX_VALUE)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(270, Short.MAX_VALUE)
+					.addComponent(gameNumberIndexCB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(261))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(265, Short.MAX_VALUE)
+					.addComponent(loadButton)
+					.addGap(255))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(180, Short.MAX_VALUE)
 					.addComponent(btnNewButton)
-					.addGap(193))
+					.addGap(170))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(141, Short.MAX_VALUE)
+					.addComponent(lblNewLabel_1)
+					.addGap(131))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(132, Short.MAX_VALUE)
+					.addComponent(lblNewLabel)
+					.addGap(123))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -162,12 +184,14 @@ public class WelcomePage extends JFrame {
 					.addGap(28)
 					.addComponent(lblNewLabel_1)
 					.addGap(18)
-					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(gameNumberIndexCB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addComponent(lblContinueEditing)
-					.addGap(57)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblContinueEditing)
+						.addComponent(loadButton))
+					.addGap(34)
 					.addComponent(btnNewButton)
-					.addContainerGap(169, Short.MAX_VALUE))
+					.addContainerGap(162, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
