@@ -13,10 +13,12 @@ import javax.swing.JRadioButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.ButtonGroup;
 
 public class WelcomePage extends JFrame {
 
 	private JPanel contentPane;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -47,10 +49,13 @@ public class WelcomePage extends JFrame {
 		JLabel lblNewLabel = new JLabel("Create a new game by selecting the number of players");
 		
 		JRadioButton radioButton = new JRadioButton("2");
+		buttonGroup.add(radioButton);
 		
 		JRadioButton radioButton_1 = new JRadioButton("3");
+		buttonGroup.add(radioButton_1);
 		
 		JRadioButton radioButton_2 = new JRadioButton("4");
+		buttonGroup.add(radioButton_2);
 		
 		JButton btnCreateGame = new JButton("Create Game");
 		
