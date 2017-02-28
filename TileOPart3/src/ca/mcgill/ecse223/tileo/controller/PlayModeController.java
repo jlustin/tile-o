@@ -199,11 +199,11 @@ public class PlayModeController {
 			connectTilesActionCard.play(selectedTile1, selectedTile2);
 			
 			// Check if current player is last player
-			if (currentPlayer.getNumber() == currentGame.numberOfPlayers()){
-				currentGame.setCurrentPlayer(Player.getWithNumber(1));
+			if (currentGame.indexOfPlayer(currentGame.getCurrentPlayer()) == currentGame.numberOfPlayers()-1){
+				currentGame.setCurrentPlayer(currentGame.getPlayer(0));
 			}
 			else{
-				currentGame.setCurrentPlayer(currentGame.getPlayer(currentGame.indexOfPlayer(currentPlayer)+1));
+				currentGame.setCurrentPlayer(currentGame.getPlayer(currentGame.indexOfPlayer(currentGame.getCurrentPlayer())+1));
 			}
 //			// Check if current card is the last card
 //			if (deck.numberOfCards() == 1){
