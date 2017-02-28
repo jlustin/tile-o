@@ -3,6 +3,7 @@ package ca.mcgill.ecse223.tileo.view;
 import javax.swing.JPanel;
 
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
+import ca.mcgill.ecse223.tileo.model.Connection;
 import ca.mcgill.ecse223.tileo.model.Game;
 import ca.mcgill.ecse223.tileo.model.NormalTile;
 import ca.mcgill.ecse223.tileo.model.Tile;
@@ -28,6 +29,7 @@ public class TilePanel extends JPanel{
 	// data element;
 	private Game myGame;
 	private HashMap<Rectangle2D, Tile> tiles;
+	private HashMap<Rectangle2D, Connection> connections;
 	private Tile selectedTile;
 	
 	
@@ -53,6 +55,7 @@ public class TilePanel extends JPanel{
 	private void init(Game game) {
 		this.myGame = game;
 		tiles = new HashMap<Rectangle2D, Tile>();
+		connections = new HashMap<Rectangle2D, Connection>();
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
