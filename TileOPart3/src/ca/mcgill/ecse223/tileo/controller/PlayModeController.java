@@ -318,6 +318,7 @@ public class PlayModeController {
 		}				
 	}
 	
+	
 	//helper method for setting the next player
 	public void setNextPlayer(Game aGame) {
 		List<Player> playerList = aGame.getPlayers();

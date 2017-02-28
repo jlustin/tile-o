@@ -40,6 +40,14 @@ public class RemoveConnectionActionCard extends ActionCard
   
   public void play(Connection connection) throws InvalidInputException {
 	  	//TODO: Li write function for the play??
+	  try
+	  {
+		  connection.delete();
+	  }
+	  catch (RuntimeException e) 
+	  {
+		  throw new InvalidInputException(e.getMessage());
+	  }
   }
   
   //------------------------
