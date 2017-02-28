@@ -139,10 +139,10 @@ public class DesignModeController {
 		TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		
-		int x1 = selectedTile1.getX();
-		int y1 = selectedTile1.getY();
-		int x2 = selectedTile2.getX();
-		int y2 = selectedTile2.getY();
+//		int x1 = selectedTile1.getX();
+//		int y1 = selectedTile1.getY();
+//		int x2 = selectedTile2.getX();
+//		int y2 = selectedTile2.getY();
 		
 		String error = "";
 		// Check if there are tiles that can be selected in the game
@@ -150,10 +150,7 @@ public class DesignModeController {
 			error = "There are less than 2 tiles in the current game.";
 		}
 		// Check if the selected tiles are adjacent
-		if ((x1 != x2+1 && y1 == y2) || (x1 != x2-1 && y1 == y2)){
-			error = error + "The selected tiles are not adjacent";
-		}
-		if ((y1 != y2+1 && x1 == x2) || (y1 != y2-1 && x1 == x2)){
+		if (!isAdjacent(selectedTile1, selectedTile2)){
 			error = error + "The selected tiles are not adjacent";
 		}
 //		
@@ -179,6 +176,29 @@ public class DesignModeController {
 			throw new InvalidInputException (error);
 		}
 	}
+	
+	
+	//helper meethod
+	public boolean isAdjacent(Tile tile1, Tile tile2) {
+		int x1 = tile1.getX();
+		int y1 = tile1.getY();
+		int x2 = tile2.getX();
+		int y2 = tile2.getY();
+		if (x1-x2 == -1 || x1-x2 == 1){
+			if(y1-y2 ==0){
+				return true;
+			}
+		}
+		if (y1-y2 == -1 || y1-y2 == 1){
+			if(x1-x2 ==0){
+				return true;
+			}
+		}
+		
+		
+		return false;
+	}
+	
 	
 	
 	/*
