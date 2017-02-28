@@ -109,6 +109,21 @@ public class TileODesignPage extends JFrame {
 		});
 		
 		JButton btnRemoveConnections = new JButton("Remove Connections");
+		btnRemoveConnections.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(grid.aConnectionIsSelected){
+					DesignModeController dmc = new DesignModeController ();
+					try 
+					{
+						dmc.removeConnection(grid.selectedConnection);
+					}
+					catch (InvalidInputException e2){
+						throw new RuntimeException (e2.getMessage());
+					}
+				}
+				
+			}
+		});
 		
 		JButton btnAddDeck = new JButton("Add Deck");
 		btnAddDeck.addActionListener(new ActionListener() {

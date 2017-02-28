@@ -39,6 +39,8 @@ public class TilePanel extends JPanel{
 	public Tile selectedTile;
 	
 
+	public boolean aConnectionIsSelected = false;
+	public Connection selectedConnection;
 
 
 	//UI elements
@@ -50,15 +52,12 @@ public class TilePanel extends JPanel{
 	private HashMap<Rectangle2D, Tile> tiles;
 	private HashMap<Rectangle2D, Connection> connections;
 
-	private Connection selectedConnection;
-	
-	
-	
 	
 	public TilePanel(Game game) {
 		super();
 		//you guys can add tiles here to try the layout
 		//add the tiles in the same format and only here
+		
 		Tile t1 = new NormalTile(1, 1, game);
 		Tile t2 = new NormalTile(1, 2, game);
 		new NormalTile(13, 9, game);
@@ -219,8 +218,6 @@ public class TilePanel extends JPanel{
 				if (selectedTile != null && selectedTile.equals(aTile)) {
 					aTileIsSelected = true;
 					g2d.setStroke(dashed); //doesn't work. I want to show the tile differently when selected
-					
-					
 				}
 
 				repaint();
@@ -270,6 +267,11 @@ public class TilePanel extends JPanel{
 						g2d.fill(rect);
 					}										
 				}
+				
+				if (selectedConnection != null && selectedConnection.equals(aConnection)){
+					aConnectionIsSelected = true;
+				}
+				
 				repaint();
 			}
 			
