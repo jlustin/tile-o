@@ -92,16 +92,27 @@ public class TileODesignPage extends JFrame {
 		});
 		
 		JButton btnRemoveConnections = new JButton("Remove Connections");
+		
+		JButton btnAddDeck = new JButton("Add Deck");
+		btnAddDeck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DeckPopOut deck = new DeckPopOut();
+				deck.setVisible(true);
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(284, Short.MAX_VALUE)
+					.addContainerGap(52, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnOpenNewWindow, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnRemoveTiles, Alignment.TRAILING)
 						.addComponent(btnAddConnections, Alignment.TRAILING)
-						.addComponent(btnRemoveConnections, Alignment.TRAILING))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(btnRemoveConnections)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnAddDeck)))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
@@ -114,8 +125,10 @@ public class TileODesignPage extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnAddConnections)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnRemoveConnections)
-					.addContainerGap(128, Short.MAX_VALUE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnRemoveConnections)
+						.addComponent(btnAddDeck))
+					.addContainerGap(599, Short.MAX_VALUE))
 		);
 		//contentPane.setLayout(gl_contentPane);
 		
@@ -136,11 +149,10 @@ public class TileODesignPage extends JFrame {
 	    splitPane.setLeftComponent(grid);
 	    splitPane.setRightComponent(contentPane);
 
-	    this.add(splitPane);
+	    getContentPane().add(splitPane);
 	}
 		
 	private void refreshData(){
 		
 	}
-
 }
