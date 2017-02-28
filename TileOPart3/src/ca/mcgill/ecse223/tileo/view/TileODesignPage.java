@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.DesignModeController;
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -88,7 +89,14 @@ public class TileODesignPage extends JFrame {
 		JButton btnRemoveTiles = new JButton("Remove Tile");
 		btnRemoveTiles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if (grid.aTileIsSelected){
+					DesignModeController dmc = new DesignModeController();
+					try {
+						dmc.removeTileFromGame(grid.selectedTile);
+					} catch (InvalidInputException e1) {
+						throw new RuntimeException(e1.getMessage());
+					}
+				}
 				
 			}
 		});

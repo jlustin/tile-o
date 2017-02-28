@@ -2,6 +2,7 @@ package ca.mcgill.ecse223.tileo.view;
 
 import javax.swing.JPanel;
 
+
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.model.ActionTile;
 import ca.mcgill.ecse223.tileo.model.Connection;
@@ -23,7 +24,10 @@ import java.awt.geom.Rectangle2D;
 
 
 public class TilePanel extends JPanel{
-
+	
+	public boolean aTileIsSelected = false;
+	public Tile selectedTile;
+	
 	//UI elements
 	private List<Rectangle2D> rectangles = new ArrayList<Rectangle2D>();
 	private static final int MINAXISSIZE = 10;
@@ -32,7 +36,7 @@ public class TilePanel extends JPanel{
 	private Game myGame;
 	private HashMap<Rectangle2D, Tile> tiles;
 	private HashMap<Rectangle2D, Connection> connections;
-	private Tile selectedTile;
+	//private Tile selectedTile;
 	private Connection selectedConnection;
 	
 	
@@ -175,6 +179,10 @@ public class TilePanel extends JPanel{
 				g2d.draw(rect);
 				//if instead you want a full colored tile, uncomment the below and comment the above
 				g2d.fill(rect);
+				
+				if (selectedTile != null && selectedTile.equals(aTile)) {
+					aTileIsSelected = true;
+				}
 				repaint();
 			}
 			
