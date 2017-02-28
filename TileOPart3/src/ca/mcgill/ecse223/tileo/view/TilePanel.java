@@ -2,7 +2,6 @@ package ca.mcgill.ecse223.tileo.view;
 
 import javax.swing.JPanel;
 
-
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.model.ActionTile;
 import ca.mcgill.ecse223.tileo.model.Connection;
@@ -24,10 +23,7 @@ import java.awt.geom.Rectangle2D;
 
 
 public class TilePanel extends JPanel{
-	
-	public boolean aTileIsSelected = false;
-	public Tile selectedTile;
-	
+
 	//UI elements
 	private List<Rectangle2D> rectangles = new ArrayList<Rectangle2D>();
 	private static final int MINAXISSIZE = 10;
@@ -36,7 +32,7 @@ public class TilePanel extends JPanel{
 	private Game myGame;
 	private HashMap<Rectangle2D, Tile> tiles;
 	private HashMap<Rectangle2D, Connection> connections;
-	//private Tile selectedTile;
+	private Tile selectedTile;
 	private Connection selectedConnection;
 	
 	
@@ -46,18 +42,27 @@ public class TilePanel extends JPanel{
 		super();
 		//you guys can add tiles here to try the layout
 		//add the tiles in the same format and only here
-//		new NormalTile(1, 1, game);
-//		new NormalTile(1, 2, game);
-//		new NormalTile(13, 9, game);
-//		new NormalTile(10, 10, game);
-//		new NormalTile(8, 19, game);
-//		new NormalTile(3, 5, game);
-//		new NormalTile(17, 13, game);
-//		new NormalTile(11, 18, game);
-//		new NormalTile(2,1, game);
-//		new ActionTile(3,1, game, 2);
-		
+		Tile t1 = new NormalTile(1, 1, game);
+		Tile t2 = new NormalTile(1, 2, game);
+		new NormalTile(13, 9, game);
+		Tile t4 = new NormalTile(10, 10, game);
+		Tile t5 = new NormalTile(10, 11, game);
+		new NormalTile(8, 9, game);
+		new NormalTile(3, 5, game);
+		new NormalTile(11, 13, game);
+		new NormalTile(11, 10, game);
+		Tile t3 = new NormalTile(2,1, game);
+		new ActionTile(3,1, game, 2);
+		Connection connect = new Connection(game);
+		t1.addConnection(connect);
+		t2.addConnection(connect);
+		Connection c2 = new Connection(game);
+		c2.addTile(t1);
+		c2.addTile(t3);
 		init(game);
+		Connection c3 = new Connection(game);
+		c3.addTile(t4);
+		c3.addTile(t5);
 		
 	}
 	
@@ -72,13 +77,21 @@ public class TilePanel extends JPanel{
 			public void mousePressed(MouseEvent e) {
 				int x = e.getX();
 				int y = e.getY();
-				System.out.println("The mouse has been pressed " + "x: " + x + " y:" + y);
+				System.out.println("The mouse has been pressed " + "x: " + x + " y:" + y);								
 				for (Rectangle2D rectangle : rectangles) {
 					if (rectangle.contains(x, y)) {
-						selectedTile = tiles.get(rectangle);
-						System.out.println("A legit tile has been selected. " + "x: " + selectedTile.getX() + " y:" + selectedTile.getY());
-						System.out.println("number of players");
-						break;
+						if(tiles.containsKey(rectangle)){
+							selectedTile = tiles.get(rectangle);
+							System.out.println("A legit tile has been selected. " + "x: " + selectedTile.getX() + " y:" + selectedTile.getY());
+							//System.out.println("number of players");
+							break;
+						}
+						else if(connections.containsKey(rectangle)){
+							selectedConnection = connections.get(rectangle);
+							System.out.println("a legit connection has been selected");
+							break;
+						}
+//						break;
 					
 					}
 				}
@@ -142,6 +155,10 @@ public class TilePanel extends JPanel{
 			float squareSize = (float) ((700/axisSize) * (2.9/5.0));
 			float SPACING = (float) ((700/axisSize) * (1.0/5.0));
 			
+			float gridspace = (float)(squareSize + 2*SPACING);
+			float locationX = SPACING;
+			float locationY = SPACING;
+			
 			//the things commented below were for me to check my math
 //			float size = (float) (axisSize*squareSize + SPACING*(axisSize*2));
 //			System.out.println(size);
@@ -151,8 +168,8 @@ public class TilePanel extends JPanel{
 			for (Tile aTile: myGame.getTiles()) {
 				int x = aTile.getX()-1;
 				int y = aTile.getY()-1;
-				float locationX = (float) (squareSize*x + SPACING*(2*x + 1));
-				float locationY = (float) (squareSize*y + SPACING*(2*y + 1));
+				locationX = (float) (SPACING + gridspace*x);
+				locationY = (float) (SPACING + gridspace*y);
 
 				//the below was used for testing
 				//System.out.println(aTile.toString());
@@ -168,21 +185,17 @@ public class TilePanel extends JPanel{
 					g2d.setColor(Color.BLUE);
 				}
 				
-				if(aTile instanceof WinTile){
+				else if(aTile instanceof WinTile){
 					g2d.setColor(Color.BLACK);
 				}
 				
-				if(aTile instanceof ActionTile){
+				else if(aTile instanceof ActionTile){
 					g2d.setColor(Color.RED);
 				}
 				
 				g2d.draw(rect);
 				//if instead you want a full colored tile, uncomment the below and comment the above
 				g2d.fill(rect);
-				
-				if (selectedTile != null && selectedTile.equals(aTile)) {
-					aTileIsSelected = true;
-				}
 				repaint();
 			}
 			
@@ -193,9 +206,79 @@ public class TilePanel extends JPanel{
 //				}
 //			}
 			
+			
+			for (Connection aConnection: myGame.getConnections()){
+				List<Tile> tempTiles = aConnection.getTiles();
+				if(tempTiles.size() == 2){
+					Tile tile1 = tempTiles.get(0);
+					Tile tile2 = tempTiles.get(1);
+					//horizontal
+					if (isH(tile1, tile2)) {
+						//use hRect
+						
+						locationX = (float) (SPACING + squareSize + smallestXIndex(tile1, tile2)*gridspace);
+						locationY = (float) (((700/axisSize)/2 - SPACING/2) + smallestYIndex(tile1, tile2)*gridspace);
+						Rectangle2D rect = new Rectangle2D.Float(
+								locationX, 
+								locationY, 
+								2*SPACING, 
+								SPACING);
+						rectangles.add(rect);
+						connections.put(rect, aConnection);
+						g2d.setColor(Color.BLACK);
+						g2d.fill(rect);
+					}					
+					else if(isV(tile1, tile2)) {
+						locationX = (float) (((700/axisSize)/2 - SPACING/2) + smallestXIndex(tile1, tile2)*gridspace);
+						locationY = (float) (SPACING + squareSize + smallestYIndex(tile1, tile2)*gridspace);
+
+						Rectangle2D rect = new Rectangle2D.Float(
+								locationX, 
+								locationY, 
+								SPACING, 
+								2*SPACING);
+						rectangles.add(rect);
+						connections.put(rect, aConnection);
+						g2d.setColor(Color.BLACK);
+						g2d.fill(rect);
+					}										
+				}
+				repaint();
+			}
+			
 		}
 	}
 	
+	public int smallestXIndex(Tile tile1, Tile tile2){
+		int smallest = tile1.getX();
+		if (tile2.getX()<smallest){
+			smallest = tile2.getX();
+		}
+		return smallest-1;
+	}
+	
+	public int smallestYIndex(Tile tile1, Tile tile2){
+		int smallest = tile1.getY();
+		if (tile2.getY()<smallest) {
+			smallest = tile2.getY();
+		}
+		return smallest-1;
+	}
+	
+	
+	public boolean isH(Tile tile1, Tile tile2){
+		if (tile1.getY() == tile2.getY()){
+			return true;
+		}
+		
+		return false;
+	}
+	public boolean isV(Tile tile1, Tile tile2){
+		if (tile1.getX() == tile2.getX()){
+			return true;
+		}
+		return false;
+	}
 	
 	@Override
 	public void paintComponent(Graphics g) {
