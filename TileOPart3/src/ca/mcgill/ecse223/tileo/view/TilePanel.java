@@ -50,6 +50,7 @@ public class TilePanel extends JPanel{
 	// data element;
 	private Game myGame;
 	private HashMap<Rectangle2D, Tile> tiles;
+	private HashMap<Tile, Rectangle2D> tRectangles;
 	private HashMap<Rectangle2D, Connection> connections;
 
 	
@@ -87,6 +88,7 @@ public class TilePanel extends JPanel{
 		this.myGame = game;
 		tiles = new HashMap<Rectangle2D, Tile>();
 		connections = new HashMap<Rectangle2D, Connection>();
+		tRectangles = new HashMap<Tile, Rectangle2D>();
 		
 		addMouseListener(new MouseAdapter() {
 			@Override
@@ -197,6 +199,7 @@ public class TilePanel extends JPanel{
 						squareSize);
 				rectangles.add(rect);
 				tiles.put(rect, aTile);
+				tRectangles.put(aTile, rect);
 				
 				if(aTile instanceof NormalTile){
 					g2d.setColor(Color.BLUE);
@@ -217,7 +220,17 @@ public class TilePanel extends JPanel{
 				
 				if (selectedTile != null && selectedTile.equals(aTile)) {
 					aTileIsSelected = true;
+<<<<<<< Updated upstream
 					g2d.setStroke(dashed); //doesn't work. I want to show the tile differently when selected
+=======
+					Rectangle2D rectangle = tRectangles.get(aTile);
+					
+					g2d.setColor(Color.PINK); //doesn't work. I want to show the tile differently when selected
+				
+					g2d.fill(rectangle);
+					
+					
+>>>>>>> Stashed changes
 				}
 
 				repaint();
