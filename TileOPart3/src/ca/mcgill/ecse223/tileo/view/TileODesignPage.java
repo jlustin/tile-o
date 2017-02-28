@@ -57,11 +57,11 @@ public class TileODesignPage extends JFrame {
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//this.setBounds(100, 100, 450, 300);
-		this.setSize(907, 700);
+		this.setSize(1200, 720);
 		this.setResizable(false);
 		
 		contentPane = new JPanel();
-		contentPane.setSize(500, 700);
+		contentPane.setSize(490, 720);
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setVisible(true);
 		//setContentPane(contentPane);
@@ -137,16 +137,16 @@ public class TileODesignPage extends JFrame {
 		
 		TilePanel grid = new TilePanel(TileOApplication.getTileO().getCurrentGame());
 		grid.setVisible(true);
-		grid.setSize(700, 700);
+		grid.setSize(700, 720);
 		
 		
 		
 		
 		
 		JSplitPane splitPane = new JSplitPane();
-		splitPane.setSize(1200, 700);
+		splitPane.setSize(1200, 720);
 	    splitPane.setDividerSize(0);
-	    splitPane.setDividerLocation(700);
+	    splitPane.setDividerLocation(710);
 	    splitPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
 	    splitPane.setLeftComponent(grid);
 	    splitPane.setRightComponent(contentPane);

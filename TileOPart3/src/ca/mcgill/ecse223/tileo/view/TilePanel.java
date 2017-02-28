@@ -23,14 +23,10 @@ public class TilePanel extends JPanel{
 
 	//UI elements
 	private List<Rectangle2D> rectangles = new ArrayList<Rectangle2D>();
-	private static final int MINWIDTH = 9;
-	private static final int MINHEIGHT = 9;
-	private static float tileW = 50;
-	private static float tileH = 50;
-	
+	private static final int MINAXISSIZE = 10;
 	
 	// data element;
-	private Game game;
+	private Game myGame;
 	private HashMap<Rectangle2D, Tile> tiles;
 	private Tile selectedTile;
 	
@@ -38,75 +34,24 @@ public class TilePanel extends JPanel{
 	
 	
 	public TilePanel(Game game) {
-		init(game);
-		
-		new NormalTile(1, 2, game);
+		super();
+		//you guys can add tiles here to try the layout
+		//add the tiles in the same format and only here
 		new NormalTile(1, 1, game);
-		new NormalTile(5, 5, game);
-		new NormalTile(8, 10, game);
-		new NormalTile(9, 15, game);
-		
-		List<Tile> listTiles = game.getTiles();
-		
-		int i = getXAxis(game);
-		int j = getYAxis(game);
+		new NormalTile(1, 2, game);
+		new NormalTile(13, 9, game);
+		new NormalTile(10, 10, game);
+		new NormalTile(8, 19, game);
+		new NormalTile(3, 5, game);
+		new NormalTile(17, 13, game);
+		new NormalTile(11, 18, game);
 
-		if (i<MINWIDTH) {
-			i=MINWIDTH;
-			
-		}
-		
-		if(j<MINHEIGHT) {
-			j=MINHEIGHT;
-		}
-		
-		if(i>j) {
-			j=i;
-		}
-		if(j>i) {
-			i=j;
-		}
-		
-		
-		JPanel[][] panelHolder = new JPanel[i][j];
-		GridLayout grid = new GridLayout(i, j);
-		//grid.setHgap(i/6);
-		//grid.setVgap(j/6);
-		setLayout(grid);
-		
-		for(int m = 0; m < i; m++) {
-			for(int n = 0; n < j; n++) {											
-				panelHolder[m][n] = new JPanel();
-				add(panelHolder[m][n]);				
-				panelHolder[m][n].setBorder(BorderFactory.createLineBorder(Color.black));
-				//panelHolder[m][n].setOpaque(true);
-								 
-			}			
-		}
-		
-		/*
-		tileH = panelHolder[1][1].getHeight();
-		tileW = panelHolder[1][1].getWidth();
-		*/
-		
-		
-		for (Tile aTile: listTiles) {
-			MyTile paint = new MyTile();
-			
-			int x = aTile.getX()-1;
-			int y = aTile.getY()-1;
-			
-			//RectDraw newrect = new RectDraw();
-			//panelHolder[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
-			//panelHolder[x][y].
-			panelHolder[x][y].add(paint);
-		}			
-				
+		init(game);
 	}
 	
 	
 	private void init(Game game) {
-		this.game = game;
+		this.myGame = game;
 		tiles = new HashMap<Rectangle2D, Tile>();
 		addMouseListener(new MouseAdapter() {
 			@Override
@@ -126,7 +71,12 @@ public class TilePanel extends JPanel{
 		});		
 	}
 	
+	public void setGame(Game game) {
+		init(game);
+		repaint();
+	}
 	
+	//below are 3 helper methods, DONT TOUCH :)))
 	public int getXAxis(Game aGame) {
 		List<Tile> listTiles = aGame.getTiles();
 		int xSize=0;
@@ -135,8 +85,7 @@ public class TilePanel extends JPanel{
 			if (tempTile.getX()>xSize){
 				xSize = tempTile.getX();
 			}
-		}
-		
+		}		
 		return xSize;		
 	}
 	
@@ -153,33 +102,69 @@ public class TilePanel extends JPanel{
 		return ySize;
 	}
 	
-	public void doDrawing(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g.create();
-		if (game != null) {
-			for (Tile aTile: game.getTiles()) {
-				
-				Rectangle2D rect = new Rectangle2D.Float(0, 0, 100, 100);
-				
+	public int equalize(int xAxisSize, int yAxisSize) {
+		int biggest = MINAXISSIZE;
+		
+		if (xAxisSize>MINAXISSIZE || yAxisSize>MINAXISSIZE) {
+			if(xAxisSize>yAxisSize) {
+				biggest = xAxisSize;
+			}
+			else {
+				biggest = yAxisSize;
+			}
+		}		
+		return biggest;
+	}
+	
+	//do not touch
+	public void doDrawing(Graphics g) {		
+		if (myGame != null) {
+			Graphics2D g2d = (Graphics2D) g.create();
+			
+			//base size
+			int axisSize = equalize(getXAxis(myGame), getYAxis(myGame));;
+			float squareSize = (float) ((700/axisSize) * (2.9/5.0));
+			float SPACING = (float) ((700/axisSize) * (1.0/5.0));
+			
+			//the things commented below were for me to check my math
+//			float size = (float) (axisSize*squareSize + SPACING*(axisSize*2));
+//			System.out.println(size);
+//			System.out.println(axisSize);
+//			System.out.println(squareSize);
+//			System.out.println(SPACING);
+			for (Tile aTile: myGame.getTiles()) {
+				int x = aTile.getX()-1;
+				int y = aTile.getY()-1;
+				float locationX = (float) (squareSize*x + SPACING*(2*x + 1));
+				float locationY = (float) (squareSize*y + SPACING*(2*y + 1));
+
+				//the below was used for testing
+				//System.out.println(aTile.toString());
+				Rectangle2D rect = new Rectangle2D.Float(
+						locationX, 
+						locationY, 
+						squareSize, 
+						squareSize);
 				rectangles.add(rect);
 				tiles.put(rect, aTile);
 				
-				g2d.setColor(Color.BLUE);
-				g2d.fill(rect);
+				g2d.setColor(Color.BLACK);
+				g2d.draw(rect);
+				//if instead you want a full colored tile, uncomment the below and comment the above
+				//g2d.fill(rect);
 			}
 			
 		}
 	}
 	
 	
-	
-	public class MyTile extends JPanel {
-		public void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			doDrawing(g);
-		}
-		
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		doDrawing(g);
 	}
 	
+
 	
 	
 
