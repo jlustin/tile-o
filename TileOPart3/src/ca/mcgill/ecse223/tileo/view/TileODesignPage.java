@@ -12,6 +12,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
+import ca.mcgill.ecse223.tileo.controller.DesignModeController;
 
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -102,20 +103,35 @@ public class TileODesignPage extends JFrame {
 				deck.setVisible(true);
 			}
 		});
+		
+		JButton btnNewButton = new JButton("Save");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SaveDesignPopOut sdpo = new SaveDesignPopOut();
+				sdpo.setVisible(true);
+				DesignModeController dmc = new DesignModeController();
+				dmc.saveDesign();
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(52, Short.MAX_VALUE)
+					.addContainerGap(40, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnOpenNewWindow, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnRemoveTiles, Alignment.TRAILING)
-						.addComponent(btnAddConnections, Alignment.TRAILING)
 						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(btnRemoveConnections)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnAddDeck)))
-					.addContainerGap())
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnOpenNewWindow, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnRemoveTiles)
+								.addComponent(btnAddConnections)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(btnRemoveConnections)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnAddDeck)))
+							.addContainerGap())
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(btnNewButton)
+							.addGap(174))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -130,7 +146,9 @@ public class TileODesignPage extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnRemoveConnections)
 						.addComponent(btnAddDeck))
-					.addContainerGap(599, Short.MAX_VALUE))
+					.addGap(83)
+					.addComponent(btnNewButton)
+					.addContainerGap(514, Short.MAX_VALUE))
 		);
 		//contentPane.setLayout(gl_contentPane);
 		
