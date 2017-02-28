@@ -44,6 +44,7 @@ public class TilePanel extends JPanel{
 		new NormalTile(1, 1, game);
 		new NormalTile(5, 5, game);
 		new NormalTile(8, 10, game);
+		new NormalTile(9, 15, game);
 		
 		List<Tile> listTiles = game.getTiles();
 		
@@ -112,9 +113,11 @@ public class TilePanel extends JPanel{
 			public void mousePressed(MouseEvent e) {
 				int x = e.getX();
 				int y = e.getY();
+				System.out.println("The mouse has been pressed " + "x: " + x + " y:" + y);
 				for (Rectangle2D rectangle : rectangles) {
 					if (rectangle.contains(x, y)) {
 						selectedTile = tiles.get(rectangle);
+						System.out.println("A legit tile has been selected. " + "x: " + x + " y:" + y);
 						break;
 					}
 				}
@@ -155,7 +158,7 @@ public class TilePanel extends JPanel{
 		if (game != null) {
 			for (Tile aTile: game.getTiles()) {
 				
-				Rectangle2D rect = new Rectangle2D.Float(0, 0, 50, 50);
+				Rectangle2D rect = new Rectangle2D.Float(0, 0, 100, 100);
 				
 				rectangles.add(rect);
 				tiles.put(rect, aTile);

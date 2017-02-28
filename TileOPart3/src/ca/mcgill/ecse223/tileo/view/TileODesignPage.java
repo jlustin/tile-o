@@ -57,7 +57,7 @@ public class TileODesignPage extends JFrame {
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//this.setBounds(100, 100, 450, 300);
-		this.setSize(1200, 700);
+		this.setSize(907, 700);
 		this.setResizable(false);
 		
 		contentPane = new JPanel();
