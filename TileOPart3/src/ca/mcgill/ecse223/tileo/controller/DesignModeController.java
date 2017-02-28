@@ -34,24 +34,44 @@ public class DesignModeController {
 	public void addDesignTile(int x, int y, String TileType) throws InvalidInputException {
 		
 		Game game = TileOApplication.getTileO().getCurrentGame();
+		String error = "";
 		//DesignModeController dmc = new DesignModeController();
-		
-		if(TileType == "NormalTile")
-		{
-			NormalTile normalTile = new NormalTile(x,y,game);
-            game.addTile(normalTile);
-            
+		if(x>50||y>50) {
+			error = "The cordinate need to be less than 50! ";
 		}
-		
-		if(TileType == "ActionTile")
-		{
-			createActionTile(x, y, game);
+		if(x<0) {
+			error = error + "The cordinate x need be bigger than 0! ";
 		}
-		
-		if(TileType == "WinTile")
-		{	
-			createWinTile(x, y, game);
+		if(y<0) {
+			error = error +  "The cordinate y need be bigger than 0! "; 
+		}
+		if(game.hasWinTile()) {
+			error = error + "The game already has a win tile! ";
+		}
+		if (error.length() > 0) {
+			throw new InvalidInputException(error.trim());
+		}
+		try {
+			if(TileType == "NormalTile")
+			{
+				NormalTile normalTile = new NormalTile(x,y,game);
+	            game.addTile(normalTile);
+	            
+			}
 			
+			if(TileType == "ActionTile")
+			{
+				createActionTile(x, y, game);
+			}
+			
+			if(TileType == "WinTile")
+			{	
+				createWinTile(x, y, game);
+				
+			}
+		}
+		catch (RuntimeException e) {
+			throw new InvalidInputException(error);
 		}
 	}
 	

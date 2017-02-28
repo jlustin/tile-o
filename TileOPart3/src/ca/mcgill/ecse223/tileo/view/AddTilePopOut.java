@@ -2,6 +2,7 @@ package ca.mcgill.ecse223.tileo.view;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -31,13 +32,10 @@ public class AddTilePopOut extends JFrame {
 	private JPanel contentPane;
 	private JTextField xComponent;
 	private JTextField yComponent;
+	private JLabel errorMessage;
+	private String error = null;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	
-	String error;
-	ButtonModel chosenTile;
-	String tileType;
-	int chosenXComp;
-	int chosenYComp;
 
 	/**
 	 * Launch the application.
@@ -76,33 +74,8 @@ public class AddTilePopOut extends JFrame {
 		
 		JButton btnNewButton = new JButton("Add Tile");
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				error = "";
-				chosenTile = buttonGroup.getSelection();
-				tileType = chosenTile.getActionCommand();
-				chosenXComp = Integer.parseInt(xComponent.getText());
-				chosenYComp = Integer.parseInt(yComponent.getText());
-				
-				
-				DesignModeController dmc = new DesignModeController();
-				
-				try{
-					System.out.println(tileType);
-					dmc.addDesignTile(chosenXComp, chosenYComp, tileType);
-					close();
-					
-				}
-				
-				catch (InvalidInputException er) {
-					error = er.getMessage();
-				}
-				
-				
-				
-				
-				
+			public void actionPerformed(ActionEvent evt) {
+				addTileActionPerformed(evt);
 			}
 		});
 		
@@ -130,21 +103,24 @@ public class AddTilePopOut extends JFrame {
 		yComponent.setColumns(10);
 		
 		JLabel lblAddANew = new JLabel("Add a new tile to the board game!");
+		
+		errorMessage= new JLabel();
+		errorMessage.setForeground(Color.RED);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(126)
 					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(132, Short.MAX_VALUE))
+					.addContainerGap(136, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(xComponent, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(yComponent, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(114, Short.MAX_VALUE))
+					.addContainerGap(240, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(84, Short.MAX_VALUE)
+					.addContainerGap(66, Short.MAX_VALUE)
 					.addComponent(lblAddANew)
 					.addGap(110))
 				.addGroup(gl_contentPane.createSequentialGroup()
@@ -159,16 +135,22 @@ public class AddTilePopOut extends JFrame {
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(39)
 							.addComponent(rdbtnActionTile)))
-					.addPreferredGap(ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
 					.addComponent(rdbtnWinTile)
 					.addGap(21))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(181)
+					.addComponent(errorMessage)
+					.addContainerGap(219, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(27)
 					.addComponent(lblAddANew)
-					.addGap(36)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(errorMessage)
+					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 							.addComponent(rdbtnWinTile)
@@ -182,22 +164,57 @@ public class AddTilePopOut extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(xComponent, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(yComponent, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
 					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
 	
-	private void addTileActionPerformed(){
+	private void addTileActionPerformed(java.awt.event.ActionEvent evt){
 		
-			error = null;
-			
+		
+		ButtonModel chosenTile;
+		int chosenXComp = 0;
+		int chosenYComp=0;
+
+		
+		error = "";
+		chosenTile = buttonGroup.getSelection();
+
+
+		if(chosenTile==null) {
+			error = "Please Selecte Tile Type. ";
+		}
+		
+		try {
+			chosenXComp = Integer.parseInt(xComponent.getText());
+		}
+		catch(NumberFormatException e){
+			error = error+ "The corrdinate x need to be a numerical value! ";
+		}
+		try {
+			chosenYComp = Integer.parseInt(yComponent.getText());
+		}
+		catch(NumberFormatException e){
+			error = error + "The coordinate y need to be a numerical value! ";
+		}
+		error.trim();
+		if (error.length()==0) {
+			try{
 			DesignModeController dmc = new DesignModeController();
-		
-		
-		
-		
-		
+			dmc.addDesignTile(chosenXComp, chosenYComp,chosenTile.getActionCommand());
+			} catch (InvalidInputException er) {
+			error = er.getMessage();
+			}
+			
+		}
+		refreshData();		
+	}
+	private void refreshData() {
+		errorMessage.setText("<html>"+error+"<html>");
+		if(error == null || error.length()==0){
+			close();
+		}
 	}
 }
