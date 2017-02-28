@@ -2,8 +2,12 @@ package ca.mcgill.ecse223.tileo.view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
@@ -12,7 +16,9 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
+import ca.mcgill.ecse223.tileo.model.*;
 
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -28,7 +34,9 @@ public class TileOPlayPage extends JFrame {
 	
 	
 	private JPanel contentPane;
-
+	private java.util.List<Tile> possibleMoves = new ArrayList<Tile>();
+	//private HashMap<Rectangle2D,Tile> possibleTile;
+	String error;
 	/**
 	 * Launch the application.
 	 */
@@ -88,7 +96,7 @@ public class TileOPlayPage extends JFrame {
 	    splitPane.setLeftComponent(grid);
 	    splitPane.setRightComponent(contentPane);
 	    
-	    JLabel lblNewLabel = new JLabel("JLabel for Player x's Turn");
+	    JLabel playersTurn = new JLabel("JLabel for Player x's Turn");
 	    
 	    JLabel lblJlabelForErrors = new JLabel("JLabel for Errors");
 	    
@@ -116,7 +124,7 @@ public class TileOPlayPage extends JFrame {
 	    			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 	    				.addGroup(gl_contentPane.createSequentialGroup()
 	    					.addGap(181)
-	    					.addComponent(lblNewLabel))
+	    					.addComponent(playersTurn))
 	    				.addGroup(gl_contentPane.createSequentialGroup()
 	    					.addGap(202)
 	    					.addComponent(lblJlabelForErrors)))
@@ -138,7 +146,7 @@ public class TileOPlayPage extends JFrame {
 	    	gl_contentPane.createParallelGroup(Alignment.LEADING)
 	    		.addGroup(gl_contentPane.createSequentialGroup()
 	    			.addGap(23)
-	    			.addComponent(lblNewLabel)
+	    			.addComponent(playersTurn)
 	    			.addGap(18)
 	    			.addComponent(lblJlabelForErrors)
 	    			.addGap(18)
@@ -163,6 +171,14 @@ public class TileOPlayPage extends JFrame {
 		
 	}
 	
-
+    public void rollDiePerformed(java.awt.event.ActionEvent evt) {
+    	PlayModeController pmc;
+    	error = "";
+    	
+    		pmc = new PlayModeController(); 
+			grid.possibleMoves =pmc.rollDie(); 
+    		
+    	
+    }
 
 }
