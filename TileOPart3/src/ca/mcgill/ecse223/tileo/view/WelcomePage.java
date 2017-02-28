@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.DesignModeController;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 
@@ -37,18 +38,18 @@ public class WelcomePage extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					WelcomePage frame = new WelcomePage();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					WelcomePage frame = new WelcomePage();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -83,17 +84,15 @@ public class WelcomePage extends JFrame {
 				chosenNumber = buttonGroup.getSelection();
 				numberOfPlayers = chosenNumber.getActionCommand();
 				chosenNumberOfPlayers =  Integer.parseInt(numberOfPlayers);
-
 				
-//				numberOfPlayers = buttonGroup.toString();
-//				chosenNumberOfPlayers = Integer.parseInt(numberOfPlayers);
-				
-			
 				DesignModeController dmc = new DesignModeController ();
 				try 
 				{
+					System.out.print("" + TileOApplication.getTileO().getCurrentGame()); //TODO: DELETE
 					dmc.createGame(chosenNumberOfPlayers);
 					System.out.print(" " + chosenNumberOfPlayers);
+					TileODesignPage.refreshData();
+					System.out.print("" + TileOApplication.getTileO().getCurrentGame()); //TODO: DELETE
 					close ();
 				}
 				catch (InvalidInputException e){

@@ -73,7 +73,9 @@ public class TilePanel extends JPanel{
 					if (rectangle.contains(x, y)) {
 						selectedTile = tiles.get(rectangle);
 						System.out.println("A legit tile has been selected. " + "x: " + selectedTile.getX() + " y:" + selectedTile.getY());
+						System.out.println("number of players");
 						break;
+					
 					}
 				}
 				repaint();

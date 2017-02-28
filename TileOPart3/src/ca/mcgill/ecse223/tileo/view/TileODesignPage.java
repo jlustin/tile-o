@@ -21,6 +21,11 @@ import javax.swing.JSplitPane;
 
 public class TileODesignPage extends JFrame {
 
+	private static TilePanel grid = new TilePanel(TileOApplication.getTileO().getCurrentGame());
+	
+	
+	
+	
 	private JPanel contentPane;
 
 	/**
@@ -113,23 +118,34 @@ public class TileODesignPage extends JFrame {
 				dmc.saveDesign();
 			}
 		});
+		
+		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				refreshData();
+				
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(40, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addContainerGap(28, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 								.addComponent(btnOpenNewWindow, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnRemoveTiles)
 								.addComponent(btnAddConnections)
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(btnRemoveConnections)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+										.addComponent(btnRefresh)
+										.addComponent(btnRemoveConnections))
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(btnAddDeck)))
 							.addContainerGap())
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(btnNewButton)
 							.addGap(174))))
 		);
@@ -148,15 +164,17 @@ public class TileODesignPage extends JFrame {
 						.addComponent(btnAddDeck))
 					.addGap(83)
 					.addComponent(btnNewButton)
-					.addContainerGap(514, Short.MAX_VALUE))
+					.addGap(249)
+					.addComponent(btnRefresh)
+					.addContainerGap(361, Short.MAX_VALUE))
 		);
 		//contentPane.setLayout(gl_contentPane);
 		
-		
-		TilePanel grid = new TilePanel(TileOApplication.getTileO().getCurrentGame());
-		grid.setVisible(true);
-		grid.setSize(700, 720);
-		
+		//----------------------------------------------------------------------------------------------------
+//		TilePanel grid = new TilePanel(TileOApplication.getTileO().getCurrentGame());
+//		grid.setVisible(true);
+//		grid.setSize(700, 720);
+//		
 		
 		
 		
@@ -170,9 +188,17 @@ public class TileODesignPage extends JFrame {
 	    splitPane.setRightComponent(contentPane);
 
 	    getContentPane().add(splitPane);
+	    
+	    
 	}
 		
-	private void refreshData(){
+	public static void refreshData(){
+		grid.setGame(TileOApplication.getTileO().getCurrentGame());
+		grid.setVisible(true);
+		grid.setSize(700, 720);
 		
 	}
+	
+
+
 }
