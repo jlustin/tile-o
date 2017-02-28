@@ -61,6 +61,8 @@ public class TileOPlayPage extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 
+	
+	
 	private void refreshData(){
 		
 	}
