@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JRadioButton;
 import javax.swing.JSplitPane;
+import javax.swing.JComboBox;
 
 public class TileODesignPage extends JFrame {
 
@@ -135,11 +136,17 @@ public class TileODesignPage extends JFrame {
 				
 			}
 		});
+		
+		JButton btnSetStartingTile = new JButton("Set Starting Tile Of Players");
+		
+		JButton btnStartGame = new JButton("Start Game");
+		
+		JComboBox comboBox = new JComboBox();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(28, Short.MAX_VALUE)
+					.addContainerGap(20, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -156,6 +163,13 @@ public class TileODesignPage extends JFrame {
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(btnNewButton)
 							.addGap(174))))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(btnSetStartingTile)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnStartGame)
+					.addContainerGap(146, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -174,7 +188,12 @@ public class TileODesignPage extends JFrame {
 					.addComponent(btnNewButton)
 					.addGap(249)
 					.addComponent(btnRefresh)
-					.addContainerGap(361, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnSetStartingTile)
+						.addComponent(btnStartGame)
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(585, Short.MAX_VALUE))
 		);
 		//contentPane.setLayout(gl_contentPane);
 		
@@ -206,7 +225,4 @@ public class TileODesignPage extends JFrame {
 		grid.setSize(700, 720);
 		
 	}
-	
-
-
 }
