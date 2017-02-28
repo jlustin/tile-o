@@ -14,6 +14,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.ButtonGroup;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class WelcomePage extends JFrame {
 
@@ -40,7 +42,8 @@ public class WelcomePage extends JFrame {
 	 * Create the frame.
 	 */
 	public WelcomePage() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setAlwaysOnTop(true);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 605, 462);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -66,6 +69,11 @@ public class WelcomePage extends JFrame {
 		JLabel lblContinueEditing = new JLabel("");
 		
 		JButton btnNewButton = new JButton("Continue designing last design?");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				close();
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -122,5 +130,9 @@ public class WelcomePage extends JFrame {
 					.addContainerGap(169, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
+	}
+	public void close() { 
+		this.setVisible(false);
+	    this.dispose();
 	}
 }

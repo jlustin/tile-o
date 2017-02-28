@@ -16,6 +16,7 @@ public class TileOApplication {
 	 */
 	public static void main(String[] args) {
 		// start UI
+		// TODO startup the UI corresponding to the right mode?
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TileODesignPage().setVisible(true);
