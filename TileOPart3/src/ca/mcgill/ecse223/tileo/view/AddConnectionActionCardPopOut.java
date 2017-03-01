@@ -55,7 +55,7 @@ public class AddConnectionActionCardPopOut extends JDialog {
 	public AddConnectionActionCardPopOut() {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setAlwaysOnTop(true);
-		setTitle("Connect Two Tiles");
+		setTitle("Add Connection Action Card");
 		setBounds(100, 100, 500, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -71,12 +71,12 @@ public class AddConnectionActionCardPopOut extends JDialog {
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addGap(176)
-							.addComponent(lblChooseYoTiles))
-						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addGap(30)
-							.addComponent(errorMessage)))
-					.addContainerGap(160, Short.MAX_VALUE))
+							.addComponent(errorMessage))
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addGap(84)
+							.addComponent(lblChooseYoTiles)))
+					.addContainerGap(92, Short.MAX_VALUE))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -85,7 +85,7 @@ public class AddConnectionActionCardPopOut extends JDialog {
 					.addComponent(lblChooseYoTiles)
 					.addGap(55)
 					.addComponent(errorMessage)
-					.addContainerGap(110, Short.MAX_VALUE))
+					.addContainerGap(144, Short.MAX_VALUE))
 		);
 		contentPanel.setLayout(gl_contentPanel);
 		{
@@ -147,8 +147,6 @@ public class AddConnectionActionCardPopOut extends JDialog {
 								}
 						   }
 						   refreshData();
-							
-						
 					}
 				});
 				okButton.setActionCommand("Connect");
