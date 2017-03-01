@@ -278,7 +278,7 @@ public abstract class Tile implements Serializable
 		  possibleMoveTiles.add(this);
 		  return possibleMoveTiles;
 	  }
-	  if(this.getConnections().size()==1) {
+	  if(this.getConnections().size()==1&&this.getConnections().contains(previousTile)) {
 		  possibleMoveTiles.add(this);
 		  return possibleMoveTiles;
 	  }
