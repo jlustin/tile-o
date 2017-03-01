@@ -65,7 +65,7 @@ public class AddTilePopOut extends JFrame {
 	}
 	
 	public AddTilePopOut() {
-		setTitle("Add a new tile lmao");
+		setTitle("Add a new tile ");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 468, 374);
 		contentPane = new JPanel();
@@ -104,7 +104,7 @@ public class AddTilePopOut extends JFrame {
 		
 		JLabel lblAddANew = new JLabel("Add a new tile to the board game!");
 		
-		errorMessage= new JLabel();
+		errorMessage= new JLabel("");
 		errorMessage.setForeground(Color.RED);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -125,9 +125,11 @@ public class AddTilePopOut extends JFrame {
 					.addGap(110))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(xLabel)
-						.addComponent(rdbtnNormalTile))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(errorMessage)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+							.addComponent(xLabel)
+							.addComponent(rdbtnNormalTile)))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(44)
@@ -138,10 +140,6 @@ public class AddTilePopOut extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
 					.addComponent(rdbtnWinTile)
 					.addGap(21))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(181)
-					.addComponent(errorMessage)
-					.addContainerGap(219, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -164,7 +162,7 @@ public class AddTilePopOut extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(xComponent, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(yComponent, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
 					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
@@ -212,7 +210,7 @@ public class AddTilePopOut extends JFrame {
 		refreshData();		
 	}
 	private void refreshData() {
-		errorMessage.setText("<html>"+error+"<html>");
+		errorMessage.setText(error);
 		if(error == null || error.length()==0){
 			close();
 		}

@@ -63,7 +63,7 @@ public class AddConnectionDesignPopOut extends JDialog {
 		{
 			lblChooseYoTiles = new JLabel("Choose your tiles");
 		}
-		errorMessage = new JLabel("New label");
+		errorMessage = new JLabel();
 		errorMessage.setForeground(Color.red);
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
@@ -74,7 +74,7 @@ public class AddConnectionDesignPopOut extends JDialog {
 							.addGap(176)
 							.addComponent(lblChooseYoTiles))
 						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addGap(79)
+							.addGap(30)
 							.addComponent(errorMessage)))
 					.addContainerGap(160, Short.MAX_VALUE))
 		);

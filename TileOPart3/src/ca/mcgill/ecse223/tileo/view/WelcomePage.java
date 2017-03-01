@@ -91,7 +91,7 @@ public class WelcomePage extends JFrame {
 				playerNumber = buttonGroup.getSelection();
 			
 				if(playerNumber==null) {
-					error = "Please select the number of players";
+					error = "Please select the number of players! ";
 				}
 				error.trim();
 				if(error.length()==0) {						
@@ -164,7 +164,7 @@ public class WelcomePage extends JFrame {
 			}
 		});
 		
-		errorMessage = new JLabel("New label");
+		errorMessage = new JLabel();
 		errorMessage.setForeground(Color.RED);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -247,7 +247,7 @@ public class WelcomePage extends JFrame {
 	    this.dispose();
 	}
 	private void refreshData() {
-		errorMessage.setText("<html>"+error+"<html>");
+		errorMessage.setText(error);
 		if(error == null || error.length()==0){
 			close();
 		}

@@ -130,7 +130,7 @@ public class SetPlayerStartingTilePopOut extends JFrame {
 			}
 		});
 		
-		errorMessage = new JLabel("New label");
+		errorMessage = new JLabel();
 		errorMessage.setForeground(Color.RED);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -138,24 +138,23 @@ public class SetPlayerStartingTilePopOut extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(190)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(radioButton_2)
-								.addComponent(radioButton_1)
-								.addComponent(radioButton)
-								.addComponent(radioButton_3)))
-						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(129)
 							.addComponent(lblSelectTheNumber))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(97)
-							.addComponent(lblChooseItsStarting))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(171)
 							.addComponent(btnSet))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(128)
-							.addComponent(errorMessage)))
+							.addGap(97)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(93)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+										.addComponent(radioButton_2)
+										.addComponent(radioButton_1)
+										.addComponent(radioButton)
+										.addComponent(radioButton_3)))
+								.addComponent(lblChooseItsStarting)
+								.addComponent(errorMessage))))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -165,9 +164,9 @@ public class SetPlayerStartingTilePopOut extends JFrame {
 					.addComponent(lblSelectTheNumber)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblChooseItsStarting)
-					.addGap(3)
-					.addComponent(errorMessage)
 					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(errorMessage)
+					.addGap(9)
 					.addComponent(radioButton_3)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(radioButton)
@@ -176,8 +175,7 @@ public class SetPlayerStartingTilePopOut extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(radioButton_2)
 					.addGap(28)
-					.addComponent(btnSet)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addComponent(btnSet))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

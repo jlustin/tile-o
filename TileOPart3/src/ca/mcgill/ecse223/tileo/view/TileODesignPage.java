@@ -184,7 +184,7 @@ public class TileODesignPage extends JFrame {
 		
 		//selectedGameComboBox = new JComboBox<Game>(new Game[0]);
 		
-		errorMessage = new JLabel("errorMessage");
+		errorMessage = new JLabel();
 		errorMessage.setForeground(Color.RED);
 		
 		selectedGameComboBox = new JComboBox();
@@ -295,10 +295,6 @@ public class TileODesignPage extends JFrame {
 
 	public void startGamePerformed(java.awt.event.ActionEvent evt) {
 		error = "";
-		if(selectedGameComboBox.getModel().getSelectedItem()==null){
-			error = "Please Select A Game To Start. ";
-		}
-		error.trim();
 		try{
 			int gameIndex = selectedGameComboBox.getSelectedIndex(); 
 			PlayModeController pmc = new PlayModeController();
