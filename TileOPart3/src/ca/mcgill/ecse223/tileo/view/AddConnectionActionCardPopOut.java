@@ -81,7 +81,7 @@ public class AddConnectionActionCardPopOut extends JDialog {
 					
 					}
 					if(chosenTile1==null){
-						error = "Please select a tile on the board and then press'Tile 1 Chosen' button! ";
+						error = "Please select a tile on the board and then press 'Tile 1 Chosen' button! ";
 					}
 					error.trim();
 					errorMessage.setText(error);
@@ -97,7 +97,7 @@ public class AddConnectionActionCardPopOut extends JDialog {
 						chosenTile2 = TileOPlayPage.getGrid().selectedTile;
 					}
 					if(chosenTile2==null){
-						error = "Please select a tile on the board and then press'Tile 2 Chosen' button! ";
+						error = "Please select a tile on the board and then press 'Tile 2 Chosen' button! ";
 					}
 					error.trim();
 					errorMessage.setText(error);

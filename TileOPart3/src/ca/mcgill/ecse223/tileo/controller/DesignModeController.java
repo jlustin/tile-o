@@ -158,9 +158,10 @@ public class DesignModeController {
 		if (isConnected(selectedTile1, selectedTile2)){
 			error = error + "The two selected tiles are already connected.";
 		}
-
-		
-		
+//		// Check if there are two tiles that are adjacent
+//		if (!areAdjacent (selectedTile1, currentGame)){
+//			error = error + "No tiles are adjacent; it is impossible to connect two tiles.";
+//		}
 		
 		// Check if there is an error
 		if (error.length() > 0){
@@ -201,7 +202,19 @@ public class DesignModeController {
 		return false;
 	}
 	
-	//helper method
+//	// helper method to check is there exist two adjacent tiles
+//			public boolean areAdjacent(Tile tile1, Game game1){
+//				Tile [] activeTiles = game1.getTiles().toArray(new Tile [game1.getTiles().size()]);
+//				
+//				for (int i = 0; i < activeTiles.length; i++){
+//					if (isAdjacent(tile1, activeTiles[i])){
+//						return true;
+//					}
+//				}
+//				return false;
+//			}
+	
+	//helper method two tiles are already connected
 	public boolean isConnected (Tile tile1, Tile tile2){
 		
 		

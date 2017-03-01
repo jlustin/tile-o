@@ -164,14 +164,14 @@ public class PlayModeController {
 		Game currentGame = tileO.getCurrentGame();
 		//Deck deck = currentGame.getDeck();
 		ConnectTilesActionCard connectTilesActionCard = (ConnectTilesActionCard) drawCard(currentGame);
-		
-		Player currentPlayer = currentGame.getCurrentPlayer();
-		
-		int x1 = selectedTile1.getX();
-		int y1 = selectedTile1.getY();
-		int x2 = selectedTile2.getX();
-		int y2 = selectedTile2.getY();
-		
+//		
+//		Player currentPlayer = currentGame.getCurrentPlayer();
+//		
+//		int x1 = selectedTile1.getX();
+//		int y1 = selectedTile1.getY();
+//		int x2 = selectedTile2.getX();
+//		int y2 = selectedTile2.getY();
+//		
 		String error = "";
 		// Check if there are tiles that can be selected in the game
 		if (currentGame.numberOfTiles() < 2){
@@ -189,7 +189,10 @@ public class PlayModeController {
 			if (isConnected(selectedTile1, selectedTile2)){
 				error = error + "The two selected tiles are already connected.";
 			}
-		
+//		// Check if there are two tiles that are adjacent
+//			if (!areAdjacent (selectedTile1, currentGame)){
+//				error = error + "No tiles are adjacent; it is impossible to connect two tiles.";
+//			}
 		
 		// Check if errors are detected
 		if (error.length() > 0){
@@ -380,6 +383,17 @@ public class PlayModeController {
 			return false;
 		}
 	
+//	// helper method to check is there exist two adjacent tiles
+//		public boolean areAdjacent(Tile tile1, Game game1){
+//			Tile [] activeTiles = game1.getTiles().toArray(new Tile [game1.getTiles().size()]);
+//			
+//			for (int i = 0; i < activeTiles.length; i++){
+//				if (isAdjacent(tile1, activeTiles[i])){
+//					return true;
+//				}
+//			}
+//			return false;
+//		}
 
 
 	
