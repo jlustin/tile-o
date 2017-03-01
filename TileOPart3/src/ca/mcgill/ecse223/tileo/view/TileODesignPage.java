@@ -163,6 +163,16 @@ public class TileODesignPage extends JFrame {
 		});
 		
 		JButton btnSetStartingTile = new JButton("Set Starting Tile Of Players");
+		btnSetStartingTile.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				SetPlayerStartingTIlePopOut spstpo = new SetPlayerStartingTIlePopOut();
+				spstpo.setVisible(true);
+				
+			}
+				
+			
+		});
 		
 		JButton btnStartGame = new JButton("Start Game");
 		

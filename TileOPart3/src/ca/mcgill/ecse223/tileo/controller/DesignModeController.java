@@ -261,10 +261,18 @@ public class DesignModeController {
 	 * 7. Identify the starting tile of a player
 	 * Chris
 	 */
-	public void setPlayerStartingTile(Player player, Tile startingTile) throws InvalidInputException {
+	public void setPlayerStartingTile(int playerNumber, Tile startingTile) throws InvalidInputException {
+		TileO tileO = TileOApplication.getTileO();
+		Game currentGame = tileO.getCurrentGame();
+		List<Player> listOfPlayers= currentGame.getPlayers();
+		Player aPlayer = listOfPlayers.get(0);
+		
+		Player actualPlayer = aPlayer.getWithNumber(playerNumber);
+		
 		
 
-		player.setStartingTile(startingTile);
+		actualPlayer.setStartingTile(startingTile);
+		actualPlayer.setCurrentTile(startingTile);
 
 		
 	}

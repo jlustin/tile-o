@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.DesignModeController;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 import ca.mcgill.ecse223.tileo.model.NormalTile;
@@ -26,9 +27,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class SetPlayerStartingTIlePopOut extends JFrame {
+	
+	Tile chosenTile;
 
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	
 	
 	String error;
 	ButtonModel chosenNumber;
@@ -92,17 +96,25 @@ public class SetPlayerStartingTIlePopOut extends JFrame {
 		btnSet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-//				error = "";
+				error = "";
 				chosenNumber = buttonGroup.getSelection();
 				playerNumber = chosenNumber.getActionCommand();
 				chosenPlayerNumber = Integer.parseInt(playerNumber);
 				
+				System.out.println(chosenPlayerNumber);
+				DesignModeController dmc = new DesignModeController();
 				
-				System.out.println(chosenPlayerNumber - 1);
-//				DesignModeController dmc = new DesignModeController();
-//				Player currentPlayer = TileO.getCurrentGame().getPlayer(chosenPlayerNumber-1);
-//				NormalTile startingTile = new NormalTile(0,0,null);
-//				dmc.setPlayerStartingTile(currentPlayer, startingTile);
+					if (TileODesignPage.getGrid().aTileIsSelected){
+						chosenTile = TileODesignPage.getGrid().selectedTile;
+				}
+				
+				
+				
+				try {
+					dmc.setPlayerStartingTile(chosenPlayerNumber, chosenTile);
+				} catch (InvalidInputException e1) {
+					throw new RuntimeException(e1.getMessage());
+				}
 				close();
 			}
 		});
