@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ca.mcgill.ecse223.tileo.controller.PlayModeController;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
@@ -37,6 +40,8 @@ public class RollDiePopOut extends JDialog {
 	 * Create the dialog.
 	 */
 	public RollDiePopOut() {
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		setAlwaysOnTop(true);
 		init();
 		refreshData();
 	}
@@ -83,6 +88,9 @@ public class RollDiePopOut extends JDialog {
 				JButton cancelButton = new JButton("Roll Die");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						PlayModeController pmc = new PlayModeController();
+						pmc.playRollDieExtraTurn();
+							
 						close();
 					}
 				});
