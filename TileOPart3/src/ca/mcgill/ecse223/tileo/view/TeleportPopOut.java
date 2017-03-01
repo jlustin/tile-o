@@ -58,6 +58,7 @@ public class TeleportPopOut extends JFrame {
 	    this.dispose();
 	}
 	public TeleportPopOut() {
+		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
