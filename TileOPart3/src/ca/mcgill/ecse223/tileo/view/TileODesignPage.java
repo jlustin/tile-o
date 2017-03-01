@@ -58,8 +58,9 @@ public class TileODesignPage extends JFrame {
 	 * Create the frame.
 	 */
 	public TileODesignPage() {
-		WelcomePage wp = new WelcomePage();
-		wp.setVisible(true);
+//		WelcomePage wp = new WelcomePage();
+//		wp.setVisible(true);
+		setTitle("Design Mode");
 		initComponents();
 		refreshData();
 	}
