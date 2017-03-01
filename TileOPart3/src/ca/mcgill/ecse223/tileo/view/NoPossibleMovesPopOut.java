@@ -18,15 +18,15 @@ public class NoPossibleMovesPopOut extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			NoPossibleMovesPopOut dialog = new NoPossibleMovesPopOut();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			NoPossibleMovesPopOut dialog = new NoPossibleMovesPopOut();
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	public void close() { 
 		this.setVisible(false);
 	    this.dispose();
