@@ -14,7 +14,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class SaveDesignPopOut extends JFrame {
+public class SavePopOut extends JFrame {
 
 	private JPanel contentPane;
 	
@@ -44,7 +44,7 @@ public class SaveDesignPopOut extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SaveDesignPopOut() {
+	public SavePopOut() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

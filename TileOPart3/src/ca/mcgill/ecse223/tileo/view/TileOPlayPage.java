@@ -98,6 +98,8 @@ public class TileOPlayPage extends JFrame {
 	    	public void actionPerformed(ActionEvent arg0) {
 	    		PlayModeController pmc = new PlayModeController();
 	    		pmc.saveGame();
+	    		SavePopOut spo = new SavePopOut();
+	    		spo.setVisible(true);
 	    		refreshData();
 	    		
 	    	}

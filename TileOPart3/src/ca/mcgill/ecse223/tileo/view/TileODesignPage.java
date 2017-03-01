@@ -147,7 +147,7 @@ public class TileODesignPage extends JFrame {
 		JButton btnNewButton = new JButton("Save");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SaveDesignPopOut sdpo = new SaveDesignPopOut();
+				SavePopOut sdpo = new SavePopOut();
 				sdpo.setVisible(true);
 				DesignModeController dmc = new DesignModeController();
 				dmc.saveDesign();
