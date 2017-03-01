@@ -9,6 +9,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.DesignModeController;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
@@ -99,6 +100,13 @@ public class SelectTilePlayPopOut extends JDialog {
 					public void actionPerformed(ActionEvent arg0) {
 						PlayModeController pmc = new PlayModeController();
 						error = "";
+						if(TileOPlayPage.pMoves.isEmpty()){
+							NoPossibleMovesPopOut npm = new NoPossibleMovesPopOut();
+							npm.setVisible(true);
+							pmc.setNextPlayer(TileOApplication.getTileO().getCurrentGame());
+							TileOPlayPage.refreshData();
+							refreshData();
+						}
 						if (TileOPlayPage.getGrid().aTileIsSelected){
 							chosenTile = TileOPlayPage.getGrid().selectedTile;
 						}
