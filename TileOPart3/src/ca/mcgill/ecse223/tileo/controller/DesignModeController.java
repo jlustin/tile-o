@@ -210,10 +210,10 @@ public class DesignModeController {
 		Game currentGame = tileO.getCurrentGame();
 		String error = "";
 		
-		// Check if there are conneciton pieces in the game
-		if (currentGame.getCurrentConnectionPieces() <= 0){
-			error = error + "There are no connection pieces in the current game.";
-		}
+//		// Check if there are conneciton pieces in the game
+//		if (currentGame.getCurrentConnectionPieces() <= 0){
+//			error = error + "There are no connection pieces in the current game.";
+//		}
 		// Check if error detected
 		if (error.length() > 0){
 			throw new InvalidInputException (error.trim());

@@ -94,6 +94,7 @@ public class AddConnectionDesignPopOut extends JDialog {
 						
 							try {
 								dmc.connectTwoTiles(chosenTile1, chosenTile2);
+								close();
 							} catch (InvalidInputException e1) {
 								throw new RuntimeException(e1.getMessage());
 							}
