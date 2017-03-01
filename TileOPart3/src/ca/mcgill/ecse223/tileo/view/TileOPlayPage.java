@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
@@ -14,13 +13,9 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
-
-import ca.mcgill.ecse223.tileo.model.Tile;
-
 import ca.mcgill.ecse223.tileo.model.Game;
 import ca.mcgill.ecse223.tileo.model.Player;
 import ca.mcgill.ecse223.tileo.model.TileO;
-
 
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -37,29 +32,24 @@ public class TileOPlayPage extends JFrame {
 	
 	
 	private JPanel contentPane;
-
-	private String error;
-	private List<Tile> pMoves;
-
 	private static JLabel playerTurnLabel;
 	private static JLabel currentModeLabel;
-
 
 	/**
 	 * Launch the application.
 	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TileOPlayPage frame = new TileOPlayPage();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					TileOPlayPage frame = new TileOPlayPage();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
@@ -105,22 +95,18 @@ public class TileOPlayPage extends JFrame {
 	    
 	    JButton btnSave = new JButton("Save");
 	    btnSave.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent evt) {
-	    		// TODO: Save the game
+	    	public void actionPerformed(ActionEvent arg0) {
+	    		PlayModeController pmc = new PlayModeController();
+	    		pmc.saveGame();
+	    		refreshData();
+	    		
 	    	}
 	    });
 	    
 	    JButton btnRollDie = new JButton("Roll Die");
 	    btnRollDie.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		error = "";
-	    		PlayModeController pmc= new PlayModeController();
-	    		pMoves = pmc.rollDie();
-	    		grid.possibleMoves = pMoves;
-	    		System.out.println(pMoves.size()+"pmoves");
-	    		System.out.println(grid.possibleMoves.size()+ "grid");
-	    		refreshData();
-	    		
+	    		// TODO: Roll the die
 	    		
 	    	}
 	    });
