@@ -87,13 +87,13 @@ public class DesignModeController {
 	public void createGame(int numberOfPlayers) throws InvalidInputException{
 		TileO tileO = TileOApplication.getTileO();
 		// Add a new game to application and set it as current game
-		Game game = new Game (0,tileO);
+		Game game = new Game (32,tileO);
 		tileO.setCurrentGame(game);
 		// Set mode to "DESIGN"
 		game.setMode(Mode.DESIGN);
 		
 		// Assign player numbers to each player
-		for(int playerNumber = 1; playerNumber < numberOfPlayers; playerNumber++){
+		for(int playerNumber = 1; playerNumber <= numberOfPlayers; playerNumber++){
 			game.addPlayer(playerNumber);
 		}
 	}
