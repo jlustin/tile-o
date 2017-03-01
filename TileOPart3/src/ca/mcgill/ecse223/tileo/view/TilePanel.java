@@ -39,10 +39,9 @@ public class TilePanel extends JPanel{
 	// data element;
 	private Game myGame;
 	private HashMap<Rectangle2D, Tile> tiles;
-	public HashMap<Tile, Rectangle2D> tRectangles;
+	private HashMap<Tile, Rectangle2D> tRectangles;
 	private HashMap<Rectangle2D, Connection> connections;
 	private HashMap<Connection, Rectangle2D> cRectangles;
-	public List<Tile> possibleMoves;
 
 	
 	public TilePanel(Game game) {
@@ -222,15 +221,6 @@ public class TilePanel extends JPanel{
 					g2d.fill(rectangle);
 					
 		
-				}
-				
-				if(!possibleMoves.isEmpty()){
-					for (Tile move: possibleMoves){
-						Rectangle2D pMove = tRectangles.get(move); 
-						g2d.setColor(Color.GREEN);
-						g2d.fill(pMove);
-
-					}
 				}
 
 				repaint();
