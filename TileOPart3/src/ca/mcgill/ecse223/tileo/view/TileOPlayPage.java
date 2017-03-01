@@ -181,7 +181,7 @@ public class TileOPlayPage extends JFrame {
 		Player player = currentGame.getCurrentPlayer();
 		
 		
-		int playerNumber = 1;
+		int playerNumber = player.getNumber();
 		//int playerNumber = player.getNumber(); //gives error if uncommented
 		
 		
