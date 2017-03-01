@@ -140,6 +140,7 @@ public class AddConnectionActionCardPopOut extends JDialog {
 						   if(error.length()==0) {
 							   try {
 									pmc.playConnectTilesActionCard(chosenTile1, chosenTile2);
+									TileOPlayPage.refreshData();
 									close();
 								} catch (InvalidInputException e1) {
 									error = e1.getMessage();
