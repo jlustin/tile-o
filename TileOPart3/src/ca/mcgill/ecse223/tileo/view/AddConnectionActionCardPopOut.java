@@ -61,7 +61,7 @@ public class AddConnectionActionCardPopOut extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
-			lblChooseYoTiles = new JLabel("Choose your tiles");
+			lblChooseYoTiles = new JLabel("You have drawn an action card. Select two tiles to connect them! ");
 		}
 		errorMessage = new JLabel();
 		errorMessage.setForeground(Color.red);
