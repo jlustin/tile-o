@@ -91,7 +91,7 @@ public class DesignModeController {
 		tileO.setCurrentGame(game);
 		// Set mode to "DESIGN"
 		game.setMode(Mode.DESIGN);
-		
+		System.out.println("The current game has players?" + game.hasPlayers());
 		// Assign player numbers to each player
 		for(int playerNumber = 1; playerNumber <= numberOfPlayers; playerNumber++){
 			game.addPlayer(playerNumber);

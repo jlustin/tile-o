@@ -86,7 +86,7 @@ public class WelcomePage extends JFrame {
 		JButton btnCreateGame = new JButton("Create Game");
 		btnCreateGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new TileODesignPage().setVisible(true);
+				
 				ButtonModel playerNumber;
 				error = "";
 				playerNumber = buttonGroup.getSelection();
@@ -99,7 +99,7 @@ public class WelcomePage extends JFrame {
 					try {
 						DesignModeController dmc = new DesignModeController ();
 						dmc.createGame( Integer.parseInt(playerNumber.getActionCommand()));
-						dmc.saveDesign();
+					
 						TileODesignPage.refreshData();
 						close();
 					} catch (InvalidInputException e) {			
