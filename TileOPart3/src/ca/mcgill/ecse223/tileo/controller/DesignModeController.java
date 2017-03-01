@@ -153,10 +153,14 @@ public class DesignModeController {
 		if (!isAdjacent(selectedTile1, selectedTile2)){
 			error = error + "The selected tiles are not adjacent";
 		}
-//		
-//		if (currentGame.getCurrentConnectionPieces() < 1){
-//			error = error + "There are 0 connection pieces in the game";
+		
+//		// Check if connection already exist at a location
+//		if (isConnected(selectedTile1, selectedTile2)){
+//			error = error + "The two selected tiles are already connected.";
 //		}
+
+		
+		
 		
 		// Check if there is an error
 		if (error.length() > 0){
@@ -194,10 +198,17 @@ public class DesignModeController {
 				return true;
 			}
 		}
-		
-		
 		return false;
 	}
+	
+//	//helper method
+//	public boolean isConnected (Tile tile1, Tile tile2){
+//		
+//		if (tile1.getConnections()){
+//			return true;
+//		}
+//		return false;
+//	}
 	
 	
 	
