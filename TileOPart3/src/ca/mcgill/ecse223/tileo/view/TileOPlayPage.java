@@ -22,7 +22,7 @@ import javax.swing.JLabel;
 
 public class TileOPlayPage extends JFrame {
 
-	private static TilePanelDesign grid = new TilePanelDesign(TileOApplication.getTileO().getCurrentGame());
+	private static TilePanelPlay grid = new TilePanelPlay(TileOApplication.getTileO().getCurrentGame());
 	
 	
 	
