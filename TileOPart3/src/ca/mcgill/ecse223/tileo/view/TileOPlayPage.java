@@ -33,6 +33,7 @@ public class TileOPlayPage extends JFrame {
 	
 	private JPanel contentPane;
 	private static JLabel playerTurnLabel;
+	private static JLabel currentModeLabel;
 
 	/**
 	 * Launch the application.
@@ -90,7 +91,7 @@ public class TileOPlayPage extends JFrame {
 	    
 	    JLabel lblJlabelForErrors = new JLabel("JLabel for Errors");
 	    
-	    JLabel lblJlabelForMode = new JLabel("JLabel for Mode");
+	    currentModeLabel = new JLabel("JLabel for Mode");
 	    
 	    JButton btnSave = new JButton("Save");
 	    btnSave.addActionListener(new ActionListener() {
@@ -120,7 +121,7 @@ public class TileOPlayPage extends JFrame {
 	    			.addContainerGap(198, Short.MAX_VALUE))
 	    		.addGroup(gl_contentPane.createSequentialGroup()
 	    			.addGap(185)
-	    			.addComponent(lblJlabelForMode)
+	    			.addComponent(currentModeLabel)
 	    			.addContainerGap(186, Short.MAX_VALUE))
 	    		.addGroup(gl_contentPane.createSequentialGroup()
 	    			.addGap(183)
@@ -139,7 +140,7 @@ public class TileOPlayPage extends JFrame {
 	    			.addGap(18)
 	    			.addComponent(lblJlabelForErrors)
 	    			.addGap(18)
-	    			.addComponent(lblJlabelForMode)
+	    			.addComponent(currentModeLabel)
 	    			.addGap(53)
 	    			.addComponent(btnRollDie)
 	    			.addPreferredGap(ComponentPlacement.RELATED, 432, Short.MAX_VALUE)
@@ -156,6 +157,7 @@ public class TileOPlayPage extends JFrame {
 	public static void refreshData(){
 		TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
+		Game.Mode currentMode = currentGame.getMode();
 		Player player = currentGame.getCurrentPlayer();
 		
 		
@@ -168,6 +170,7 @@ public class TileOPlayPage extends JFrame {
 		grid.setSize(700, 720);
 		
 		playerTurnLabel.setText("It is currently player " + playerNumber + "'s turn.");
+		currentModeLabel.setText("CurrentMode: " + currentMode.name());
 		
 		
 		
