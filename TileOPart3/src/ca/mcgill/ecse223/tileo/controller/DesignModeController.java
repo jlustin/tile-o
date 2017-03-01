@@ -365,6 +365,7 @@ public class DesignModeController {
 		try{
     	Game selectedGame = TileOApplication.getTileO().getGame(index);
     	selectedGame.setMode(Mode.DESIGN);
+    	Player.reinitializeUniquePlayer(selectedGame.getPlayers()); //ADDED
     	return selectedGame;
 		}
 		catch (RuntimeException e)
