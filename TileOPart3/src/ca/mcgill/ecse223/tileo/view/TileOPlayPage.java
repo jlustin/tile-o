@@ -116,6 +116,10 @@ public class TileOPlayPage extends JFrame {
 	    		PlayModeController pmc = new PlayModeController();
 	    		pMoves = pmc.rollDie();
 	    		grid.possibleMoves=pMoves;
+	    		
+	    		SelectTilePlayPopOut stpop = new SelectTilePlayPopOut();
+	    		stpop.setVisible(true);
+	    		
 	    	
 	    	}
 	    });
