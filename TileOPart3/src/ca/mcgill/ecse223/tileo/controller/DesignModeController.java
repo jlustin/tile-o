@@ -154,10 +154,10 @@ public class DesignModeController {
 			error = error + "The selected tiles are not adjacent";
 		}
 		
-//		// Check if connection already exist at a location
-//		if (isConnected(selectedTile1, selectedTile2)){
-//			error = error + "The two selected tiles are already connected.";
-//		}
+		// Check if connection already exist at a location
+		if (isConnected(selectedTile1, selectedTile2)){
+			error = error + "The two selected tiles are already connected.";
+		}
 
 		
 		
@@ -201,14 +201,22 @@ public class DesignModeController {
 		return false;
 	}
 	
-//	//helper method
-//	public boolean isConnected (Tile tile1, Tile tile2){
-//		
-//		if (tile1.getConnections()){
-//			return true;
-//		}
-//		return false;
-//	}
+	//helper method
+	public boolean isConnected (Tile tile1, Tile tile2){
+		
+		
+		Connection [] possibleConnections1 = tile1.getConnections().toArray(new Connection [tile1.getConnections().size()]);
+		Connection [] possibleConnections2 = tile2.getConnections().toArray(new Connection [tile2.getConnections().size()]);
+		
+		for (int i = 0; i < possibleConnections1.length; i++){
+			for (int j = 0; j < possibleConnections2.length; j++){
+				if (possibleConnections1[i] == possibleConnections2[j]){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 	
 	
 	
