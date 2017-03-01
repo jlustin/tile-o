@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -175,6 +176,11 @@ public class TileODesignPage extends JFrame {
 		});
 		
 		JButton btnStartGame = new JButton("Start Game");
+		btnStartGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				startGamePerformed(e);
+			}
+		});
 		
 		//selectedGameComboBox = new JComboBox<Game>(new Game[0]);
 		
@@ -182,6 +188,15 @@ public class TileODesignPage extends JFrame {
 		errorMessage.setForeground(Color.RED);
 		
 		selectedGameComboBox = new JComboBox();
+		String[] games = new String[TileOApplication.getTileO().numberOfGames()];
+		addNums(games, TileOApplication.getTileO().numberOfGames());
+		selectedGameComboBox.setModel(new DefaultComboBoxModel(games));
+		
+//		JComboBox gameNumberIndexCB = new JComboBox();
+//		String[] games = new String[TileOApplication.getTileO().numberOfGames()];
+//		addNums(games, TileOApplication.getTileO().numberOfGames());
+//		gameNumberIndexCB.setModel(new DefaultComboBoxModel(games));
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -281,12 +296,14 @@ public class TileODesignPage extends JFrame {
 	public void startGamePerformed(java.awt.event.ActionEvent evt) {
 		error = "";
 		if(selectedGameComboBox.getModel().getSelectedItem()==null){
-			error = "Please Selecte A Game To Start. ";
+			error = "Please Select A Game To Start. ";
 		}
 		error.trim();
 		try{
+			int gameIndex = selectedGameComboBox.getSelectedIndex(); 
 			PlayModeController pmc = new PlayModeController();
-			Game selectedGame = (Game) selectedGameComboBox.getModel().getSelectedItem();
+			
+			Game selectedGame = TileOApplication.getTileO().getGame(gameIndex);
 			pmc.startGame(selectedGame);
 		}catch (InvalidInputException e) {
 			error = e.getMessage();
@@ -296,6 +313,14 @@ public class TileODesignPage extends JFrame {
 	public void displayPlayBoard() {
 		errorMessage.setText(error);
 		if(error==null||error.length()==0){
+			TileOPlayPage topp = new TileOPlayPage();
+			topp.setVisible(true);
 		}
     }
+	
+	public void addNums(String[] g, int games){
+		for (int i = 1; i<games+1; i++){
+			g[i-1] = String.valueOf(i);			
+		}
+	}
 }
