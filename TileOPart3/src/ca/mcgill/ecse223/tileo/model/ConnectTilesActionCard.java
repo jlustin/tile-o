@@ -40,12 +40,12 @@ public class ConnectTilesActionCard extends ActionCard
 	  String error = "";
 	  
 	  // Check if card is connectTilesActionCard
-	  if (super.getDeck().getCurrentCard() != this){
-		  error = "The current card is not a Connect Tiles Action Card.";
-	  }
-	  if (error.length() > 0){
-			throw new InvalidInputException (error.trim());
-	  }
+//	  if (super.getDeck().getCurrentCard() != this){
+//		  error = "The current card is not a Connect Tiles Action Card.";
+//	  }
+//	  if (error.length() > 0){
+//			throw new InvalidInputException (error.trim());
+//	  }
 	  
 	  try
 	  {
