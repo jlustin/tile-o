@@ -210,7 +210,7 @@ public class AddTilePopOut extends JFrame {
 		refreshData();		
 	}
 	private void refreshData() {
-		errorMessage.setText(error);
+		errorMessage.setText("<html>"+error+"<html>");
 		if(error == null || error.length()==0){
 			close();
 		}
