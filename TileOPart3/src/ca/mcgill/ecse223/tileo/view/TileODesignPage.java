@@ -176,15 +176,17 @@ public class TileODesignPage extends JFrame {
 		
 		JButton btnStartGame = new JButton("Start Game");
 		
-		selectedGameComboBox = new JComboBox<Game>(new Game[0]);
+		//selectedGameComboBox = new JComboBox<Game>(new Game[0]);
 		
 		errorMessage = new JLabel("errorMessage");
 		errorMessage.setForeground(Color.RED);
+		
+		selectedGameComboBox = new JComboBox();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(20, Short.MAX_VALUE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -194,7 +196,9 @@ public class TileODesignPage extends JFrame {
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 										.addComponent(btnRefresh)
-										.addComponent(btnRemoveConnections))
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addComponent(btnRemoveConnections)
+											.addGap(41)))
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(btnAddDeck)))
 							.addContainerGap())
@@ -206,11 +210,12 @@ public class TileODesignPage extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(selectedGameComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnStartGame)
-					.addContainerGap(187, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(errorMessage)
-					.addContainerGap(565, Short.MAX_VALUE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnStartGame)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(103)
+							.addComponent(errorMessage)))
+					.addContainerGap(150, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -236,7 +241,7 @@ public class TileODesignPage extends JFrame {
 						.addComponent(selectedGameComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addComponent(errorMessage)
-					.addContainerGap(551, Short.MAX_VALUE))
+					.addContainerGap(576, Short.MAX_VALUE))
 		);
 		//contentPane.setLayout(gl_contentPane);
 		
@@ -293,5 +298,4 @@ public class TileODesignPage extends JFrame {
 		if(error==null||error.length()==0){
 		}
     }
-
 }

@@ -96,6 +96,7 @@ public class WelcomePage extends JFrame {
 					try {
 						DesignModeController dmc = new DesignModeController ();
 						dmc.createGame( Integer.parseInt(playerNumber.getActionCommand()));
+						dmc.saveDesign();
 						TileODesignPage.refreshData();
 					} catch (InvalidInputException e) {			
 						error = e.getMessage();
