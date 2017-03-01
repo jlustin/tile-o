@@ -32,6 +32,7 @@ public class TilePanelPlay extends JPanel{
 	public boolean aConnectionIsSelected = false;
 	public Connection selectedConnection;
 
+	public boolean isAPlayerTurn = false;
 
 	//UI elements
 	private List<Rectangle2D> rectangles = new ArrayList<Rectangle2D>();
@@ -226,16 +227,16 @@ public class TilePanelPlay extends JPanel{
 					g2d.fill(r);
 				}
 				
-				if(possibleMoves != null) {
-					if(possibleMoves.contains(aTile)){
-						g2d.setColor(Color.GREEN);
-						Rectangle2D r = tRectangles.get(aTile);
-						g2d.fill(r);
+				if(isAPlayerTurn){
+					if(possibleMoves != null) {
+						if(possibleMoves.contains(aTile)){
+							g2d.setColor(Color.GREEN);
+							Rectangle2D r = tRectangles.get(aTile);
+							g2d.fill(r);
+						}
 					}
 				}
 				
-				
-
 				repaint();
 			}
 			

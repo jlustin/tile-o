@@ -11,7 +11,9 @@ import javax.swing.border.EmptyBorder;
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.DesignModeController;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+import ca.mcgill.ecse223.tileo.controller.PlayModeController;
 import ca.mcgill.ecse223.tileo.model.Game;
+import ca.mcgill.ecse223.tileo.model.Game.Mode;
 import ca.mcgill.ecse223.tileo.model.NormalTile;
 
 import javax.swing.GroupLayout;
@@ -136,11 +138,22 @@ public class WelcomePage extends JFrame {
 		loadButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DesignModeController dmc = new DesignModeController();
+				PlayModeController pmc = new PlayModeController();
 				int chosenGameIndex = gameNumberIndexCB.getSelectedIndex(); //getSelected returns 0 for first one
 				try {
 //					Game newGame =dmc.loadDesign(chosenGameIndex);
 //					new NormalTile(1, 1, newGame);
-					TileOApplication.getTileO().setCurrentGame(dmc.loadDesign(chosenGameIndex));
+					if(TileOApplication.getTileO().getGame(chosenGameIndex).getMode() == Mode.DESIGN){
+						TileOApplication.getTileO().setCurrentGame(dmc.loadDesign(chosenGameIndex));
+
+					}
+					else if(TileOApplication.getTileO().getGame(chosenGameIndex).getMode() == Mode.GAME){
+						TileOApplication.getTileO().setCurrentGame(pmc.loadGame(chosenGameIndex));
+						TileOPlayPage topp = new TileOPlayPage();
+						topp.setVisible(true);
+						
+
+					}
 					TileODesignPage.refreshData();
 					//System.out.print("" + TileOApplication.getTileO().getCurrentGame());
 					close();
