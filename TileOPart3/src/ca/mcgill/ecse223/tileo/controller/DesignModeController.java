@@ -92,10 +92,6 @@ public class DesignModeController {
 		// Set mode to "DESIGN"
 		game.setMode(Mode.DESIGN);
 		System.out.println("The current game has players?" + game.hasPlayers());
-		System.out.println(game.toString());
-		System.out.println(game.getPlayers());
-	
-		
 		// Assign player numbers to each player
 		for(int playerNumber = 1; playerNumber <= numberOfPlayers; playerNumber++){
 			game.addPlayer(playerNumber);
