@@ -37,7 +37,7 @@ public class TileOPlayPage extends JFrame {
 	private JPanel contentPane;
 	private static JLabel playerTurnLabel;
 	private static JLabel currentModeLabel;
-	private List<Tile> pMoves;
+	public static List<Tile> pMoves;
 	TilePanelPlay tpp ;
 	
 	static JButton btnRollDie;
