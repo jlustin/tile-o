@@ -69,8 +69,8 @@ public class SelectTilePlayPopOut extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						PlayModeController pmc = new PlayModeController();
-						if (TileODesignPage.getGrid().aTileIsSelected){
-							chosenTile = TileODesignPage.getGrid().selectedTile;
+						if (TileOPlayPage.getGrid().aTileIsSelected){
+							chosenTile = TileOPlayPage.getGrid().selectedTile;
 							try {
 								pmc.landedOnTile(chosenTile);
 								System.out.println("Successfully(?) landed on tile: x: " + chosenTile.getX() + " y: " + chosenTile.getY());
