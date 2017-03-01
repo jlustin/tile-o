@@ -27,7 +27,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class SetPlayerStartingTIlePopOut extends JFrame {
+public class SetPlayerStartingTilePopOut extends JFrame {
 	
 	Tile chosenTile=null;
 
@@ -67,7 +67,7 @@ public class SetPlayerStartingTIlePopOut extends JFrame {
 	    this.dispose();
 	}
 	
-	public SetPlayerStartingTIlePopOut() {
+	public SetPlayerStartingTilePopOut() {
 		setAlwaysOnTop(true);
 		setTitle("Choose Starting Tile");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
