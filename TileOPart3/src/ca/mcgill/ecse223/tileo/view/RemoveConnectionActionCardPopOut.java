@@ -13,7 +13,7 @@ import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 
-public class RemoveTileActionCardPopOut extends JFrame {
+public class RemoveConnectionActionCardPopOut extends JFrame {
 
 	private JPanel contentPane;
 
@@ -24,7 +24,7 @@ public class RemoveTileActionCardPopOut extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RemoveTileActionCardPopOut frame = new RemoveTileActionCardPopOut();
+					RemoveConnectionActionCardPopOut frame = new RemoveConnectionActionCardPopOut();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +36,7 @@ public class RemoveTileActionCardPopOut extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RemoveTileActionCardPopOut() {
+	public RemoveConnectionActionCardPopOut() {
 		setTitle("Remove Connection Action Card");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

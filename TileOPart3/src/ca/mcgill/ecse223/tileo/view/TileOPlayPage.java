@@ -176,6 +176,27 @@ public class TileOPlayPage extends JFrame {
 		playerTurnLabel.setText("It is currently player " + playerNumber + "'s turn.");
 		currentModeLabel.setText("CurrentMode: " + currentMode.name());
 		
+		switch (currentMode){
+			case GAME_ROLLDIEACTIONCARD:
+				RollDiePopOut rdpo = new RollDiePopOut();
+				rdpo.setVisible(true);
+				break;
+			case GAME_CONNECTTILESACTIONCARD:
+				AddConnectionActionCardPopOut acacpo = new AddConnectionActionCardPopOut();
+				acacpo.setVisible(true);
+				break;
+			case GAME_REMOVECONNECTIONACTIONCARD:
+				RemoveConnectionActionCardPopOut rcacpo = new RemoveConnectionActionCardPopOut();
+				rcacpo.setVisible(true);
+				break;
+			case GAME_TELEPORTACTIONCARD:
+				TeleportPopOut tpo = new TeleportPopOut();
+				tpo.setVisible(true);
+				break;
+			default:
+				
+		}
+		
 		
 		
 		
