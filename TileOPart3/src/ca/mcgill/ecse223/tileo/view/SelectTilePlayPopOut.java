@@ -69,7 +69,7 @@ public class SelectTilePlayPopOut extends JDialog {
 			lblPleaseClickOn = new JLabel("Please click on a highlighted tile on the board in order to move to it.");
 		}
 		
-		errorMessage = new JLabel("123123");
+		errorMessage = new JLabel("");
 		errorMessage.setForeground(Color.RED);
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
