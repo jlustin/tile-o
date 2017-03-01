@@ -68,9 +68,9 @@ public class AddConnectionDesignPopOut extends JDialog {
 				btnTileChosen.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						
-						//if (TileODesignPage.getGrid().aTileIsSelected){
+						if (TileODesignPage.getGrid().aTileIsSelected){
 							chosenTile1 = TileODesignPage.getGrid().selectedTile;
-						//}
+						}
 					}
 				});
 				buttonPane.add(btnTileChosen);
@@ -79,9 +79,9 @@ public class AddConnectionDesignPopOut extends JDialog {
 				JButton btnChosenTile = new JButton("Tile 2 Chosen");
 				btnChosenTile.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-					//	if (TileODesignPage.getGrid().aTileIsSelected){
+						if (TileODesignPage.getGrid().aTileIsSelected){
 							chosenTile2 = TileODesignPage.getGrid().selectedTile;
-						//}
+						}
 					}
 				});
 				buttonPane.add(btnChosenTile);
