@@ -4,7 +4,9 @@ import ca.mcgill.ecse223.tileo.model.TileO;
 import ca.mcgill.ecse223.tileo.persistence.PersistenceObjectStream;
 import ca.mcgill.ecse223.tileo.view.TileODesignPage;
 import ca.mcgill.ecse223.tileo.view.TileOPlayPage;
+import ca.mcgill.ecse223.tileo.view.WelcomePage;
 import ca.mcgill.ecse223.tileo.model.Game;
+import ca.mcgill.ecse223.tileo.model.Game.Mode;
 import ca.mcgill.ecse223.tileo.model.Player;
 
 public class TileOApplication {
