@@ -138,9 +138,6 @@ public class SetPlayerStartingTilePopOut extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(129)
-							.addComponent(lblSelectTheNumber))
-						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(171)
 							.addComponent(btnSet))
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -154,8 +151,11 @@ public class SetPlayerStartingTilePopOut extends JFrame {
 										.addComponent(radioButton)
 										.addComponent(radioButton_3)))
 								.addComponent(lblChooseItsStarting)
-								.addComponent(errorMessage))))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addComponent(errorMessage)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(121)
+							.addComponent(lblSelectTheNumber)))
+					.addContainerGap(99, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)

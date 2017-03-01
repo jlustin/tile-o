@@ -29,6 +29,9 @@ public class AddConnectionActionCardPopOut extends JDialog {
 	private JLabel lblChooseYoTiles;
 	private JLabel errorMessage;
 	private String error= "";
+	private JButton btnTileChosen;
+	private JButton btnChosenTile;
+	private JButton okButton;
 
 	/**
 	 * Launch the application.
@@ -68,14 +71,69 @@ public class AddConnectionActionCardPopOut extends JDialog {
 		errorMessage.setForeground(Color.red);
 		JLabel lblNewLabel = new JLabel("please select two tiles on the board and click on the");
 		JLabel lblToAddA = new JLabel("\"Connect\" button to add a connection between them.");
+		{
+			btnTileChosen = new JButton("Tile 1 Chosen");
+			btnTileChosen.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					error="";
+					if (TileOPlayPage.getGrid().aTileIsSelected){
+						chosenTile1 = TileOPlayPage.getGrid().selectedTile;
+					
+					}
+					if(chosenTile1==null){
+						error = "Please select a tile on the board and then press'Tile 1 Chosen' button! ";
+					}
+					error.trim();
+					errorMessage.setText(error);
+				}
+			});
+		}
+		{
+			btnChosenTile = new JButton("Tile 2 Chosen");
+			btnChosenTile.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					error="";
+					if (TileOPlayPage.getGrid().aTileIsSelected){
+						chosenTile2 = TileOPlayPage.getGrid().selectedTile;
+					}
+					if(chosenTile2==null){
+						error = "Please select a tile on the board and then press'Tile 2 Chosen' button! ";
+					}
+					error.trim();
+					errorMessage.setText(error);
+				}
+			});
+		}
+		{
+			okButton = new JButton("Connect");
+			okButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					error = "";
+					PlayModeController pmc = new PlayModeController();
+					   if(chosenTile1==null||chosenTile2==null){
+						   error = "Please choose the tiles first! ";
+					   }
+					   error.trim();
+					   if(error.length()==0) {
+						   try {
+								pmc.playConnectTilesActionCard(chosenTile1, chosenTile2);
+								TileOPlayPage.refreshData();
+								close();
+							} catch (InvalidInputException e1) {
+								error = e1.getMessage();
+							}
+					   }
+					   refreshData();
+				}
+			});
+			okButton.setActionCommand("Connect");
+			getRootPane().setDefaultButton(okButton);
+		}
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addGap(30)
-							.addComponent(errorMessage))
 						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addGap(73)
 							.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
@@ -83,8 +141,19 @@ public class AddConnectionActionCardPopOut extends JDialog {
 								.addComponent(lblNewLabel)))
 						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addGap(89)
-							.addComponent(lblChooseYoTiles)))
-					.addContainerGap(84, Short.MAX_VALUE))
+							.addComponent(lblChooseYoTiles))
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addGap(30)
+							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPanel.createSequentialGroup()
+									.addGap(9)
+									.addComponent(btnTileChosen)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(btnChosenTile)
+									.addGap(18)
+									.addComponent(okButton))
+								.addComponent(errorMessage))))
+					.addContainerGap(65, Short.MAX_VALUE))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -96,85 +165,13 @@ public class AddConnectionActionCardPopOut extends JDialog {
 					.addComponent(lblToAddA)
 					.addGap(16)
 					.addComponent(errorMessage)
-					.addContainerGap(153, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnTileChosen)
+						.addComponent(okButton)
+						.addComponent(btnChosenTile)))
 		);
 		contentPanel.setLayout(gl_contentPanel);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton btnTileChosen = new JButton("Tile 1 Chosen");
-				btnTileChosen.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						error="";
-						if (TileOPlayPage.getGrid().aTileIsSelected){
-							chosenTile1 = TileOPlayPage.getGrid().selectedTile;
-						
-						}
-						if(chosenTile1==null){
-							error = "Please select a tile on the board and then press'Tile 1 Chosen' button! ";
-						}
-						error.trim();
-						errorMessage.setText(error);
-					}
-				});
-				buttonPane.add(btnTileChosen);
-			}
-			{
-				JButton btnChosenTile = new JButton("Tile 2 Chosen");
-				btnChosenTile.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						error="";
-						if (TileOPlayPage.getGrid().aTileIsSelected){
-							chosenTile2 = TileOPlayPage.getGrid().selectedTile;
-						}
-						if(chosenTile2==null){
-							error = "Please select a tile on the board and then press'Tile 2 Chosen' button! ";
-						}
-						error.trim();
-						errorMessage.setText(error);
-					}
-				});
-				buttonPane.add(btnChosenTile);
-			}
-			{
-				JButton okButton = new JButton("Connect");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						error = "";
-						PlayModeController pmc = new PlayModeController();
-						   if(chosenTile1==null||chosenTile2==null){
-							   error = "Please choose the tiles first! ";
-						   }
-						   error.trim();
-						   if(error.length()==0) {
-							   try {
-									pmc.playConnectTilesActionCard(chosenTile1, chosenTile2);
-									TileOPlayPage.refreshData();
-									close();
-								} catch (InvalidInputException e1) {
-									error = e1.getMessage();
-								}
-						   }
-						   refreshData();
-					}
-				});
-				okButton.setActionCommand("Connect");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-//			{
-//				JButton cancelButton = new JButton("Cancel");
-//				cancelButton.addActionListener(new ActionListener() {
-//					public void actionPerformed(ActionEvent e) {
-//						close();						
-//					}
-//				});
-//				cancelButton.setActionCommand("Cancel");
-//				buttonPane.add(cancelButton);
-//			}
-		}
 	}
 	private void refreshData() {
 		errorMessage.setText("<html>"+error+"<html>");
