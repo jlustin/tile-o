@@ -44,18 +44,18 @@ public class SetPlayerStartingTIlePopOut extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SetPlayerStartingTIlePopOut frame = new SetPlayerStartingTIlePopOut();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					SetPlayerStartingTIlePopOut frame = new SetPlayerStartingTIlePopOut();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -66,7 +66,9 @@ public class SetPlayerStartingTIlePopOut extends JFrame {
 	}
 	
 	public SetPlayerStartingTIlePopOut() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setAlwaysOnTop(true);
+		setTitle("Choose Starting Tile");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -112,6 +114,8 @@ public class SetPlayerStartingTIlePopOut extends JFrame {
 				
 				try {
 					dmc.setPlayerStartingTile(chosenPlayerNumber, chosenTile);
+					System.out.println("Starting Tile for player" + chosenPlayerNumber + "successfully set");
+					System.out.println(TileOApplication.getTileO().getCurrentGame().getPlayer(chosenPlayerNumber-1).getCurrentTile().getX());
 				} catch (InvalidInputException e1) {
 					throw new RuntimeException(e1.getMessage());
 				}
