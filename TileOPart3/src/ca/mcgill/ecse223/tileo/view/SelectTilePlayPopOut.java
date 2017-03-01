@@ -106,7 +106,7 @@ public class SelectTilePlayPopOut extends JDialog {
 							error = "Please choose on tile on the board! ";
 						}
 						if(!TileOPlayPage.pMoves.contains(chosenTile)){
-							error = error+ "Please choose on tile from highligh tiles! ";
+							error = error+ "Please choose one of the highlighted tiles! ";
 						}
 						error.trim();
 						
