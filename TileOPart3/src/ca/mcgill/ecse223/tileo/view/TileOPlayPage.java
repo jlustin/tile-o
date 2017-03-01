@@ -209,6 +209,9 @@ public class TileOPlayPage extends JFrame {
 				TeleportPopOut tpo = new TeleportPopOut();
 				tpo.setVisible(true);
 				break;
+			case GAME_WON:
+				GameWonPopOut gwpo = new GameWonPopOut();
+				gwpo.setVisible(true);
 			default:
 				
 		}
