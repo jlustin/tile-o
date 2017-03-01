@@ -43,13 +43,13 @@ public class TeleportActionCard extends ActionCard
 	  
 String error = "";
 	  
-	  // Check if card is a Teleport Card
-	  if (!(super.getDeck().getCurrentCard() instanceof TeleportActionCard)){
-		  error = "The current card is not a Teleport Action Card.";
-	  }
-	  if (error.length() > 0){
-			throw new InvalidInputException (error.trim());
-	  }
+	  // Check if card is a Teleport Card REMOVED (CAUSED GAME TO CRASH)
+//	  if (!(super.getDeck().getCurrentCard() instanceof TeleportActionCard)){
+//		  error = "The current card is not a Teleport Action Card.";
+//	  }
+//	  if (error.length() > 0){
+//			throw new InvalidInputException (error.trim());
+//	  }
 	  
 	  try
 	  {
