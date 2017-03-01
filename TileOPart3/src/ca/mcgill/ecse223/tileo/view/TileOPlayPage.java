@@ -15,6 +15,7 @@ import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
 import ca.mcgill.ecse223.tileo.model.Game;
 import ca.mcgill.ecse223.tileo.model.Player;
+import ca.mcgill.ecse223.tileo.model.Tile;
 import ca.mcgill.ecse223.tileo.model.TileO;
 
 import javax.swing.JButton;
@@ -28,6 +29,7 @@ public class TileOPlayPage extends JFrame {
 	private static TilePanelPlay grid = new TilePanelPlay(TileOApplication.getTileO().getCurrentGame());
 	
 	static String currentPlayer;
+	
 	
 	
 	
@@ -203,5 +205,7 @@ public class TileOPlayPage extends JFrame {
 	}
 	
 
-
+	public static TilePanelPlay getGrid(){
+		return grid;
+	}
 }

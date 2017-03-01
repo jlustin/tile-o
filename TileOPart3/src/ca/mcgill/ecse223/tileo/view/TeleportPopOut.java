@@ -9,8 +9,10 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.DesignModeController;
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
 import ca.mcgill.ecse223.tileo.model.Game;
+import ca.mcgill.ecse223.tileo.model.Tile;
 import ca.mcgill.ecse223.tileo.model.TileO;
 
 import javax.swing.JLabel;
@@ -26,7 +28,9 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 
 public class TeleportPopOut extends JFrame {
-
+	Tile chosenTile=null;
+	String error;
+	
 	private JPanel contentPane;
 //	private final Action action = new SwingAction();
 
@@ -66,11 +70,22 @@ public class TeleportPopOut extends JFrame {
 		JLabel lblOnTheBoard = new JLabel("on the Board to teleport to and click on the \"Teleport\" button. ");
 		lblOnTheBoard.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JButton btnTeleport = new JButton("Ok");
+		JButton btnTeleport = new JButton("Teleport");
 		btnTeleport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				System.out.print("lmao");
+				error = "";
+				PlayModeController pmc = new PlayModeController();
+				if (TileODesignPage.getGrid().aTileIsSelected){
+					chosenTile = TileODesignPage.getGrid().selectedTile;
+				if(chosenTile==null){
+					error = error + "Please click a tile on the board! ";
+				}
+					try {
+						pmc.playTeleportActionCard(chosenTile);
+					} catch (InvalidInputException e1) {
+						throw new RuntimeException(e1.getMessage());
+					}
+			    }
 				close();
 			}
 		});
@@ -87,9 +102,9 @@ public class TeleportPopOut extends JFrame {
 							.addComponent(lblYouHaveDrawn)))
 					.addContainerGap(25, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(188, Short.MAX_VALUE)
+					.addContainerGap(198, Short.MAX_VALUE)
 					.addComponent(btnTeleport)
-					.addGap(177))
+					.addGap(167))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
