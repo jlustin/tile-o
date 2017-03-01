@@ -7,6 +7,7 @@ import ca.mcgill.ecse223.tileo.model.ActionTile;
 import ca.mcgill.ecse223.tileo.model.Connection;
 import ca.mcgill.ecse223.tileo.model.Game;
 import ca.mcgill.ecse223.tileo.model.NormalTile;
+import ca.mcgill.ecse223.tileo.model.Player;
 import ca.mcgill.ecse223.tileo.model.Tile;
 import ca.mcgill.ecse223.tileo.model.TileO;
 import ca.mcgill.ecse223.tileo.model.WinTile;
@@ -48,7 +49,6 @@ public class TilePanelPlay extends JPanel{
 		super();
 		//you guys can add tiles here to try the layout
 		//add the tiles in the same format and only here
-//		
 //		Tile t1 = new NormalTile(1, 1, game);
 //		Tile t2 = new NormalTile(1, 2, game);
 //		new NormalTile(13, 9, game);
@@ -66,10 +66,24 @@ public class TilePanelPlay extends JPanel{
 //		Connection c2 = new Connection(game);
 //		c2.addTile(t1);
 //		c2.addTile(t3);
-		init(game);
+//		t5.setHasBeenVisited(true);
+//
 //		Connection c3 = new Connection(game);
 //		c3.addTile(t4);
 //		c3.addTile(t5);
+//		Player p1 = new Player(1, game);
+//		Player p2 = new Player(2, game);
+//		game.addPlayer(p1);
+////		game.addPlayer(p2);
+//		Player p1 = new Player(0, game);
+//		Player p2 = game.getPlayer(1);
+//		p1.setCurrentTile(t1);
+//		game.addPlayer(p1);
+		//p2.setCurrentTile(t2);
+		
+//		
+		
+		init(game);
 		
 	}
 	
@@ -171,20 +185,13 @@ public class TilePanelPlay extends JPanel{
 			float locationX = SPACING;
 			float locationY = SPACING;
 			
-			//the things commented below were for me to check my math
-//			float size = (float) (axisSize*squareSize + SPACING*(axisSize*2));
-//			System.out.println(size);
-//			System.out.println(axisSize);
-//			System.out.println(squareSize);
-//			System.out.println(SPACING);
 			for (Tile aTile: myGame.getTiles()) {
 				int x = aTile.getX()-1;
 				int y = aTile.getY()-1;
 				locationX = (float) (SPACING + gridspace*x);
 				locationY = (float) (SPACING + gridspace*y);
 
-				//the below was used for testing
-				//System.out.println(aTile.toString());
+				
 				Rectangle2D rect = new Rectangle2D.Float(
 						locationX, 
 						locationY, 
@@ -194,21 +201,10 @@ public class TilePanelPlay extends JPanel{
 				tiles.put(rect, aTile);
 				tRectangles.put(aTile, rect);
 				
-				if(aTile instanceof NormalTile){
-					g2d.setColor(Color.BLUE);
-				}
-				
-				else if(aTile instanceof WinTile){
-					g2d.setColor(Color.BLACK);
-				}
-				
-				else if(aTile instanceof ActionTile){
-					g2d.setColor(Color.RED);
-				}
-				
+				g2d.setColor(Color.BLACK);
 				g2d.draw(rect);
 				//if instead you want a full colored tile, uncomment the below and comment the above
-				g2d.fill(rect);
+				//g2d.fill(rect);
 
 				
 				if (selectedTile != null && selectedTile.equals(aTile)) {
@@ -216,22 +212,28 @@ public class TilePanelPlay extends JPanel{
 					aTileIsSelected = true;
 					Rectangle2D rectangle = tRectangles.get(aTile);
 					
-					g2d.setColor(Color.PINK); //doesn't work. I want to show the tile differently when selected
+					g2d.setColor(Color.PINK); 
 				
 					g2d.fill(rectangle);
-					
-		
+						
 				}
+				
+				if(aTile.getHasBeenVisited()){
+					Rectangle2D r = tRectangles.get(aTile);
+					g2d.setColor(Color.BLACK);
+					g2d.fill(r);
+				}
+				
+				for (Player aPlayer: myGame.getPlayers()){
+					Tile cTile = aPlayer.getCurrentTile();
+					Rectangle2D r = tRectangles.get(cTile);
+					String number = String.valueOf(aPlayer.getNumber());
+					g2d.drawString(number, (int) r.getX(), (int) r.getY());
+				}
+				
 
 				repaint();
 			}
-			
-			//horizontal
-//			for (Tile aTile: myGame.getTiles()){
-//				for(Tile bTile: myGame.getTiles()){
-//					
-//				}
-//			}
 			
 			
 			for (Connection aConnection: myGame.getConnections()){
