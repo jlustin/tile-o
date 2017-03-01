@@ -43,8 +43,8 @@ public class TileOApplication {
 		// model cannot be loaded - create empty TileO
 		if (tileO == null) {
 			tileO = new TileO();
-			Game game = new Game (32, tileO);
-			tileO.setCurrentGame(game);
+//			Game game = new Game (32, tileO);
+//			tileO.setCurrentGame(game);
 			//Player.reinitializeUniquePlayer(tileO.getCurrentGame().getPlayers());
 		}
 		else {

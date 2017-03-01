@@ -147,7 +147,6 @@ public class WelcomePage extends JFrame {
 //					new NormalTile(1, 1, newGame);
 					if(TileOApplication.getTileO().getGame(chosenGameIndex).getMode() == Mode.DESIGN){
 						TileOApplication.getTileO().setCurrentGame(dmc.loadDesign(chosenGameIndex));
-
 					}
 					else if(TileOApplication.getTileO().getGame(chosenGameIndex).getMode() == Mode.GAME){
 						TileOApplication.getTileO().setCurrentGame(pmc.loadGame(chosenGameIndex));
