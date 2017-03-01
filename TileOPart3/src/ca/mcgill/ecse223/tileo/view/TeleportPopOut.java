@@ -37,18 +37,18 @@ public class TeleportPopOut extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TeleportPopOut frame = new TeleportPopOut();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					TeleportPopOut frame = new TeleportPopOut();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -75,8 +75,8 @@ public class TeleportPopOut extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				error = "";
 				PlayModeController pmc = new PlayModeController();
-				if (TileODesignPage.getGrid().aTileIsSelected){
-					chosenTile = TileODesignPage.getGrid().selectedTile;
+				if (TileOPlayPage.getGrid().aTileIsSelected){
+					chosenTile = TileOPlayPage.getGrid().selectedTile;
 				if(chosenTile==null){
 					error = error + "Please click a tile on the board! ";
 				}

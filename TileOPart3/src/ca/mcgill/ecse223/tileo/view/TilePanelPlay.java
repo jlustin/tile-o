@@ -201,7 +201,8 @@ public class TilePanelPlay extends JPanel{
 				rectangles.add(rect);
 				tiles.put(rect, aTile);
 				tRectangles.put(aTile, rect);
-				
+				g2d.setColor(Color.WHITE);
+				g2d.fill(rect);
 				g2d.setColor(Color.black);
 				g2d.draw(rect);
 				//if instead you want a full colored tile, uncomment the below and comment the above
