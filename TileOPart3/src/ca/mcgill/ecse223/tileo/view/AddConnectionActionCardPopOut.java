@@ -61,6 +61,8 @@ public class AddConnectionActionCardPopOut extends JFrame {
 	}
 	
 	public AddConnectionActionCardPopOut() {
+		setTitle("Add A Connection Action Card");
+		setResizable(false);
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 670, 369);
@@ -116,6 +118,7 @@ public class AddConnectionActionCardPopOut extends JFrame {
 				if (error.length() == 0){
 					try {
 						pmc.playConnectTilesActionCard(chosenTile1, chosenTile2);
+						TileOPlayPage.refreshData();
 						close();
 					}
 					catch (InvalidInputException e1){
