@@ -115,9 +115,9 @@ public class PlayModeController {
 	 * 4. Take the first card from the deck of cards
 	 * CM
 	 */
-	//Not needed because it is already handled (in the ActionTile Class)
 	
-	public ActionCard drawCard(Game currentGame) {
+	//helper method called within this controller
+	private ActionCard drawCard(Game currentGame) {
 		
 		Deck deck = currentGame.getDeck();
 		ActionCard drawnCard = deck.getCurrentCard();

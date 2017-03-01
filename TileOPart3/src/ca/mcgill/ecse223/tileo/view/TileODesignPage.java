@@ -167,7 +167,7 @@ public class TileODesignPage extends JFrame {
 		btnSetStartingTile.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				SetPlayerStartingTIlePopOut spstpo = new SetPlayerStartingTIlePopOut();
+				SetPlayerStartingTilePopOut spstpo = new SetPlayerStartingTilePopOut();
 				spstpo.setVisible(true);
 				
 			}
