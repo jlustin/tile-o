@@ -58,8 +58,8 @@ public class TileODesignPage extends JFrame {
 	 * Create the frame.
 	 */
 	public TileODesignPage() {
-		WelcomePage wp = new WelcomePage();
-		wp.setVisible(true);
+//		WelcomePage wp = new WelcomePage();
+//		wp.setVisible(true);
 		setTitle("Design Mode");
 		initComponents();
 		refreshData();
@@ -263,9 +263,9 @@ public class TileODesignPage extends JFrame {
 		
 		//----------------------------------------------------------------------------------------------------
 //		TilePanel grid = new TilePanel(TileOApplication.getTileO().getCurrentGame());
-//		grid.setVisible(true);
-//		grid.setSize(700, 720);
-//		
+		grid.setVisible(true);
+		grid.setSize(700, 720);
+		
 		
 		
 		

@@ -19,7 +19,14 @@ public class TileOApplication {
 		// TODO startup the UI corresponding to the right mode?
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TileODesignPage().setVisible(true);
+            	new WelcomePage().setVisible(true);
+            	//getTileO().getCurrentGame()
+            	if (getTileO().getCurrentGame().getMode() == Mode.DESIGN){
+            		new TileODesignPage().setVisible(true);
+            	}
+            	else{
+            		new TileOPlayPage().setVisible(true);
+            	}
             }
         });
         
@@ -47,7 +54,7 @@ public class TileOApplication {
 			tileO.setCurrentGame(game);
 		}
 		else {
-			Player.reinitializeUniquePlayer(tileO.getCurrentGame().getPlayers());
+			//Player.reinitializeUniquePlayer(tileO.getCurrentGame().getPlayers());
 		}
 		return tileO;
 	}
