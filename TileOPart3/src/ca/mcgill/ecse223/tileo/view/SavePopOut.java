@@ -51,7 +51,7 @@ public class SavePopOut extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblGameDesignSuccessfully = new JLabel("Game design successfully saved!");
+		JLabel lblGameDesignSuccessfully = new JLabel("Game successfully saved!");
 		
 		JButton btnOk = new JButton("Ok");
 		btnOk.addActionListener(new ActionListener() {
@@ -63,18 +63,18 @@ public class SavePopOut extends JFrame {
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(122, Short.MAX_VALUE)
+					.addContainerGap(145, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(lblGameDesignSuccessfully)
-							.addGap(111))
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 							.addComponent(btnOk)
-							.addGap(177))))
+							.addGap(177))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(lblGameDesignSuccessfully)
+							.addGap(134))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblGameDesignSuccessfully)
 					.addPreferredGap(ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
