@@ -61,6 +61,7 @@ public class AddConnectionActionCardPopOut extends JFrame {
 	}
 	
 	public AddConnectionActionCardPopOut() {
+		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 670, 369);
 		contentPane = new JPanel();
@@ -77,12 +78,11 @@ public class AddConnectionActionCardPopOut extends JFrame {
 		btnTileChosen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				error = ""; 
-				PlayModeController pmc = new PlayModeController();
 				if (TileOPlayPage.getGrid().aTileIsSelected){
 					chosenTile1 = TileOPlayPage.getGrid().selectedTile;
 				}
 				if (chosenTile1 == null){
-					error =  "Please select a tile on the board andpress 'Tile 1 Chosen' button! ";
+					error =  "Please select a tile on the board and press 'Tile 1 Chosen' button! ";
 				}
 				error.trim();
 				errorMessage.setText(error);
@@ -93,12 +93,11 @@ public class AddConnectionActionCardPopOut extends JFrame {
 		btnTileChosen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				error = ""; 
-				PlayModeController pmc = new PlayModeController();
 				if (TileOPlayPage.getGrid().aTileIsSelected){
 					chosenTile2 = TileOPlayPage.getGrid().selectedTile;
 				}
 				if (chosenTile2 == null){
-					error =  "Please select a tile on the board andpress 'Tile 2 Chosen' button! ";
+					error =  "Please select a tile on the board and press 'Tile 2 Chosen' button! ";
 				}
 				error.trim();
 				errorMessage.setText(error);
@@ -115,16 +114,15 @@ public class AddConnectionActionCardPopOut extends JFrame {
 				}
 				error.trim();
 				if (error.length() == 0){
-					
-				
 					try {
 						pmc.playConnectTilesActionCard(chosenTile1, chosenTile2);
+						close();
 					}
 					catch (InvalidInputException e1){
 						throw new RuntimeException (e1.getMessage());
 					}
 				}	
-				close();	
+				refreshData();	
 			}
 			
 		});
