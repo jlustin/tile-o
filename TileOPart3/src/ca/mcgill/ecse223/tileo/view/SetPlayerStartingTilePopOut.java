@@ -121,7 +121,7 @@ public class SetPlayerStartingTilePopOut extends JFrame {
 						System.out.println("Starting Tile for player" + chosenPlayerNumber + "successfully set");
 						System.out.println(TileOApplication.getTileO().getCurrentGame().getPlayer(chosenPlayerNumber-1).getCurrentTile().getX());
 					} catch (InvalidInputException e1) {
-						throw new RuntimeException(e1.getMessage());
+						error = e1.getMessage();
 					}	
 				}
 				refreshData();
@@ -134,39 +134,37 @@ public class SetPlayerStartingTilePopOut extends JFrame {
 		errorMessage.setForeground(Color.RED);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(188)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(radioButton_2)
+						.addComponent(radioButton_1)
+						.addComponent(radioButton)
+						.addComponent(radioButton_3)
+						.addComponent(btnSet))
+					.addContainerGap(75, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(53, Short.MAX_VALUE)
+					.addComponent(lblChooseItsStarting)
+					.addGap(49))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(94, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(171)
-							.addComponent(btnSet))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(97)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(93)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-										.addComponent(radioButton_2)
-										.addComponent(radioButton_1)
-										.addComponent(radioButton)
-										.addComponent(radioButton_3)))
-								.addComponent(lblChooseItsStarting)
-								.addComponent(errorMessage)))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(121)
-							.addComponent(lblSelectTheNumber)))
-					.addContainerGap(99, Short.MAX_VALUE))
+						.addComponent(errorMessage)
+						.addComponent(lblSelectTheNumber))
+					.addGap(88))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
+					.addGap(7)
+					.addComponent(errorMessage)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblSelectTheNumber)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblChooseItsStarting)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(errorMessage)
-					.addGap(9)
+					.addGap(22)
 					.addComponent(radioButton_3)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(radioButton)
@@ -174,13 +172,14 @@ public class SetPlayerStartingTilePopOut extends JFrame {
 					.addComponent(radioButton_1)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(radioButton_2)
-					.addGap(28)
-					.addComponent(btnSet))
+					.addGap(5)
+					.addComponent(btnSet)
+					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
 	private void refreshData() {
-		errorMessage.setText("<html>"+error+"<html>");
+		errorMessage.setText(error);
 		if(error == null || error.length()==0){
 			close();
 		}

@@ -283,15 +283,24 @@ public class DesignModeController {
 	public void setPlayerStartingTile(int playerNumber, Tile startingTile) throws InvalidInputException {
 		TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
-		List<Player> listOfPlayers= currentGame.getPlayers();
-		Player aPlayer = listOfPlayers.get(0);
+		String error = "";
+		if(playerNumber > currentGame.numberOfPlayers()) {
+			error = " The player doesn't exist! ";
+		}
+		if (error.length() > 0) {
+			throw new InvalidInputException(error.trim());
+		}
+		try {
+			List<Player> listOfPlayers= currentGame.getPlayers();
+			Player aPlayer = listOfPlayers.get(0);	
+			Player actualPlayer = aPlayer.getWithNumber(playerNumber);
+			actualPlayer.setStartingTile(startingTile);
+			actualPlayer.setCurrentTile(startingTile);
+		}
+		catch (RuntimeException e) {
+			throw new InvalidInputException(error);
+		}
 		
-		Player actualPlayer = aPlayer.getWithNumber(playerNumber);
-		
-		
-
-		actualPlayer.setStartingTile(startingTile);
-		actualPlayer.setCurrentTile(startingTile);
 
 		
 	}
