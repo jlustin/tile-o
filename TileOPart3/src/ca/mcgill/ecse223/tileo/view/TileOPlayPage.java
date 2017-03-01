@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
@@ -13,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
+import ca.mcgill.ecse223.tileo.model.Tile;
 
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -28,22 +30,24 @@ public class TileOPlayPage extends JFrame {
 	
 	
 	private JPanel contentPane;
+	private String error;
+	private List<Tile> pMoves;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TileOPlayPage frame = new TileOPlayPage();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					TileOPlayPage frame = new TileOPlayPage();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -97,9 +101,9 @@ public class TileOPlayPage extends JFrame {
 	    
 	    JButton btnSave = new JButton("Save");
 	    btnSave.addActionListener(new ActionListener() {
-	    	public void actionPerformed(ActionEvent arg0) {
+	    	public void actionPerformed(ActionEvent evt) {
 	    		// TODO: Save the game
-	    		
+	    		rollDieActionPerformed(evt);
 	    	}
 	    });
 	    
@@ -107,6 +111,7 @@ public class TileOPlayPage extends JFrame {
 	    btnRollDie.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		// TODO: Roll the die
+	    		
 	    		
 	    	}
 	    });
@@ -163,6 +168,14 @@ public class TileOPlayPage extends JFrame {
 		
 	}
 	
-
+	public void rollDieActionPerformed(java.awt.event.ActionEvent evt){
+		error = "";
+		PlayModeController pmc= new PlayModeController();
+		pMoves = pmc.rollDie();
+		grid.possibleMoves = pMoves;
+		System.out.println(pMoves.size()+"pmoves");
+		System.out.println(grid.possibleMoves.size()+ "grid");
+		refreshData();
+	}
 
 }

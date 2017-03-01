@@ -43,6 +43,7 @@ public class TilePanelPlay extends JPanel{
 	private HashMap<Tile, Rectangle2D> tRectangles;
 	private HashMap<Rectangle2D, Connection> connections;
 	private HashMap<Connection, Rectangle2D> cRectangles;
+	public List<Tile> possibleMoves;
 
 	
 	public TilePanelPlay(Game game) {
@@ -201,7 +202,7 @@ public class TilePanelPlay extends JPanel{
 				tiles.put(rect, aTile);
 				tRectangles.put(aTile, rect);
 				
-				g2d.setColor(Color.BLACK);
+				g2d.setColor(Color.black);
 				g2d.draw(rect);
 				//if instead you want a full colored tile, uncomment the below and comment the above
 				//g2d.fill(rect);
@@ -220,21 +221,30 @@ public class TilePanelPlay extends JPanel{
 				
 				if(aTile.getHasBeenVisited()){
 					Rectangle2D r = tRectangles.get(aTile);
-					g2d.setColor(Color.BLACK);
+					g2d.setColor(Color.PINK);
 					g2d.fill(r);
 				}
 				
-				for (Player aPlayer: myGame.getPlayers()){
-					Tile cTile = aPlayer.getCurrentTile();
-					Rectangle2D r = tRectangles.get(cTile);
-					String number = String.valueOf(aPlayer.getNumber());
-					g2d.drawString(number, (int) r.getX(), (int) r.getY());
+				if(possibleMoves != null) {
+					if(possibleMoves.contains(aTile)){
+						g2d.setColor(Color.GREEN);
+						Rectangle2D r = tRectangles.get(aTile);
+						g2d.fill(r);
+					}
 				}
+				
 				
 
 				repaint();
 			}
 			
+			for (Player aPlayer: myGame.getPlayers()){
+				Tile cTile = aPlayer.getCurrentTile();
+				Rectangle2D r = tRectangles.get(cTile);
+				String number = String.valueOf(aPlayer.getNumber());
+				g2d.setColor(Color.BLACK);
+				g2d.drawString(number, (int) r.getCenterX(), (int) r.getCenterY());
+			}
 			
 			for (Connection aConnection: myGame.getConnections()){
 				List<Tile> tempTiles = aConnection.getTiles();
