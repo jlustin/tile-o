@@ -227,9 +227,9 @@ public class Player implements Serializable
   
   //Method to get all the possible moves of current player according to his current Tile.
   public List<Tile> getPossibleMoves(int moveLeft) { 
-	  List<Tile> possibleMoves;
+	
 	  Tile currentTile=this.getCurrentTile();
-	  possibleMoves =currentTile.getNextMoves(moveLeft, null) ;   	  
+	  List<Tile> possibleMoves = currentTile.getNextMoves(moveLeft, null) ;   	  
       return possibleMoves;	  	  
   }
   

@@ -273,26 +273,27 @@ public abstract class Tile implements Serializable
 	  	//Create a ArrayList to store the neighbor Tile
 	  List<Tile> possibleMoveTiles =  new ArrayList<>();
 	  List<Connection> connections = new ArrayList<>();
-	  int i = 0;
-      
-	  //If the moveLeft is 1, then add Tile itself into list possibleMoveTiles
+	  //If the moveLeft is 0, then add Tile itself into list possibleMoveTiles
 	  if(moveLeft==0) {
 		  possibleMoveTiles.add(this);
 		  return possibleMoveTiles;
 	  }
-	  
-	  /*If the Tile only has one connection, and it connects with previousTiles, it means this Tile cannot get possible moves anymore,
-	   therefore, add the Tile itself into list possibleMoveTiles*/
-	  if(this.getConnections().size()==1 && (getConnection(0).getTile(0).equals(previousTile)||getConnection(0).getTile(1).equals(previousTile))){
+	  if(this.getConnections().size()==1) {
 		  possibleMoveTiles.add(this);
 		  return possibleMoveTiles;
 	  }
 	  
-	  for(Connection c:connections){
-		  List<Tile> neiborTiles = c.getTiles();
-		  int index = neiborTiles.indexOf(this);
-		  Tile neighborTile = neiborTiles.get(1-index);
-		  possibleMoveTiles.addAll(neighborTile.getNextMoves(moveLeft-1,this));
+	  for(int i=0;i<this.getConnections().size();i++){
+		  if(!this.getConnection(i).getTiles().contains(previousTile)){
+			  connections.add(this.getConnection(i));
+		  }
+	  }
+	  for(Connection cnt:connections){
+		  List<Tile> neighborTiles = cnt.getTiles();
+		  int indexOfNeiborTile =neighborTiles.indexOf(this)==0 ? 1:0;
+		  Tile neighborTile = neighborTiles.get(indexOfNeiborTile);
+		  List<Tile> tiles = neighborTile.getNextMoves(moveLeft-1, this);
+		  possibleMoveTiles.addAll(tiles);
 		  
 	  }
 	  return possibleMoveTiles;  

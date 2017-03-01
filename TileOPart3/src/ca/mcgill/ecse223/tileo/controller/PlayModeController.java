@@ -78,8 +78,8 @@ public class PlayModeController {
 		//TODO: CHARLES
 		TileO tileO = TileOApplication.getTileO(); 
 		Game currentGame = tileO.getCurrentGame();
-		
-		return currentGame.rollDie(); //method in Game class
+		List<Tile> possibleMoves = currentGame.rollDie();
+		return possibleMoves; //method in Game class
 	}
 	
 	/*
