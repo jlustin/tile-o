@@ -223,11 +223,11 @@ public class TilePanelPlay extends JPanel{
 				
 				if(aTile.getHasBeenVisited()){
 					Rectangle2D r = tRectangles.get(aTile);
-					g2d.setColor(Color.PINK);
+					g2d.setColor(Color.GRAY);
 					g2d.fill(r);
 				}
 				
-				if(isAPlayerTurn){
+				if(isAPlayerTurn){	//added by Li
 					if(possibleMoves != null) {
 						if(possibleMoves.contains(aTile)){
 							g2d.setColor(Color.GREEN);

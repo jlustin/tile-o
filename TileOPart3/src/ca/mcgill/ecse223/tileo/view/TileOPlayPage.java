@@ -117,6 +117,8 @@ public class TileOPlayPage extends JFrame {
 	    		pMoves = pmc.rollDie();
 	    		grid.possibleMoves=pMoves;
 	    		
+	    		grid.isAPlayerTurn = true;	//added by Li
+	    		
 	    		SelectTilePlayPopOut stpop = new SelectTilePlayPopOut();
 	    		stpop.setVisible(true);
 	    		
