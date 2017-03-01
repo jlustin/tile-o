@@ -116,7 +116,7 @@ public class TileOPlayPage extends JFrame {
 	    		PlayModeController pmc = new PlayModeController();
 	    		pMoves = pmc.rollDie();
 	    		grid.possibleMoves=pMoves;
-	    		tpp.refreshBoard();
+	    	
 	    	}
 	    });
 	    GroupLayout gl_contentPane = new GroupLayout(contentPane);
