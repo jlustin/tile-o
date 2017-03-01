@@ -1,6 +1,7 @@
 package ca.mcgill.ecse223.tileo.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -31,7 +32,7 @@ public class WelcomePage extends JFrame {
 
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	
+	private JLabel errorMessage;
 	String error;
 	ButtonModel chosenNumber;
 	String numberOfPlayers;
@@ -83,29 +84,33 @@ public class WelcomePage extends JFrame {
 		JButton btnCreateGame = new JButton("Create Game");
 		btnCreateGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				ButtonModel playerNumber;
 				error = "";
-				chosenNumber = buttonGroup.getSelection();
-				numberOfPlayers = chosenNumber.getActionCommand();
-				chosenNumberOfPlayers =  Integer.parseInt(numberOfPlayers);
+				playerNumber = buttonGroup.getSelection();
+			
+				if(playerNumber==null) {
+					error = "Please select player number";
+				}
+				error.trim();
+				if(error.length()==0) {						
+					try {
+						DesignModeController dmc = new DesignModeController ();
+						dmc.createGame( Integer.parseInt(playerNumber.getActionCommand()));
+					} catch (InvalidInputException e) {			
+						error = e.getMessage();
+					}					
+				}
+				refreshData();
 				
-				DesignModeController dmc = new DesignModeController ();
-				
-				try 
-				{
 					//System.out.print("" + TileOApplication.getTileO().getCurrentGame()); //TODO: DELETE
-					dmc.createGame(chosenNumberOfPlayers);
+					
 //					TileOApplication.getTileO().setCurrentGame(newGame);
 					//System.out.print(" " + chosenNumberOfPlayers);
-					TileODesignPage.refreshData();
+					
 					
 					//System.out.print("" + TileOApplication.getTileO().getCurrentGame()); //TODO: DELETE
-					close ();
-				}
-				catch (InvalidInputException e){
-					error = e.getMessage();
 					
-				}
+				
 			}
 		});
 		
@@ -143,6 +148,9 @@ public class WelcomePage extends JFrame {
 				}
 			}
 		});
+		
+		errorMessage = new JLabel("New label");
+		errorMessage.setForeground(Color.RED);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -155,31 +163,35 @@ public class WelcomePage extends JFrame {
 					.addComponent(radioButton_2)
 					.addGap(116)
 					.addComponent(btnCreateGame)
-					.addContainerGap(93, Short.MAX_VALUE))
+					.addContainerGap(98, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(385, Short.MAX_VALUE)
+					.addContainerGap(379, Short.MAX_VALUE)
 					.addComponent(lblContinueEditing)
 					.addGap(210))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(270, Short.MAX_VALUE)
+					.addContainerGap(291, Short.MAX_VALUE)
 					.addComponent(gameNumberIndexCB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(261))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(265, Short.MAX_VALUE)
+					.addContainerGap(269, Short.MAX_VALUE)
 					.addComponent(loadButton)
 					.addGap(255))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(180, Short.MAX_VALUE)
+					.addContainerGap(138, Short.MAX_VALUE)
 					.addComponent(btnNewButton)
 					.addGap(170))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(141, Short.MAX_VALUE)
+					.addContainerGap(66, Short.MAX_VALUE)
 					.addComponent(lblNewLabel_1)
 					.addGap(131))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(132, Short.MAX_VALUE)
+					.addContainerGap(50, Short.MAX_VALUE)
 					.addComponent(lblNewLabel)
 					.addGap(123))
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addGap(225)
+					.addComponent(errorMessage)
+					.addContainerGap(292, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -202,7 +214,9 @@ public class WelcomePage extends JFrame {
 						.addComponent(loadButton))
 					.addGap(34)
 					.addComponent(btnNewButton)
-					.addContainerGap(162, Short.MAX_VALUE))
+					.addGap(38)
+					.addComponent(errorMessage)
+					.addContainerGap(91, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
@@ -216,5 +230,11 @@ public class WelcomePage extends JFrame {
 	public void close() { 
 		this.setVisible(false);
 	    this.dispose();
+	}
+	private void refreshData() {
+		errorMessage.setText("<html>"+error+"<html>");
+		if(error == null || error.length()==0){
+			close();
+		}
 	}
 }
