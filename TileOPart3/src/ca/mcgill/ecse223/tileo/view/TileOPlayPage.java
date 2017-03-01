@@ -14,7 +14,13 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
+
 import ca.mcgill.ecse223.tileo.model.Tile;
+
+import ca.mcgill.ecse223.tileo.model.Game;
+import ca.mcgill.ecse223.tileo.model.Player;
+import ca.mcgill.ecse223.tileo.model.TileO;
+
 
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -26,12 +32,18 @@ public class TileOPlayPage extends JFrame {
 
 	private static TilePanelPlay grid = new TilePanelPlay(TileOApplication.getTileO().getCurrentGame());
 	
+	static String currentPlayer;
 	
 	
 	
 	private JPanel contentPane;
+
 	private String error;
 	private List<Tile> pMoves;
+
+	private static JLabel playerTurnLabel;
+	private static JLabel currentModeLabel;
+
 
 	/**
 	 * Launch the application.
@@ -66,23 +78,15 @@ public class TileOPlayPage extends JFrame {
 	private void initComponents(){
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//this.setBounds(100, 100, 450, 300);
+	
 		this.setSize(1200, 720);
 		this.setResizable(false);
 		
 		contentPane = new JPanel();
 		contentPane.setSize(490, 720);
-		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
 		contentPane.setVisible(true);
-		//contentPane.setLayout(gl_contentPane);
-		
-		//----------------------------------------------------------------------------------------------------
-//		TilePanel grid = new TilePanel(TileOApplication.getTileO().getCurrentGame());
-//		grid.setVisible(true);
-//		grid.setSize(700, 720);
-//		
-		
-		
+
 		
 		
 		JSplitPane splitPane = new JSplitPane();
@@ -93,24 +97,29 @@ public class TileOPlayPage extends JFrame {
 	    splitPane.setLeftComponent(grid);
 	    splitPane.setRightComponent(contentPane);
 	    
-	    JLabel lblNewLabel = new JLabel("JLabel for Player x's Turn");
+	    playerTurnLabel = new JLabel("It is currently Player x's turn.");
 	    
 	    JLabel lblJlabelForErrors = new JLabel("JLabel for Errors");
 	    
-	    JLabel lblJlabelForMode = new JLabel("JLabel for Mode");
+	    currentModeLabel = new JLabel("JLabel for Mode");
 	    
 	    JButton btnSave = new JButton("Save");
 	    btnSave.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent evt) {
 	    		// TODO: Save the game
-	    		rollDieActionPerformed(evt);
 	    	}
 	    });
 	    
 	    JButton btnRollDie = new JButton("Roll Die");
 	    btnRollDie.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		// TODO: Roll the die
+	    		error = "";
+	    		PlayModeController pmc= new PlayModeController();
+	    		pMoves = pmc.rollDie();
+	    		grid.possibleMoves = pMoves;
+	    		System.out.println(pMoves.size()+"pmoves");
+	    		System.out.println(grid.possibleMoves.size()+ "grid");
+	    		refreshData();
 	    		
 	    		
 	    	}
@@ -128,7 +137,7 @@ public class TileOPlayPage extends JFrame {
 	    			.addContainerGap(198, Short.MAX_VALUE))
 	    		.addGroup(gl_contentPane.createSequentialGroup()
 	    			.addGap(185)
-	    			.addComponent(lblJlabelForMode)
+	    			.addComponent(currentModeLabel)
 	    			.addContainerGap(186, Short.MAX_VALUE))
 	    		.addGroup(gl_contentPane.createSequentialGroup()
 	    			.addGap(183)
@@ -136,18 +145,18 @@ public class TileOPlayPage extends JFrame {
 	    			.addContainerGap(183, Short.MAX_VALUE))
 	    		.addGroup(gl_contentPane.createSequentialGroup()
 	    			.addGap(152)
-	    			.addComponent(lblNewLabel)
+	    			.addComponent(playerTurnLabel)
 	    			.addContainerGap(152, Short.MAX_VALUE))
 	    );
 	    gl_contentPane.setVerticalGroup(
 	    	gl_contentPane.createParallelGroup(Alignment.LEADING)
 	    		.addGroup(gl_contentPane.createSequentialGroup()
 	    			.addGap(23)
-	    			.addComponent(lblNewLabel)
+	    			.addComponent(playerTurnLabel)
 	    			.addGap(18)
 	    			.addComponent(lblJlabelForErrors)
 	    			.addGap(18)
-	    			.addComponent(lblJlabelForMode)
+	    			.addComponent(currentModeLabel)
 	    			.addGap(53)
 	    			.addComponent(btnRollDie)
 	    			.addPreferredGap(ComponentPlacement.RELATED, 432, Short.MAX_VALUE)
@@ -162,20 +171,28 @@ public class TileOPlayPage extends JFrame {
 	}
 		
 	public static void refreshData(){
+		TileO tileO = TileOApplication.getTileO();
+		Game currentGame = tileO.getCurrentGame();
+		Game.Mode currentMode = currentGame.getMode();
+		Player player = currentGame.getCurrentPlayer();
+		
+		
+		int playerNumber = 1;
+		//int playerNumber = player.getNumber(); //gives error if uncommented
+		
+		
 		grid.setGame(TileOApplication.getTileO().getCurrentGame());
 		grid.setVisible(true);
 		grid.setSize(700, 720);
 		
+		playerTurnLabel.setText("It is currently player " + playerNumber + "'s turn.");
+		currentModeLabel.setText("CurrentMode: " + currentMode.name());
+		
+		
+		
+		
 	}
 	
-	public void rollDieActionPerformed(java.awt.event.ActionEvent evt){
-		error = "";
-		PlayModeController pmc= new PlayModeController();
-		pMoves = pmc.rollDie();
-		grid.possibleMoves = pMoves;
-		System.out.println(pMoves.size()+"pmoves");
-		System.out.println(grid.possibleMoves.size()+ "grid");
-		refreshData();
-	}
+
 
 }
