@@ -299,14 +299,13 @@ public class PlayModeController {
 		
 	}
 	
-	public Game loadGame(Game aGame) throws InvalidInputException {
+	public Game loadGame(int index) throws InvalidInputException {
 		//TODO: LI check if it's load() or this function
 		//set mode to "GAME" when loading a game
 		
 		TileO tileO = TileOApplication.getTileO();
 		try {
-			int gameIndex = tileO.indexOfGame(aGame);
-			Game loadedGame = tileO.getGame(gameIndex);
+			Game loadedGame = tileO.getGame(index);
 			loadedGame.setMode(Mode.GAME);
 			return loadedGame;
 		}
