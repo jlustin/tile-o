@@ -226,34 +226,11 @@ public class Player implements Serializable
   //------------------------
   
   //Method to get all the possible moves of current player according to his current Tile.
-  public List<Tile> getPossibleMoves(int moveLeft) {
-	  //Initialize variables
-	  List<Tile> possibleMoves = new ArrayList<Tile>();
-	  Tile neighborTile;
-	  Connection connectionOfTile;
-	  
-	  //If the current Tile doesn't have any connections,return null.
-	  if (currentTile.getConnections().size()==0){
-		  return null;
-	  }
-	  
-	  
-	  else{
-		  //else, choose the neighbor Tile of current Tile
-		  for(int i = 0;i<currentTile.getConnections().size();i++){
-			  connectionOfTile = currentTile.getConnection(i);
-    	  	  for(int j =0;j<connectionOfTile.getTiles().size();j++){
-    	  		  neighborTile = connectionOfTile.getTile(j);
-    	  		  /*If the the neighbor Tile is not the currentTile, then call getNextMove in the 
-    	  		   * neighbor Tile to get all the possible Moves of current player.*/
-    	  		  if (!neighborTile.equals(currentTile)){
-    	  			  possibleMoves.addAll(neighborTile.getNextMoves(moveLeft,currentTile));
-    	  		  }
-    	  	  }
-	      }  	  
-       return possibleMoves;	  
-      }
-	  
+  public List<Tile> getPossibleMoves(int moveLeft) { 
+	  List<Tile> possibleMoves;
+	  Tile currentTile=this.getCurrentTile();
+	  possibleMoves =currentTile.getNextMoves(moveLeft, null) ;   	  
+      return possibleMoves;	  	  
   }
   
   //------------------------

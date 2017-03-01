@@ -271,12 +271,12 @@ public abstract class Tile implements Serializable
   //Method to get next moves according to the current Tile
   public List<Tile> getNextMoves (int moveLeft,Tile previousTile) {
 	  	//Create a ArrayList to store the neighbor Tile
-	  List<Tile> possibleMoveTiles =  new ArrayList<Tile>();
+	  List<Tile> possibleMoveTiles =  new ArrayList<>();
+	  List<Connection> connections = new ArrayList<>();
 	  int i = 0;
-	  Tile neighborTile;
       
 	  //If the moveLeft is 1, then add Tile itself into list possibleMoveTiles
-	  if(moveLeft==1) {
+	  if(moveLeft==0) {
 		  possibleMoveTiles.add(this);
 		  return possibleMoveTiles;
 	  }
@@ -288,18 +288,13 @@ public abstract class Tile implements Serializable
 		  return possibleMoveTiles;
 	  }
 	  
-      //Pick each connection piece that connect to this Tile 
-	  for(i=0;i<getConnections().size();i++){
-			 Connection nextConnection = getConnection(i);
-			 //Get all neighborTile
-			 for(int j=0;j<2;j++){			
-				 neighborTile = nextConnection.getTile(j);
-				  //If the neighborTile is not the Tile itself and is not the previous Tile,then, recursively call getNextMove in order to get possible moves.
-				  if((!neighborTile.equals(this))&&(!neighborTile.equals(previousTile))){
-					   possibleMoveTiles.addAll(neighborTile.getNextMoves(moveLeft-1,this));
-			      }			
-			 }			  
-		  }
+	  for(Connection c:connections){
+		  List<Tile> neiborTiles = c.getTiles();
+		  int index = neiborTiles.indexOf(this);
+		  Tile neighborTile = neiborTiles.get(1-index);
+		  possibleMoveTiles.addAll(neighborTile.getNextMoves(moveLeft-1,this));
+		  
+	  }
 	  return possibleMoveTiles;  
   }	  
   
