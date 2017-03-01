@@ -183,12 +183,21 @@ public class PlayModeController {
 		}
 		// Check if connection pieces are available
 		if (currentGame.getCurrentConnectionPieces() < 1){
-			error = error + "There are 0 connection pieces in the game";
+			error = error + "There are 0 connection pieces available";
 		}
+		// Check if connection already exist at a location
+			if (isConnected(selectedTile1, selectedTile2)){
+				error = error + "The two selected tiles are already connected.";
+			}
+		
+		
 		// Check if errors are detected
 		if (error.length() > 0){
 			throw new InvalidInputException (error.trim());
 		}
+		
+		
+		
 		
 		try 
 		{
@@ -333,7 +342,7 @@ public class PlayModeController {
 		}		
 	}
 	
-	//helper method
+	//helper method to check if tiles are adjacent
 	public boolean isAdjacent(Tile tile1, Tile tile2) {
 		int x1 = tile1.getX();
 		int y1 = tile1.getY();
@@ -353,6 +362,23 @@ public class PlayModeController {
 		
 		return false;
 	}
+	
+	//helper method to check if connection already exists
+		public boolean isConnected (Tile tile1, Tile tile2){
+			
+			
+			Connection [] possibleConnections1 = tile1.getConnections().toArray(new Connection [tile1.getConnections().size()]);
+			Connection [] possibleConnections2 = tile2.getConnections().toArray(new Connection [tile2.getConnections().size()]);
+			
+			for (int i = 0; i < possibleConnections1.length; i++){
+				for (int j = 0; j < possibleConnections2.length; j++){
+					if (possibleConnections1[i] == possibleConnections2[j]){
+						return true;
+					}
+				}
+			}
+			return false;
+		}
 	
 
 
