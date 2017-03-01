@@ -1,6 +1,7 @@
 package ca.mcgill.ecse223.tileo.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -28,14 +29,15 @@ import java.awt.event.ActionEvent;
 
 public class SetPlayerStartingTIlePopOut extends JFrame {
 	
-	Tile chosenTile;
+	Tile chosenTile=null;
 
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JLabel errorMessage;
 	
 	
 	String error;
-	ButtonModel chosenNumber;
+	
 	String playerNumber;
 	int chosenPlayerNumber;
 	
@@ -97,31 +99,39 @@ public class SetPlayerStartingTIlePopOut extends JFrame {
 		JButton btnSet = new JButton("Set");
 		btnSet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				ButtonModel chosenNumber;
 				error = "";
 				chosenNumber = buttonGroup.getSelection();
-				playerNumber = chosenNumber.getActionCommand();
-				chosenPlayerNumber = Integer.parseInt(playerNumber);
-				
-				System.out.println(chosenPlayerNumber);
-				DesignModeController dmc = new DesignModeController();
-				
-					if (TileODesignPage.getGrid().aTileIsSelected){
+
+			    if(chosenNumber == null) {
+			    	error = "Please select a player! ";
+			    }
+				if (TileODesignPage.getGrid().aTileIsSelected){
 						chosenTile = TileODesignPage.getGrid().selectedTile;
 				}
-				
-				
-				
-				try {
-					dmc.setPlayerStartingTile(chosenPlayerNumber, chosenTile);
-					System.out.println("Starting Tile for player" + chosenPlayerNumber + "successfully set");
-					System.out.println(TileOApplication.getTileO().getCurrentGame().getPlayer(chosenPlayerNumber-1).getCurrentTile().getX());
-				} catch (InvalidInputException e1) {
-					throw new RuntimeException(e1.getMessage());
+				if(chosenTile==null){
+					error = error + "Please click a tile on the board! ";
 				}
-				close();
+				error.trim();
+				if(error.length()==0) {
+					DesignModeController dmc = new DesignModeController();
+					chosenPlayerNumber = Integer.parseInt(chosenNumber.getActionCommand());
+					try {
+						dmc.setPlayerStartingTile(chosenPlayerNumber, chosenTile);
+						System.out.println("Starting Tile for player" + chosenPlayerNumber + "successfully set");
+						System.out.println(TileOApplication.getTileO().getCurrentGame().getPlayer(chosenPlayerNumber-1).getCurrentTile().getX());
+					} catch (InvalidInputException e1) {
+						throw new RuntimeException(e1.getMessage());
+					}	
+				}
+				refreshData();
+				
+				
 			}
 		});
+		
+		errorMessage = new JLabel("New label");
+		errorMessage.setForeground(Color.RED);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -142,8 +152,11 @@ public class SetPlayerStartingTIlePopOut extends JFrame {
 							.addComponent(lblChooseItsStarting))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(171)
-							.addComponent(btnSet)))
-					.addContainerGap(99, Short.MAX_VALUE))
+							.addComponent(btnSet))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(128)
+							.addComponent(errorMessage)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -152,7 +165,9 @@ public class SetPlayerStartingTIlePopOut extends JFrame {
 					.addComponent(lblSelectTheNumber)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblChooseItsStarting)
-					.addGap(24)
+					.addGap(3)
+					.addComponent(errorMessage)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(radioButton_3)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(radioButton)
@@ -162,8 +177,14 @@ public class SetPlayerStartingTIlePopOut extends JFrame {
 					.addComponent(radioButton_2)
 					.addGap(28)
 					.addComponent(btnSet)
-					.addContainerGap(33, Short.MAX_VALUE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
+	}
+	private void refreshData() {
+		errorMessage.setText("<html>"+error+"<html>");
+		if(error == null || error.length()==0){
+			close();
+		}
 	}
 }

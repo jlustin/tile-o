@@ -89,7 +89,7 @@ public class WelcomePage extends JFrame {
 				playerNumber = buttonGroup.getSelection();
 			
 				if(playerNumber==null) {
-					error = "Please select player number";
+					error = "Please select the number of players";
 				}
 				error.trim();
 				if(error.length()==0) {						
@@ -109,7 +109,7 @@ public class WelcomePage extends JFrame {
 					
 					
 					//System.out.print("" + TileOApplication.getTileO().getCurrentGame()); //TODO: DELETE
-					
+				
 				
 			}
 		});
