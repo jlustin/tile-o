@@ -56,7 +56,7 @@ public class TileOApplication {
 			tileO.setCurrentGame(game);
 		}
 		else {
-			//Player.reinitializeUniquePlayer(tileO.getCurrentGame().getPlayers());
+			Player.reinitializeUniquePlayer(tileO.getCurrentGame().getPlayers());
 		}
 		return tileO;
 	}
