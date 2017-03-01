@@ -22,7 +22,7 @@ import javax.swing.JLabel;
 
 public class TileOPlayPage extends JFrame {
 
-	private static TilePanel grid = new TilePanel(TileOApplication.getTileO().getCurrentGame());
+	private static TilePanelDesign grid = new TilePanelDesign(TileOApplication.getTileO().getCurrentGame());
 	
 	
 	
@@ -49,6 +49,7 @@ public class TileOPlayPage extends JFrame {
 	 * Create the frame.
 	 */
 	public TileOPlayPage() {
+		setTitle("Play Mode");
 		initComponents();
 		refreshData();
 	}
@@ -111,28 +112,27 @@ public class TileOPlayPage extends JFrame {
 	    });
 	    GroupLayout gl_contentPane = new GroupLayout(contentPane);
 	    gl_contentPane.setHorizontalGroup(
-	    	gl_contentPane.createParallelGroup(Alignment.TRAILING)
+	    	gl_contentPane.createParallelGroup(Alignment.LEADING)
 	    		.addGroup(gl_contentPane.createSequentialGroup()
-	    			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-	    				.addGroup(gl_contentPane.createSequentialGroup()
-	    					.addGap(181)
-	    					.addComponent(lblNewLabel))
-	    				.addGroup(gl_contentPane.createSequentialGroup()
-	    					.addGap(202)
-	    					.addComponent(lblJlabelForErrors)))
-	    			.addContainerGap(181, Short.MAX_VALUE))
-	    		.addGroup(gl_contentPane.createSequentialGroup()
-	    			.addContainerGap(203, Short.MAX_VALUE)
-	    			.addComponent(lblJlabelForMode)
-	    			.addGap(204))
-	    		.addGroup(gl_contentPane.createSequentialGroup()
-	    			.addContainerGap(416, Short.MAX_VALUE)
+	    			.addContainerGap(403, Short.MAX_VALUE)
 	    			.addComponent(btnSave)
 	    			.addContainerGap())
-	    		.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-	    			.addContainerGap()
+	    		.addGroup(gl_contentPane.createSequentialGroup()
+	    			.addGap(198)
 	    			.addComponent(btnRollDie)
-	    			.addContainerGap(384, Short.MAX_VALUE))
+	    			.addContainerGap(198, Short.MAX_VALUE))
+	    		.addGroup(gl_contentPane.createSequentialGroup()
+	    			.addGap(185)
+	    			.addComponent(lblJlabelForMode)
+	    			.addContainerGap(186, Short.MAX_VALUE))
+	    		.addGroup(gl_contentPane.createSequentialGroup()
+	    			.addGap(183)
+	    			.addComponent(lblJlabelForErrors)
+	    			.addContainerGap(183, Short.MAX_VALUE))
+	    		.addGroup(gl_contentPane.createSequentialGroup()
+	    			.addGap(152)
+	    			.addComponent(lblNewLabel)
+	    			.addContainerGap(152, Short.MAX_VALUE))
 	    );
 	    gl_contentPane.setVerticalGroup(
 	    	gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -143,9 +143,9 @@ public class TileOPlayPage extends JFrame {
 	    			.addComponent(lblJlabelForErrors)
 	    			.addGap(18)
 	    			.addComponent(lblJlabelForMode)
-	    			.addGap(30)
+	    			.addGap(53)
 	    			.addComponent(btnRollDie)
-	    			.addPreferredGap(ComponentPlacement.RELATED, 501, Short.MAX_VALUE)
+	    			.addPreferredGap(ComponentPlacement.RELATED, 432, Short.MAX_VALUE)
 	    			.addComponent(btnSave)
 	    			.addContainerGap())
 	    );

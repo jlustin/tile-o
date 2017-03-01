@@ -22,7 +22,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 
 
-public class TilePanel extends JPanel{
+public class TilePanelDesign extends JPanel{
 
 	public boolean aTileIsSelected = false;
 	public Tile selectedTile;
@@ -44,7 +44,7 @@ public class TilePanel extends JPanel{
 	private HashMap<Connection, Rectangle2D> cRectangles;
 
 	
-	public TilePanel(Game game) {
+	public TilePanelDesign(Game game) {
 		super();
 		//you guys can add tiles here to try the layout
 		//add the tiles in the same format and only here

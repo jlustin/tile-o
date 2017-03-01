@@ -27,7 +27,7 @@ import javax.swing.JLabel;
 
 public class TileODesignPage extends JFrame {
 
-	private static TilePanel grid = new TilePanel(TileOApplication.getTileO().getCurrentGame());
+	private static TilePanelDesign grid = new TilePanelDesign(TileOApplication.getTileO().getCurrentGame());
 	
 	
 	
@@ -269,7 +269,7 @@ public class TileODesignPage extends JFrame {
 		
 	}
 	
-	public static TilePanel getGrid(){
+	public static TilePanelDesign getGrid(){
 		return grid;
 	}
 
