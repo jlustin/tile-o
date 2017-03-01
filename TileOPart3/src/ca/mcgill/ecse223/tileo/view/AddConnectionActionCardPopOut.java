@@ -8,8 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
 import ca.mcgill.ecse223.tileo.model.Game;
+import ca.mcgill.ecse223.tileo.model.Tile;
 import ca.mcgill.ecse223.tileo.model.Game.Mode;
 import ca.mcgill.ecse223.tileo.model.TileO;
 
@@ -23,7 +25,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class AddConnectionActionCardPopOut extends JFrame {
-
+	
+	private Tile chosenTile1=null;
+	private Tile chosenTile2=null;
+	
+	private JLabel errorMessage;
+	private String error= "";
 	private JPanel contentPane;
 
 	/**
@@ -41,14 +48,16 @@ public class AddConnectionActionCardPopOut extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
 	
 	public void close() { 
 		this.setVisible(false);
 	    this.dispose();
+	}
+	private void refreshData() {
+		errorMessage.setText("<html>"+error+"<html>");
+		if(error == null || error.length()==0){
+			close();
+		}
 	}
 	
 	public AddConnectionActionCardPopOut() {
@@ -64,34 +73,64 @@ public class AddConnectionActionCardPopOut extends JFrame {
 		JLabel lblClickOnTwo = new JLabel("Click on two tiles on the board to add a connection between them.");
 		lblClickOnTwo.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
-		JButton btnAddConnection = new JButton("OK");
-		btnAddConnection.addActionListener(new ActionListener() {
+		JButton btnTileChosen = new JButton("Tile 1 Chosen");
+		btnTileChosen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
-//				
-//				// Add two selected tiles from the board
-//			
-//				PlayModeController pmc = new PlayModeController ();
-//				// Get tiles selected from board // pmc.playConnectTilesActionCard(selectedTile1, selectedTile2);
-				close ();
+				error = ""; 
+				PlayModeController pmc = new PlayModeController();
+				if (TileOPlayPage.getGrid().aTileIsSelected){
+					chosenTile1 = TileOPlayPage.getGrid().selectedTile;
+				}
 			}
 		});
+		
+		JButton btnTileChosen_1 = new JButton("Tile 2 Chosen");
+		btnTileChosen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				error = ""; 
+				PlayModeController pmc = new PlayModeController();
+				if (TileOPlayPage.getGrid().aTileIsSelected){
+					chosenTile2 = TileOPlayPage.getGrid().selectedTile;
+				}
+			}
+		});
+		
+		JButton btnConnect = new JButton("Connect!");
+		btnConnect.addActionListener(new ActionListener(){
+			public void actionPerformed (ActionEvent e){
+				error = "";
+				PlayModeController pmc = new PlayModeController ();
+				try {
+					pmc.playConnectTilesActionCard(chosenTile1, chosenTile2);
+				}
+				catch (InvalidInputException e1){
+					throw new RuntimeException (e1.getMessage());
+				}
+				close();	
+			}
+			
+		});
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap(140, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(lblNewLabel)
 							.addGap(180))
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(lblClickOnTwo)
-							.addGap(130))
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(btnAddConnection)
-							.addGap(293))))
+							.addGap(130))))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(184)
+					.addComponent(btnTileChosen)
+					.addGap(18)
+					.addComponent(btnTileChosen_1)
+					.addGap(18)
+					.addComponent(btnConnect)
+					.addContainerGap(157, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -100,9 +139,12 @@ public class AddConnectionActionCardPopOut extends JFrame {
 					.addComponent(lblNewLabel)
 					.addGap(18)
 					.addComponent(lblClickOnTwo)
-					.addPreferredGap(ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
-					.addComponent(btnAddConnection)
-					.addGap(24))
+					.addPreferredGap(ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnTileChosen)
+						.addComponent(btnTileChosen_1)
+						.addComponent(btnConnect))
+					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
