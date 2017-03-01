@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class AddConnectionActionCardPopOut extends JDialog {
 	
@@ -61,10 +62,12 @@ public class AddConnectionActionCardPopOut extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
-			lblChooseYoTiles = new JLabel("You have drawn an action card. Select two tiles to connect them! ");
+			lblChooseYoTiles = new JLabel("You have drawn an Add Connection Action card, ");
 		}
 		errorMessage = new JLabel();
 		errorMessage.setForeground(Color.red);
+		JLabel lblNewLabel = new JLabel("please select two tiles on the board and click on the");
+		JLabel lblToAddA = new JLabel("\"Connect\" button to add a connection between them.");
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -74,18 +77,26 @@ public class AddConnectionActionCardPopOut extends JDialog {
 							.addGap(30)
 							.addComponent(errorMessage))
 						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addGap(84)
+							.addGap(73)
+							.addGroup(gl_contentPanel.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblToAddA)
+								.addComponent(lblNewLabel)))
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addGap(89)
 							.addComponent(lblChooseYoTiles)))
-					.addContainerGap(92, Short.MAX_VALUE))
+					.addContainerGap(84, Short.MAX_VALUE))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addGap(5)
 					.addComponent(lblChooseYoTiles)
-					.addGap(55)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblNewLabel)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblToAddA)
+					.addGap(16)
 					.addComponent(errorMessage)
-					.addContainerGap(144, Short.MAX_VALUE))
+					.addContainerGap(153, Short.MAX_VALUE))
 		);
 		contentPanel.setLayout(gl_contentPanel);
 		{
@@ -128,7 +139,7 @@ public class AddConnectionActionCardPopOut extends JDialog {
 				buttonPane.add(btnChosenTile);
 			}
 			{
-				JButton okButton = new JButton("Connect!");
+				JButton okButton = new JButton("Connect");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						error = "";
