@@ -65,10 +65,10 @@ public class RemoveConnectionActionCardPopOut extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblYouHaveDrawn = new JLabel("You have drawn a Remove Connection Action Card.");
+		JLabel lblYouHaveDrawn = new JLabel("You have drawn a Remove Connection Action Card,");
 		lblYouHaveDrawn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
-		JLabel lblSelectAConnection = new JLabel("Select a connection on the board to remove it.");
+		JLabel lblSelectAConnection = new JLabel("select a connection piece on the board and click on the \"Remove Connection\"");
 		lblSelectAConnection.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
 		JButton btnRemoveConnection = new JButton("Remove Connection");
@@ -91,31 +91,37 @@ public class RemoveConnectionActionCardPopOut extends JFrame {
 			}
 			
 		});
+		
+		JLabel lblButtonToRemove = new JLabel("button to remove the selected connection piece.");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addGap(75)
+					.addComponent(lblYouHaveDrawn)
+					.addContainerGap(261, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(87)
-							.addComponent(lblSelectAConnection))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(75)
-							.addComponent(lblYouHaveDrawn)))
-					.addContainerGap(64, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(153, Short.MAX_VALUE)
+					.addContainerGap(138, Short.MAX_VALUE)
 					.addComponent(btnRemoveConnection)
-					.addGap(142))
+					.addGap(133))
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addGap(65)
+					.addComponent(lblButtonToRemove)
+					.addContainerGap(71, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(12, Short.MAX_VALUE)
+					.addComponent(lblSelectAConnection)
+					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
 					.addComponent(lblYouHaveDrawn)
-					.addGap(11)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblSelectAConnection)
-					.addPreferredGap(ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblButtonToRemove)
+					.addPreferredGap(ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
 					.addComponent(btnRemoveConnection)
 					.addContainerGap())
 		);

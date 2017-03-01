@@ -58,6 +58,7 @@ public class TeleportPopOut extends JFrame {
 	    this.dispose();
 	}
 	public TeleportPopOut() {
+		setTitle("Teleport Action Card");
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -65,10 +66,10 @@ public class TeleportPopOut extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblYouHaveDrawn = new JLabel("You have drawn a Teleport action card, please select a tile ");
+		JLabel lblYouHaveDrawn = new JLabel("You have drawn a Teleport Action Card, please select a tile ");
 		lblYouHaveDrawn.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JLabel lblOnTheBoard = new JLabel("on the Board to teleport to and click on the \"Teleport\" button. ");
+		JLabel lblOnTheBoard = new JLabel("on the board and click on the \"Teleport\" button ");
 		lblOnTheBoard.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JButton btnTeleport = new JButton("Teleport");
@@ -91,22 +92,27 @@ public class TeleportPopOut extends JFrame {
 				close();
 			}
 		});
+		
+		JLabel lblToTeleportTo = new JLabel("to teleport to the selected tile. ");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(24)
-							.addComponent(lblOnTheBoard))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(36)
-							.addComponent(lblYouHaveDrawn)))
-					.addContainerGap(25, Short.MAX_VALUE))
+					.addGap(36)
+					.addComponent(lblYouHaveDrawn)
+					.addContainerGap(32, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(198, Short.MAX_VALUE)
+					.addContainerGap(174, Short.MAX_VALUE)
 					.addComponent(btnTeleport)
-					.addGap(167))
+					.addGap(170))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(65)
+					.addComponent(lblOnTheBoard)
+					.addContainerGap(74, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(115)
+					.addComponent(lblToTeleportTo)
+					.addContainerGap(130, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -114,28 +120,12 @@ public class TeleportPopOut extends JFrame {
 					.addComponent(lblYouHaveDrawn)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblOnTheBoard)
-					.addPreferredGap(ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblToTeleportTo)
+					.addPreferredGap(ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
 					.addComponent(btnTeleport)
-					.addGap(30))
+					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
-//	private class SwingAction extends AbstractAction {
-//		public SwingAction() {
-//			putValue(NAME, "SwingAction");
-//			putValue(SHORT_DESCRIPTION, "Some short description");
-//		}
-//		
-//		public void actionPerformed(ActionEvent e) {
-//			String cmd = e.getActionCommand();
-//			
-//			if(cmd.equals("Teleport"))
-//			{
-//				PlayModeController pmc = new PlayModeController();
-//				System.out.print("lmao");
-//			}
-//
-//			
-//		}
-//	}
 }
