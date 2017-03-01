@@ -178,10 +178,7 @@ public class PlayModeController {
 			error = "There are less than 2 tiles in the current game.";
 		}
 		// Check if the selected tiles are adjacent
-		if ((x1 != x2+1 && y1 == y2) || (x1 != x2-1 && y1 == y2)){
-			error = error + "The selected tiles are not adjacent";
-		}
-		if ((y1 != y2+1 && x1 == x2) || (y1 != y2-1 && x1 == x2)){
+		if (!isAdjacent(selectedTile1, selectedTile2)){
 			error = error + "The selected tiles are not adjacent";
 		}
 		// Check if connection pieces are available
@@ -336,6 +333,28 @@ public class PlayModeController {
 			aGame.setCurrentPlayer(nextPlayer);
 		}		
 	}
+	
+	//helper method
+	public boolean isAdjacent(Tile tile1, Tile tile2) {
+		int x1 = tile1.getX();
+		int y1 = tile1.getY();
+		int x2 = tile2.getX();
+		int y2 = tile2.getY();
+		if (x1-x2 == -1 || x1-x2 == 1){
+			if(y1-y2 ==0){
+				return true;
+			}
+		}
+		if (y1-y2 == -1 || y1-y2 == 1){
+			if(x1-x2 ==0){
+				return true;
+			}
+		}
+		
+		
+		return false;
+	}
+	
 
 
 	

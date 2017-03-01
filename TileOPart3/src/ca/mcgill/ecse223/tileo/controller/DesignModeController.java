@@ -178,7 +178,7 @@ public class DesignModeController {
 	}
 	
 	
-	//helper meethod
+	//helper method to check if two tiles are adjacent
 	public boolean isAdjacent(Tile tile1, Tile tile2) {
 		int x1 = tile1.getX();
 		int y1 = tile1.getY();
