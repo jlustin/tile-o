@@ -39,21 +39,24 @@ public class TileOPlayPage extends JFrame {
 	private static JLabel currentModeLabel;
 	private List<Tile> pMoves;
 	TilePanelPlay tpp ;
+	
+	static JButton btnRollDie;
+	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TileOPlayPage frame = new TileOPlayPage();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					TileOPlayPage frame = new TileOPlayPage();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -109,7 +112,7 @@ public class TileOPlayPage extends JFrame {
 	    	}
 	    });
 	    
-	    JButton btnRollDie = new JButton("Roll Die");
+	    btnRollDie = new JButton("Roll Die");
 	    btnRollDie.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		// TODO: Roll the die
