@@ -338,7 +338,9 @@ public class TilePanelPlay extends JPanel{
 	}
 	
 
-	
+	public void refreshBoard(){
+		repaint();
+	}
 	
 
 }

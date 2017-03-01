@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
@@ -36,7 +37,8 @@ public class TileOPlayPage extends JFrame {
 	private JPanel contentPane;
 	private static JLabel playerTurnLabel;
 	private static JLabel currentModeLabel;
-
+	private List<Tile> pMoves;
+	TilePanelPlay tpp ;
 	/**
 	 * Launch the application.
 	 */
@@ -111,7 +113,10 @@ public class TileOPlayPage extends JFrame {
 	    btnRollDie.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		// TODO: Roll the die
-	    		
+	    		PlayModeController pmc = new PlayModeController();
+	    		pMoves = pmc.rollDie();
+	    		grid.possibleMoves=pMoves;
+	    		tpp.refreshBoard();
 	    	}
 	    });
 	    GroupLayout gl_contentPane = new GroupLayout(contentPane);
