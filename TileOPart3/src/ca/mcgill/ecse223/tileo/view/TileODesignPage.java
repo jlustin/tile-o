@@ -308,7 +308,7 @@ public class TileODesignPage extends JFrame {
 		displayPlayBoard();
 	}
 	public void displayPlayBoard() {
-		errorMessage.setText("<html>"+error+"<html>");
+		errorMessage.setText(error);
 		if(error==null||error.length()==0){
 			TileOPlayPage topp = new TileOPlayPage();
 			topp.setVisible(true);
