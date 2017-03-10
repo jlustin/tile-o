@@ -58,20 +58,17 @@ public class TilePanelDesign extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				int x = e.getX();
-				int y = e.getY();
-//				System.out.println("The mouse has been pressed " + "x: " + x + " y:" + y);								
+				int y = e.getY();							
 				for (Rectangle2D rectangle : rectangles) {
 					if (rectangle.contains(x, y)) {
 						if(tiles.containsKey(rectangle)){
 							selectedTile = tiles.get(rectangle);
 							selectedConnection = null;
-//							System.out.println("A legit tile has been selected. " + "x: " + selectedTile.getX() + " y:" + selectedTile.getY());
 							break;
 						}
 						else if(connections.containsKey(rectangle)){
 							selectedConnection = connections.get(rectangle);
 							selectedTile = null;
-//							System.out.println("a legit connection has been selected");
 							break;
 						}
 					}
@@ -101,14 +98,13 @@ public class TilePanelDesign extends JPanel{
 	
 	public int getYAxis(Game aGame) {
 		List<Tile> listTiles = aGame.getTiles();
-		int ySize=0;
-		
+		int ySize = 0;
+		 
 		for (Tile tempTile: listTiles) {
 			if (tempTile.getY()>ySize){
 				ySize = tempTile.getY();
 			}
-		}
-		
+		}		
 		return ySize;
 	}
 	
@@ -126,12 +122,14 @@ public class TilePanelDesign extends JPanel{
 		return biggest;
 	}
 	
-	//do not touch
+
 	public void doDrawing(Graphics g) {		
 		if (myGame != null) {
 			Graphics2D g2d = (Graphics2D) g.create();
 			
 			//base size
+			//TODO: Li recode this so that it's more efficient/if it's not already done
+			//refer to connection? don't remember
 			int axisSize = equalize(getXAxis(myGame), getYAxis(myGame));;
 			float squareSize = (float) ((700/axisSize) * (2.9/5.0));
 			float SPACING = (float) ((700/axisSize) * (1.0/5.0));
@@ -183,12 +181,10 @@ public class TilePanelDesign extends JPanel{
 					aTileIsSelected = true;
 					Rectangle2D rectangle = tRectangles.get(aTile);
 					
-					g2d.setColor(Color.PINK); //doesn't work. I want to show the tile differently when selected
+					g2d.setColor(Color.PINK);
 				
 					g2d.fill(rectangle);
 				}
-				
-				repaint();
 			}
 			
 			for (Connection aConnection: myGame.getConnections()){
@@ -197,11 +193,10 @@ public class TilePanelDesign extends JPanel{
 					Tile tile1 = tempTiles.get(0);
 					Tile tile2 = tempTiles.get(1);
 					//horizontal
-					if (isH(tile1, tile2)) {
-						//use hRect
-						
+					if (isH(tile1, tile2)) {				
 						locationX = (float) (SPACING + squareSize + smallestXIndex(tile1, tile2)*gridspace);
 						locationY = (float) (((700/axisSize)/2 - SPACING/2) + smallestYIndex(tile1, tile2)*gridspace);
+						
 						Rectangle2D rect = new Rectangle2D.Float(
 								locationX, 
 								locationY, 
@@ -213,6 +208,7 @@ public class TilePanelDesign extends JPanel{
 						g2d.setColor(Color.BLACK);
 						g2d.fill(rect);
 					}					
+					//vertical			
 					else if(isV(tile1, tile2)) {
 						locationX = (float) (((700/axisSize)/2 - SPACING/2) + smallestXIndex(tile1, tile2)*gridspace);
 						locationY = (float) (SPACING + squareSize + smallestYIndex(tile1, tile2)*gridspace);
@@ -231,13 +227,11 @@ public class TilePanelDesign extends JPanel{
 				}
 				
 				if (selectedConnection != null && selectedConnection.equals(aConnection)){
-					//selectedTile;
 					aConnectionIsSelected = true;
 					Rectangle2D rectangle = cRectangles.get(aConnection);
 					g2d.setColor(Color.PINK);
 					g2d.fill(rectangle);
 				}				
-				repaint();
 			}			
 		}
 	}
@@ -262,8 +256,7 @@ public class TilePanelDesign extends JPanel{
 	public boolean isH(Tile tile1, Tile tile2){
 		if (tile1.getY() == tile2.getY()){
 			return true;
-		}
-		
+		}		
 		return false;
 	}
 	public boolean isV(Tile tile1, Tile tile2){
@@ -272,6 +265,7 @@ public class TilePanelDesign extends JPanel{
 		}
 		return false;
 	}
+	
 	
 	@Override
 	public void paintComponent(Graphics g) {

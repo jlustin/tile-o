@@ -49,9 +49,7 @@ public class TilePanelPlay extends JPanel{
 	
 	public TilePanelPlay(Game game) {
 		super();
-
-		init(game);
-		
+		init(game);		
 	}
 	
 	
@@ -74,7 +72,6 @@ public class TilePanelPlay extends JPanel{
 							selectedTile = tiles.get(rectangle);
 							selectedConnection = null;
 							System.out.println("A legit tile has been selected. " + "x: " + selectedTile.getX() + " y:" + selectedTile.getY());
-							//System.out.println("number of players");
 							break;
 						}
 						else if(connections.containsKey(rectangle)){
@@ -83,9 +80,6 @@ public class TilePanelPlay extends JPanel{
 							System.out.println("a legit connection has been selected");
 							break;
 						}
-//						break;
-
-					
 					}
 				}
 				repaint();
@@ -113,14 +107,13 @@ public class TilePanelPlay extends JPanel{
 	
 	public int getYAxis(Game aGame) {
 		List<Tile> listTiles = aGame.getTiles();
-		int ySize=0;
+		int ySize = 0;
 		
 		for (Tile tempTile: listTiles) {
-			if (tempTile.getY()>ySize){
+			if (tempTile.getY() > ySize){
 				ySize = tempTile.getY();
 			}
-		}
-		
+		}		
 		return ySize;
 	}
 	
@@ -157,7 +150,6 @@ public class TilePanelPlay extends JPanel{
 				int y = aTile.getY()-1;
 				locationX = (float) (SPACING + gridspace*x);
 				locationY = (float) (SPACING + gridspace*y);
-
 				
 				Rectangle2D rect = new Rectangle2D.Float(
 						locationX, 
@@ -171,19 +163,14 @@ public class TilePanelPlay extends JPanel{
 				g2d.fill(rect);
 				g2d.setColor(Color.black);
 				g2d.draw(rect);
-				//if instead you want a full colored tile, uncomment the below and comment the above
-				//g2d.fill(rect);
-
 				
 				if (selectedTile != null && selectedTile.equals(aTile)) {
-					//selectedConnection = null;
 					aTileIsSelected = true;
 					Rectangle2D rectangle = tRectangles.get(aTile);
 					
 					g2d.setColor(Color.PINK); 
 				
-					g2d.fill(rectangle);
-						
+					g2d.fill(rectangle);						
 				}
 				
 				if(aTile.getHasBeenVisited()){
@@ -201,8 +188,6 @@ public class TilePanelPlay extends JPanel{
 						}
 					}
 				}
-				
-				repaint();
 			}
 			
 			for (Player aPlayer: myGame.getPlayers()){
@@ -220,10 +205,9 @@ public class TilePanelPlay extends JPanel{
 					Tile tile2 = tempTiles.get(1);
 					//horizontal
 					if (isH(tile1, tile2)) {
-						//use hRect
-						
 						locationX = (float) (SPACING + squareSize + smallestXIndex(tile1, tile2)*gridspace);
 						locationY = (float) (((700/axisSize)/2 - SPACING/2) + smallestYIndex(tile1, tile2)*gridspace);
+						
 						Rectangle2D rect = new Rectangle2D.Float(
 								locationX, 
 								locationY, 
@@ -253,16 +237,12 @@ public class TilePanelPlay extends JPanel{
 				}
 				
 				if (selectedConnection != null && selectedConnection.equals(aConnection)){
-					//selectedTile;
 					aConnectionIsSelected = true;
 					Rectangle2D rectangle = cRectangles.get(aConnection);
 					g2d.setColor(Color.PINK);
 					g2d.fill(rectangle);
 				}
-				
-				repaint();
-			}
-			
+			}			
 		}
 	}
 	
@@ -281,8 +261,7 @@ public class TilePanelPlay extends JPanel{
 		}
 		return smallest-1;
 	}
-	
-	
+		
 	public boolean isH(Tile tile1, Tile tile2){
 		if (tile1.getY() == tile2.getY()){
 			return true;
@@ -290,6 +269,7 @@ public class TilePanelPlay extends JPanel{
 		
 		return false;
 	}
+	
 	public boolean isV(Tile tile1, Tile tile2){
 		if (tile1.getX() == tile2.getX()){
 			return true;

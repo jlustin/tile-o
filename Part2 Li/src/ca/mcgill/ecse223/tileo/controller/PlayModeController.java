@@ -306,9 +306,7 @@ public class PlayModeController {
 			if(x1-x2 ==0){
 				return true;
 			}
-		}
-		
-		
+		}		
 		return false;
 	}
 	

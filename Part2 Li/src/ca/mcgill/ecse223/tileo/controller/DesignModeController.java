@@ -83,19 +83,14 @@ public class DesignModeController {
 	 */
 	public void createGame(int numberOfPlayers) throws InvalidInputException{
 		TileO tileO = TileOApplication.getTileO();
-		// Add a new game to application and set it as current game
 		Game game = new Game (32,tileO);
 		tileO.setCurrentGame(game);
-		// Set mode to "DESIGN"
 		game.setMode(Mode.DESIGN);
 			
 		// Assign player numbers to each player
 		for(int playerNumber = 1; playerNumber <= numberOfPlayers; playerNumber++){
 			game.addPlayer(playerNumber);
-		}		
-//		System.out.println("The current game has players?" + game.hasPlayers());
-//		System.out.println(game.toString());
-//		System.out.println(game.getPlayers());		
+		}			
 	}
 	
 	
@@ -147,13 +142,11 @@ public class DesignModeController {
 		if (isConnected(selectedTile1, selectedTile2)){
 			error = "The two selected tiles are already connected.";
 		}		
-		// Check if there is an error
 		if (error.length() > 0){
 			throw new InvalidInputException (error.trim());
 		}
 
 		try {
-			// Create a connection and add the connection to the selected tiles
 			Connection newConnection =  currentGame.addConnection();
 			selectedTile1.addConnection(newConnection);
 			selectedTile2.addConnection(newConnection);
@@ -315,23 +308,25 @@ public class DesignModeController {
 			TileO tileO = TileOApplication.getTileO();
 			Game currentGame = tileO.getCurrentGame();
 			Deck deck = currentGame.getDeck();
-			for(int i = 0; i < numberOfRollDieActionCard;i++){
-				deck.addCard( new RollDieActionCard(rollDieInstruction, deck) );
+			int i=0;
+			while (i<32){
+				//TODO: change this part so that you can override it
+				for (int j = 0; j < numberOfRollDieActionCard; j++, i++){
+					deck.addCardAt( new RollDieActionCard(rollDieInstruction, deck), i);
+				}
+				for (int j = 0; j < numberOfConnectTilesActionCard; j++, i++) {
+					deck.addCardAt( new ConnectTilesActionCard(connectTilesInstruction,deck), i);
+				}
+				for (int j = 0; j < numberOfRemoveConnectionActionCard; j++, i++){
+					deck.addCardAt( new RemoveConnectionActionCard(removeConnectionInstruction,deck), i);
+				}
+				for (int j = 0; j < numberOfTeleportActionCard; j++, i++) {
+					deck.addCardAt( new TeleportActionCard(teleportInstruction,deck), i);
+				}
+				for (int j = 0; j < numberOfLoseTurnActionCard; j++, i++) {
+					deck.addCardAt( new LoseTurnActionCard(loseTurnInstruction,deck), i);
+				}								
 			}
-			for(int i = 0; i < numberOfConnectTilesActionCard; i++) {
-				deck.addCard( new ConnectTilesActionCard(connectTilesInstruction,deck) );
-			}
-			for(int i = 0; i < numberOfRemoveConnectionActionCard; i++){
-				;
-				deck.addCard( new RemoveConnectionActionCard(removeConnectionInstruction,deck) );
-			}
-			for(int i = 0; i < numberOfTeleportActionCard; i++) {
-				deck.addCard( new TeleportActionCard(teleportInstruction,deck));
-			}
-			for(int i = 0; i < numberOfLoseTurnActionCard; i++) {
-				deck.addCard( new LoseTurnActionCard(loseTurnInstruction,deck));
-			}
-			
 		}
 		catch (RuntimeException e) {
 			throw new InvalidInputException(error);
