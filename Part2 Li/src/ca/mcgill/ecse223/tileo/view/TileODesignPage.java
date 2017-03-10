@@ -41,6 +41,8 @@ import javax.swing.JSpinner;
 public class TileODesignPage extends JFrame {
 
 	private static TilePanelDesign grid = new TilePanelDesign(TileOApplication.getTileO().getCurrentGame());
+	private static HelpPopOut helpPop = new HelpPopOut();
+	private static SavePopOut savePop = new SavePopOut();
 	public static int numberOfPlayers;
 	private static int numberOfGames = 0;
 	private JPanel contentPane;
@@ -114,10 +116,6 @@ public class TileODesignPage extends JFrame {
 	private JButton helpBtn;
 	
     
-    
-
-    
-    
 	/**
 	 * Create the frame.
 	 */
@@ -136,7 +134,6 @@ public class TileODesignPage extends JFrame {
 	private void initComponents(){
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//this.setBounds(100, 100, 450, 300);
 		this.setSize(1200, 720);
 		this.setResizable(false);
 		
@@ -147,7 +144,6 @@ public class TileODesignPage extends JFrame {
 		errorLbl.setForeground(Color.RED);
 		String[] games = new String[TileOApplication.getTileO().numberOfGames()];
 		addNums(games, TileOApplication.getTileO().numberOfGames());
-
 		
 		grid.setVisible(true);
 		grid.setSize(700, 720);
@@ -281,15 +277,14 @@ public class TileODesignPage extends JFrame {
 			addNums(gameNum, numberOfGames);
 			startGameCBox.setModel(new DefaultComboBoxModel(gameNum));
 	    }
-	    
-	    
+	    	    
 	    startGameLbl = new JLabel("Select a game to start it");
 	    
 	    saveBtn = new JButton("Save");
 	    saveBtn.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		SavePopOut sdpo = new SavePopOut();
-	    		sdpo.setVisible(true);
+//	    		SavePopOut sdpo = new SavePopOut();
+	    		savePop.setVisible(true);
 	    		DesignModeController dmc = new DesignModeController();
 	    		dmc.saveDesign();
 	    		refreshData();
@@ -303,8 +298,8 @@ public class TileODesignPage extends JFrame {
 	    helpBtn = new JButton("Help!");
 	    helpBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				HelpPopOut help = new HelpPopOut();
-				help.setVisible(true);
+//				HelpPopOut help = new HelpPopOut();
+				helpPop.setVisible(true);
 			}
 		});
 	    GroupLayout gl_savePnl = new GroupLayout(savePnl);
@@ -650,14 +645,12 @@ public class TileODesignPage extends JFrame {
 		winTileBtn = new JRadioButton("Win Tile");
 		winTileBtn.setActionCommand("WinTile");
 		tileBtnGroup.add(winTileBtn);
-		
+						
+		xLbl = new JLabel("X:");
 		xComponent = new JTextField();
 		xComponent.setColumns(10);
 		
-		xLbl = new JLabel("X:");
-		
 		yLbl = new JLabel("Y:");
-		
 		yComponent = new JTextField();
 		yComponent.setColumns(10);
 		
@@ -739,8 +732,6 @@ public class TileODesignPage extends JFrame {
 			DesignModeController dmc = new DesignModeController();
 			try {
 				dmc.setPlayerStartingTile(chosenPlayerNumber, chosenTile);
-//				System.out.println("Starting Tile for player" + chosenPlayerNumber + "successfully set");
-//				System.out.println(TileOApplication.getTileO().getCurrentGame().getPlayer(chosenPlayerNumber-1).getCurrentTile().getX());
 				error = "Player " + chosenPlayerNumber + " starting tile set!";
 				grid.aTileIsSelected = false;
 				grid.selectedTile = null;
@@ -797,8 +788,7 @@ public class TileODesignPage extends JFrame {
 		yComponent.setText("");
 		xComponent.setText("");
 		inactivePeriod.setText("");
-		refreshData();
-		
+		refreshData();		
 	}
 	
 	private void btnCreateActionPerformed(java.awt.event.ActionEvent evt)  {
@@ -851,7 +841,8 @@ public class TileODesignPage extends JFrame {
 				rollDieNum.setText("");
 				connectTileNum.setText("");
 				loseTurnNum.setText("");
-			} catch (InvalidInputException e) {
+			} 
+			catch (InvalidInputException e) {
 				error = e.getMessage();
 			}
 		}

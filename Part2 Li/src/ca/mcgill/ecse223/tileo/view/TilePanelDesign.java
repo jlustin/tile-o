@@ -45,6 +45,7 @@ public class TilePanelDesign extends JPanel{
 	
 	public TilePanelDesign(Game game) {
 		super();
+		
 	}
 	
 	private void init(Game game) {
@@ -128,8 +129,6 @@ public class TilePanelDesign extends JPanel{
 			Graphics2D g2d = (Graphics2D) g.create();
 			
 			//base size
-			//TODO: Li recode this so that it's more efficient/if it's not already done
-			//refer to connection? don't remember
 			int axisSize = equalize(getXAxis(myGame), getYAxis(myGame));;
 			float squareSize = (float) ((700/axisSize) * (2.9/5.0));
 			float SPACING = (float) ((700/axisSize) * (1.0/5.0));
@@ -185,6 +184,7 @@ public class TilePanelDesign extends JPanel{
 				
 					g2d.fill(rectangle);
 				}
+				repaint();
 			}
 			
 			for (Connection aConnection: myGame.getConnections()){
