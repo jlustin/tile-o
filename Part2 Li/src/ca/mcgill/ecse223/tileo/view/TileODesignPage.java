@@ -88,11 +88,13 @@ public class TileODesignPage extends JFrame {
 	private JLabel removeConnectionCardLbl;
 	private JLabel rollDieCardLbl;
 	private JLabel connectTilesCardLbl;
+	private JLabel loseTurnCardsLbl;
     private JButton createDeckBtn;
     private JTextField removeConnectionNum;
 	private JTextField teleportNum;
 	private JTextField rollDieNum;
 	private JTextField connectTileNum;
+	private JTextField loseTurnNum;
 	
 	//Setting player starting tile Panel
 	private JPanel startingTilePnl;
@@ -110,6 +112,7 @@ public class TileODesignPage extends JFrame {
 	private JButton startGameBtn;
 	private JLabel unclearLbl;
 	private JButton helpBtn;
+	
     
     
 
@@ -400,24 +403,24 @@ public class TileODesignPage extends JFrame {
 	    createDeckLbl = new JLabel("Create a deck of 32 action cards");
 	    
 	    teleportCardLbl = new JLabel("Teleport cards");
-	    
-	    removeConnectionCardLbl = new JLabel("Remove connection cards");
-	    
+	    teleportNum = new JTextField();
+	    teleportNum.setColumns(10);
+	    	    
+	    removeConnectionCardLbl = new JLabel("Remove connection cards");	    
 	    removeConnectionNum = new JTextField();
 	    removeConnectionNum.setColumns(10);
 	    
 	    rollDieCardLbl = new JLabel("Roll die cards");
-	    
-	    connectTilesCardLbl = new JLabel("Connect tiles cards");
-	    
-	    teleportNum = new JTextField();
-	    teleportNum.setColumns(10);
-	    
 	    rollDieNum = new JTextField();
-	    rollDieNum.setColumns(10);
+	    rollDieNum.setColumns(10);	    
 	    
+	    connectTilesCardLbl = new JLabel("Connect tiles cards");	    	    	   
 	    connectTileNum = new JTextField();
 	    connectTileNum.setColumns(10);
+	    
+	    loseTurnCardsLbl = new JLabel("Lose turn cards");	    
+	    loseTurnNum = new JTextField();
+	    loseTurnNum.setColumns(10);
 	    
 	    createDeckBtn = new JButton("Create Deck");
 	    createDeckBtn.addActionListener(new ActionListener() {
@@ -426,61 +429,68 @@ public class TileODesignPage extends JFrame {
 			}
 		});
 	    
+	    
 	    GroupLayout gl_createDeckPnl = new GroupLayout(createDeckPnl);
 	    gl_createDeckPnl.setHorizontalGroup(
 	    	gl_createDeckPnl.createParallelGroup(Alignment.LEADING)
 	    		.addGroup(gl_createDeckPnl.createSequentialGroup()
 	    			.addGap(22)
-	    			.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.LEADING)
-	    				.addComponent(removeConnectionCardLbl)
-	    				.addComponent(teleportCardLbl)
-	    				.addComponent(rollDieCardLbl)
-	    				.addComponent(connectTilesCardLbl))
-	    			.addPreferredGap(ComponentPlacement.UNRELATED)
-	    			.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.LEADING)
+	    			.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.TRAILING)
 	    				.addGroup(gl_createDeckPnl.createSequentialGroup()
 	    					.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.LEADING)
-	    						.addComponent(connectTileNum, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-	    						.addComponent(rollDieNum, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
-	    					.addPreferredGap(ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-	    					.addComponent(createDeckBtn)
-	    					.addGap(27))
+	    						.addComponent(teleportCardLbl)
+	    						.addComponent(connectTilesCardLbl))
+	    					.addGap(52))
+	    				.addGroup(gl_createDeckPnl.createSequentialGroup()
+	    					.addComponent(removeConnectionCardLbl)
+	    					.addPreferredGap(ComponentPlacement.UNRELATED)))
+	    			.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.LEADING)
 	    				.addGroup(gl_createDeckPnl.createSequentialGroup()
 	    					.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.LEADING)
 	    						.addComponent(teleportNum, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
 	    						.addComponent(removeConnectionNum, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
-	    					.addContainerGap(224, Short.MAX_VALUE))))
+	    					.addGap(18)
+	    					.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.LEADING)
+	    						.addComponent(rollDieCardLbl)
+	    						.addComponent(loseTurnCardsLbl))
+	    					.addPreferredGap(ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+	    					.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.LEADING)
+	    						.addComponent(loseTurnNum, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+	    						.addComponent(rollDieNum, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)))
+	    				.addGroup(gl_createDeckPnl.createSequentialGroup()
+	    					.addComponent(connectTileNum, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+	    					.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+	    					.addComponent(createDeckBtn)))
+	    			.addGap(33))
 	    		.addGroup(gl_createDeckPnl.createSequentialGroup()
 	    			.addGap(14)
 	    			.addComponent(createDeckLbl)
-	    			.addContainerGap(256, Short.MAX_VALUE))
+	    			.addContainerGap(298, Short.MAX_VALUE))
 	    );
 	    gl_createDeckPnl.setVerticalGroup(
-	    	gl_createDeckPnl.createParallelGroup(Alignment.LEADING)
+	    	gl_createDeckPnl.createParallelGroup(Alignment.TRAILING)
 	    		.addGroup(gl_createDeckPnl.createSequentialGroup()
 	    			.addGap(11)
 	    			.addComponent(createDeckLbl)
 	    			.addPreferredGap(ComponentPlacement.UNRELATED)
 	    			.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.BASELINE)
 	    				.addComponent(teleportCardLbl)
-	    				.addComponent(teleportNum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-	    			.addPreferredGap(ComponentPlacement.RELATED)
-	    			.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.BASELINE)
-	    				.addComponent(removeConnectionCardLbl)
-	    				.addComponent(removeConnectionNum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-	    			.addPreferredGap(ComponentPlacement.RELATED)
-	    			.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.BASELINE)
+	    				.addComponent(teleportNum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 	    				.addComponent(rollDieCardLbl)
 	    				.addComponent(rollDieNum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-	    			.addPreferredGap(ComponentPlacement.RELATED)
+	    			.addGap(16)
 	    			.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.BASELINE)
-	    				.addComponent(connectTilesCardLbl)
-	    				.addComponent(connectTileNum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-	    			.addContainerGap(18, Short.MAX_VALUE))
-	    		.addGroup(Alignment.TRAILING, gl_createDeckPnl.createSequentialGroup()
-	    			.addContainerGap(118, Short.MAX_VALUE)
-	    			.addComponent(createDeckBtn)
-	    			.addGap(19))
+	    				.addComponent(removeConnectionCardLbl)
+	    				.addComponent(removeConnectionNum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+	    				.addComponent(loseTurnCardsLbl)
+	    				.addComponent(loseTurnNum, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
+	    			.addPreferredGap(ComponentPlacement.UNRELATED)
+	    			.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.LEADING)
+	    				.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.BASELINE)
+	    					.addComponent(connectTilesCardLbl)
+	    					.addComponent(connectTileNum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+	    				.addComponent(createDeckBtn))
+	    			.addContainerGap(14, Short.MAX_VALUE))
 	    );
 	    createDeckPnl.setLayout(gl_createDeckPnl);
 	    
@@ -796,6 +806,7 @@ public class TileODesignPage extends JFrame {
 		int connectCNum = 0;
 		int removeCNum = 0;
 		int dieCNum = 0;
+		int turnCNum = 0;
 	    error = "";
 		try{
 			teleportCNum = Integer.parseInt(teleportNum.getText());
@@ -808,31 +819,38 @@ public class TileODesignPage extends JFrame {
 			connectCNum = Integer.parseInt(connectTileNum.getText());
 		}
 		catch(NumberFormatException e) {
-			error = "The number of connectTile action cards needs to be a numerical value!";
+			error = "The number of connect tile action cards needs to be a numerical value!";
 		}
 		try{
 			removeCNum = Integer.parseInt(removeConnectionNum.getText());
 		}
 		catch(NumberFormatException e) {
-			error = "The number of romoveConnection action cards needs to be a numerical value!";
+			error = "The number of remove connection action cards needs to be a numerical value!";
 		}
 		try{
 			dieCNum = Integer.parseInt(rollDieNum.getText());
 		}
 		catch(NumberFormatException e) {
-			error = "The number of rollDie action cards needs to be a numerical value! ";
+			error = "The number of roll die action cards needs to be a numerical value! ";
+		}
+		try{
+			turnCNum = Integer.parseInt(loseTurnNum.getText());
+		}
+		catch(NumberFormatException e) {
+			error = "The number of lose turn action cards needs to be a numerical value! ";
 		}
 		error.trim();
 		if (error.length() == 0) {
 			
 			DesignModeController dmc = new DesignModeController();
 			try {
-				dmc.createDeck(dieCNum, connectCNum, removeCNum, teleportCNum);
+				dmc.createDeck(dieCNum, connectCNum, removeCNum, teleportCNum, turnCNum);
 				error = "Deck created!";
 				removeConnectionNum.setText("");
 				teleportNum.setText("");
 				rollDieNum.setText("");
 				connectTileNum.setText("");
+				loseTurnNum.setText("");
 			} catch (InvalidInputException e) {
 				error = e.getMessage();
 			}

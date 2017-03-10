@@ -9,6 +9,7 @@ import ca.mcgill.ecse223.tileo.model.Connection;
 import ca.mcgill.ecse223.tileo.model.Deck;
 import ca.mcgill.ecse223.tileo.model.Game;
 import ca.mcgill.ecse223.tileo.model.Game.Mode;
+import ca.mcgill.ecse223.tileo.model.LoseTurnActionCard;
 import ca.mcgill.ecse223.tileo.model.NormalTile;
 import ca.mcgill.ecse223.tileo.model.Player;
 import ca.mcgill.ecse223.tileo.model.RemoveConnectionActionCard;
@@ -23,11 +24,11 @@ public class DesignModeController {
 	
 
 	//METHODS
-	private static final String rollDieInstruction = "Roll the die for an extra turn. ";
-	private static final String connectTilesInstruction = "Connect two adjacent tiles with a connection piece from the pile of spare connection pieces. "; 
-	private static final String teleportInstruction = "Move your playing piece to an arbitray tile that is not your current tile. ";
-	private static final String removeConnectionInstruction = "Remove a connectio piece from the board and place it in the pile of spare connection pieces. ";
-	
+	private static final String rollDieInstruction = "Roll the die for an extra turn.";
+	private static final String connectTilesInstruction = "Connect two adjacent tiles with a connection piece from the pile of spare connection pieces."; 
+	private static final String teleportInstruction = "Move your playing piece to an arbitray tile that is not your current tile.";
+	private static final String removeConnectionInstruction = "Remove a connectio piece from the board and place it in the pile of spare connection pieces.";
+	private static final String loseTurnInstruction = "You lose your next turn.";
 	
 	
 	//TileType is chosen from UI from a button
@@ -286,13 +287,15 @@ public class DesignModeController {
 	public void createDeck(int numberOfRollDieActionCard, 
 			int numberOfConnectTilesActionCard,
 			int numberOfRemoveConnectionActionCard,
-			int numberOfTeleportActionCard) throws InvalidInputException {
+			int numberOfTeleportActionCard,
+			int numberOfLoseTurnActionCard) throws InvalidInputException {
 		
 		String error = "";
 		int totalCards = numberOfRollDieActionCard 
 				+ numberOfConnectTilesActionCard 
 				+ numberOfRemoveConnectionActionCard
-				+ numberOfTeleportActionCard;
+				+ numberOfTeleportActionCard
+				+ numberOfLoseTurnActionCard;
 		
 		if(totalCards != 32) {
 			error = "The sum of numbers of different types of acton cards should be 32!";
@@ -300,7 +303,8 @@ public class DesignModeController {
 		if(numberOfRollDieActionCard < 0 
 				|| numberOfConnectTilesActionCard < 0 
 				|| numberOfRemoveConnectionActionCard < 0 
-				|| numberOfTeleportActionCard < 0) {
+				|| numberOfTeleportActionCard < 0
+				|| numberOfLoseTurnActionCard < 0) {
 			error ="The numbers of the cards should bigger than zero!";
 		}
 		if (error.length() > 0) {
@@ -322,8 +326,12 @@ public class DesignModeController {
 				deck.addCard( new RemoveConnectionActionCard(removeConnectionInstruction,deck) );
 			}
 			for(int i = 0; i < numberOfTeleportActionCard; i++) {
-				deck.addCard(new TeleportActionCard(teleportInstruction,deck));
+				deck.addCard( new TeleportActionCard(teleportInstruction,deck));
 			}
+			for(int i = 0; i < numberOfLoseTurnActionCard; i++) {
+				deck.addCard( new LoseTurnActionCard(loseTurnInstruction,deck));
+			}
+			
 		}
 		catch (RuntimeException e) {
 			throw new InvalidInputException(error);
