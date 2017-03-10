@@ -7,6 +7,8 @@ Class ActionTile {
 		Inactive {
 			land()	[almostActive()] / {
 			} -> Active;
+			land()	[!almostActive()] / {
+			} -> Inactive;
 		}
 	}
 	int inactivePeriod;
