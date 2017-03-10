@@ -1,6 +1,8 @@
 Class ActionTile {
 	state {
 		Active {
+			land()	[turnsInactive] / {
+			} -> Active;
 			land() / {
 			} ->  Inactive;
 		}
@@ -16,6 +18,9 @@ Class ActionTile {
 	
 	private boolean almostActive() {
 		return getTurnsUntilActive() == 1;
+	}
+	private boolean turnsInactive(){
+		return getInactivityPeriod() == 0;
 	}
 
 }
