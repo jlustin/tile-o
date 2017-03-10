@@ -1,10 +1,19 @@
 Class ActionTile {
-	sm {
+	state {
 		Active {
-		
+			land() / {
+			} ->  Inactive;
 		}
 		Inactive {
-		
+			land()	[almostActive()] / {
+			} -> Active;
 		}
 	}
+	int inactivePeriod;
+	1 -> 1 ActionTile tile;
+	
+	private boolean almostActive() {
+		return getTurnsUntilActive() == 1;
+	}
+
 }
