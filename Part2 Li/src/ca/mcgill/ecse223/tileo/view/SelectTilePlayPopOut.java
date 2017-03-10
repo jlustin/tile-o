@@ -29,18 +29,7 @@ public class SelectTilePlayPopOut extends JDialog {
 	String error;
     JLabel errorMessage;
     private JLabel lblPleaseClickOn;
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			SelectTilePlayPopOut dialog = new SelectTilePlayPopOut();
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	
 
 	/**
 	 * Create the dialog.

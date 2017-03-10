@@ -139,12 +139,14 @@ public class WelcomePage extends JFrame {
 									TileOApplication.dp.close();
 									TileOApplication.dp = new TileODesignPage();
 									TileOApplication.dp.setVisible(true);
+									TileOApplication.pp.close();
 								}
 								else if(TileOApplication.getTileO().getGame(chosenGameIndex).getMode() == Mode.GAME){
 									TileOApplication.getTileO().setCurrentGame(pmc.loadGame(chosenGameIndex));
 									TileOApplication.pp.close();
 									TileOApplication.pp = new TileOPlayPage();
 									TileOApplication.pp.setVisible(true);
+									TileOApplication.dp.close();
 								}
 								TileODesignPage.refreshData();
 								close();

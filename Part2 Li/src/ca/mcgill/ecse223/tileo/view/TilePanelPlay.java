@@ -49,42 +49,7 @@ public class TilePanelPlay extends JPanel{
 	
 	public TilePanelPlay(Game game) {
 		super();
-		//you guys can add tiles here to try the layout
-		//add the tiles in the same format and only here
-//		Tile t1 = new NormalTile(1, 1, game);
-//		Tile t2 = new NormalTile(1, 2, game);
-//		new NormalTile(13, 9, game);
-//		Tile t4 = new NormalTile(10, 10, game);
-//		Tile t5 = new NormalTile(10, 11, game);
-//		new NormalTile(8, 9, game);
-//		new NormalTile(3, 5, game);
-//		new NormalTile(11, 13, game);
-//		new NormalTile(11, 10, game);
-//		Tile t3 = new NormalTile(2,1, game);
-//		new ActionTile(3,1, game, 2);
-//		Connection connect = new Connection(game);
-//		t1.addConnection(connect);
-//		t2.addConnection(connect);
-//		Connection c2 = new Connection(game);
-//		c2.addTile(t1);
-//		c2.addTile(t3);
-//		t5.setHasBeenVisited(true);
-//
-//		Connection c3 = new Connection(game);
-//		c3.addTile(t4);
-//		c3.addTile(t5);
-//		Player p1 = new Player(1, game);
-//		Player p2 = new Player(2, game);
-//		game.addPlayer(p1);
-////		game.addPlayer(p2);
-//		Player p1 = new Player(0, game);
-//		Player p2 = game.getPlayer(1);
-//		p1.setCurrentTile(t1);
-//		game.addPlayer(p1);
-		//p2.setCurrentTile(t2);
-		
-//		
-		
+
 		init(game);
 		
 	}

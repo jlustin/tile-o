@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 16 "../../../../../TileOPersistence.ump"
-// line 24 "../../../../../TileO (updated Feb10).ump"
+// line 40 "../../../../../TileO (updated Feb10).ump"
 public class Player implements Serializable
 {
 
@@ -202,11 +202,18 @@ public class Player implements Serializable
   }
 
   // line 22 "../../../../../TileOPersistence.ump"
-   public static void reinitializeUniquePlayer(List<Player> players){
+   public static  void reinitializeUniquePlayer(List<Player> players){
     playersByNumber = new HashMap<Integer, Player>();
 	for(Player player : players) {
 		playersByNumber.put(player.getNumber(), player);
 		}
+  }
+
+  // line 51 "../../../../../TileO (updated Feb10).ump"
+   public List<Tile> getPossibleMoves(int moveLeft){
+    Tile currentTile=this.getCurrentTile();
+		List<Tile> possibleMoves = currentTile.getNextMoves(moveLeft, null) ;   	  
+		return possibleMoves;
   }
 
 
@@ -221,18 +228,8 @@ public class Player implements Serializable
             "  " + "game = "+(getGame()!=null?Integer.toHexString(System.identityHashCode(getGame())):"null")
      + outputString;
   }  
-  
-  
   //------------------------
-  
-  //Method to get all the possible moves of current player according to his current Tile.
-  public List<Tile> getPossibleMoves(int moveLeft) { 
-	
-	  Tile currentTile=this.getCurrentTile();
-	  List<Tile> possibleMoves = currentTile.getNextMoves(moveLeft, null) ;   	  
-      return possibleMoves;	  	  
-  }
-  
+  // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
   // line 19 ../../../../../TileOPersistence.ump

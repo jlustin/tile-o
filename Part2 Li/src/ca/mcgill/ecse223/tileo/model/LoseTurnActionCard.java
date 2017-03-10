@@ -5,14 +5,9 @@ package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
 // line 95 "../../../../../TileOPersistence.ump"
-// line 86 "../../../../../TileO (updated Feb10).ump"
+// line 272 "../../../../../TileO (updated Feb10).ump"
 public class LoseTurnActionCard extends ActionCard
 {
-	
-	@Override
-	public Game.Mode getActionCardGameMode() {
-		  return Game.Mode.GAME_LOSETURNACTIONCARD;
-	 }
 
   //------------------------
   // MEMBER VARIABLES
@@ -42,6 +37,9 @@ public class LoseTurnActionCard extends ActionCard
   
   // line 98 ../../../../../TileOPersistence.ump
   private static final long serialVersionUID = 6060606060606060606L ;
+// line 275 ../../../../../TileO (updated Feb10).ump
+  @Override
+	public Game.Mode getActionCardGameMode() {return Game.Mode.GAME_LOSETURNACTIONCARD;};
 
   
 }

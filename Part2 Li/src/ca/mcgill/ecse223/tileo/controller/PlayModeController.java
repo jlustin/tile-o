@@ -280,7 +280,15 @@ public class PlayModeController {
 		else {
 			Player nextPlayer = playerList.get(playerIndex + 1);
 			aGame.setCurrentPlayer(nextPlayer);
-		}		
+		}
+		
+		for (Player aPlayer: playerList){
+			//if has a penalty
+			if(aPlayer.getTurnsUntilActive() != 0) {
+				int turnsLeft = aPlayer.getTurnsUntilActive();
+				aPlayer.setTurnsUntilActive(turnsLeft-1);
+			}
+		}
 	}
 	
 	//helper method to check if tiles are adjacent

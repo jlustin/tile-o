@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Random;
 
 // line 101 "../../../../../TileOPersistence.ump"
-// line 90 "../../../../../TileO (updated Feb10).ump"
+// line 281 "../../../../../TileO (updated Feb10).ump"
 public class Die implements Serializable
 {
 
@@ -53,16 +53,17 @@ public class Die implements Serializable
       existingGame.delete();
     }
   }
+
+  // line 283 "../../../../../TileO (updated Feb10).ump"
+   public int roll(){
+    int rollNumber;
+		Random randomGenerator = new Random();
+		rollNumber = randomGenerator.nextInt(6)+1;
+		return rollNumber;
+  }
   
   //------------------------
-  
-  //Method to return a random value between 1 to 6.
-  public int roll(){
-	int rollNumber;
-	Random randomGenerator = new Random();
-	rollNumber = randomGenerator.nextInt(6)+1;
-	return rollNumber;
-  }
+  // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
   // line 104 ../../../../../TileOPersistence.ump

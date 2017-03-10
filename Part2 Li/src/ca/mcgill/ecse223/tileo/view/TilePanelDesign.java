@@ -169,7 +169,15 @@ public class TilePanelDesign extends JPanel{
 				
 				g2d.draw(rect);
 				g2d.fill(rect);
-
+				
+				if (aTile instanceof ActionTile) {
+					Rectangle2D r = tRectangles.get(aTile);
+					String inactive = String.valueOf(((ActionTile) aTile).getInactivityPeriod());
+					g2d.setColor(Color.BLACK);
+					g2d.drawString(inactive,
+							(int) r.getCenterX(), 
+							(int) r.getCenterY());
+				}
 				
 				if (selectedTile != null && selectedTile.equals(aTile)) {
 					aTileIsSelected = true;
@@ -179,6 +187,7 @@ public class TilePanelDesign extends JPanel{
 				
 					g2d.fill(rectangle);
 				}
+				
 				repaint();
 			}
 			

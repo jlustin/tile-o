@@ -571,6 +571,16 @@ public class Game implements Serializable
     placeholderTileO.removeGame(this);
   }
 
+  // line 31 "../../../../../TileO (updated Feb10).ump"
+   public List<Tile> rollDie(){
+    List<Tile> possibleMoves = new ArrayList<Tile>();
+		Die die =this.getDie();
+		int number = die.roll();
+		Player currentPlayer =this.getCurrentPlayer();	  
+		possibleMoves = currentPlayer.getPossibleMoves(number);
+		return possibleMoves;
+  }
+
 
   public String toString()
   {
@@ -590,16 +600,6 @@ public class Game implements Serializable
   
   // line 12 ../../../../../TileOPersistence.ump
   private static final long serialVersionUID = 2222222222222222222L ;
-
-  //added methods
-  public List<Tile> rollDie() {
-	  List<Tile> possibleMoves = new ArrayList<Tile>();
-	  Die die =this.getDie();
-	  int number = die.roll();
-	  Player currentPlayer =this.getCurrentPlayer();	  
-	  possibleMoves = currentPlayer.getPossibleMoves(number);
-	  return possibleMoves;
-	}
 
   
 }

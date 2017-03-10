@@ -54,6 +54,7 @@ public class TileODesignPage extends JFrame {
 	private JLabel addTileLbl;
 	private JRadioButton normalTileBtn;
 	private JRadioButton actionTileBtn;
+	private JTextField inactivePeriod;
 	private JRadioButton winTileBtn;
 	private final ButtonGroup tileBtnGroup = new ButtonGroup();
 	private JLabel xLbl;
@@ -650,6 +651,9 @@ public class TileODesignPage extends JFrame {
 		yComponent = new JTextField();
 		yComponent.setColumns(10);
 		
+		inactivePeriod = new JTextField();
+		inactivePeriod.setColumns(10);
+		
 		GroupLayout gl_AddTilePnl = new GroupLayout(AddTilePnl);
 		gl_AddTilePnl.setHorizontalGroup(
 			gl_AddTilePnl.createParallelGroup(Alignment.LEADING)
@@ -657,43 +661,43 @@ public class TileODesignPage extends JFrame {
 					.addGap(16)
 					.addGroup(gl_AddTilePnl.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_AddTilePnl.createSequentialGroup()
-							.addGroup(gl_AddTilePnl.createParallelGroup(Alignment.LEADING)
+							.addGap(10)
+							.addGroup(gl_AddTilePnl.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_AddTilePnl.createSequentialGroup()
-									.addGap(31)
 									.addComponent(xLbl)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(xComponent, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_AddTilePnl.createSequentialGroup()
-									.addGap(22)
-									.addComponent(normalTileBtn)))
+									.addComponent(normalTileBtn)
+									.addGap(18)))
 							.addGroup(gl_AddTilePnl.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_AddTilePnl.createSequentialGroup()
-									.addGap(18)
-									.addComponent(actionTileBtn))
 								.addGroup(gl_AddTilePnl.createSequentialGroup()
 									.addGap(28)
 									.addComponent(yLbl)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(yComponent, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)))
-							.addGroup(gl_AddTilePnl.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_AddTilePnl.createSequentialGroup()
-									.addGap(18)
-									.addComponent(winTileBtn))
-								.addGroup(gl_AddTilePnl.createSequentialGroup()
+									.addComponent(yComponent, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
 									.addGap(68)
-									.addComponent(addTileBtn))))
+									.addComponent(addTileBtn))
+								.addGroup(gl_AddTilePnl.createSequentialGroup()
+									.addGap(6)
+									.addComponent(actionTileBtn)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(inactivePeriod, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+									.addGap(27)
+									.addComponent(winTileBtn))))
 						.addComponent(addTileLbl))
-					.addGap(17))
+					.addGap(71))
 		);
 		gl_AddTilePnl.setVerticalGroup(
 			gl_AddTilePnl.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_AddTilePnl.createSequentialGroup()
-					.addContainerGap(18, Short.MAX_VALUE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addComponent(addTileLbl)
 					.addGap(18)
 					.addGroup(gl_AddTilePnl.createParallelGroup(Alignment.BASELINE)
-						.addComponent(normalTileBtn)
 						.addComponent(actionTileBtn)
+						.addComponent(normalTileBtn)
+						.addComponent(inactivePeriod, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(winTileBtn))
 					.addGap(10)
 					.addGroup(gl_AddTilePnl.createParallelGroup(Alignment.BASELINE)
@@ -742,6 +746,7 @@ public class TileODesignPage extends JFrame {
 		ButtonModel chosenTile;
 		int chosenXComp = 0;
 		int chosenYComp = 0;
+		int inactive = 0;
 		error = "";
 		chosenTile = tileBtnGroup.getSelection();
 		if(chosenTile==null) {
@@ -759,11 +764,21 @@ public class TileODesignPage extends JFrame {
 		catch(NumberFormatException e){
 			error ="The coordinate y needs to be a numerical value!\n";
 		}
+		
+		if(chosenTile.getActionCommand() == "ActionTile"){
+			try {
+				inactive = Integer.parseInt(inactivePeriod.getText());
+			}
+			catch(NumberFormatException e) {
+				error ="The inactive period needs to be a numerical value!\n";
+			}
+		}
+		
 		error.trim();
 		if (error.length()==0) {
 			try{
-			DesignModeController dmc = new DesignModeController();
-			dmc.addDesignTile(chosenXComp, chosenYComp,chosenTile.getActionCommand());
+				DesignModeController dmc = new DesignModeController();
+				dmc.addDesignTile(chosenXComp, chosenYComp,chosenTile.getActionCommand(), inactive);
 			} 
 			catch (InvalidInputException er) {
 			error = er.getMessage();
@@ -771,6 +786,7 @@ public class TileODesignPage extends JFrame {
 		}
 		yComponent.setText("");
 		xComponent.setText("");
+		inactivePeriod.setText("");
 		refreshData();
 		
 	}
@@ -884,5 +900,4 @@ public class TileODesignPage extends JFrame {
 			str[i-1] = String.valueOf(i);			
 		}
 	}
-	
 }

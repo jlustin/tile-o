@@ -1,7 +1,8 @@
 package ca.mcgill.ecse223.tileo.controller;
+import java.util.*;
 
-import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 import ca.mcgill.ecse223.tileo.model.ActionTile;
 import ca.mcgill.ecse223.tileo.model.ConnectTilesActionCard;
 import ca.mcgill.ecse223.tileo.model.Connection;
@@ -17,6 +18,7 @@ import ca.mcgill.ecse223.tileo.model.Tile;
 import ca.mcgill.ecse223.tileo.model.TileO;
 import ca.mcgill.ecse223.tileo.model.WinTile;
 
+
 public class DesignModeController {
 	
 
@@ -30,7 +32,7 @@ public class DesignModeController {
 	
 	//TileType is chosen from UI from a button
 	//How to make sure that you don't add 2 tiles at the same location?
-	public void addDesignTile(int x, int y, String TileType) throws InvalidInputException {		
+	public void addDesignTile(int x, int y, String TileType, int aInactivityPeriod) throws InvalidInputException {		
 		Game currentGame = TileOApplication.getTileO().getCurrentGame();
 		String error = "";
 		
@@ -47,6 +49,9 @@ public class DesignModeController {
         		error = "The tile already exists.";
         	}
         }
+        if((TileType == "ActionTile") && (aInactivityPeriod<0)) {
+        	error = "The inactive period must be in the positive values!";        	
+        }
                 
 		if (error.length() > 0) {
 			throw new InvalidInputException(error.trim());
@@ -54,11 +59,11 @@ public class DesignModeController {
 				
 		try {
 			if(TileType == "NormalTile") {
-				NormalTile normalTile = new NormalTile( x, y, currentGame);
+				NormalTile normalTile = new NormalTile(x, y, currentGame);
 	            currentGame.addTile(normalTile);	            
 			}			
 			else if(TileType == "ActionTile") {
-				createActionTile(x, y, currentGame);
+				createActionTile(x, y, currentGame, aInactivityPeriod);
 			}			
 			else if(TileType == "WinTile") {	
 				createWinTile(x, y, currentGame);				
@@ -263,10 +268,9 @@ public class DesignModeController {
 	 * 8. Identify an action tile (inactivity period not required for this iteration)
 	 * Victor
 	 */
-	public void createActionTile(int x, int y, Game game) throws InvalidInputException {
+	public void createActionTile(int x, int y, Game game, int aInactivityPeriod) throws InvalidInputException {
 		try{
-			int inactivityPeriodDefault = 1;
-			ActionTile actionTile = new ActionTile( x, y, game, inactivityPeriodDefault);
+			ActionTile actionTile = new ActionTile( x, y, game, aInactivityPeriod);
 	        game.addTile(actionTile);
 		}
 		catch (RuntimeException e){

@@ -7,7 +7,7 @@ import java.io.Serializable;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 
 // line 89 "../../../../../TileOPersistence.ump"
-// line 82 "../../../../../TileO (updated Feb10).ump"
+// line 252 "../../../../../TileO (updated Feb10).ump"
 public class TeleportActionCard extends ActionCard
 {
 
@@ -27,46 +27,22 @@ public class TeleportActionCard extends ActionCard
   //------------------------
   // INTERFACE
   //------------------------
-  
-  @Override
-  public Game.Mode getActionCardGameMode() {
-	  return Game.Mode.GAME_TELEPORTACTIONCARD;
- }
-
-  
-  public void play(Tile tile) throws InvalidInputException {
-	 //  Deck deck = this.getDeck();	 
-	 // Game game = deck.getGame();
-	 // Player player = game.getCurrentPlayer(); 
-	 // player.setCurrentTile(tile);
-	 //EVERYTHING IS IN LAND METHOD...
-	  
-String error = "";
-	  
-	  // Check if card is a Teleport Card REMOVED (CAUSED GAME TO CRASH)
-//	  if (!(super.getDeck().getCurrentCard() instanceof TeleportActionCard)){
-//		  error = "The current card is not a Teleport Action Card.";
-//	  }
-//	  if (error.length() > 0){
-//			throw new InvalidInputException (error.trim());
-//	  }
-	  
-	  try
-	  {
-		  tile.land();
-	  }
-	  catch (RuntimeException e) 
-	  {
-		  error = e.getMessage();
-		  throw new InvalidInputException(error);
-	  }
-	  
- }
-  
 
   public void delete()
   {
     super.delete();
+  }
+
+  // line 261 "../../../../../TileO (updated Feb10).ump"
+   public void play(Tile tile) throws InvalidInputException{
+    String error = "";
+	  try {
+		  tile.land();
+	  }
+	  catch (RuntimeException e) {
+		  error = e.getMessage();
+		  throw new InvalidInputException(error);
+	  }
   }
   
   //------------------------
@@ -75,6 +51,9 @@ String error = "";
   
   // line 92 ../../../../../TileOPersistence.ump
   private static final long serialVersionUID = 5050505050505050505L ;
+// line 255 ../../../../../TileO (updated Feb10).ump
+  @Override
+  	public Game.Mode getActionCardGameMode() {return Game.Mode.GAME_TELEPORTACTIONCARD;};
 
   
 }

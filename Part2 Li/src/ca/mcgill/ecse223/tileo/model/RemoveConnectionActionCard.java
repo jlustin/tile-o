@@ -7,14 +7,9 @@ import java.io.Serializable;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 
 // line 83 "../../../../../TileOPersistence.ump"
-// line 78 "../../../../../TileO (updated Feb10).ump"
+// line 234 "../../../../../TileO (updated Feb10).ump"
 public class RemoveConnectionActionCard extends ActionCard
 {
-	@Override
-	public Game.Mode getActionCardGameMode() {
-		  return Game.Mode.GAME_REMOVECONNECTIONACTIONCARD;
-	 }
-
 
   //------------------------
   // MEMBER VARIABLES
@@ -37,15 +32,13 @@ public class RemoveConnectionActionCard extends ActionCard
   {
     super.delete();
   }
-  
-  public void play(Connection connection) throws InvalidInputException {
-	  	//TODO: Li write function for the play??
-	  try
-	  {
+
+  // line 238 "../../../../../TileO (updated Feb10).ump"
+   public void play(Connection connection) throws InvalidInputException{
+    try{
 		  connection.delete();
 	  }
-	  catch (RuntimeException e) 
-	  {
+	  catch (RuntimeException e) {
 		  throw new InvalidInputException(e.getMessage());
 	  }
   }
@@ -56,6 +49,9 @@ public class RemoveConnectionActionCard extends ActionCard
   
   // line 86 ../../../../../TileOPersistence.ump
   private static final long serialVersionUID = 4040404040404040404L ;
+// line 246 ../../../../../TileO (updated Feb10).ump
+  @Override
+	public Game.Mode getActionCardGameMode() {return Game.Mode.GAME_REMOVECONNECTIONACTIONCARD;};
 
   
 }

@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 47 "../../../../../TileOPersistence.ump"
-// line 52 "../../../../../TileO (updated Feb10).ump"
+// line 150 "../../../../../TileO (updated Feb10).ump"
 public class WinTile extends Tile
 {
 
@@ -26,29 +26,6 @@ public class WinTile extends Tile
   //------------------------
   // INTERFACE
   //------------------------
-  
-  @Override
-  public void land()
-  { 
-  	  // get the current game
-  	  Game currentGame = this.getGame();
-  	  
-  	  this.setHasBeenVisited(true);
-  	  
-  	  // get the current player
-  	  Player currentPlayer = currentGame.getCurrentPlayer();
-  	 
-  	  // set the player's current tile to the tile he has to move to
-  	  // possible moves from Charles
-  	  currentPlayer.setCurrentTile(this); //not in the sequence diagram though
-  	 
-  	  currentGame.setMode(Game.Mode.GAME_WON);
-  	 
-  	  // set possible tile that player chose, that it has been visited
-  	  
-  	 
-
-  }
 
   public void delete()
   {
@@ -61,6 +38,17 @@ public class WinTile extends Tile
   
   // line 50 ../../../../../TileOPersistence.ump
   private static final long serialVersionUID = 7777777777777777777L ;
+// line 153 ../../../../../TileO (updated Feb10).ump
+  @Override
+  	public void land() {// get the current game
+  	  	Game currentGame = this.getGame();  	  
+  	  	this.setHasBeenVisited(true);  	  
+  	  	// get the current player
+  	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 
+  	  	// set the player's current tile to the tile he has to move to
+  	  	// possible moves from Charles
+  	  	currentPlayer.setCurrentTile(this); //not in the sequence diagram though  	 
+  	  	currentGame.setMode(Game.Mode.GAME_WON);};
 
   
 }
