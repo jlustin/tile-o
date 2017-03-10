@@ -5,8 +5,10 @@ package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 import java.util.*;
 
+import ca.mcgill.ecse223.tileo.model.ActionTile.TileStatus;
+
 // line 9 "../../../../../TileOPersistence.ump"
-// line 10 "../../../../../TileO (updated Feb10).ump"
+// line 11 "../../../../../TileO (updated Feb10).ump"
 public class Game implements Serializable
 {
 
@@ -571,7 +573,7 @@ public class Game implements Serializable
     placeholderTileO.removeGame(this);
   }
 
-  // line 31 "../../../../../TileO (updated Feb10).ump"
+  // line 32 "../../../../../TileO (updated Feb10).ump"
    public List<Tile> rollDie(){
     List<Tile> possibleMoves = new ArrayList<Tile>();
 		Die die =this.getDie();
@@ -579,6 +581,44 @@ public class Game implements Serializable
 		Player currentPlayer =this.getCurrentPlayer();	  
 		possibleMoves = currentPlayer.getPossibleMoves(number);
 		return possibleMoves;
+  }
+
+  // line 41 "../../../../../TileO (updated Feb10).ump"
+   public void setNextPlayer(){
+    //helper method for setting the next player
+		List<Player> playerList = getPlayers();
+		Player currentPlayer = getCurrentPlayer();
+		int playerIndex = indexOfPlayer(currentPlayer);
+				
+		//checks if current player is the last player
+		if (playerIndex + 1 == playerList.size()) {
+			//if it is, set the first player to current player
+			setCurrentPlayer(playerList.get(0));
+		}
+		//if it's not, set the next player
+		else {
+			Player nextPlayer = playerList.get(playerIndex + 1);
+			setCurrentPlayer(nextPlayer);
+		}
+		
+		for (Player aPlayer: playerList){
+			//if has a penalty
+			if(aPlayer.getTurnsUntilActive() != 0) {
+				int turnsLeft = aPlayer.getTurnsUntilActive();
+				aPlayer.setTurnsUntilActive(turnsLeft-1);
+			}
+		}		
+		
+		List<Tile> tileList = getTiles();
+		for (Tile aTile: tileList){
+			if (aTile instanceof ActionTile){
+				//if inactive, and turns until active is not 0				
+				if(((ActionTile) aTile).getTileStatus() == TileStatus.Inactive){
+					int turnsTilActive = ((ActionTile) aTile).getTurnsUntilActive();
+					((ActionTile) aTile).setTurnsUntilActive(turnsTilActive-1);
+				}
+			}
+		}
   }
 
 

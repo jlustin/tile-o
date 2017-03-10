@@ -110,8 +110,6 @@ public class TileOPlayPage extends JFrame {
 	    		
 	    		SelectTilePlayPopOut stpop = new SelectTilePlayPopOut();
 	    		stpop.setVisible(true);
-	    		
-	    	
 	    	}
 	    });
 	    GroupLayout gl_contentPane = new GroupLayout(contentPane);

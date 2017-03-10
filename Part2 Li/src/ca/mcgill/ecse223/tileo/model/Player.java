@@ -6,7 +6,8 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 16 "../../../../../TileOPersistence.ump"
-// line 40 "../../../../../TileO (updated Feb10).ump"
+// line 22 "../../../../../TileOStates.ump"
+// line 78 "../../../../../TileO (updated Feb10).ump"
 public class Player implements Serializable
 {
 
@@ -25,6 +26,8 @@ public class Player implements Serializable
   private int turnsUntilActive;
 
   //Player State Machines
+  public enum PlayerStatus { hasNextTurn, noNextTurn }
+  private PlayerStatus playerStatus;
   public enum Color { RED, BLUE, GREEN, YELLOW }
   private Color color;
 
@@ -49,6 +52,7 @@ public class Player implements Serializable
     {
       throw new RuntimeException("Unable to create player due to game");
     }
+    setPlayerStatus(PlayerStatus.hasNextTurn);
     setColor(Color.RED);
   }
 
@@ -100,15 +104,32 @@ public class Player implements Serializable
     return turnsUntilActive;
   }
 
+  public String getPlayerStatusFullName()
+  {
+    String answer = playerStatus.toString();
+    return answer;
+  }
+
   public String getColorFullName()
   {
     String answer = color.toString();
     return answer;
   }
 
+  public PlayerStatus getPlayerStatus()
+  {
+    return playerStatus;
+  }
+
   public Color getColor()
   {
     return color;
+  }
+
+  public boolean setPlayerStatus(PlayerStatus aPlayerStatus)
+  {
+    playerStatus = aPlayerStatus;
+    return true;
   }
 
   public boolean setColor(Color aColor)
@@ -209,7 +230,7 @@ public class Player implements Serializable
 		}
   }
 
-  // line 51 "../../../../../TileO (updated Feb10).ump"
+  // line 89 "../../../../../TileO (updated Feb10).ump"
    public List<Tile> getPossibleMoves(int moveLeft){
     Tile currentTile=this.getCurrentTile();
 		List<Tile> possibleMoves = currentTile.getNextMoves(moveLeft, null) ;   	  

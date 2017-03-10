@@ -1,0 +1,31 @@
+class ActionTile {
+	tileStatus {
+		Active {
+			land [inactivityPeriod == 0] -> / {
+				doLand();
+			} Active;
+			land [inactivityPeriod > 0] -> / {
+				doLand();
+			} Inactive;
+		}
+		Inactive {
+			land [turnsUntilActive == 1] -> / {
+				doLand();
+			} Active
+			land [turnsUntilActive > 0] -> / {
+				doLand();
+			} Inactive
+		}
+	}
+}
+
+class Player {
+	playerStatus{
+		hasNextTurn{
+		
+		}
+		noNextTurn{
+		
+		}
+	}
+}

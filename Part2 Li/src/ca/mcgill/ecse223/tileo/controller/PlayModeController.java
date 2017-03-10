@@ -5,6 +5,8 @@ import java.util.List;
 
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.model.ActionCard;
+import ca.mcgill.ecse223.tileo.model.ActionTile;
+import ca.mcgill.ecse223.tileo.model.ActionTile.TileStatus;
 import ca.mcgill.ecse223.tileo.model.ConnectTilesActionCard;
 import ca.mcgill.ecse223.tileo.model.Connection;
 import ca.mcgill.ecse223.tileo.model.Deck;
@@ -98,7 +100,7 @@ public class PlayModeController {
 		}
 		
 		try{
-			tile.land();
+			tile.doLand();
 		}
 		catch(RuntimeException e){
 			throw new InvalidInputException(e.getMessage());
@@ -178,7 +180,7 @@ public class PlayModeController {
 		try {
 			// Connect the two selected tiles
 			connectTilesActionCard.play(selectedTile1, selectedTile2);			
-			setNextPlayer(currentGame);
+			currentGame.setNextPlayer();
 			currentGame.setMode(Mode.GAME);
 		}
 		catch (RuntimeException e) {
@@ -204,7 +206,7 @@ public class PlayModeController {
 				if (currentCard instanceof RemoveConnectionActionCard) {				
 					((RemoveConnectionActionCard) currentCard).play(connection);
 				}				
-				setNextPlayer(currentGame);		
+				currentGame.setNextPlayer();		
 				currentGame.setMode(Mode.GAME);
 			} 
 			catch (RuntimeException e) {
@@ -265,31 +267,43 @@ public class PlayModeController {
 	}
 	
 	
-	//helper method for setting the next player
-	public void setNextPlayer(Game aGame) {
-		List<Player> playerList = aGame.getPlayers();
-		Player currentPlayer = aGame.getCurrentPlayer();
-		int playerIndex = aGame.indexOfPlayer(currentPlayer);
-				
-		//checks if current player is the last player
-		if (playerIndex + 1 == playerList.size()) {
-			//if it is, set the first player to current player
-			aGame.setCurrentPlayer(playerList.get(0));
-		}
-		//if it's not, set the next player
-		else {
-			Player nextPlayer = playerList.get(playerIndex + 1);
-			aGame.setCurrentPlayer(nextPlayer);
-		}
-		
-		for (Player aPlayer: playerList){
-			//if has a penalty
-			if(aPlayer.getTurnsUntilActive() != 0) {
-				int turnsLeft = aPlayer.getTurnsUntilActive();
-				aPlayer.setTurnsUntilActive(turnsLeft-1);
-			}
-		}
-	}
+//	//helper method for setting the next player
+//	public void setNextPlayer(Game aGame) {
+//		List<Player> playerList = aGame.getPlayers();
+//		Player currentPlayer = aGame.getCurrentPlayer();
+//		int playerIndex = aGame.indexOfPlayer(currentPlayer);
+//				
+//		//checks if current player is the last player
+//		if (playerIndex + 1 == playerList.size()) {
+//			//if it is, set the first player to current player
+//			aGame.setCurrentPlayer(playerList.get(0));
+//		}
+//		//if it's not, set the next player
+//		else {
+//			Player nextPlayer = playerList.get(playerIndex + 1);
+//			aGame.setCurrentPlayer(nextPlayer);
+//		}
+//		
+//		for (Player aPlayer: playerList){
+//			//if has a penalty
+//			if(aPlayer.getTurnsUntilActive() != 0) {
+//				int turnsLeft = aPlayer.getTurnsUntilActive();
+//				aPlayer.setTurnsUntilActive(turnsLeft-1);
+//			}
+//		}		
+//		
+//		List<Tile> tileList = aGame.getTiles();
+//		for (Tile aTile: tileList){
+//			if (aTile instanceof ActionTile){
+//				//if inactive, and turns until active is not 0				
+//				if(((ActionTile) aTile).getTileStatus() == TileStatus.Inactive){
+//					int turnsTilActive = ((ActionTile) aTile).getTurnsUntilActive();
+//					((ActionTile) aTile).setTurnsUntilActive(turnsTilActive-1);
+//				}
+//			}
+//		}
+//		
+//	}
 	
 	//helper method to check if tiles are adjacent
 	public boolean isAdjacent(Tile tile1, Tile tile2) {

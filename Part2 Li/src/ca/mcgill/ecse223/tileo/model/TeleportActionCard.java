@@ -7,7 +7,7 @@ import java.io.Serializable;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 
 // line 89 "../../../../../TileOPersistence.ump"
-// line 252 "../../../../../TileO (updated Feb10).ump"
+// line 280 "../../../../../TileO (updated Feb10).ump"
 public class TeleportActionCard extends ActionCard
 {
 
@@ -33,11 +33,11 @@ public class TeleportActionCard extends ActionCard
     super.delete();
   }
 
-  // line 261 "../../../../../TileO (updated Feb10).ump"
+  // line 289 "../../../../../TileO (updated Feb10).ump"
    public void play(Tile tile) throws InvalidInputException{
     String error = "";
 	  try {
-		  tile.land();
+		  tile.doLand();
 	  }
 	  catch (RuntimeException e) {
 		  error = e.getMessage();
@@ -51,7 +51,7 @@ public class TeleportActionCard extends ActionCard
   
   // line 92 ../../../../../TileOPersistence.ump
   private static final long serialVersionUID = 5050505050505050505L ;
-// line 255 ../../../../../TileO (updated Feb10).ump
+// line 283 ../../../../../TileO (updated Feb10).ump
   @Override
   	public Game.Mode getActionCardGameMode() {return Game.Mode.GAME_TELEPORTACTIONCARD;};
 

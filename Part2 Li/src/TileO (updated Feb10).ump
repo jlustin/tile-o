@@ -1,7 +1,7 @@
 namespace ca.mcgill.ecse223.tileo.model;
 
 use TileOPersistence.ump;
-use ActionTileState.ump;
+use TileOStates.ump;
 
 class TileO {
 	1 <@>- * Game games;
@@ -35,6 +35,43 @@ class Game {
 		Player currentPlayer =this.getCurrentPlayer();	  
 		possibleMoves = currentPlayer.getPossibleMoves(number);
 		return possibleMoves;
+	};
+		
+	public void setNextPlayer() {
+	//helper method for setting the next player
+		List<Player> playerList = getPlayers();
+		Player currentPlayer = getCurrentPlayer();
+		int playerIndex = indexOfPlayer(currentPlayer);
+				
+		//checks if current player is the last player
+		if (playerIndex + 1 == playerList.size()) {
+			//if it is, set the first player to current player
+			setCurrentPlayer(playerList.get(0));
+		}
+		//if it's not, set the next player
+		else {
+			Player nextPlayer = playerList.get(playerIndex + 1);
+			setCurrentPlayer(nextPlayer);
+		}
+		
+		for (Player aPlayer: playerList){
+			//if has a penalty
+			if(aPlayer.getTurnsUntilActive() != 0) {
+				int turnsLeft = aPlayer.getTurnsUntilActive();
+				aPlayer.setTurnsUntilActive(turnsLeft-1);
+			}
+		}		
+		
+		List<Tile> tileList = getTiles();
+		for (Tile aTile: tileList){
+			if (aTile instanceof ActionTile){
+				//if inactive, and turns until active is not 0				
+				if(((ActionTile) aTile).getTileStatus() == TileStatus.Inactive){
+					int turnsTilActive = ((ActionTile) aTile).getTurnsUntilActive();
+					((ActionTile) aTile).setTurnsUntilActive(turnsTilActive-1);
+				}
+			}
+		}		
 	};
 }
 
@@ -92,7 +129,7 @@ class Tile {
 	};	  
   
 	// Abstract method for land()
-	public abstract void land();
+	public abstract void doLand();
   
 }
 
@@ -103,7 +140,7 @@ class ActionTile {
 	Integer turnsUntilActive= 0;
 	  
 	@Override
-	public void land() {
+	public void doLand() {
 		Game currentGame = getGame();
 		Player currentPlayer = currentGame.getCurrentPlayer();
 		currentPlayer.setCurrentTile(this);
@@ -118,23 +155,13 @@ class NormalTile {
 	isA Tile;
 	
 	@Override
-  	public void land() { 
-  		// get the current game
+  	public void doLand() { 
 		Game currentGame = this.getGame();
-  	 	// get the current player
   	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 
-  	  	// set the player's current tile to the tile he has to move to
-  	  	// possible moves from Charles
   	  	currentPlayer.setCurrentTile(this);  	 
-  	  	// get the index of the current player
-  	  	//currentGame.setCurrentPlayer(currentGame.getPlayer(currentGame.indexOfPlayer(currentPlayer) + 1))
   	  	int playerIndex = currentGame.indexOfPlayer(currentPlayer);  	 
-  	  	// get the number of players in the game
   	  	int numberOfPlayers = currentGame.numberOfPlayers();  	 
-  	  	// if it's the last player's turn
   	  	if(playerIndex == numberOfPlayers-1){  		  
-  		// it is now player 1's turn
-  		// Player playerOne = currentGame.getPlayer(0);	 
   		 	currentGame.setCurrentPlayer(currentGame.getPlayer(0));
   	  	}
   	  	else{
@@ -152,7 +179,7 @@ class WinTile {
 	isA Tile;
 	
 	@Override
-  	public void land() { 
+  	public void doLand() { 
   	  	// get the current game
   	  	Game currentGame = this.getGame();  	  
   	  	this.setHasBeenVisited(true);  	  
@@ -261,7 +288,7 @@ class TeleportActionCard {
   	public void play(Tile tile) throws InvalidInputException {	
 	  String error = "";
 	  try {
-		  tile.land();
+		  tile.doLand();
 	  }
 	  catch (RuntimeException e) {
 		  error = e.getMessage();
