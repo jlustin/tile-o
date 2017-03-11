@@ -27,9 +27,21 @@ class PlayModeController
   GameState {
     
     ReadyToStart{
-      startGame(Game game) -> / {
+      startGame(Game game) [game.getMode() == Game.Mode.GAME] -> / {
       	doStartGame(game);
       } Start;
+      startGame(Game game) [game.getMode() == Game.Mode.GAME_ROLLDIEACTIONCARD] -> / {
+      } ExtraRoll;
+      startGame(Game game) [game.getMode() == Game.Mode.GAME_CONNECTTILESACTIONCARD] -> / {
+      } AddConnection;
+      startGame(Game game) [game.getMode() == Game.Mode.GAME_REMOVECONNECTIONACTIONCARD] -> / {
+      } RemoveConnection;
+      startGame(Game game) [game.getMode() == Game.Mode.GAME_TELEPORTACTIONCARD] -> / {
+      } Teleport;
+      startGame(Game game) [game.getMode() == Game.Mode.GAME_LOSETURNACTIONCARD] -> / {
+      } LoseTurn;
+      startGame(Game game) [game.getMode() == Game.Mode.GAME_WON] -> / {
+      } Win;
     }
     
     Start {
@@ -54,7 +66,7 @@ class PlayModeController
 	}     
       
     ActionTileState{
-		ReomveConnectionAction [checkGameMode(Game.Mode.GAME_REMOVECONNECTIONACTIONCARD)]
+		RemoveConnectionAction [checkGameMode(Game.Mode.GAME_REMOVECONNECTIONACTIONCARD)]
 		-> RemoveConnection;      
 		TeleportAction[checkGameMode(Game.Mode.GAME_TELEPORTACTIONCARD)]
 		-> Teleport;
