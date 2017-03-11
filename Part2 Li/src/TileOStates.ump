@@ -9,23 +9,27 @@ class ActionTile {
 			} Inactive;
 		}
 		Inactive {
-			land [turnsUntilActive == 1] -> / {
-				doLand();
-			} Active
-			land [turnsUntilActive > 0] -> / {
-				doLand();
-			} Inactive
+			changeTurn [turnsUntilActive == 0] -> Active;
+			changeTurn [turnsUntilActive > 0] -> / {
+				setTurnsUntilActive(getTurnsUntilActive()-1);
+			} Inactive;
 		}
 	}
 }
 
 class Player {
-	playerStatus{
+	playerStatus {
 		hasNextTurn{
-		
-		}
-		noNextTurn{
-		
+			changeTurn [turnsUntilActive == 0] -> hasNextTurn;
+			changeTurn [turnsUntilActive > 0] -> / {
+				setTurnsUntilActive(getTurnsUntilActive()-1);
+			} noNextTurn;
+		}  
+		noNextTurn {
+			changeTurn [turnsUntilActive == 0] -> hasNextTurn;
+			changeTurn [turnsUntilActive > 0] -> / {
+				setTurnsUntilActive(getTurnsUntilActive()-1);
+			} noNextTurn;
 		}
 	}
 }

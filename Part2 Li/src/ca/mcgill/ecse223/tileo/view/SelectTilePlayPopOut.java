@@ -92,7 +92,7 @@ public class SelectTilePlayPopOut extends JDialog {
 						if(TileOPlayPage.pMoves.isEmpty()){
 							NoPossibleMovesPopOut npm = new NoPossibleMovesPopOut();
 							npm.setVisible(true);
-							pmc.setNextPlayer(TileOApplication.getTileO().getCurrentGame());
+							(TileOApplication.getTileO().getCurrentGame()).setNextPlayer();
 							TileOPlayPage.refreshData();
 							refreshData();
 						}

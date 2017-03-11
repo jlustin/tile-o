@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 16 "../../../../../TileOPersistence.ump"
-// line 22 "../../../../../TileOStates.ump"
+// line 20 "../../../../../TileOStates.ump"
 // line 78 "../../../../../TileO (updated Feb10).ump"
 public class Player implements Serializable
 {
@@ -126,10 +126,55 @@ public class Player implements Serializable
     return color;
   }
 
-  public boolean setPlayerStatus(PlayerStatus aPlayerStatus)
+  public boolean changeTurn()
+  {
+    boolean wasEventProcessed = false;
+    
+    PlayerStatus aPlayerStatus = playerStatus;
+    switch (aPlayerStatus)
+    {
+      case hasNextTurn:
+        if (turnsUntilActive==0)
+        {
+          setPlayerStatus(PlayerStatus.hasNextTurn);
+          wasEventProcessed = true;
+          break;
+        }
+        if (turnsUntilActive>0)
+        {
+        // line 24 "../../../../../TileOStates.ump"
+          setTurnsUntilActive(getTurnsUntilActive()-1);
+          setPlayerStatus(PlayerStatus.noNextTurn);
+          wasEventProcessed = true;
+          break;
+        }
+        break;
+      case noNextTurn:
+        if (turnsUntilActive==0)
+        {
+          setPlayerStatus(PlayerStatus.hasNextTurn);
+          wasEventProcessed = true;
+          break;
+        }
+        if (turnsUntilActive>0)
+        {
+        // line 30 "../../../../../TileOStates.ump"
+          setTurnsUntilActive(getTurnsUntilActive()-1);
+          setPlayerStatus(PlayerStatus.noNextTurn);
+          wasEventProcessed = true;
+          break;
+        }
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  private void setPlayerStatus(PlayerStatus aPlayerStatus)
   {
     playerStatus = aPlayerStatus;
-    return true;
   }
 
   public boolean setColor(Color aColor)

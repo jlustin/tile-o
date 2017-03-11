@@ -100,6 +100,36 @@ public class ActionTile extends Tile
     return wasEventProcessed;
   }
 
+  public boolean changeTurn()
+  {
+    boolean wasEventProcessed = false;
+    
+    TileStatus aTileStatus = tileStatus;
+    switch (aTileStatus)
+    {
+      case Inactive:
+        if (turnsUntilActive==0)
+        {
+          setTileStatus(TileStatus.Active);
+          wasEventProcessed = true;
+          break;
+        }
+        if (turnsUntilActive>0)
+        {
+        // line 13 "../../../../../TileOStates.ump"
+          setTurnsUntilActive(getTurnsUntilActive()-1);
+          setTileStatus(TileStatus.Inactive);
+          wasEventProcessed = true;
+          break;
+        }
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
   private void setTileStatus(TileStatus aTileStatus)
   {
     tileStatus = aTileStatus;
