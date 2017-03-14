@@ -883,7 +883,7 @@ public class TileODesignPage extends JFrame {
 				int gameIndex = startGameCBox.getSelectedIndex(); 
 				PlayModeController pmc = new PlayModeController();			
 				Game selectedGame = TileOApplication.getTileO().getGame(gameIndex);
-				pmc.startGame(selectedGame);
+				pmc.doStartGame(selectedGame);
 				TileOApplication.pp.close();
 				close();
 				TileOApplication.pp = new TileOPlayPage();

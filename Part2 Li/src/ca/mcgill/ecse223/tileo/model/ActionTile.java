@@ -7,7 +7,7 @@ import java.util.*;
 
 // line 35 "../../../../../TileOPersistence.ump"
 // line 1 "../../../../../TileOStates.ump"
-// line 136 "../../../../../TileO (updated Feb10).ump"
+// line 137 "../../../../../TileO (updated Feb10).ump"
 public class ActionTile extends Tile
 {
 
@@ -155,7 +155,7 @@ public class ActionTile extends Tile
   
   // line 38 ../../../../../TileOPersistence.ump
   private static final long serialVersionUID = 5555555555555555555L ;
-// line 142 ../../../../../TileO (updated Feb10).ump
+// line 143 ../../../../../TileO (updated Feb10).ump
   @Override
 	public void doLand() {Game currentGame = getGame();
 		Player currentPlayer = currentGame.getCurrentPlayer();

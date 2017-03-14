@@ -103,7 +103,7 @@ public class TileOPlayPage extends JFrame {
 	    	public void actionPerformed(ActionEvent e) {
 	    		// TODO: Roll the die
 	    		PlayModeController pmc = new PlayModeController();
-	    		pMoves = pmc.rollDie();
+	    		pMoves = pmc.doRollDie();
 	    		grid.possibleMoves=pMoves;
 	    		
 	    		grid.isAPlayerTurn = true;	//added by Li

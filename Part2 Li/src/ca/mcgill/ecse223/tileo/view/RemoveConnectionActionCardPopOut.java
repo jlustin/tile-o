@@ -79,7 +79,7 @@ public class RemoveConnectionActionCardPopOut extends JFrame {
 					chosenConnection = TileOPlayPage.getGrid().selectedConnection;
 					try 
 					{						
-						pmc.playRemoveConnectionActionCard(chosenConnection);
+						pmc.doPlayRemoveConnectionActionCard(chosenConnection);
 						TileOPlayPage.refreshData();
 						close();
 					}

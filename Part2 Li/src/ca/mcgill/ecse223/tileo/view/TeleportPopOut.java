@@ -83,7 +83,7 @@ public class TeleportPopOut extends JFrame {
 					error = error + "Please click a tile on the board! ";
 				}
 					try {
-						pmc.playTeleportActionCard(chosenTile);
+						pmc.doPlayTeleportActionCard(chosenTile);
 						TileOPlayPage.refreshData();
 					} catch (InvalidInputException e1) {
 						throw new RuntimeException(e1.getMessage());

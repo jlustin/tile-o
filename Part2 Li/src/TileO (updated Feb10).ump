@@ -3,6 +3,7 @@ namespace ca.mcgill.ecse223.tileo.model;
 use TileOPersistence.ump;
 use TileOStates.ump;
 
+
 class TileO {
 	1 <@>- * Game games;
 	1 -> 0..1 Game currentGame;
@@ -35,6 +36,36 @@ class Game {
 		Player currentPlayer =this.getCurrentPlayer();	  
 		possibleMoves = currentPlayer.getPossibleMoves(number);
 		return possibleMoves;
+	};
+	
+	public void determineNextPlayer() {
+		boolean found = false;
+		Player player = getCurrentPlayer();
+		Player nextPlayer;
+		while(!found) {
+			try {
+				nextPlayer = getPlayer(indexOfPlayer(player) + 1);
+			}
+			catch (IndexOutOfBoundsException e) {
+				nextPlayer = getPlayer(0);
+			}
+			if (nextPlayer.getStatus() == PlayerStatus.Active) {
+				found = true;
+			}
+			else {
+				nextPlayer.takeTurn();
+			}
+			player = nextPlayer;
+		}
+		setCurrentPlayer(Player);
+	};
+	
+	public void updateTileStatus() {
+		for(Tile tile: getTiles()) {
+			if (tile instanceof ActionTile) {
+				tile.takeTurn();
+			}
+		}
 	};
 		
 	public void setNextPlayer() {
@@ -303,6 +334,11 @@ class LoseTurnActionCard {
 	@Override
 	public Game.Mode getActionCardGameMode() {
 		  return Game.Mode.GAME_LOSETURNACTIONCARD;
+	};
+	
+	//TODO: write the function for this
+	public void play(){
+	
 	};
 }
 

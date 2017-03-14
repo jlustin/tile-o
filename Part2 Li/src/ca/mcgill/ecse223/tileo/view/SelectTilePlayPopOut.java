@@ -109,7 +109,7 @@ public class SelectTilePlayPopOut extends JDialog {
 						
 						if (error.length()==0){					
 							try {
-								pmc.landedOnTile(chosenTile);
+								pmc.doLandedOnTile(chosenTile);
 								TileOPlayPage.refreshData();
 								System.out.println("Successfully(?) landed on tile: x: " + chosenTile.getX() + " y: " + chosenTile.getY());
 								TileOPlayPage.getGrid().isAPlayerTurn = false;	//added by Li						

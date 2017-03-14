@@ -8,7 +8,7 @@ import java.util.*;
 import ca.mcgill.ecse223.tileo.model.ActionTile.TileStatus;
 
 // line 9 "../../../../../TileOPersistence.ump"
-// line 11 "../../../../../TileO (updated Feb10).ump"
+// line 12 "../../../../../TileO (updated Feb10).ump"
 public class Game implements Serializable
 {
 
@@ -573,7 +573,7 @@ public class Game implements Serializable
     placeholderTileO.removeGame(this);
   }
 
-  // line 32 "../../../../../TileO (updated Feb10).ump"
+  // line 33 "../../../../../TileO (updated Feb10).ump"
    public List<Tile> rollDie(){
     List<Tile> possibleMoves = new ArrayList<Tile>();
 		Die die =this.getDie();
@@ -583,7 +583,7 @@ public class Game implements Serializable
 		return possibleMoves;
   }
 
-  // line 41 "../../../../../TileO (updated Feb10).ump"
+  // line 42 "../../../../../TileO (updated Feb10).ump"
    public void setNextPlayer(){
     //helper method for setting the next player
 		List<Player> playerList = getPlayers();
