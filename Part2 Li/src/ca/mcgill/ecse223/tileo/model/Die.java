@@ -3,6 +3,7 @@
 
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
+import java.util.Random;
 
 // line 101 "../../../../../TileOPersistence.ump"
 // line 346 "../../../../../TileO (updated Feb10).ump"

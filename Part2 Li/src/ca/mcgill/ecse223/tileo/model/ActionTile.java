@@ -8,7 +8,7 @@ import java.util.*;
 // line 35 "../../../../../TileOPersistence.ump"
 // line 1 "../../../../../TileOStates.ump"
 // line 168 "../../../../../TileO (updated Feb10).ump"
-public abstract class ActionTile extends Tile
+public class ActionTile extends Tile
 {
 
   //------------------------

@@ -4,9 +4,11 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+
 // line 89 "../../../../../TileOPersistence.ump"
 // line 312 "../../../../../TileO (updated Feb10).ump"
-public abstract class TeleportActionCard extends ActionCard
+public class TeleportActionCard extends ActionCard
 {
 
   //------------------------

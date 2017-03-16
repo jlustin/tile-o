@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 // line 95 "../../../../../TileOPersistence.ump"
 // line 332 "../../../../../TileO (updated Feb10).ump"
-public abstract class LoseTurnActionCard extends ActionCard
+public class LoseTurnActionCard extends ActionCard
 {
 
   //------------------------

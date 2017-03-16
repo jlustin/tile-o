@@ -7,7 +7,7 @@ import java.util.*;
 
 // line 47 "../../../../../TileOPersistence.ump"
 // line 210 "../../../../../TileO (updated Feb10).ump"
-public abstract class WinTile extends Tile
+public class WinTile extends Tile
 {
 
   //------------------------
