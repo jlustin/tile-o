@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 59 "../../../../../TileOPersistence.ump"
-// line 199 "../../../../../TileO (updated Feb10).ump"
+// line 230 "../../../../../TileO (updated Feb10).ump"
 public class Deck implements Serializable
 {
 
@@ -99,17 +99,17 @@ public class Deck implements Serializable
     return 32;
   }
 
-//  public ActionCard addCard(String aInstructions)
-//  {
-//    if (numberOfCards() >= maximumNumberOfCards())
-//    {
-//      return null;
-//    }
-//    else
-//    {
-//      return new ActionCard(aInstructions, this);
-//    }
-//  }
+  public ActionCard addCard(String aInstructions)
+  {
+    if (numberOfCards() >= maximumNumberOfCards())
+    {
+      return null;
+    }
+    else
+    {
+      return new ActionCard(aInstructions, this);
+    }
+  }
 
   public boolean addCard(ActionCard aCard)
   {
@@ -204,7 +204,7 @@ public class Deck implements Serializable
     }
   }
 
-  // line 204 "../../../../../TileO (updated Feb10).ump"
+  // line 235 "../../../../../TileO (updated Feb10).ump"
    public void shuffle(){
     ActionCard tmpCard;
 	  Random randomGenerator = new Random();
@@ -223,7 +223,7 @@ public class Deck implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 62 ../../../../../TileOPersistence.ump
+  // line 62 TileOPersistence.ump
   private static final long serialVersionUID = 1234567890123456789L ;
 
   

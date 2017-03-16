@@ -5,10 +5,8 @@ package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 import java.util.*;
 
-import ca.mcgill.ecse223.tileo.model.ActionTile.TileStatus;
-
 // line 9 "../../../../../TileOPersistence.ump"
-// line 12 "../../../../../TileO (updated Feb10).ump"
+// line 13 "../../../../../TileO (updated Feb10).ump"
 public class Game implements Serializable
 {
 
@@ -357,10 +355,10 @@ public class Game implements Serializable
     return 0;
   }
 
-//  public Tile addTile(int aX, int aY)
-//  {
-//    return new Tile(aX, aY, this);
-//  }
+  public Tile addTile(int aX, int aY)
+  {
+    return new Tile(aX, aY, this);
+  }
 
   public boolean addTile(Tile aTile)
   {
@@ -573,7 +571,7 @@ public class Game implements Serializable
     placeholderTileO.removeGame(this);
   }
 
-  // line 33 "../../../../../TileO (updated Feb10).ump"
+  // line 34 "../../../../../TileO (updated Feb10).ump"
    public List<Tile> rollDie(){
     List<Tile> possibleMoves = new ArrayList<Tile>();
 		Die die =this.getDie();
@@ -583,7 +581,39 @@ public class Game implements Serializable
 		return possibleMoves;
   }
 
-  // line 42 "../../../../../TileO (updated Feb10).ump"
+  // line 43 "../../../../../TileO (updated Feb10).ump"
+   public void determineNextPlayer(){
+    boolean found = false;
+		Player player = getCurrentPlayer();
+		Player nextPlayer;
+		while(!found) {
+			try {
+				nextPlayer = getPlayer(indexOfPlayer(player) + 1);
+			}
+			catch (IndexOutOfBoundsException e) {
+				nextPlayer = getPlayer(0);
+			}
+			if (nextPlayer.getStatus() == PlayerStatus.Active) {
+				found = true;
+			}
+			else {
+				nextPlayer.takeTurn();
+			}
+			player = nextPlayer;
+		}
+		setCurrentPlayer(Player);
+  }
+
+  // line 65 "../../../../../TileO (updated Feb10).ump"
+   public void updateTileStatus(){
+    for(Tile tile: getTiles()) {
+			if (tile instanceof ActionTile) {
+				((ActionTile) tile).takeTurn();
+			}
+		}
+  }
+
+  // line 73 "../../../../../TileO (updated Feb10).ump"
    public void setNextPlayer(){
     //helper method for setting the next player
 		List<Player> playerList = getPlayers();
@@ -638,7 +668,7 @@ public class Game implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 12 ../../../../../TileOPersistence.ump
+  // line 12 TileOPersistence.ump
   private static final long serialVersionUID = 2222222222222222222L ;
 
   

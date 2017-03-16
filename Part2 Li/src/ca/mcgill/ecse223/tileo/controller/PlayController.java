@@ -2,145 +2,61 @@
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
 package ca.mcgill.ecse223.tileo.controller;
-import java.util.List;
-import ca.mcgill.ecse223.tileo.application.TileOApplication;
-import ca.mcgill.ecse223.tileo.model.ActionCard;
-import ca.mcgill.ecse223.tileo.model.ActionTile;
-import ca.mcgill.ecse223.tileo.model.ActionTile.TileStatus;
-import ca.mcgill.ecse223.tileo.model.ConnectTilesActionCard;
-import ca.mcgill.ecse223.tileo.model.Connection;
-import ca.mcgill.ecse223.tileo.model.Deck;
-import ca.mcgill.ecse223.tileo.model.Game;
-import ca.mcgill.ecse223.tileo.model.NormalTile;
-import ca.mcgill.ecse223.tileo.model.Game.Mode;
-import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
-import ca.mcgill.ecse223.tileo.model.Player;
-import ca.mcgill.ecse223.tileo.model.RemoveConnectionActionCard;
-import ca.mcgill.ecse223.tileo.model.RollDieActionCard;
-import ca.mcgill.ecse223.tileo.model.TeleportActionCard;
 import ca.mcgill.ecse223.tileo.model.Tile;
-import ca.mcgill.ecse223.tileo.model.TileO;
-import ca.mcgill.ecse223.tileo.model.WinTile;
+import java.util.*;
+import ca.mcgill.ecse223.tileo.model.*;
 
 // line 4 "../../../../../playState.ump"
-public class PlayModeController
+public class PlayController
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //PlayModeController State Machines
-  public enum GameState { ReadyToStart, Start, ChoosingTile, ActionTileState, RemoveConnection, Teleport, LoseTurn, ExtraRoll, AddConnection, Win }
-  private GameState gameState;
+  //PlayController State Machines
+  public enum Mode { Ready, Roll, Move, ActionCard, Won }
+  private Mode mode;
+
+  //PlayController Associations
+  private List<Tile> possibleMoves;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public PlayModeController()
+  public PlayController()
   {
-    setGameState(GameState.ReadyToStart);
+    possibleMoves = new ArrayList<Tile>();
+    setMode(Mode.Ready);
   }
 
   //------------------------
   // INTERFACE
   //------------------------
 
-  public String getGameStateFullName()
+  public String getModeFullName()
   {
-    String answer = gameState.toString();
+    String answer = mode.toString();
     return answer;
   }
 
-  public GameState getGameState()
+  public Mode getMode()
   {
-    return gameState;
+    return mode;
   }
 
-  public boolean startGame(Game game) throws InvalidInputException
+  public boolean startGame()
   {
     boolean wasEventProcessed = false;
     
-    GameState aGameState = gameState;
-    switch (aGameState)
+    Mode aMode = mode;
+    switch (aMode)
     {
-      case ReadyToStart:
-        if (game.getMode().equals(Game.Mode.GAME))
-        {
-        // line 30 "../../../../../playState.ump"
-          doStartGame(game);
-          setGameState(GameState.Start);
-          wasEventProcessed = true;
-          break;
-        }
-        if (game.getMode().equals(Game.Mode.GAME_ROLLDIEACTIONCARD))
-        {
-        // line 33 "../../../../../playState.ump"
-          
-          setGameState(GameState.ExtraRoll);
-          wasEventProcessed = true;
-          break;
-        }
-        if (game.getMode().equals(Game.Mode.GAME_CONNECTTILESACTIONCARD))
-        {
-        // line 35 "../../../../../playState.ump"
-          
-          setGameState(GameState.AddConnection);
-          wasEventProcessed = true;
-          break;
-        }
-        if (game.getMode().equals(Game.Mode.GAME_REMOVECONNECTIONACTIONCARD))
-        {
-        // line 37 "../../../../../playState.ump"
-          
-          setGameState(GameState.RemoveConnection);
-          wasEventProcessed = true;
-          break;
-        }
-        if (game.getMode().equals(Game.Mode.GAME_TELEPORTACTIONCARD))
-        {
-        // line 39 "../../../../../playState.ump"
-          
-          setGameState(GameState.Teleport);
-          wasEventProcessed = true;
-          break;
-        }
-        if (game.getMode().equals(Game.Mode.GAME_LOSETURNACTIONCARD))
-        {
-        // line 41 "../../../../../playState.ump"
-          
-          setGameState(GameState.LoseTurn);
-          wasEventProcessed = true;
-          break;
-        }
-        if (game.getMode().equals(Game.Mode.GAME_WON))
-        {
-        // line 43 "../../../../../playState.ump"
-          
-          setGameState(GameState.Win);
-          wasEventProcessed = true;
-          break;
-        }
-        break;
-      default:
-        // Other states do respond to this event
-    }
-
-    return wasEventProcessed;
-  }
-
-  public boolean takeATurn()
-  {
-    boolean wasEventProcessed = false;
-    
-    GameState aGameState = gameState;
-    switch (aGameState)
-    {
-      case Start:
-        // line 48 "../../../../../playState.ump"
-        doRollDie();
-        setGameState(GameState.ChoosingTile);
+      case Ready:
+        // line 10 "../../../../../playState.ump"
+        doStartGame();
+        setMode(Mode.Roll);
         wasEventProcessed = true;
         break;
       default:
@@ -150,35 +66,95 @@ public class PlayModeController
     return wasEventProcessed;
   }
 
-  public boolean choose(Tile tile) throws InvalidInputException
+  public boolean load(Game selectedGame)
   {
     boolean wasEventProcessed = false;
     
-    GameState aGameState = gameState;
-    switch (aGameState)
+    Mode aMode = mode;
+    switch (aMode)
     {
-      case ChoosingTile:
-        if (isWinTile(tile))
+      case Ready:
+        if (isInGameMode(selectedGame))
         {
-        // line 55 "../../../../../playState.ump"
-          doLandedOnTile(tile);
-          setGameState(GameState.Win);
+        // line 13 "../../../../../playState.ump"
+          doLoad(selectedGame);
+          setMode(Mode.Roll);
           wasEventProcessed = true;
           break;
         }
+        if (isInWonMode(selectedGame))
+        {
+        // line 16 "../../../../../playState.ump"
+          doLoad(selectedGame);
+          setMode(Mode.Won);
+          wasEventProcessed = true;
+          break;
+        }
+        if (isNotInGameOrWonMode(selectedGame))
+        {
+        // line 19 "../../../../../playState.ump"
+          doLoad(selectedGame);
+          setMode(Mode.ActionCard);
+          wasEventProcessed = true;
+          break;
+        }
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  public boolean rollDie()
+  {
+    boolean wasEventProcessed = false;
+    
+    Mode aMode = mode;
+    switch (aMode)
+    {
+      case Roll:
+        // line 26 "../../../../../playState.ump"
+        possibleMoves = doRollDie();
+        setMode(Mode.Move);
+        wasEventProcessed = true;
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  public boolean land(Tile tile)
+  {
+    boolean wasEventProcessed = false;
+    
+    Mode aMode = mode;
+    switch (aMode)
+    {
+      case Move:
         if (isNormalTile(tile))
         {
-        // line 59 "../../../../../playState.ump"
-          doLandedOnTile(tile);
-          setGameState(GameState.Start);
+        // line 33 "../../../../../playState.ump"
+          doLandTile(tile);
+          setMode(Mode.Roll);
+          wasEventProcessed = true;
+          break;
+        }
+        if (isWinTile(tile))
+        {
+        // line 36 "../../../../../playState.ump"
+          doLandTile(tile);
+          setMode(Mode.Won);
           wasEventProcessed = true;
           break;
         }
         if (isActionTile(tile))
         {
-        // line 63 "../../../../../playState.ump"
-          doLandedOnTile(tile);
-          setGameState(GameState.ActionTileState);
+        // line 39 "../../../../../playState.ump"
+          doLandTile(tile);
+          setMode(Mode.ActionCard);
           wasEventProcessed = true;
           break;
         }
@@ -190,17 +166,19 @@ public class PlayModeController
     return wasEventProcessed;
   }
 
-  public boolean RemoveConnectionAction()
+  public boolean playRollDieActionCard()
   {
     boolean wasEventProcessed = false;
     
-    GameState aGameState = gameState;
-    switch (aGameState)
+    Mode aMode = mode;
+    switch (aMode)
     {
-      case ActionTileState:
-        if (checkGameMode(Game.Mode.GAME_REMOVECONNECTIONACTIONCARD))
+      case ActionCard:
+        if (isRollDieActionCard())
         {
-          setGameState(GameState.RemoveConnection);
+        // line 46 "../../../../../playState.ump"
+          possibleMoves = doPlayRollDieActionCard();
+          setMode(Mode.Roll);
           wasEventProcessed = true;
           break;
         }
@@ -212,17 +190,19 @@ public class PlayModeController
     return wasEventProcessed;
   }
 
-  public boolean TeleportAction()
+  public boolean playConnectTilesActionCard(Tile tile1,Tile tile2)
   {
     boolean wasEventProcessed = false;
     
-    GameState aGameState = gameState;
-    switch (aGameState)
+    Mode aMode = mode;
+    switch (aMode)
     {
-      case ActionTileState:
-        if (checkGameMode(Game.Mode.GAME_TELEPORTACTIONCARD))
+      case ActionCard:
+        if (isConnectTilesActionCard())
         {
-          setGameState(GameState.Teleport);
+        // line 49 "../../../../../playState.ump"
+          doPlayConnectTilesActionCard(tile1, tile2);
+          setMode(Mode.Roll);
           wasEventProcessed = true;
           break;
         }
@@ -234,17 +214,19 @@ public class PlayModeController
     return wasEventProcessed;
   }
 
-  public boolean LoseTurnAction()
+  public boolean playRemoveConnectionActionCard(Connection c)
   {
     boolean wasEventProcessed = false;
     
-    GameState aGameState = gameState;
-    switch (aGameState)
+    Mode aMode = mode;
+    switch (aMode)
     {
-      case ActionTileState:
-        if (checkGameMode(Game.Mode.GAME_LOSETURNACTIONCARD))
+      case ActionCard:
+        if (isRemoveConnectionActionCard())
         {
-          setGameState(GameState.LoseTurn);
+        // line 52 "../../../../../playState.ump"
+          doPlayRemoveConnectionActionCard(c);
+          setMode(Mode.Roll);
           wasEventProcessed = true;
           break;
         }
@@ -256,99 +238,59 @@ public class PlayModeController
     return wasEventProcessed;
   }
 
-  public boolean ExtraRollAction()
+  public boolean playTeleportActionCard(Tile tile)
   {
     boolean wasEventProcessed = false;
     
-    GameState aGameState = gameState;
-    switch (aGameState)
+    Mode aMode = mode;
+    switch (aMode)
     {
-      case ActionTileState:
-        if (checkGameMode(Game.Mode.GAME_ROLLDIEACTIONCARD))
+      case ActionCard:
+        if (isTeleportAndNormalTile(tile))
         {
-          setGameState(GameState.ExtraRoll);
+        // line 55 "../../../../../playState.ump"
+          doPlayTeleportActionCard(tile);
+          setMode(Mode.Roll);
           wasEventProcessed = true;
           break;
         }
-        break;
-      default:
-        // Other states do respond to this event
-    }
-
-    return wasEventProcessed;
-  }
-
-  public boolean AddConnectionAction()
-  {
-    boolean wasEventProcessed = false;
-    
-    GameState aGameState = gameState;
-    switch (aGameState)
-    {
-      case ActionTileState:
-        if (checkGameMode(Game.Mode.GAME_CONNECTTILESACTIONCARD))
+        if (isTeleportAndWinTile(tile))
         {
-          setGameState(GameState.AddConnection);
+        // line 58 "../../../../../playState.ump"
+          doPlayTeleportActionCard(tile);
+          setMode(Mode.Won);
           wasEventProcessed = true;
           break;
         }
-        break;
-      default:
-        // Other states do respond to this event
-    }
-
-    return wasEventProcessed;
-  }
-
-  public boolean removeconnection(Connection connection) throws InvalidInputException
-  {
-    boolean wasEventProcessed = false;
-    
-    GameState aGameState = gameState;
-    switch (aGameState)
-    {
-      case RemoveConnection:
-        // line 82 "../../../../../playState.ump"
-        doPlayRemoveConnectionActionCard(connection);
-        setGameState(GameState.Start);
-        wasEventProcessed = true;
-        break;
-      default:
-        // Other states do respond to this event
-    }
-
-    return wasEventProcessed;
-  }
-
-  public boolean teleport(Tile selectedTile) throws InvalidInputException
-  {
-    boolean wasEventProcessed = false;
-    
-    GameState aGameState = gameState;
-    switch (aGameState)
-    {
-      case Teleport:
-        if (isNormalTile(selectedTile))
+        if (isTeleportAndActionTile(tile))
         {
-        // line 88 "../../../../../playState.ump"
-          doPlayTeleportActionCard(selectedTile);
-          setGameState(GameState.Start);
+        // line 61 "../../../../../playState.ump"
+          doPlayTeleportActionCard(tile);
+          setMode(Mode.ActionCard);
           wasEventProcessed = true;
           break;
         }
-        if (isActionTile(selectedTile))
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  public boolean playLoseTurnActionCard()
+  {
+    boolean wasEventProcessed = false;
+    
+    Mode aMode = mode;
+    switch (aMode)
+    {
+      case ActionCard:
+        if (isLoseTurnActionCard())
         {
-        // line 91 "../../../../../playState.ump"
-          doPlayTeleportActionCard(selectedTile);
-          setGameState(GameState.ActionTileState);
-          wasEventProcessed = true;
-          break;
-        }
-        if (isWinTile(selectedTile))
-        {
-        // line 94 "../../../../../playState.ump"
-          doPlayTeleportActionCard(selectedTile);
-          setGameState(GameState.Win);
+        // line 64 "../../../../../playState.ump"
+          doPlayLoseTurnActionCard();
+          setMode(Mode.Roll);
           wasEventProcessed = true;
           break;
         }
@@ -360,100 +302,129 @@ public class PlayModeController
     return wasEventProcessed;
   }
 
-  public boolean loseTurn()
+  private void setMode(Mode aMode)
   {
-    boolean wasEventProcessed = false;
-    
-    GameState aGameState = gameState;
-    switch (aGameState)
-    {
-      case LoseTurn:
-        // line 100 "../../../../../playState.ump"
-        doPlayLoseTurnActionCard();
-        setGameState(GameState.Start);
-        wasEventProcessed = true;
-        break;
-      default:
-        // Other states do respond to this event
-    }
-
-    return wasEventProcessed;
+    mode = aMode;
   }
 
-  public boolean rollDieAgain()
+  public Tile getPossibleMove(int index)
   {
-    boolean wasEventProcessed = false;
-    
-    GameState aGameState = gameState;
-    switch (aGameState)
-    {
-      case ExtraRoll:
-        // line 106 "../../../../../playState.ump"
-        doPlayRollDieExtraTurn();
-        setGameState(GameState.ChoosingTile);
-        wasEventProcessed = true;
-        break;
-      default:
-        // Other states do respond to this event
-    }
-
-    return wasEventProcessed;
+    Tile aPossibleMove = possibleMoves.get(index);
+    return aPossibleMove;
   }
 
-  public boolean connectionAdd(Tile t1,Tile t2)
+  public List<Tile> getPossibleMoves()
   {
-    boolean wasEventProcessed = false;
-    
-    GameState aGameState = gameState;
-    switch (aGameState)
-    {
-      case AddConnection:
-        // line 112 "../../../../../playState.ump"
-        doPlayConnectTilesActionCard(t1,t2);
-        setGameState(GameState.Start);
-        wasEventProcessed = true;
-        break;
-      default:
-        // Other states do respond to this event
-    }
-
-    return wasEventProcessed;
+    List<Tile> newPossibleMoves = Collections.unmodifiableList(possibleMoves);
+    return newPossibleMoves;
   }
 
-  private void setGameState(GameState aGameState)
+  public int numberOfPossibleMoves()
   {
-    gameState = aGameState;
+    int number = possibleMoves.size();
+    return number;
+  }
+
+  public boolean hasPossibleMoves()
+  {
+    boolean has = possibleMoves.size() > 0;
+    return has;
+  }
+
+  public int indexOfPossibleMove(Tile aPossibleMove)
+  {
+    int index = possibleMoves.indexOf(aPossibleMove);
+    return index;
+  }
+
+  public static int minimumNumberOfPossibleMoves()
+  {
+    return 0;
+  }
+
+  public boolean addPossibleMove(Tile aPossibleMove)
+  {
+    boolean wasAdded = false;
+    if (possibleMoves.contains(aPossibleMove)) { return false; }
+    possibleMoves.add(aPossibleMove);
+    wasAdded = true;
+    return wasAdded;
+  }
+
+  public boolean removePossibleMove(Tile aPossibleMove)
+  {
+    boolean wasRemoved = false;
+    if (possibleMoves.contains(aPossibleMove))
+    {
+      possibleMoves.remove(aPossibleMove);
+      wasRemoved = true;
+    }
+    return wasRemoved;
+  }
+
+  public boolean addPossibleMoveAt(Tile aPossibleMove, int index)
+  {  
+    boolean wasAdded = false;
+    if(addPossibleMove(aPossibleMove))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfPossibleMoves()) { index = numberOfPossibleMoves() - 1; }
+      possibleMoves.remove(aPossibleMove);
+      possibleMoves.add(index, aPossibleMove);
+      wasAdded = true;
+    }
+    return wasAdded;
+  }
+
+  public boolean addOrMovePossibleMoveAt(Tile aPossibleMove, int index)
+  {
+    boolean wasAdded = false;
+    if(possibleMoves.contains(aPossibleMove))
+    {
+      if(index < 0 ) { index = 0; }
+      if(index > numberOfPossibleMoves()) { index = numberOfPossibleMoves() - 1; }
+      possibleMoves.remove(aPossibleMove);
+      possibleMoves.add(index, aPossibleMove);
+      wasAdded = true;
+    } 
+    else 
+    {
+      wasAdded = addPossibleMoveAt(aPossibleMove, index);
+    }
+    return wasAdded;
   }
 
   public void delete()
-  {}
+  {
+    possibleMoves.clear();
+  }
 
 
   /**
    * Condition
    */
-  // line 125 "../../../../../playState.ump"
+  // line 81 "../../../../../playState.ump"
    public boolean checkGameMode(Game.Mode aMode){
     return aMode == TileOApplication.getTileO().getCurrentGame().getMode();
   }
 
-  // line 129 "../../../../../playState.ump"
+  // line 85 "../../../../../playState.ump"
    public boolean isNormalTile(Tile selectedTile){
     return (selectedTile instanceof NormalTile);
   }
 
-  // line 133 "../../../../../playState.ump"
+  // line 89 "../../../../../playState.ump"
    public boolean isActionTile(Tile selectedTile){
     return (selectedTile instanceof ActionTile);
   }
 
-  // line 137 "../../../../../playState.ump"
+  // line 93 "../../../../../playState.ump"
    public boolean isWinTile(Tile selectedTile){
     return (selectedTile instanceof WinTile);
   }
 
-  // line 141 "../../../../../playState.ump"
-   public void doStartGame(Game selectedGame) throws InvalidInputException{
+  // line 98 "../../../../../playState.ump"
+   private void doStartGame(Game selectedGame) throws InvalidInputException{
     //TODO: CHARLES
 		String error = "";
 		if(selectedGame.getDeck().numberOfCards() != 32) {
@@ -501,8 +472,8 @@ public class PlayModeController
    * 2. Take a turn (roll the die, move to new position)
    * Charles
    */
-  // line 189 "../../../../../playState.ump"
-   public List<Tile> doRollDie(){
+  // line 146 "../../../../../playState.ump"
+   private List<Tile> doRollDie(){
     //TODO: CHARLES
 		TileO tileO = TileOApplication.getTileO(); 
 		Game currentGame = tileO.getCurrentGame();
@@ -515,8 +486,8 @@ public class PlayModeController
    * 3. Land on a tile (basic behavior for hidden, regular, and action tiles)
    * Chris
    */
-  // line 202 "../../../../../playState.ump"
-   public void doLandedOnTile(Tile tile) throws InvalidInputException{
+  // line 159 "../../../../../playState.ump"
+   private void doLand(Tile tile) throws InvalidInputException{
     TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		List<Tile> tiles = currentGame.getTiles();
@@ -543,7 +514,7 @@ public class PlayModeController
    * CM
    * helper method called within this controller
    */
-  // line 229 "../../../../../playState.ump"
+  // line 186 "../../../../../playState.ump"
    private ActionCard drawCard(Game currentGame){
     Deck deck = currentGame.getDeck();
 		ActionCard drawnCard = deck.getCurrentCard();
@@ -562,14 +533,14 @@ public class PlayModeController
 
 
   /**
+   * TODO: CM t'as besoin de changer ca
    * 5. Action card "Roll the die for an extra turn"
    * CM
    */
-  // line 250 "../../../../../playState.ump"
-   public void doPlayRollDieExtraTurn(){
+  // line 207 "../../../../../playState.ump"
+   public void doPlayRollDieActionCard(){
     TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();		
-		//the drawn card needs to be a rollDieActionCard since this method is only called in the appropriate mode
 		RollDieActionCard rollDieActionCard = (RollDieActionCard) drawCard(currentGame);
 		
 		rollDieActionCard.play();
@@ -582,36 +553,30 @@ public class PlayModeController
    * 6. Action card "Connect two adjacent tiles with a connection piece from the pile of spare connection pieces"
    * Justin
    */
-  // line 266 "../../../../../playState.ump"
-   public void doPlayConnectTilesActionCard(Tile selectedTile1, Tile selectedTile2) throws InvalidInputException{
+  // line 222 "../../../../../playState.ump"
+   private void doPlayConnectTilesActionCard(Tile selectedTile1, Tile selectedTile2) throws InvalidInputException{
     TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		ConnectTilesActionCard connectTilesActionCard = (ConnectTilesActionCard) drawCard(currentGame);
 		
 		String error = "";
-		// Check if there are tiles that can be selected in the game
 		if (currentGame.numberOfTiles() < 2){
 			error = "There are less than 2 tiles in the current game.";
 		}
-		// Check if the selected tiles are adjacent
 		if (!isAdjacent(selectedTile1, selectedTile2)){
 			error = "The selected tiles are not adjacent.";
 		}
-		// Check if connection pieces are available
 		if (currentGame.getCurrentConnectionPieces() < 1){
 			error = "There are 0 connection pieces available.";
 		}
-		// Check if connection already exist at a location
 		if (isConnected(selectedTile1, selectedTile2)){
 			error = "The two selected tiles are already connected.";
 		}
-		// Check if errors are detected
 		if (error.length() > 0){
 			throw new InvalidInputException (error.trim());
 		}
 		
 		try {
-			// Connect the two selected tiles
 			connectTilesActionCard.play(selectedTile1, selectedTile2);			
 			currentGame.setNextPlayer();
 			currentGame.setMode(Mode.GAME);
@@ -626,8 +591,8 @@ public class PlayModeController
    * 7. Action card "Remove a connection piece from the board and place it in the pile of spare connection pieces"
    * Li
    */
-  // line 309 "../../../../../playState.ump"
-   public void doPlayRemoveConnectionActionCard(Connection connection) throws InvalidInputException{
+  // line 259 "../../../../../playState.ump"
+   private void doPlayRemoveConnectionActionCard(Connection connection) throws InvalidInputException{
     //TODO: LI
 		TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
@@ -654,16 +619,14 @@ public class PlayModeController
    * 8. Action card "Move your playing piece to an arbitrary tile that is not your current tile"
    * Victor
    */
-  // line 336 "../../../../../playState.ump"
-   public void doPlayTeleportActionCard(Tile tile) throws InvalidInputException{
-    //TODO: VICTORIQUE
-		
-		TileO tileO = TileOApplication.getTileO();
+  // line 286 "../../../../../playState.ump"
+   private void doPlayTeleportActionCard(Tile tile) throws InvalidInputException{
+    TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
-		ActionCard currentCard= drawCard(currentGame);
+		ActionCard currentCard = drawCard(currentGame);
 		List<Tile> tiles = currentGame.getTiles();
 		String error = "";
-		if(tiles.contains(tile)==false){
+		if(tiles.contains(tile) == false){
 			error = "Please select an existing tile on the board.";
 		}
 		if(error.length() > 0){
@@ -682,15 +645,32 @@ public class PlayModeController
 
 
   /**
+   * Action card "Lose your next turn"
+   */
+  // line 312 "../../../../../playState.ump"
+   private void doPlayLoseTurnActionCard() throws InvalidInputException{
+    TileO tileO = tileOApplication.getTileO();
+		Game currentGame = tileO.getCurrentGame();
+		ActionCard currentCard = drawCard(currentGame);
+		if (currentCard instanceof LoseTurnActionCard) {
+			((LoseTurnActionCarD) currentCard).play();
+		}
+		currentGame.determineNextPlayer();
+		currentGame.updateTileStatus();
+		currentGame.setMode(Mode.GAME);
+  }
+
+
+  /**
    * 9. Save and load game to continue playing at a later point
    * Li
    */
-  // line 366 "../../../../../playState.ump"
+  // line 329 "../../../../../playState.ump"
    public void saveGame(){
     TileOApplication.save();
   }
 
-  // line 370 "../../../../../playState.ump"
+  // line 333 "../../../../../playState.ump"
    public Game loadGame(int index) throws InvalidInputException{
     TileO tileO = TileOApplication.getTileO();
 		try {
@@ -705,9 +685,9 @@ public class PlayModeController
 
 
   /**
-   * helper method to check if tiles are adjacent
+   * Helper method to check if two tiles are adjacent
    */
-  // line 383 "../../../../../playState.ump"
+  // line 350 "../../../../../playState.ump"
    public boolean isAdjacent(Tile tile1, Tile tile2){
     int x1 = tile1.getX();
 		int y1 = tile1.getY();
@@ -728,9 +708,9 @@ public class PlayModeController
 
 
   /**
-   * helper method two tiles are already connected
+   * Helper method to check if two tiles are already connected
    */
-  // line 402 "../../../../../playState.ump"
+  // line 372 "../../../../../playState.ump"
    public boolean isConnected(Tile tile1, Tile tile2){
     for (Connection c1: tile1.getConnections()){
 			for (Connection c2: tile2.getConnections()){

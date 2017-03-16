@@ -7,7 +7,7 @@ import java.util.*;
 
 // line 16 "../../../../../TileOPersistence.ump"
 // line 20 "../../../../../TileOStates.ump"
-// line 79 "../../../../../TileO (updated Feb10).ump"
+// line 110 "../../../../../TileO (updated Feb10).ump"
 public class Player implements Serializable
 {
 
@@ -26,7 +26,7 @@ public class Player implements Serializable
   private int turnsUntilActive;
 
   //Player State Machines
-  public enum PlayerStatus { hasNextTurn, noNextTurn }
+  public enum PlayerStatus { Active, Inactive }
   private PlayerStatus playerStatus;
   public enum Color { RED, BLUE, GREEN, YELLOW }
   private Color color;
@@ -52,7 +52,7 @@ public class Player implements Serializable
     {
       throw new RuntimeException("Unable to create player due to game");
     }
-    setPlayerStatus(PlayerStatus.hasNextTurn);
+    setPlayerStatus(PlayerStatus.Active);
     setColor(Color.RED);
   }
 
@@ -126,41 +126,61 @@ public class Player implements Serializable
     return color;
   }
 
-  public boolean changeTurn()
+  public boolean loseTurns(int n)
   {
     boolean wasEventProcessed = false;
     
     PlayerStatus aPlayerStatus = playerStatus;
     switch (aPlayerStatus)
     {
-      case hasNextTurn:
-        if (turnsUntilActive==0)
+      case Active:
+        if (n>0)
         {
-          setPlayerStatus(PlayerStatus.hasNextTurn);
-          wasEventProcessed = true;
-          break;
-        }
-        if (turnsUntilActive>0)
-        {
-        // line 24 "../../../../../TileOStates.ump"
-          setTurnsUntilActive(getTurnsUntilActive()-1);
-          setPlayerStatus(PlayerStatus.noNextTurn);
+        // line 23 "../../../../../TileOStates.ump"
+          setTurnsUntilActive(getTurnsUntilActive() + n);
+          setPlayerStatus(PlayerStatus.Inactive);
           wasEventProcessed = true;
           break;
         }
         break;
-      case noNextTurn:
-        if (turnsUntilActive==0)
+      case Inactive:
+        if (n>0)
         {
-          setPlayerStatus(PlayerStatus.hasNextTurn);
+        // line 34 "../../../../../TileOStates.ump"
+          setTurnsUntilActive(getTurnsUntilActive() + n);
+          setPlayerStatus(PlayerStatus.Inactive);
           wasEventProcessed = true;
           break;
         }
-        if (turnsUntilActive>0)
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  public boolean takeTurn()
+  {
+    boolean wasEventProcessed = false;
+    
+    PlayerStatus aPlayerStatus = playerStatus;
+    switch (aPlayerStatus)
+    {
+      case Inactive:
+        if (getTurnsUntilActive()>1)
         {
-        // line 30 "../../../../../TileOStates.ump"
-          setTurnsUntilActive(getTurnsUntilActive()-1);
-          setPlayerStatus(PlayerStatus.noNextTurn);
+        // line 28 "../../../../../TileOStates.ump"
+          setTurnsUntilActive(getTurnsUntilActive() - 1);
+          setPlayerStatus(PlayerStatus.Inactive);
+          wasEventProcessed = true;
+          break;
+        }
+        if (getTurnsUntilActive()<=1)
+        {
+        // line 31 "../../../../../TileOStates.ump"
+          setTurnsUntilActive(0);
+          setPlayerStatus(PlayerStatus.Active);
           wasEventProcessed = true;
           break;
         }
@@ -275,7 +295,7 @@ public class Player implements Serializable
 		}
   }
 
-  // line 90 "../../../../../TileO (updated Feb10).ump"
+  // line 121 "../../../../../TileO (updated Feb10).ump"
    public List<Tile> getPossibleMoves(int moveLeft){
     Tile currentTile=this.getCurrentTile();
 		List<Tile> possibleMoves = currentTile.getNextMoves(moveLeft, null) ;   	  
@@ -298,7 +318,7 @@ public class Player implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 19 ../../../../../TileOPersistence.ump
+  // line 19 TileOPersistence.ump
   private static final long serialVersionUID = 3333333333333333333L ;
 
   

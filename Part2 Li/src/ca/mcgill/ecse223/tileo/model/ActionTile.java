@@ -7,8 +7,8 @@ import java.util.*;
 
 // line 35 "../../../../../TileOPersistence.ump"
 // line 1 "../../../../../TileOStates.ump"
-// line 137 "../../../../../TileO (updated Feb10).ump"
-public class ActionTile extends Tile
+// line 168 "../../../../../TileO (updated Feb10).ump"
+public abstract class ActionTile extends Tile
 {
 
   //------------------------
@@ -20,8 +20,8 @@ public class ActionTile extends Tile
   private int turnsUntilActive;
 
   //ActionTile State Machines
-  public enum TileStatus { Active, Inactive }
-  private TileStatus tileStatus;
+  public enum ActionTileStatus { Active, Inactive }
+  private ActionTileStatus actionTileStatus;
 
   //------------------------
   // CONSTRUCTOR
@@ -32,7 +32,7 @@ public class ActionTile extends Tile
     super(aX, aY, aGame);
     inactivityPeriod = aInactivityPeriod;
     turnsUntilActive = 0;
-    setTileStatus(TileStatus.Active);
+    setActionTileStatus(ActionTileStatus.Active);
   }
 
   //------------------------
@@ -57,38 +57,30 @@ public class ActionTile extends Tile
     return turnsUntilActive;
   }
 
-  public String getTileStatusFullName()
+  public String getActionTileStatusFullName()
   {
-    String answer = tileStatus.toString();
+    String answer = actionTileStatus.toString();
     return answer;
   }
 
-  public TileStatus getTileStatus()
+  public ActionTileStatus getActionTileStatus()
   {
-    return tileStatus;
+    return actionTileStatus;
   }
 
-  public boolean land()
+  public boolean deactivate()
   {
     boolean wasEventProcessed = false;
     
-    TileStatus aTileStatus = tileStatus;
-    switch (aTileStatus)
+    ActionTileStatus aActionTileStatus = actionTileStatus;
+    switch (aActionTileStatus)
     {
       case Active:
-        if (inactivityPeriod==0)
+        if (getInactivityPeriod()>0)
         {
         // line 4 "../../../../../TileOStates.ump"
-          doLand();
-          setTileStatus(TileStatus.Active);
-          wasEventProcessed = true;
-          break;
-        }
-        if (inactivityPeriod>0)
-        {
-        // line 7 "../../../../../TileOStates.ump"
-          doLand();
-          setTileStatus(TileStatus.Inactive);
+          setTurnsUntilActive(getInactivityPeriod() + 1);
+          setActionTileStatus(ActionTileStatus.Inactive);
           wasEventProcessed = true;
           break;
         }
@@ -100,25 +92,27 @@ public class ActionTile extends Tile
     return wasEventProcessed;
   }
 
-  public boolean changeTurn()
+  public boolean takeTurn()
   {
     boolean wasEventProcessed = false;
     
-    TileStatus aTileStatus = tileStatus;
-    switch (aTileStatus)
+    ActionTileStatus aActionTileStatus = actionTileStatus;
+    switch (aActionTileStatus)
     {
       case Inactive:
-        if (turnsUntilActive==0)
+        if (getTurnsUntilActive()>1)
         {
-          setTileStatus(TileStatus.Active);
+        // line 9 "../../../../../TileOStates.ump"
+          setTurnsUntilActive(getTurnsUntilActive() - 1);
+          setActionTileStatus(ActionTileStatus.Inactive);
           wasEventProcessed = true;
           break;
         }
-        if (turnsUntilActive>0)
+        if (getTurnsUntilActive()<=1)
         {
-        // line 13 "../../../../../TileOStates.ump"
-          setTurnsUntilActive(getTurnsUntilActive()-1);
-          setTileStatus(TileStatus.Inactive);
+        // line 12 "../../../../../TileOStates.ump"
+          setTurnsUntilActive(0);
+          setActionTileStatus(ActionTileStatus.Active);
           wasEventProcessed = true;
           break;
         }
@@ -130,9 +124,9 @@ public class ActionTile extends Tile
     return wasEventProcessed;
   }
 
-  private void setTileStatus(TileStatus aTileStatus)
+  private void setActionTileStatus(ActionTileStatus aActionTileStatus)
   {
-    tileStatus = aTileStatus;
+    actionTileStatus = aActionTileStatus;
   }
 
   public void delete()
@@ -153,9 +147,9 @@ public class ActionTile extends Tile
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 38 ../../../../../TileOPersistence.ump
+  // line 38 TileOPersistence.ump
   private static final long serialVersionUID = 5555555555555555555L ;
-// line 143 ../../../../../TileO (updated Feb10).ump
+// line 174 ../../../../../TileO (updated Feb10).ump
   @Override
 	public void doLand() {Game currentGame = getGame();
 		Player currentPlayer = currentGame.getCurrentPlayer();
