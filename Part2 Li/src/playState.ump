@@ -4,7 +4,7 @@ namespace ca.mcgill.ecse223.tileo.controller;
 class PlayController {
 	depend ca.mcgill.ecse223.tileo.model.Tile;
 	
-	Mode {
+	mode {
     
 	    Ready {
 			startGame / {
