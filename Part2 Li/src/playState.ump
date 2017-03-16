@@ -200,7 +200,7 @@ class PlayController {
 		 * 5. Action card "Roll the die for an extra turn"
 		 * CM
 		 */
-		public void doPlayRollDieExtraTurn() {
+		public void doPlayRollDieActionCard() {
 			TileO tileO = TileOApplication.getTileO();
 			Game currentGame = tileO.getCurrentGame();		
 			//the drawn card needs to be a rollDieActionCard since this method is only called in the appropriate mode

@@ -63,7 +63,7 @@ class Game {
 	public void updateTileStatus() {
 		for(Tile tile: getTiles()) {
 			if (tile instanceof ActionTile) {
-				tile.takeTurn();
+				((ActionTile) tile).takeTurn();
 			}
 		}
 	};
