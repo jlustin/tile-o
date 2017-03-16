@@ -49,7 +49,7 @@ public class PlayController
     return mode;
   }
 
-  public boolean startGame()
+  public boolean startGame() throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -58,7 +58,7 @@ public class PlayController
     {
       case Ready:
         // line 10 "../../../../../playState.ump"
-        doStartGame();
+        doStartGame(TileOApplication.getTileO().getCurrentGame());
         setMode(Mode.Roll);
         wasEventProcessed = true;
         break;
@@ -462,7 +462,7 @@ public class PlayController
 			
 			selectedGame.setCurrentPlayer(selectedGame.getPlayers().get(0));
 			selectedGame.setCurrentConnectionPieces(Game.SpareConnectionPieces);
-			selectedGame.setMode(Mode.GAME);
+			selectedGame.setMode(Game.Mode.GAME);
 		}
 		catch(RuntimeException e){
 			error = e.getMessage();
@@ -548,7 +548,7 @@ public class PlayController
 		
 		rollDieActionCard.play();
 		
-		currentGame.setMode(Mode.GAME);
+		currentGame.setMode(Game.Mode.GAME);
   }
 
 
@@ -582,7 +582,7 @@ public class PlayController
 		try {
 			connectTilesActionCard.play(selectedTile1, selectedTile2);			
 			currentGame.setNextPlayer();
-			currentGame.setMode(Mode.GAME);
+			currentGame.setMode(Game.Mode.GAME);
 		}
 		catch (RuntimeException e) {
 			throw new InvalidInputException(e.getMessage());
@@ -609,7 +609,7 @@ public class PlayController
 					((RemoveConnectionActionCard) currentCard).play(connection);
 				}				
 				currentGame.setNextPlayer();		
-				currentGame.setMode(Mode.GAME);
+				currentGame.setMode(Game.Mode.GAME);
 			} 
 			catch (RuntimeException e) {
 				throw new InvalidInputException(e.getMessage());	
@@ -678,7 +678,7 @@ public class PlayController
     TileO tileO = TileOApplication.getTileO();
 		try {
 			Game loadedGame = tileO.getGame(index);
-			loadedGame.setMode(Mode.GAME);
+			loadedGame.setMode(Game.Mode.GAME);
 			return loadedGame;
 		}
 		catch (RuntimeException e) {

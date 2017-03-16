@@ -8,7 +8,7 @@ class PlayController {
     
 	    Ready {
 			startGame / {
-				doStartGame();
+				doStartGame(TileOApplication.getTileO().getCurrentGame());
 			} -> Roll;
 			load(Game selectedGame) [isInGameMode(selectedGame)] / {
 				doLoad(selectedGame);
@@ -129,7 +129,7 @@ class PlayController {
 			
 			selectedGame.setCurrentPlayer(selectedGame.getPlayers().get(0));
 			selectedGame.setCurrentConnectionPieces(Game.SpareConnectionPieces);
-			selectedGame.setMode(Mode.GAME);
+			selectedGame.setMode(Game.Mode.GAME);
 		}
 		catch(RuntimeException e){
 			error = e.getMessage();
@@ -210,7 +210,7 @@ class PlayController {
 		
 		rollDieActionCard.play();
 		
-		currentGame.setMode(Mode.GAME);				
+		currentGame.setMode(Game.Mode.GAME);				
 	}
 
 	
@@ -243,7 +243,7 @@ class PlayController {
 		try {
 			connectTilesActionCard.play(selectedTile1, selectedTile2);			
 			currentGame.setNextPlayer();
-			currentGame.setMode(Mode.GAME);
+			currentGame.setMode(Game.Mode.GAME);
 		}
 		catch (RuntimeException e) {
 			throw new InvalidInputException(e.getMessage());
@@ -269,7 +269,7 @@ class PlayController {
 					((RemoveConnectionActionCard) currentCard).play(connection);
 				}				
 				currentGame.setNextPlayer();		
-				currentGame.setMode(Mode.GAME);
+				currentGame.setMode(Game.Mode.GAME);
 			} 
 			catch (RuntimeException e) {
 				throw new InvalidInputException(e.getMessage());	
@@ -333,7 +333,7 @@ class PlayController {
 		TileO tileO = TileOApplication.getTileO();
 		try {
 			Game loadedGame = tileO.getGame(index);
-			loadedGame.setMode(Mode.GAME);
+			loadedGame.setMode(Game.Mode.GAME);
 			return loadedGame;
 		}
 		catch (RuntimeException e) {
