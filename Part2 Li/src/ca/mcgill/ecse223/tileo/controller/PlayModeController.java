@@ -11,6 +11,7 @@ import ca.mcgill.ecse223.tileo.model.ConnectTilesActionCard;
 import ca.mcgill.ecse223.tileo.model.Connection;
 import ca.mcgill.ecse223.tileo.model.Deck;
 import ca.mcgill.ecse223.tileo.model.Game;
+import ca.mcgill.ecse223.tileo.model.LoseTurnActionCard;
 import ca.mcgill.ecse223.tileo.model.NormalTile;
 import ca.mcgill.ecse223.tileo.model.Game.Mode;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
@@ -300,7 +301,7 @@ public class PlayModeController
     return wasEventProcessed;
   }
 
-  public boolean removeConnection(Connection connection) throws InvalidInputException
+  public boolean removeconnection(Connection connection) throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -360,7 +361,7 @@ public class PlayModeController
     return wasEventProcessed;
   }
 
-  public boolean loseTurn()
+  public boolean loseTurn() throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -725,7 +726,17 @@ public class PlayModeController
 		}		
 		return false;
   }
-
+   private void doPlayLoseTurnActionCard() throws InvalidInputException{
+	    TileO tileO = TileOApplication.getTileO();
+			Game currentGame = tileO.getCurrentGame();
+			ActionCard currentCard = drawCard(currentGame);
+			if (currentCard instanceof LoseTurnActionCard) {
+				((LoseTurnActionCard) currentCard).play();
+			}
+			currentGame.determineNextPlayer();
+			currentGame.updateTileStatus();
+			currentGame.setMode(Game.Mode.GAME);
+	  }
 
   /**
    * helper method two tiles are already connected
