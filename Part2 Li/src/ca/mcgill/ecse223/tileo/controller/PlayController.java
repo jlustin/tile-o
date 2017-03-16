@@ -4,7 +4,10 @@
 package ca.mcgill.ecse223.tileo.controller;
 import ca.mcgill.ecse223.tileo.model.Tile;
 import java.util.*;
+
+import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.model.*;
+
 
 // line 4 "../../../../../playState.ump"
 public class PlayController
@@ -649,15 +652,15 @@ public class PlayController
    */
   // line 312 "../../../../../playState.ump"
    private void doPlayLoseTurnActionCard() throws InvalidInputException{
-    TileO tileO = tileOApplication.getTileO();
+    TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		ActionCard currentCard = drawCard(currentGame);
 		if (currentCard instanceof LoseTurnActionCard) {
-			((LoseTurnActionCarD) currentCard).play();
+			((LoseTurnActionCard) currentCard).play();
 		}
 		currentGame.determineNextPlayer();
 		currentGame.updateTileStatus();
-		currentGame.setMode(Mode.GAME);
+		currentGame.setMode(Game.Mode.GAME);
   }
 
 

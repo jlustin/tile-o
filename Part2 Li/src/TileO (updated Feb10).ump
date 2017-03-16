@@ -58,7 +58,7 @@ class Game {
 			}
 			player = nextPlayer;
 		}
-		setCurrentPlayer(Player);
+		setCurrentPlayer(player);
 	};
 	
 	public void updateTileStatus() {

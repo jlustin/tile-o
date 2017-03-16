@@ -317,7 +317,7 @@ class PlayController {
 		}
 		currentGame.determineNextPlayer();
 		currentGame.updateTileStatus();
-		currentGame.setMode(Mode.GAME);		
+		currentGame.setMode(Game.Mode.GAME);		
 	} 
 
 	

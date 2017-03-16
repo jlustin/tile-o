@@ -6,7 +6,7 @@ import java.util.List;
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.model.ActionCard;
 import ca.mcgill.ecse223.tileo.model.ActionTile;
-import ca.mcgill.ecse223.tileo.model.ActionTile.TileStatus;
+import ca.mcgill.ecse223.tileo.model.ActionTile.ActionTileStatus;
 import ca.mcgill.ecse223.tileo.model.ConnectTilesActionCard;
 import ca.mcgill.ecse223.tileo.model.Connection;
 import ca.mcgill.ecse223.tileo.model.Deck;
@@ -300,7 +300,7 @@ public class PlayModeController
     return wasEventProcessed;
   }
 
-  public boolean removeconnection(Connection connection) throws InvalidInputException
+  public boolean removeConnection(Connection connection) throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -400,7 +400,7 @@ public class PlayModeController
     return wasEventProcessed;
   }
 
-  public boolean connectionAdd(Tile t1,Tile t2)
+  public boolean connectionAdd(Tile t1,Tile t2) throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     

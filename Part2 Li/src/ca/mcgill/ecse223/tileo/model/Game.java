@@ -5,6 +5,9 @@ package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 import java.util.*;
 
+import ca.mcgill.ecse223.tileo.model.ActionTile.ActionTileStatus;
+import ca.mcgill.ecse223.tileo.model.Player.PlayerStatus;
+
 // line 9 "../../../../../TileOPersistence.ump"
 // line 13 "../../../../../TileO (updated Feb10).ump"
 public class Game implements Serializable
@@ -593,7 +596,7 @@ public class Game implements Serializable
 			catch (IndexOutOfBoundsException e) {
 				nextPlayer = getPlayer(0);
 			}
-			if (nextPlayer.getStatus() == PlayerStatus.Active) {
+			if (nextPlayer.getPlayerStatus() == PlayerStatus.Active) {
 				found = true;
 			}
 			else {
@@ -601,7 +604,7 @@ public class Game implements Serializable
 			}
 			player = nextPlayer;
 		}
-		setCurrentPlayer(Player);
+		setCurrentPlayer(player);
   }
 
   // line 65 "../../../../../TileO (updated Feb10).ump"
@@ -643,7 +646,7 @@ public class Game implements Serializable
 		for (Tile aTile: tileList){
 			if (aTile instanceof ActionTile){
 				//if inactive, and turns until active is not 0				
-				if(((ActionTile) aTile).getTileStatus() == TileStatus.Inactive){
+				if(((ActionTile) aTile).getActionTileStatus() == ActionTileStatus.Inactive){
 					int turnsTilActive = ((ActionTile) aTile).getTurnsUntilActive();
 					((ActionTile) aTile).setTurnsUntilActive(turnsTilActive-1);
 				}
