@@ -726,16 +726,17 @@ public class PlayModeController
 		}		
 		return false;
   }
-   private void doPlayLoseTurnActionCard() throws InvalidInputException{
+   public void doPlayLoseTurnActionCard() throws InvalidInputException{
 	    TileO tileO = TileOApplication.getTileO();
 			Game currentGame = tileO.getCurrentGame();
 			ActionCard currentCard = drawCard(currentGame);
 			if (currentCard instanceof LoseTurnActionCard) {
 				((LoseTurnActionCard) currentCard).play();
-			}
-			currentGame.determineNextPlayer();
-			currentGame.updateTileStatus();
+			
+			currentGame.setNextPlayer();
+			//currentGame.updateTileStatus();
 			currentGame.setMode(Game.Mode.GAME);
+			}
 	  }
 
   /**

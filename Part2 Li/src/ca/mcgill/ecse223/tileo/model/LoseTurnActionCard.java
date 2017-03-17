@@ -37,7 +37,9 @@ public class LoseTurnActionCard extends ActionCard
    */
   // line 343 "../../../../../TileO (updated Feb10).ump"
    public void play(){
-    
+	   Game currentGame = super.getDeck().getGame();
+	   Player currentplayer = currentGame.getCurrentPlayer();
+	   currentplayer.setTurnsUntilActive(currentGame.numberOfPlayers() + 1);
   }
   
   //------------------------

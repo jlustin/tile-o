@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+import ca.mcgill.ecse223.tileo.controller.PlayModeController;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -56,6 +60,13 @@ public class LoseTurnWarningPopOut extends JFrame {
 		JButton btnOk = new JButton("Ok");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				PlayModeController pmc = new PlayModeController();
+						try {
+							pmc.doPlayLoseTurnActionCard();
+						} catch (InvalidInputException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 				close();
 			}
 		});
