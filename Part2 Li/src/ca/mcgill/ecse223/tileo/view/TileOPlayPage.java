@@ -105,6 +105,7 @@ public class TileOPlayPage extends JFrame {
 	    		PlayModeController pmc = new PlayModeController();
 	    		pMoves = pmc.doRollDie();
 	    		grid.possibleMoves=pMoves;
+	    		refreshData();
 	    		
 	    		grid.isAPlayerTurn = true;	//added by Li
 	    		

@@ -31,7 +31,6 @@ public class RollDiePopOut extends JDialog {
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		setAlwaysOnTop(true);
 		init();
-		refreshData();
 	}
 	
 	private void init(){
@@ -90,9 +89,7 @@ public class RollDiePopOut extends JDialog {
 		contentPanel.setLayout(gl_contentPanel);
 	}
 	
-	private void refreshData(){
-		
-	}
+	
 	
 	public void close() { 
 		this.setVisible(false);

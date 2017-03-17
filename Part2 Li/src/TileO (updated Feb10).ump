@@ -50,7 +50,7 @@ class Game {
 			catch (IndexOutOfBoundsException e) {
 				nextPlayer = getPlayer(0);
 			}
-			if (nextPlayer.getStatus() == PlayerStatus.Active) {
+			if (nextPlayer.getPlayerStatus() == PlayerStatus.Active) {
 				found = true;
 			}
 			else {
@@ -180,6 +180,7 @@ class ActionTile {
 		ActionCard currentCard = deck.getCurrentCard();	  
 		currentGame.setMode(currentCard.getActionCardGameMode());
 		setHasBeenVisited(true);
+		setTurnsUntilActive(inactivityPeriod);
 	};
 }
 
