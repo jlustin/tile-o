@@ -151,7 +151,8 @@ public class ActionTile extends Tile
   private static final long serialVersionUID = 5555555555555555555L ;
 // line 174 ../../../../../TileO (updated Feb10).ump
   @Override
-	public void doLand() {Game currentGame = getGame();
+	public void doLand() {
+	  	Game currentGame = getGame();
 		Player currentPlayer = currentGame.getCurrentPlayer();
 		currentPlayer.setCurrentTile(this);
 		Deck deck = currentGame.getDeck();

@@ -644,21 +644,24 @@ public class Game implements Serializable
 			for (Player aPlayer: playerList){
 				//if has a penalty
 				if(aPlayer.getTurnsUntilActive() != 0) {
-					int turnsLeft = aPlayer.getTurnsUntilActive();
-					aPlayer.setTurnsUntilActive(turnsLeft-1);
+//					int turnsLeft = aPlayer.getTurnsUntilActive();
+//					aPlayer.setTurnsUntilActive(turnsLeft-1);
+					aPlayer.takeTurn();
 				}
 			}		
 			
-			List<Tile> tileList = getTiles();
-			for (Tile aTile: tileList){
-				if (aTile instanceof ActionTile){
-					//if inactive, and turns until active is not 0				
-					if(((ActionTile) aTile).getActionTileStatus() == ActionTileStatus.Inactive){
-						int turnsTilActive = ((ActionTile) aTile).getTurnsUntilActive();
-						((ActionTile) aTile).setTurnsUntilActive(turnsTilActive-1);
-					}
-				}
-			}
+			
+			updateTileStatus();
+//			List<Tile> tileList = getTiles();
+//			for (Tile aTile: tileList){
+//				if (aTile instanceof ActionTile){
+//					//if inactive, and turns until active is not 0				
+//					if(((ActionTile) aTile).getActionTileStatus() == ActionTileStatus.Inactive){
+//						int turnsTilActive = ((ActionTile) aTile).getTurnsUntilActive();
+//						((ActionTile) aTile).setTurnsUntilActive(turnsTilActive-1);
+//					}
+//				}
+//			}
 		}
 
   }
