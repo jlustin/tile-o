@@ -623,48 +623,39 @@ public class Game implements Serializable
 		List<Player> playerList = getPlayers();
 		Player currentPlayer = getCurrentPlayer();
 		int playerIndex = indexOfPlayer(currentPlayer);
-				
-		//checks if current player is the last player
-		if (playerIndex + 1 == playerList.size()) {
-			//if it is, set the first player to current player
-			nextPlayer = playerList.get(0);
-			setCurrentPlayer(nextPlayer);
-		}
-		//if it's not, set the next player
-		else {
-			nextPlayer = playerList.get(playerIndex + 1);
-			setCurrentPlayer(nextPlayer);
-		}
 		
-		if(nextPlayer.getTurnsUntilActive() > 0){ //the player that will lose turn
-			setNextPlayer();
-		}
+		determineNextPlayer();
 		
-		else{ //it's normal.
-			for (Player aPlayer: playerList){
-				//if has a penalty
-				if(aPlayer.getTurnsUntilActive() != 0) {
-//					int turnsLeft = aPlayer.getTurnsUntilActive();
-//					aPlayer.setTurnsUntilActive(turnsLeft-1);
-					aPlayer.takeTurn();
-				}
-			}		
-			
-			
-			updateTileStatus();
-//			List<Tile> tileList = getTiles();
-//			for (Tile aTile: tileList){
-//				if (aTile instanceof ActionTile){
-//					//if inactive, and turns until active is not 0				
-//					if(((ActionTile) aTile).getActionTileStatus() == ActionTileStatus.Inactive){
-//						int turnsTilActive = ((ActionTile) aTile).getTurnsUntilActive();
-//						((ActionTile) aTile).setTurnsUntilActive(turnsTilActive-1);
-//					}
+//		//checks if current player is the last player
+//		if (playerIndex + 1 == playerList.size()) {
+//			//if it is, set the first player to current player
+//			nextPlayer = playerList.get(0);
+//			setCurrentPlayer(nextPlayer);
+//		}
+//		//if it's not, set the next player
+//		else {
+//			nextPlayer = playerList.get(playerIndex + 1);
+//			setCurrentPlayer(nextPlayer);
+//		}
+//		
+//		if(nextPlayer.getTurnsUntilActive() > 0){ //the player that will lose turn
+//			setNextPlayer();
+//		}
+		
+//			{ //it's normal.
+		for (Player aPlayer: playerList){
+			//if has a penalty
+//				if(aPlayer.getTurnsUntilActive() != 0) {
+				aPlayer.takeTurn();
 //				}
-//			}
+//			}		
+			
+			
+		
 		}
+		updateTileStatus();
 
-  }
+}
 
 
   public String toString()

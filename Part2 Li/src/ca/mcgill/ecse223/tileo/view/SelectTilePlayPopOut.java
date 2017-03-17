@@ -114,6 +114,7 @@ public class SelectTilePlayPopOut extends JDialog {
 								System.out.println("Successfully(?) landed on tile: x: " + chosenTile.getX() + " y: " + chosenTile.getY());
 								TileOPlayPage.getGrid().isAPlayerTurn = false;	//added by Li	
 								TileOPlayPage.refreshData();
+								close();
 							} catch (InvalidInputException e) {
 								throw new RuntimeException(e.getMessage());
 							}
