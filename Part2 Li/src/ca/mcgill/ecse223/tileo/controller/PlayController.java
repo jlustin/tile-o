@@ -658,7 +658,7 @@ public class PlayController
 			if (currentCard instanceof TeleportActionCard){
 				((TeleportActionCard) currentCard).play(tile);
 			}
-			currentGame.setNextPlayer();
+			//currentGame.setNextPlayer();
 			//currentGame.updateTileStatus();
 			//currentGame.setMode(Game.Mode.GAME);
 		}
