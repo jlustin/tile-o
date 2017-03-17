@@ -63,6 +63,7 @@ public class LoseTurnWarningPopOut extends JFrame {
 				PlayModeController pmc = new PlayModeController();
 						try {
 							pmc.doPlayLoseTurnActionCard();
+							TileOPlayPage.refreshData();
 						} catch (InvalidInputException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

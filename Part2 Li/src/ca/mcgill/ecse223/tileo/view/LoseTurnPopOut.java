@@ -56,6 +56,7 @@ public class LoseTurnPopOut extends JFrame {
 		JButton btnOk = new JButton("Ok");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				TileOPlayPage.refreshData();
 				close();
 			}
 		});

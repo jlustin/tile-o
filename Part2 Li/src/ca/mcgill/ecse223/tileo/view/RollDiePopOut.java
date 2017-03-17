@@ -53,6 +53,7 @@ public class RollDiePopOut extends JDialog {
 					PlayModeController pmc = new PlayModeController();
 					pmc.doPlayRollDieExtraTurn();
 					TileOPlayPage.btnRollDie.doClick();
+					TileOPlayPage.refreshData();
 			
 						
 					close();

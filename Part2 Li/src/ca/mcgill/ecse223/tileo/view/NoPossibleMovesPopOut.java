@@ -55,6 +55,7 @@ public class NoPossibleMovesPopOut extends JDialog {
 				JButton okButton = new JButton("Feels Bad, Man.");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						TileOPlayPage.refreshData();
 						close();
 					}
 				});
