@@ -39,7 +39,7 @@ public class LoseTurnActionCard extends ActionCard
    public void play(){
 	   Game currentGame = super.getDeck().getGame();
 	   Player currentplayer = currentGame.getCurrentPlayer();
-	   currentplayer.setTurnsUntilActive(currentGame.numberOfPlayers());
+	   currentplayer.loseTurns(currentGame.numberOfPlayers());
   }
   
   //------------------------
