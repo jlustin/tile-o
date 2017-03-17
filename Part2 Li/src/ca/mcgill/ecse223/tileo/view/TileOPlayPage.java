@@ -43,7 +43,7 @@ public class TileOPlayPage extends JFrame {
 	private JPanel contentPane;
 	private static JLabel playerTurnLbl;
 	private static JLabel modeLbl;
-	private JLabel errorLbl;
+	private static JLabel errorLbl;
 	private JPanel actionCardPnl;
 	static JButton btnRollDie;
 	private JButton gotItBtn;
@@ -66,6 +66,10 @@ public class TileOPlayPage extends JFrame {
 	public void close() { 
 		this.setVisible(false);
 	    this.dispose();
+	}
+	
+	public static void setError(String error ){
+		errorLbl.setText(error);
 	}
 	
 	private void initComponents(){
@@ -100,11 +104,15 @@ public class TileOPlayPage extends JFrame {
 	    JButton saveBtn = new JButton("Save");
 	    saveBtn.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent arg0) {
-	    		PlayModeController pmc = new PlayModeController();
-	    		pmc.saveGame();
-	    		SavePopOut spo = new SavePopOut();
-	    		spo.setVisible(true);
-	    		refreshData();
+	    		if(pmc.getMode().equals(PlayController.Mode.Ready) || pmc.getMode().equals(PlayController.Mode.Roll)){
+	    			pmc.saveGame();
+		    		SavePopOut spo = new SavePopOut();
+		    		spo.setVisible(true);
+		    		//refreshData();
+	    		}
+	    		else {
+	    			errorLbl.setText("You cannot save during an action");
+	    		}
 	    		
 	    	}
 	    });

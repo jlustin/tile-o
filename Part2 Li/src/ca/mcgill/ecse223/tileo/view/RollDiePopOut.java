@@ -55,7 +55,7 @@ public class RollDiePopOut extends JDialog {
 					pmc.playRollDieActionCard();
 					TileOPlayPage.btnRollDie.doClick();
 					TileOPlayPage.refreshData();
-			
+					TileOPlayPage.setError("");
 						
 					close();
 				}

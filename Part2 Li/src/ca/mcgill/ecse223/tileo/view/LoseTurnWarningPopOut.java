@@ -37,6 +37,7 @@ public class LoseTurnWarningPopOut extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(500, 200, 450, 300);
 		contentPane = new JPanel();
+		setAlwaysOnTop(true);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
@@ -49,6 +50,7 @@ public class LoseTurnWarningPopOut extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					pmc.playLoseTurnActionCard();
+					TileOPlayPage.setError("");
 					
 				} catch (InvalidInputException e1) {
 					// TODO Auto-generated catch block

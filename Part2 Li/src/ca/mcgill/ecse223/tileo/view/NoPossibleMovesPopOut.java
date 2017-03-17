@@ -45,6 +45,7 @@ public class NoPossibleMovesPopOut extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						TileOPlayPage.refreshData();
+						TileOPlayPage.setError("");
 						close();
 					}
 				});

@@ -29,21 +29,21 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 
 public class TeleportPopOut extends JFrame {
-	Tile chosenTile=null;
-	String error;
+	private Tile chosenTile = null;
+	private String error;
 	private PlayController pmc = TileOPlayPage.pmc;
 
-	
 	private JPanel contentPane;
-//	private final Action action = new SwingAction();
 
 	/**
 	 * Create the frame.
 	 */
 	public void close() { 
 		this.setVisible(false);
+		this.setAlwaysOnTop(true);
 	    this.dispose();
 	}
+	
 	public TeleportPopOut() {
 		setTitle("Teleport Action Card");
 		setAlwaysOnTop(true);
@@ -71,6 +71,7 @@ public class TeleportPopOut extends JFrame {
 					try {
 						pmc.playTeleportActionCard(chosenTile);
 						TileOPlayPage.refreshData();
+						TileOPlayPage.setError("");
 					} catch (InvalidInputException e1) {
 						throw new RuntimeException(e1.getMessage());
 					}

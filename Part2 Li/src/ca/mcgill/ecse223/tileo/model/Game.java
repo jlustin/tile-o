@@ -598,9 +598,9 @@ public class Game implements Serializable
 			if (nextPlayer.getPlayerStatus() == PlayerStatus.Active) {
 				found = true;
 			}
-//			else {
-//				nextPlayer.takeTurn();
-//			}
+			else {
+				nextPlayer.takeTurn();
+			}
 			player = nextPlayer;
 		}
 		List<Player> pList = getPlayers();

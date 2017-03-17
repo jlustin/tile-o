@@ -30,6 +30,7 @@ public class SavePopOut extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(500, 200, 450, 300);
 		contentPane = new JPanel();
+		setAlwaysOnTop(true);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
@@ -38,6 +39,7 @@ public class SavePopOut extends JFrame {
 		JButton btnOk = new JButton("Ok");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				TileOPlayPage.setError("");
 				close();
 			}
 		});

@@ -41,7 +41,7 @@ public class NormalTile extends Tile
 // line 170 ../../../../../TileO (updated Feb10).ump
   @Override
   	public void doLand() {
-	  Game currentGame = getGame();
+	  	Game currentGame = getGame();
   	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 
   	  	currentPlayer.setCurrentTile(this);  	 
   	  	currentGame.setNextPlayer();

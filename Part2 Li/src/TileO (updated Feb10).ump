@@ -58,8 +58,11 @@ class Game {
 			}
 			player = nextPlayer;
 		}
-		setCurrentPlayer(player);
-		
+		List<Player> pList = getPlayers();
+		for (Player p: pList) {
+			p.takeTurn();
+		}
+		setCurrentPlayer(player);		
 	};
 	
 	public void updateTileStatus() {
@@ -70,11 +73,9 @@ class Game {
 		}
 	};
 		
-	public void setNextPlayer() {
-		List<Player> playerList = getPlayers();
-			
-			determineNextPlayer();
-			updateTileStatus();
+	public void setNextPlayer() {			
+		determineNextPlayer();
+		updateTileStatus();
 	};
 }
 
@@ -129,8 +130,7 @@ class Tile {
 			possibleMoveTiles.addAll(tiles);		  
 	  	}
 	  	return possibleMoveTiles;  
-	};	  
-  
+	};	    
 	// Abstract method for land()
 	public abstract void doLand();
   
@@ -149,10 +149,10 @@ class ActionTile {
 		currentPlayer.setCurrentTile(this);
 		
 		if (getActionTileStatus() == ActionTileStatus.Inactive) {
-			currentGame.determineNextPlayer();
+			currentGame.setNextPlayer();
 	  	  	// set possible tile that player chose, that it has been visited
 	  	  	this.setHasBeenVisited(true);  	 
-	  	  	//currentGame.setMode(Game.Mode.GAME);
+	  	  	currentGame.setMode(Game.Mode.GAME);
 		}
 		else {
 			Deck deck = currentGame.getDeck();
@@ -172,28 +172,9 @@ class NormalTile {
   		Game currentGame = getGame();
   	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 
   	  	currentPlayer.setCurrentTile(this);  	 
-  	  	currentGame.determineNextPlayer();
-  	  	// set possible tile that player chose, that it has been visited
-  	  	this.setHasBeenVisited(true);  	 
-  	  	//currentGame.setMode(Game.Mode.GAME);
- /* 	
-		Game currentGame = this.getGame();
-  	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 
-  	  	currentPlayer.setCurrentTile(this);  	 
-  	  	int playerIndex = currentGame.indexOfPlayer(currentPlayer);  	 
-  	  	int numberOfPlayers = currentGame.numberOfPlayers();  	 
-  	  	if(playerIndex == numberOfPlayers-1){  		  
-  		 	currentGame.setCurrentPlayer(currentGame.getPlayer(0));
-  	  	}
-  	  	else{
-  			// it is now the next player's turn
-  		  	Player followingPlayer = currentGame.getPlayer(currentGame.indexOfPlayer(currentPlayer)+1);  		 
-  		  	currentGame.setCurrentPlayer(followingPlayer);  		 
-  	  	}
-  	  	// set possible tile that player chose, that it has been visited
-  	  	this.setHasBeenVisited(true);  	 
+  	  	currentGame.setNextPlayer();
+  	  	this.setHasBeenVisited(true);
   	  	currentGame.setMode(Game.Mode.GAME);
-  	  	*/
 	};
 }
 
@@ -328,11 +309,10 @@ class LoseTurnActionCard {
 		  return Game.Mode.GAME_LOSETURNACTIONCARD;
 	};
 	
-	//TODO: write the function for this
 	public void play(){
 		Game currentGame = super.getDeck().getGame();
-	   Player currentplayer = currentGame.getCurrentPlayer();
-	   currentplayer.loseTurns(currentGame.numberOfPlayers());
+	   	Player currentplayer = currentGame.getCurrentPlayer();
+	   	currentplayer.loseTurns(currentGame.numberOfPlayers() + 1);
 	};
 }
 

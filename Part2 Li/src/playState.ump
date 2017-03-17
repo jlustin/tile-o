@@ -81,11 +81,8 @@ class PlayController {
 
 	
    
-   //Condition
-	public boolean checkGameMode(Game.Mode aMode) {
-  		return aMode == TileOApplication.getTileO().getCurrentGame().getMode();
-	}
-
+   //Guards
+	
 	public boolean isNormalTile (Tile selectedTile) {
   		return (selectedTile instanceof NormalTile);
 	}

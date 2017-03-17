@@ -110,6 +110,7 @@ public class AddConnectionActionCardPopOut extends JDialog {
 							TileOPlayPage.getGrid().selectedTile = null;
 							TileOPlayPage.getGrid().aTileIsSelected = false;
 							TileOPlayPage.refreshData();
+							TileOPlayPage.setError("");
 						} catch (InvalidInputException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

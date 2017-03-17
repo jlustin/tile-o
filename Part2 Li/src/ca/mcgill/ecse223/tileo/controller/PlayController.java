@@ -704,7 +704,6 @@ public class PlayController
     TileO tileO = TileOApplication.getTileO();
 		try {
 			Game loadedGame = tileO.getGame(index);
-			loadedGame.setMode(Game.Mode.GAME);
 			return loadedGame;
 		}
 		catch (RuntimeException e) {
