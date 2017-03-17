@@ -69,7 +69,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean load(Game selectedGame)
+  public boolean load(int gameIndex) throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -77,26 +77,26 @@ public class PlayController
     switch (aMode)
     {
       case Ready:
-        if (isInGameMode(selectedGame))
+        if (isInGameMode(TileOApplication.getTileO().getGame(gameIndex)))
         {
         // line 13 "../../../../../playState.ump"
-          doLoad(selectedGame);
+          doLoad(gameIndex);
           setMode(Mode.Roll);
           wasEventProcessed = true;
           break;
         }
-        if (isInWonMode(selectedGame))
+        if (isInWonMode(TileOApplication.getTileO().getGame(gameIndex)))
         {
         // line 16 "../../../../../playState.ump"
-          doLoad(selectedGame);
+          doLoad(gameIndex);
           setMode(Mode.Won);
           wasEventProcessed = true;
           break;
         }
-        if (isNotInGameOrWonMode(selectedGame))
+        if (isNotInGameOrWonMode(TileOApplication.getTileO().getGame(gameIndex)))
         {
         // line 19 "../../../../../playState.ump"
-          doLoad(selectedGame);
+          doLoad(gameIndex);
           setMode(Mode.ActionCard);
           wasEventProcessed = true;
           break;
@@ -129,7 +129,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean land(Tile tile)
+  public boolean land(Tile tile) throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -180,7 +180,8 @@ public class PlayController
         if (isRollDieActionCard())
         {
         // line 46 "../../../../../playState.ump"
-          possibleMoves = doPlayRollDieActionCard();
+          //possibleMoves
+          doPlayRollDieActionCard();
           setMode(Mode.Roll);
           wasEventProcessed = true;
           break;
@@ -193,7 +194,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playConnectTilesActionCard(Tile tile1,Tile tile2)
+  public boolean playConnectTilesActionCard(Tile tile1,Tile tile2) throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -217,7 +218,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playRemoveConnectionActionCard(Connection c)
+  public boolean playRemoveConnectionActionCard(Connection c) throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -241,7 +242,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playTeleportActionCard(Tile tile)
+  public boolean playTeleportActionCard(Tile tile) throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -281,7 +282,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playLoseTurnActionCard()
+  public boolean playLoseTurnActionCard() throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -490,7 +491,7 @@ public class PlayController
    * Chris
    */
   // line 159 "../../../../../playState.ump"
-   private void doLand(Tile tile) throws InvalidInputException{
+   private void doLandTile(Tile tile) throws InvalidInputException{
     TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		List<Tile> tiles = currentGame.getTiles();
@@ -674,7 +675,7 @@ public class PlayController
   }
 
   // line 333 "../../../../../playState.ump"
-   public Game loadGame(int index) throws InvalidInputException{
+   public Game doLoad(int index) throws InvalidInputException{
     TileO tileO = TileOApplication.getTileO();
 		try {
 			Game loadedGame = tileO.getGame(index);
