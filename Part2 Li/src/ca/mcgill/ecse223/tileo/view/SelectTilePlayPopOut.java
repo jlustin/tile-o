@@ -53,7 +53,7 @@ public class SelectTilePlayPopOut extends JDialog {
 		setTitle("Move To A Tile");
 		setResizable(false);
 		setAlwaysOnTop(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(500, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

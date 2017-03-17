@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 41 "../../../../../TileOPersistence.ump"
-// line 170 "../../../../../TileO (updated Feb10).ump"
+// line 171 "../../../../../TileO (updated Feb10).ump"
 public class NormalTile extends Tile
 {
 
@@ -38,15 +38,15 @@ public class NormalTile extends Tile
   
   // line 44 TileOPersistence.ump
   private static final long serialVersionUID = 6666666666666666666L ;
-// line 173 ../../../../../TileO (updated Feb10).ump
+// line 174 ../../../../../TileO (updated Feb10).ump
   @Override
   	public void doLand() {Game currentGame = getGame();
   	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 
   	  	currentPlayer.setCurrentTile(this);  	 
-  	  	currentGame.determineNextPlayer();
+  	  	currentGame.setNextPlayer();
   	  	// set possible tile that player chose, that it has been visited
   	  	this.setHasBeenVisited(true);  	 
-//  	  	currentGame.setMode(Game.Mode.GAME);
+  	  	//currentGame.setMode(Game.Mode.GAME);
  /* 	
 		Game currentGame = this.getGame();
   	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 

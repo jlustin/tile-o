@@ -7,7 +7,7 @@ import java.util.*;
 
 // line 35 "../../../../../TileOPersistence.ump"
 // line 1 "../../../../../TileOStates.ump"
-// line 168 "../../../../../TileO (updated Feb10).ump"
+// line 143 "../../../../../TileO (updated Feb10).ump"
 public class ActionTile extends Tile
 {
 
@@ -149,28 +149,26 @@ public class ActionTile extends Tile
   
   // line 38 TileOPersistence.ump
   private static final long serialVersionUID = 5555555555555555555L ;
-// line 174 ../../../../../TileO (updated Feb10).ump
+// line 149 ../../../../../TileO (updated Feb10).ump
   @Override
-	public void doLand() {
-	  	Game currentGame = getGame();
+	public void doLand() {Game currentGame = getGame();
 		Player currentPlayer = currentGame.getCurrentPlayer();
 		currentPlayer.setCurrentTile(this);
-		
+  	  	this.setHasBeenVisited(true);  	 
+
 		if (getActionTileStatus() == ActionTileStatus.Inactive) {
-			currentGame.determineNextPlayer();
+			currentGame.setNextPlayer();
 	  	  	// set possible tile that player chose, that it has been visited
-	  	  	this.setHasBeenVisited(true);  	 
-//	  	  	currentGame.setMode(Game.Mode.GAME);
+	  	  	//this.setHasBeenVisited(true);  	 
+	  	  	//currentGame.setMode(Game.Mode.GAME);
 		}
 		else {
 			Deck deck = currentGame.getDeck();
 			ActionCard currentCard = deck.getCurrentCard();	  
 			currentGame.setMode(currentCard.getActionCardGameMode());
 			deactivate();
-			setHasBeenVisited(true);			
-		}
-		
-	};
+			//this.setHasBeenVisited(true);			
+		}};
 
   
 }

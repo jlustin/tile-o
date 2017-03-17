@@ -5,7 +5,6 @@ package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 import java.util.*;
 
-import ca.mcgill.ecse223.tileo.model.ActionTile.ActionTileStatus;
 import ca.mcgill.ecse223.tileo.model.Player.PlayerStatus;
 
 // line 9 "../../../../../TileOPersistence.ump"
@@ -607,7 +606,7 @@ public class Game implements Serializable
 		setCurrentPlayer(player);
   }
 
-  // line 65 "../../../../../TileO (updated Feb10).ump"
+  // line 66 "../../../../../TileO (updated Feb10).ump"
    public void updateTileStatus(){
     for(Tile tile: getTiles()) {
 			if (tile instanceof ActionTile) {
@@ -616,46 +615,17 @@ public class Game implements Serializable
 		}
   }
 
-  // line 73 "../../../../../TileO (updated Feb10).ump"
+  // line 74 "../../../../../TileO (updated Feb10).ump"
    public void setNextPlayer(){
-    //helper method for setting the next player
-	   	Player nextPlayer;
-		List<Player> playerList = getPlayers();
-		Player currentPlayer = getCurrentPlayer();
-		int playerIndex = indexOfPlayer(currentPlayer);
-		
-		determineNextPlayer();
-		
-//		//checks if current player is the last player
-//		if (playerIndex + 1 == playerList.size()) {
-//			//if it is, set the first player to current player
-//			nextPlayer = playerList.get(0);
-//			setCurrentPlayer(nextPlayer);
-//		}
-//		//if it's not, set the next player
-//		else {
-//			nextPlayer = playerList.get(playerIndex + 1);
-//			setCurrentPlayer(nextPlayer);
-//		}
-//		
-//		if(nextPlayer.getTurnsUntilActive() > 0){ //the player that will lose turn
-//			setNextPlayer();
-//		}
-		
-//			{ //it's normal.
-		for (Player aPlayer: playerList){
-			//if has a penalty
-//				if(aPlayer.getTurnsUntilActive() != 0) {
-				aPlayer.takeTurn();
-//				}
-//			}		
+    List<Player> playerList = getPlayers();
 			
-			
-		
-		}
-		updateTileStatus();
-
-}
+			determineNextPlayer();
+	
+	//		for (Player aPlayer: playerList){
+	//			aPlayer.takeTurn();
+	//		}
+			updateTileStatus();
+  }
 
 
   public String toString()

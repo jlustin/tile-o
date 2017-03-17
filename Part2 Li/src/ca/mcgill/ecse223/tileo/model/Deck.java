@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 59 "../../../../../TileOPersistence.ump"
-// line 230 "../../../../../TileO (updated Feb10).ump"
+// line 224 "../../../../../TileO (updated Feb10).ump"
 public class Deck implements Serializable
 {
 
@@ -204,7 +204,7 @@ public class Deck implements Serializable
     }
   }
 
-  // line 235 "../../../../../TileO (updated Feb10).ump"
+  // line 229 "../../../../../TileO (updated Feb10).ump"
    public void shuffle(){
     ActionCard tmpCard;
 	  Random randomGenerator = new Random();

@@ -38,7 +38,7 @@ public class NoPossibleMovesPopOut extends JDialog {
 		setAlwaysOnTop(true);
 		setResizable(false);
 		setTitle("Sucks For You!");
-		setBounds(100, 100, 450, 300);
+		setBounds(500, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

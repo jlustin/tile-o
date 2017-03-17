@@ -63,7 +63,7 @@ public class AddConnectionActionCardPopOut extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setAlwaysOnTop(true);
 		setTitle("Add Connection Action Card");
-		setBounds(100, 100, 500, 300);
+		setBounds(500, 100, 500, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -118,12 +118,16 @@ public class AddConnectionActionCardPopOut extends JDialog {
 					   error.trim();
 					   if(error.length()==0) {
 						   try {
-								pmc.playConnectTilesActionCard(chosenTile1, chosenTile2);
-								TileOPlayPage.refreshData();
-								close();
-							} catch (InvalidInputException e1) {
-								error = e1.getMessage();
-							}
+							pmc.playConnectTilesActionCard(chosenTile1, chosenTile2);
+							TileOPlayPage.getGrid().selectedTile = null;
+							TileOPlayPage.getGrid().aTileIsSelected = false;
+							
+						} catch (InvalidInputException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						TileOPlayPage.refreshData();
+						close();
 					   }
 					   refreshData();
 				}

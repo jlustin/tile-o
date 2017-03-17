@@ -7,7 +7,7 @@ import java.util.*;
 
 // line 16 "../../../../../TileOPersistence.ump"
 // line 20 "../../../../../TileOStates.ump"
-// line 110 "../../../../../TileO (updated Feb10).ump"
+// line 85 "../../../../../TileO (updated Feb10).ump"
 public class Player implements Serializable
 {
 
@@ -295,7 +295,7 @@ public class Player implements Serializable
 		}
   }
 
-  // line 121 "../../../../../TileO (updated Feb10).ump"
+  // line 96 "../../../../../TileO (updated Feb10).ump"
    public List<Tile> getPossibleMoves(int moveLeft){
     Tile currentTile=this.getCurrentTile();
 		List<Tile> possibleMoves = currentTile.getNextMoves(moveLeft, null) ;   	  
