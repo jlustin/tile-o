@@ -660,7 +660,7 @@ public class PlayController
 			}
 			currentGame.setNextPlayer();
 			//currentGame.updateTileStatus();
-			currentGame.setMode(Game.Mode.GAME);
+			//currentGame.setMode(Game.Mode.GAME);
 		}
 		catch (RuntimeException e) {
 			throw new InvalidInputException(e.getMessage());

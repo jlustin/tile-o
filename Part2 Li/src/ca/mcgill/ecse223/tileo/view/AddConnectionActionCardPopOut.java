@@ -117,7 +117,6 @@ public class AddConnectionActionCardPopOut extends JDialog {
 						TileOPlayPage.refreshData();
 						close();
 					   }
-					   refreshData();
 				}
 			});
 			okButton.setActionCommand("Connect");

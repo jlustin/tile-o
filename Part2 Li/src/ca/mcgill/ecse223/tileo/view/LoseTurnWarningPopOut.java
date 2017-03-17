@@ -47,13 +47,14 @@ public class LoseTurnWarningPopOut extends JFrame {
 		JButton btnOk = new JButton("Ok");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-						try {
-							pmc.playLoseTurnActionCard();
-							TileOPlayPage.refreshData();
-						} catch (InvalidInputException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
+				try {
+					pmc.playLoseTurnActionCard();
+					
+				} catch (InvalidInputException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				TileOPlayPage.refreshData();
 				close();
 			}
 		});
