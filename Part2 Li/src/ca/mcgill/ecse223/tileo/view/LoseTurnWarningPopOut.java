@@ -51,8 +51,12 @@ public class LoseTurnWarningPopOut extends JFrame {
 				try {
 					pmc.playLoseTurnActionCard();
 					TileOPlayPage.setError("");
-					
-				} catch (InvalidInputException e1) {
+					TileOPlayPage.getGrid().aTileIsSelected = false;
+					TileOPlayPage.getGrid().aConnectionIsSelected = false;
+					TileOPlayPage.getGrid().selectedConnection = null;
+					TileOPlayPage.getGrid().selectedTile = null;					
+				} 
+				catch (InvalidInputException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}

@@ -83,18 +83,18 @@ class PlayController {
    
    //Guards
 	
-	public boolean isNormalTile (Tile selectedTile) {
+	private boolean isNormalTile (Tile selectedTile) {
   		return (selectedTile instanceof NormalTile);
 	}
 
-	public boolean isActiveActionTile (Tile selectedTile) {
+	private boolean isActiveActionTile (Tile selectedTile) {
 		if(selectedTile instanceof ActionTile && ((ActionTile)selectedTile).getActionTileStatus().equals(ActionTileStatus.Active)){
 			return true;
 		}
   		return false;
 	}
 
-	public boolean isWinTile(Tile selectedTile) {
+	private boolean isWinTile(Tile selectedTile) {
   		return (selectedTile instanceof WinTile);
 	}
 	
@@ -203,7 +203,7 @@ class PlayController {
 		return drawnCard;		
 	}
 
-	//TODO: CM t'as besoin de changer ca
+
 	/*
 	 * 5. Action card "Roll the die for an extra turn"
 	 * CM
@@ -304,9 +304,6 @@ class PlayController {
 			if (currentCard instanceof TeleportActionCard){
 				((TeleportActionCard) currentCard).play(tile);
 			}
-			currentGame.setNextPlayer();
-			//currentGame.updateTileStatus();
-			//currentGame.setMode(Game.Mode.GAME);
 		}
 		catch (RuntimeException e) {
 			throw new InvalidInputException(e.getMessage());
@@ -325,7 +322,6 @@ class PlayController {
 				((LoseTurnActionCard) currentCard).play();
 			}
 			currentGame.setNextPlayer();
-			//currentGame.updateTileStatus();
 			currentGame.setMode(Game.Mode.GAME);	
 		}
 		catch (RuntimeException e) {
@@ -347,7 +343,6 @@ class PlayController {
 		TileO tileO = TileOApplication.getTileO();
 		try {
 			Game loadedGame = tileO.getGame(index);
-			loadedGame.setMode(Game.Mode.GAME);
 			return loadedGame;
 		}
 		catch (RuntimeException e) {
@@ -395,7 +390,7 @@ class PlayController {
 	   //Guards
   
    private boolean isInGameMode(int gameIndex) {
-    	Game selectedGame = TileOApplication.getTileO().getGame(gameIndex);
+	   Game selectedGame = TileOApplication.getTileO().getGame(gameIndex);
 	   if(selectedGame.getMode().equals(Game.Mode.GAME)) {
 		   return true;
 	   }

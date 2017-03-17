@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ca.mcgill.ecse223.tileo.application.TileOApplication;
+
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -46,6 +49,8 @@ public class NoPossibleMovesPopOut extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						TileOPlayPage.refreshData();
 						TileOPlayPage.setError("");
+						(TileOApplication.getTileO().getCurrentGame()).setNextPlayer();
+						TileOPlayPage.refreshData();
 						close();
 					}
 				});

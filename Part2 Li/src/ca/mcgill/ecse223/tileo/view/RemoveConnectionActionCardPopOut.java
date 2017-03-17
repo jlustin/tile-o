@@ -68,6 +68,10 @@ public class RemoveConnectionActionCardPopOut extends JFrame {
 						pmc.playRemoveConnectionActionCard(chosenConnection);
 						TileOPlayPage.refreshData();
 						TileOPlayPage.setError("");
+						TileOPlayPage.getGrid().aTileIsSelected = false;
+						TileOPlayPage.getGrid().aConnectionIsSelected = false;
+						TileOPlayPage.getGrid().selectedConnection = null;
+						TileOPlayPage.getGrid().selectedTile = null;
 						close();
 					}
 					catch (InvalidInputException e2){

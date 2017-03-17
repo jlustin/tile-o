@@ -40,6 +40,10 @@ public class SavePopOut extends JFrame {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TileOPlayPage.setError("");
+				TileOPlayPage.getGrid().aTileIsSelected = false;
+				TileOPlayPage.getGrid().aConnectionIsSelected = false;
+				TileOPlayPage.getGrid().selectedConnection = null;
+				TileOPlayPage.getGrid().selectedTile = null;
 				close();
 			}
 		});

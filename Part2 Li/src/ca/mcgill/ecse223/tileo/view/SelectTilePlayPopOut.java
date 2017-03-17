@@ -90,13 +90,13 @@ public class SelectTilePlayPopOut extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						error = "";
-						if(pmc.getPossibleMoves().isEmpty()){
-							NoPossibleMovesPopOut npm = new NoPossibleMovesPopOut();
-							npm.setVisible(true);
-							(TileOApplication.getTileO().getCurrentGame()).setNextPlayer();
-							TileOPlayPage.refreshData();
-							refreshData();
-						}
+//						if(pmc.getPossibleMoves().isEmpty()){
+//							NoPossibleMovesPopOut npm = new NoPossibleMovesPopOut();
+//							npm.setVisible(true);
+//							(TileOApplication.getTileO().getCurrentGame()).setNextPlayer();
+//							TileOPlayPage.refreshData();
+//							refreshData();
+//						}
 						if (TileOPlayPage.getGrid().aTileIsSelected){
 							chosenTile = TileOPlayPage.getGrid().selectedTile;
 						}
@@ -125,6 +125,7 @@ public class SelectTilePlayPopOut extends JDialog {
 						refreshData();
 					}
 				});
+				
 				okButton.setActionCommand("MoveToThisTile");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);

@@ -741,13 +741,19 @@ public class TileODesignPage extends JFrame {
 	}
 
 	private void addTileActionPerformed(java.awt.event.ActionEvent evt){
-		ButtonModel chosenTile;
+		ButtonModel chosenTile = null;
 		int chosenXComp = 0;
 		int chosenYComp = 0;
 		int inactive = 0;
 		error = "";
-		chosenTile = tileBtnGroup.getSelection();
-		if(chosenTile==null) {
+		try {
+			chosenTile = tileBtnGroup.getSelection();
+		}
+		catch (NullPointerException e){
+			error = "Please select a Tile Type.";			
+		}
+		
+		if(chosenTile == null) {
 			error = "Please select a Tile Type.";
 		}		
 		try {

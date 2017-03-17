@@ -56,7 +56,10 @@ public class RollDiePopOut extends JDialog {
 					TileOPlayPage.btnRollDie.doClick();
 					TileOPlayPage.refreshData();
 					TileOPlayPage.setError("");
-						
+					TileOPlayPage.getGrid().aTileIsSelected = false;
+					TileOPlayPage.getGrid().aConnectionIsSelected = false;
+					TileOPlayPage.getGrid().selectedConnection = null;
+					TileOPlayPage.getGrid().selectedTile = null;
 					close();
 				}
 			});

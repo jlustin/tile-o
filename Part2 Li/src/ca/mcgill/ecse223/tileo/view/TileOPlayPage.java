@@ -48,10 +48,10 @@ public class TileOPlayPage extends JFrame {
 	static JButton btnRollDie;
 	private JButton gotItBtn;
 	private static JLabel gameModeLbl;
-	private static JLabel p1InactivityLbl;
-	private static JLabel p2InactivityLbl;
-	private static JLabel p3InactivityLbl;
-	private static JLabel p4InactivityLbl;
+	private static JLabel p1InactivityLbl = new JLabel("");
+	private static JLabel p2InactivityLbl = new JLabel("");
+	private static JLabel p3InactivityLbl = new JLabel("");
+	private static JLabel p4InactivityLbl = new JLabel("");
 	
 
 	/**
@@ -121,14 +121,31 @@ public class TileOPlayPage extends JFrame {
 	    btnRollDie.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		pmc.rollDie();
+	    		
 	    		possibleMoves = pmc.getPossibleMoves();
+	    		
 	    		grid.isAPlayerTurn = true;
+	    		grid.aTileIsSelected = false;
+	    		grid.aConnectionIsSelected = false;
+	    		grid.selectedConnection = null;
+	    		grid.selectedTile = null;	    
+	    		
 	    		refreshData();
 	    		grid.possibleMoves = possibleMoves;
 	    		grid.refreshBoard();
 	    		
-	    		SelectTilePlayPopOut stpop = new SelectTilePlayPopOut();
-	    		stpop.setVisible(true);
+	    		if (possibleMoves.isEmpty()){
+	    			NoPossibleMovesPopOut npm = new NoPossibleMovesPopOut();
+					npm.setVisible(true);					
+					TileOPlayPage.refreshData();
+					//(TileOApplication.getTileO().getCurrentGame()).setNextPlayer();
+					refreshData();
+	    		}
+	    		else {
+	    			SelectTilePlayPopOut stpop = new SelectTilePlayPopOut();
+		    		stpop.setVisible(true);
+	    		}
+	    		
 	    	}
 	    });
 	    
@@ -139,13 +156,13 @@ public class TileOPlayPage extends JFrame {
 	    
 	    gameModeLbl = new JLabel("Game.Mode");
 	    
-	    p1InactivityLbl = new JLabel("Player1 inactivity:");
-	    
-	    p2InactivityLbl = new JLabel("Player 2 inactivity:");
-	    
-	    p3InactivityLbl = new JLabel("Player 3 inactivity:");
-	    
-	    p4InactivityLbl = new JLabel("Player 4 inactivity:");
+//	    p1InactivityLbl.setText("Player1 inactivity:");
+//	    
+//	    p2InactivityLbl.setText("Player 2 inactivity:");
+//	    
+//	    p3InactivityLbl.setText("Player 3 inactivity:");
+//	    
+//	    p4InactivityLbl.setText("Player 4 inactivity:");
 	    GroupLayout gl_contentPane = new GroupLayout(contentPane);
 	    gl_contentPane.setHorizontalGroup(
 	    	gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -250,10 +267,10 @@ public class TileOPlayPage extends JFrame {
 			modeLbl.setText("CurrentMode: " + pmc.getModeFullName());
 			gameModeLbl.setText("CurrentGameMode: " + currentGame.getModeFullName());
 			
-			p1InactivityLbl.setText("Player 1 inactivity: " + currentGame.getPlayer(0).getTurnsUntilActive());
-			p2InactivityLbl.setText("Player 2 inactivity: " + currentGame.getPlayer(1).getTurnsUntilActive());
-			p3InactivityLbl.setText("Player 3 inactivity: " + currentGame.getPlayer(2).getTurnsUntilActive());
-			p4InactivityLbl.setText("Player 4 inactivity: " + currentGame.getPlayer(3).getTurnsUntilActive());
+//			p1InactivityLbl.setText("Player 1 inactivity: " + currentGame.getPlayer(0).getTurnsUntilActive());
+//			p2InactivityLbl.setText("Player 2 inactivity: " + currentGame.getPlayer(1).getTurnsUntilActive());
+//			p3InactivityLbl.setText("Player 3 inactivity: " + currentGame.getPlayer(2).getTurnsUntilActive());
+//			p4InactivityLbl.setText("Player 4 inactivity: " + currentGame.getPlayer(3).getTurnsUntilActive());
 
 			
 			switch (currentMode){
@@ -281,13 +298,10 @@ public class TileOPlayPage extends JFrame {
 					GameWonPopOut gwpo = new GameWonPopOut();
 					gwpo.setVisible(true);
 				default:
-			}
-				
-		}
-		
+			}				
+		}		
 	}
 	
-
 	public static TilePanelPlay getGrid(){
 		return grid;
 	}

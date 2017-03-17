@@ -162,7 +162,13 @@ public class TilePanelPlay extends JPanel{
 				g2d.setColor(Color.WHITE);
 				g2d.fill(rect);
 				g2d.setColor(Color.black);
-				g2d.draw(rect);
+				g2d.draw(rect);				
+			
+				if(aTile.getHasBeenVisited()){
+					Rectangle2D r = tRectangles.get(aTile);
+					g2d.setColor(Color.GRAY);
+					g2d.fill(r);
+				}
 				
 				if (selectedTile != null && selectedTile.equals(aTile)) {
 					aTileIsSelected = true;
@@ -171,13 +177,7 @@ public class TilePanelPlay extends JPanel{
 					g2d.setColor(Color.PINK); 
 				
 					g2d.fill(rectangle);						
-				}
-				
-				if(aTile.getHasBeenVisited()){
-					Rectangle2D r = tRectangles.get(aTile);
-					g2d.setColor(Color.GRAY);
-					g2d.fill(r);
-				}
+				}				
 				
 				if(isAPlayerTurn){	//added by Li
 					if(possibleMoves != null) {
@@ -188,14 +188,15 @@ public class TilePanelPlay extends JPanel{
 						}
 					}
 				}
-				if (aTile instanceof ActionTile) {
-					Rectangle2D r = tRectangles.get(aTile);
-					String inactive = String.valueOf(((ActionTile) aTile).getTurnsUntilActive());
-					g2d.setColor(Color.BLACK);
-					g2d.drawString(inactive,
-							(int) r.getCenterX(), 
-							(int) r.getCenterY());
-				}
+				//inactivity period show
+//				if (aTile instanceof ActionTile) {
+//					Rectangle2D r = tRectangles.get(aTile);
+//					String inactive = String.valueOf(((ActionTile) aTile).getTurnsUntilActive());
+//					g2d.setColor(Color.BLACK);
+//					g2d.drawString(inactive,
+//							(int) r.getCenterX(), 
+//							(int) r.getCenterY());
+//				}
 			}
 			
 			for (Player aPlayer: myGame.getPlayers()){
