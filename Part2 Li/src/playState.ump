@@ -38,7 +38,7 @@ class PlayController {
 			land(Tile tile) [isActionTileAndInactive(tile)] / {
 				doLand(tile);
 			} -> Roll;
-			land(Tile tile) [isActionTile(tile)] / {
+			land(Tile tile) [isActiveActionTile(tile)] / {
 				doLand(tile);
 			} -> ActionCard;
 		}
@@ -63,7 +63,7 @@ class PlayController {
 			playTeleportActionCard(Tile tile) [isTeleportAndInactiveActionTile(tile)] / {
 				doPlayTeleportActionCard(tile);
 			} -> Roll;
-			playTeleportActionCard(Tile tile) [isTeleportAndActionTile(tile)] / {
+			playTeleportActionCard(Tile tile) [isTeleportAndActiveActionTile(tile)] / {
 				doPlayTeleportActionCard(tile);
 			} -> ActionCard;
 			playLoseTurnActionCard()[isLoseTurnActionCard()] / {
@@ -90,8 +90,11 @@ class PlayController {
   		return (selectedTile instanceof NormalTile);
 	}
 
-	public boolean isActionTile (Tile selectedTile) {
-  		return (selectedTile instanceof ActionTile);
+	public boolean isActiveActionTile (Tile selectedTile) {
+		if(selectedTile instanceof ActionTile && ((ActionTile)selectedTile).getActionTileStatus().equals(ActionTileStatus.Active)){
+			return true;
+		}
+  		return false;
 	}
 
 	public boolean isWinTile(Tile selectedTile) {
@@ -402,7 +405,7 @@ class PlayController {
 	   return false;
    }
    
-   private boolean isInWonMode(Game selectedGame){
+   private boolean isInWonMode(int gameIndex){
        Game selectedGame = TileOApplication.getTileO().getGame(gameIndex);
 	   if(selectedGame.getMode().equals(Game.Mode.GAME_WON)){
 		   return true;	   
@@ -410,7 +413,7 @@ class PlayController {
 	   return false;
    }
       
-   private boolean isNotInGameOrWonMode(Game selectedGame){
+   private boolean isNotInGameOrWonMode(int gameIndex){
    	   Game selectedGame = TileOApplication.getTileO().getGame(gameIndex);
 	   if(selectedGame.getMode().equals(Game.Mode.GAME)||selectedGame.getMode().equals(Game.Mode.GAME_WON)){
 		   return false;
@@ -483,9 +486,11 @@ class PlayController {
 		return false;
 	}
    
-   private boolean isTeleportAndActionTile(Tile tile) {
+   private boolean isTeleportAndActiveActionTile(Tile tile) {
 	   ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
-	   if(aActionCard instanceof TeleportActionCard && tile instanceof ActionTile ) {
+	   if(aActionCard instanceof TeleportActionCard && 
+	   		tile instanceof ActionTile &&
+	   		((ActionTile)tile).getActionTileStatus().equals(ActionTileStatus.Active)) {
 		   return true;
 	   }
 	   return false;

@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 41 "../../../../../TileOPersistence.ump"
-// line 171 "../../../../../TileO (updated Feb10).ump"
+// line 167 "../../../../../TileO (updated Feb10).ump"
 public class NormalTile extends Tile
 {
 
@@ -38,7 +38,7 @@ public class NormalTile extends Tile
   
   // line 44 TileOPersistence.ump
   private static final long serialVersionUID = 6666666666666666666L ;
-// line 174 ../../../../../TileO (updated Feb10).ump
+// line 170 ../../../../../TileO (updated Feb10).ump
   @Override
   	public void doLand() {Game currentGame = getGame();
   	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 

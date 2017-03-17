@@ -74,10 +74,6 @@ class Game {
 		List<Player> playerList = getPlayers();
 			
 			determineNextPlayer();
-	
-	//		for (Player aPlayer: playerList){
-	//			aPlayer.takeTurn();
-	//		}
 			updateTileStatus();
 	};
 }

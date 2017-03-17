@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 53 "../../../../../TileOPersistence.ump"
-// line 221 "../../../../../TileO (updated Feb10).ump"
+// line 217 "../../../../../TileO (updated Feb10).ump"
 public class Connection implements Serializable
 {
 

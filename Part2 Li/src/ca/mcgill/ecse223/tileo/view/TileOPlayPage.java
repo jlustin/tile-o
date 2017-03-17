@@ -29,6 +29,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.JTextField;
 
 public class TileOPlayPage extends JFrame {
 
@@ -46,6 +47,7 @@ public class TileOPlayPage extends JFrame {
 	private JPanel actionCardPnl;
 	static JButton btnRollDie;
 	private JButton gotItBtn;
+	private static JLabel gameModeLbl;
 	
 
 	/**
@@ -122,20 +124,26 @@ public class TileOPlayPage extends JFrame {
 	    
 	    gotItBtn = new JButton("Got it!");
 	    gotItBtn.setVisible(false);
+	    
+	    gameModeLbl = new JLabel("Game.Mode");
 	    GroupLayout gl_contentPane = new GroupLayout(contentPane);
 	    gl_contentPane.setHorizontalGroup(
 	    	gl_contentPane.createParallelGroup(Alignment.LEADING)
 	    		.addGroup(gl_contentPane.createSequentialGroup()
 	    			.addGap(22)
 	    			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-	    				.addGroup(gl_contentPane.createSequentialGroup()
-	    					.addComponent(btnRollDie)
+	    				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+	    					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+	    						.addComponent(btnRollDie)
+	    						.addGroup(gl_contentPane.createSequentialGroup()
+	    							.addGap(9)
+	    							.addComponent(gameModeLbl)))
 	    					.addPreferredGap(ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
 	    					.addComponent(actionCardPnl, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE))
 	    				.addComponent(modeLbl)
 	    				.addGroup(gl_contentPane.createSequentialGroup()
 	    					.addComponent(errorLbl)
-	    					.addPreferredGap(ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
+	    					.addPreferredGap(ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
 	    					.addComponent(gotItBtn))
 	    				.addComponent(playerTurnLbl))
 	    			.addGap(33))
@@ -157,14 +165,16 @@ public class TileOPlayPage extends JFrame {
 	    						.addComponent(gotItBtn))
 	    					.addPreferredGap(ComponentPlacement.UNRELATED)
 	    					.addComponent(modeLbl)
-	    					.addGap(48)
+	    					.addGap(56)
+	    					.addComponent(gameModeLbl)
+	    					.addGap(29)
 	    					.addComponent(btnRollDie)
-	    					.addGap(479)
+	    					.addGap(426)
 	    					.addComponent(saveBtn))
 	    				.addGroup(gl_contentPane.createSequentialGroup()
 	    					.addGap(106)
 	    					.addComponent(actionCardPnl, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)))
-	    			.addContainerGap(19, Short.MAX_VALUE))
+	    			.addContainerGap(22, Short.MAX_VALUE))
 	    );
 	    contentPane.setLayout(gl_contentPane);
 
@@ -193,6 +203,7 @@ public class TileOPlayPage extends JFrame {
 			
 			playerTurnLbl.setText("It is currently player " + currentPlayerNb + "'s turn.");
 			modeLbl.setText("CurrentMode: " + pmc.getModeFullName());
+			gameModeLbl.setText("CurrentGameMode: " + currentGame.getModeFullName());
 			
 			switch (currentMode){
 				case GAME_ROLLDIEACTIONCARD:

@@ -36,18 +36,6 @@ public class AddConnectionActionCardPopOut extends JDialog {
 	private JButton btnChosenTile;
 	private JButton okButton;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			AddConnectionPlayPopOut dialog = new AddConnectionPlayPopOut();
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	/**
 	 * Create the dialog.
@@ -63,7 +51,7 @@ public class AddConnectionActionCardPopOut extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setAlwaysOnTop(true);
 		setTitle("Add Connection Action Card");
-		setBounds(500, 100, 500, 300);
+		setBounds(500, 200, 500, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

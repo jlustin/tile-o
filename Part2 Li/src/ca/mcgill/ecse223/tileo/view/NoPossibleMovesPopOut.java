@@ -15,18 +15,7 @@ public class NoPossibleMovesPopOut extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			NoPossibleMovesPopOut dialog = new NoPossibleMovesPopOut();
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+
 	public void close() { 
 		this.setVisible(false);
 	    this.dispose();
@@ -38,7 +27,7 @@ public class NoPossibleMovesPopOut extends JDialog {
 		setAlwaysOnTop(true);
 		setResizable(false);
 		setTitle("Sucks For You!");
-		setBounds(500, 100, 450, 300);
+		setBounds(500, 200, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

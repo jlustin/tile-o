@@ -598,11 +598,16 @@ public class Game implements Serializable
 			if (nextPlayer.getPlayerStatus() == PlayerStatus.Active) {
 				found = true;
 			}
-			else {
-				nextPlayer.takeTurn();
-			}
+//			else {
+//				nextPlayer.takeTurn();
+//			}
 			player = nextPlayer;
 		}
+		List<Player> pList = getPlayers();
+		for (Player p: pList) {
+			p.takeTurn();
+		}
+		
 		setCurrentPlayer(player);
   }
 
@@ -620,10 +625,6 @@ public class Game implements Serializable
     List<Player> playerList = getPlayers();
 			
 			determineNextPlayer();
-	
-	//		for (Player aPlayer: playerList){
-	//			aPlayer.takeTurn();
-	//		}
 			updateTileStatus();
   }
 

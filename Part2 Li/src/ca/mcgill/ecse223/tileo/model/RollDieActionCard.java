@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 // line 71 "../../../../../TileOPersistence.ump"
-// line 250 "../../../../../TileO (updated Feb10).ump"
+// line 246 "../../../../../TileO (updated Feb10).ump"
 public class RollDieActionCard extends ActionCard
 {
 
@@ -32,7 +32,7 @@ public class RollDieActionCard extends ActionCard
     super.delete();
   }
 
-  // line 254 "../../../../../TileO (updated Feb10).ump"
+  // line 250 "../../../../../TileO (updated Feb10).ump"
    public List<Tile> play(){
     Game currentGame = getDeck().getGame();
 	  return currentGame.rollDie();
@@ -44,7 +44,7 @@ public class RollDieActionCard extends ActionCard
   
   // line 74 TileOPersistence.ump
   private static final long serialVersionUID = 2020202020202020202L ;
-// line 258 ../../../../../TileO (updated Feb10).ump
+// line 254 ../../../../../TileO (updated Feb10).ump
   @Override
 	public Game.Mode getActionCardGameMode() {return Game.Mode.GAME_ROLLDIEACTIONCARD;};
 
