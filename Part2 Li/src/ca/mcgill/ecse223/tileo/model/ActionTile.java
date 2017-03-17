@@ -155,10 +155,20 @@ public class ActionTile extends Tile
 	  	Game currentGame = getGame();
 		Player currentPlayer = currentGame.getCurrentPlayer();
 		currentPlayer.setCurrentTile(this);
-		Deck deck = currentGame.getDeck();
-		ActionCard currentCard = deck.getCurrentCard();	  
-		currentGame.setMode(currentCard.getActionCardGameMode());
-		setHasBeenVisited(true);};
+		if (getActionTileStatus() == ActionTileStatus.Inactive) {
+			currentGame.setNextPlayer();
+	  	  	// set possible tile that player chose, that it has been visited
+	  	  	this.setHasBeenVisited(true);  	 
+	  	  	currentGame.setMode(Game.Mode.GAME);
+		}
+		else {
+			Deck deck = currentGame.getDeck();
+			ActionCard currentCard = deck.getCurrentCard();	  
+			currentGame.setMode(currentCard.getActionCardGameMode());
+			setHasBeenVisited(true);			
+		}
+		
+	};
 
   
 }
