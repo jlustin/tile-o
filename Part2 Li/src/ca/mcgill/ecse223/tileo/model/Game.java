@@ -619,6 +619,7 @@ public class Game implements Serializable
   // line 73 "../../../../../TileO (updated Feb10).ump"
    public void setNextPlayer(){
     //helper method for setting the next player
+	   	Player nextPlayer;
 		List<Player> playerList = getPlayers();
 		Player currentPlayer = getCurrentPlayer();
 		int playerIndex = indexOfPlayer(currentPlayer);
@@ -626,32 +627,40 @@ public class Game implements Serializable
 		//checks if current player is the last player
 		if (playerIndex + 1 == playerList.size()) {
 			//if it is, set the first player to current player
-			setCurrentPlayer(playerList.get(0));
+			nextPlayer = playerList.get(0);
+			setCurrentPlayer(nextPlayer);
 		}
 		//if it's not, set the next player
 		else {
-			Player nextPlayer = playerList.get(playerIndex + 1);
+			nextPlayer = playerList.get(playerIndex + 1);
 			setCurrentPlayer(nextPlayer);
 		}
 		
-		for (Player aPlayer: playerList){
-			//if has a penalty
-			if(aPlayer.getTurnsUntilActive() != 0) {
-				int turnsLeft = aPlayer.getTurnsUntilActive();
-				aPlayer.setTurnsUntilActive(turnsLeft-1);
-			}
-		}		
+		if(nextPlayer.getTurnsUntilActive() > 0){ //the player that will lose turn
+			setNextPlayer();
+		}
 		
-		List<Tile> tileList = getTiles();
-		for (Tile aTile: tileList){
-			if (aTile instanceof ActionTile){
-				//if inactive, and turns until active is not 0				
-				if(((ActionTile) aTile).getActionTileStatus() == ActionTileStatus.Inactive){
-					int turnsTilActive = ((ActionTile) aTile).getTurnsUntilActive();
-					((ActionTile) aTile).setTurnsUntilActive(turnsTilActive-1);
+		else{ //it's normal.
+			for (Player aPlayer: playerList){
+				//if has a penalty
+				if(aPlayer.getTurnsUntilActive() != 0) {
+					int turnsLeft = aPlayer.getTurnsUntilActive();
+					aPlayer.setTurnsUntilActive(turnsLeft-1);
+				}
+			}		
+			
+			List<Tile> tileList = getTiles();
+			for (Tile aTile: tileList){
+				if (aTile instanceof ActionTile){
+					//if inactive, and turns until active is not 0				
+					if(((ActionTile) aTile).getActionTileStatus() == ActionTileStatus.Inactive){
+						int turnsTilActive = ((ActionTile) aTile).getTurnsUntilActive();
+						((ActionTile) aTile).setTurnsUntilActive(turnsTilActive-1);
+					}
 				}
 			}
 		}
+
   }
 
 
