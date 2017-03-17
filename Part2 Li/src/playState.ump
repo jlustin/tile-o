@@ -2,11 +2,10 @@ namespace ca.mcgill.ecse223.tileo.controller;
 
 
 class PlayController {
-	depend ca.mcgill.ecse223.tileo.model.Tile;
 	
-	mode {
+	Mode {
     
-	    Ready {
+		Ready {
 			startGame / {
 				doStartGame(TileOApplication.getTileO().getCurrentGame());
 			} -> Roll;
@@ -36,6 +35,9 @@ class PlayController {
 			land(Tile tile) [isWinTile(tile)] / {
 				doLandTile(tile);
 			} -> Won;
+			land(Tile tile) [isActionTileAndInactive(tile)] / {
+				dolandTile(tile);
+			} -> Roll;
 			land(Tile tile) [isActionTile(tile)] / {
 				doLandTile(tile);
 			} -> ActionCard;
@@ -312,12 +314,18 @@ class PlayController {
 		TileO tileO = tileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		ActionCard currentCard = drawCard(currentGame);
-		if (currentCard instanceof LoseTurnActionCard) {
-			((LoseTurnActionCarD) currentCard).play();
+		try {
+			if (currentCard instanceof LoseTurnActionCard) {
+				((LoseTurnActionCarD) currentCard).play();
+			}
+			currentGame.determineNextPlayer();
+			currentGame.updateTileStatus();
+			currentGame.setMode(Game.Mode.GAME);	
 		}
-		currentGame.determineNextPlayer();
-		currentGame.updateTileStatus();
-		currentGame.setMode(Game.Mode.GAME);		
+		catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
+			
 	} 
 
 	
@@ -384,21 +392,23 @@ class PlayController {
 	   if(selectedGame.getMode().equals(Game.Mode.GAME)) {
 		   return true;
 	   }
-	   else return false;
+	   return false;
    }
    
    private boolean isInWonMode(Game selectedGame){
 	   if(selectedGame.getMode().equals(Game.Mode.GAME_WON)){
 		   return true;	   
 	   }
-	   else return false;
+	   return false;
    }
+   
+	
    
    private boolean isNotInGameOrWonMode(Game selectedGame){
 	   if(selectedGame.getMode().equals(Game.Mode.GAME)||selectedGame.getMode().equals(Game.Mode.GAME_WON)){
 		   return false;
 	   }
-	   else return true;
+	   return true;
    }
    
    private boolean isRollDieActionCard() {
@@ -406,7 +416,7 @@ class PlayController {
 	   if(aActionCard instanceof RollDieActionCard ) {
 		   return true;
 	   }
-	   else return false;
+	   return false;
    }
    
    private boolean isConnectTilesActionCard(){
@@ -414,7 +424,7 @@ class PlayController {
 	   if(aActionCard instanceof ConnectTilesActionCard ) {
 		   return true;
 	   }
-	   else return false;
+	   return false;
    }
    
    private boolean isRemoveConnectionActionCard(){
@@ -422,7 +432,7 @@ class PlayController {
 	   if(aActionCard instanceof RemoveConnectionActionCard ) {
 		   return true;
 	   }
-	   else return false;
+	   return false;
    }
    
    private boolean isLoseTurnActionCard() {
@@ -430,7 +440,7 @@ class PlayController {
 	   if(aActionCard instanceof LoseTurnActionCard ) {
 		   return true;
 	   }
-	   else return false;	   
+	   return false;	   
    }
    
    private boolean isTeleportAndNormalTile(Tile tile) {
@@ -438,7 +448,7 @@ class PlayController {
 	   if(aActionCard instanceof TeleportActionCard && tile instanceof NormalTile ) {
 		   return true;
 	   }
-	   else return false;
+	   return false;
    }
    
    private boolean isTeleportAndWinTile(Tile tile) {
@@ -446,15 +456,22 @@ class PlayController {
 	   if(aActionCard instanceof TeleportActionCard && tile instanceof WinTile ) {
 		   return true;
 	   }
-	   else return false;
+	   return false;
    }
+   
+   private isActionTileAndInactive(Tile tile) {
+		if (tile instanceOf ActionTile && tile.getActionTileStatus().equals(ActionTileStatus.Inactive)) {
+			return true;
+			}
+		return false;
+	}
    
    private boolean isTeleportAndActionTile(Tile tile) {
 	   ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof TeleportActionCard && tile instanceof ActionTile ) {
 		   return true;
 	   }
-	   else return false;
+	   return false;
    }
               
 }  

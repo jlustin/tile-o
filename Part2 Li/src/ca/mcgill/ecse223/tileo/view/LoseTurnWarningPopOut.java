@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+import ca.mcgill.ecse223.tileo.controller.PlayController;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
 
 import javax.swing.GroupLayout;
@@ -21,22 +22,8 @@ import java.awt.event.ActionEvent;
 public class LoseTurnWarningPopOut extends JFrame {
 
 	private JPanel contentPane;
+	private PlayController pmc = TileOPlayPage.pmc;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					LoseTurnWarningPopOut frame = new LoseTurnWarningPopOut();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 	
 	public void close() { 
 		this.setVisible(false);
@@ -60,9 +47,8 @@ public class LoseTurnWarningPopOut extends JFrame {
 		JButton btnOk = new JButton("Ok");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PlayModeController pmc = new PlayModeController();
 						try {
-							pmc.doPlayLoseTurnActionCard();
+							pmc.playLoseTurnActionCard();
 							TileOPlayPage.refreshData();
 						} catch (InvalidInputException e1) {
 							// TODO Auto-generated catch block

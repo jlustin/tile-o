@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.DesignModeController;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+import ca.mcgill.ecse223.tileo.controller.PlayController;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
 import ca.mcgill.ecse223.tileo.model.Game;
 import ca.mcgill.ecse223.tileo.model.Game.Mode;
@@ -41,7 +42,9 @@ import javax.swing.JSpinner;
 public class TileODesignPage extends JFrame {
 
 	private static TilePanelDesign grid = new TilePanelDesign(TileOApplication.getTileO().getCurrentGame());
-	private static HelpPopOut helpPop = new HelpPopOut();
+	private DesignModeController dmc = new DesignModeController();
+	private PlayController pmc = new PlayController();
+	private static DesignHelpPO helpPop = new DesignHelpPO();
 	private static SavePopOut savePop = new SavePopOut();
 	public static int numberOfPlayers;
 	private static int numberOfGames = 0;
@@ -176,7 +179,6 @@ public class TileODesignPage extends JFrame {
 					error = "Please select a connection to delete.";
 				}			
 				else {
-					DesignModeController dmc = new DesignModeController ();
 					try 
 					{
 						dmc.removeConnection(grid.selectedConnection);
@@ -285,7 +287,6 @@ public class TileODesignPage extends JFrame {
 	    	public void actionPerformed(ActionEvent e) {
 //	    		SavePopOut sdpo = new SavePopOut();
 	    		savePop.setVisible(true);
-	    		DesignModeController dmc = new DesignModeController();
 	    		dmc.saveDesign();
 	    		refreshData();
 	    	}
@@ -298,7 +299,6 @@ public class TileODesignPage extends JFrame {
 	    helpBtn = new JButton("Help!");
 	    helpBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				HelpPopOut help = new HelpPopOut();
 				helpPop.setVisible(true);
 			}
 		});
@@ -525,7 +525,6 @@ public class TileODesignPage extends JFrame {
 	    connectBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				error = "";
-				DesignModeController dmc = new DesignModeController();
 				   if(chosenTile1==null||chosenTile2==null){
 					   error = "Please choose the tiles first! ";
 				   }
@@ -589,7 +588,6 @@ public class TileODesignPage extends JFrame {
 	    			error = "Please select a tile to delete.";	    			
 	    		}
 	    		else {
-	    			DesignModeController dmc = new DesignModeController();
 	    			try {
 	    				dmc.removeTileFromGame(grid.selectedTile);
 	    				grid.selectedTile = null;	
@@ -729,7 +727,6 @@ public class TileODesignPage extends JFrame {
 		}
 		error.trim();
 		if(error.length()==0) {
-			DesignModeController dmc = new DesignModeController();
 			try {
 				dmc.setPlayerStartingTile(chosenPlayerNumber, chosenTile);
 				error = "Player " + chosenPlayerNumber + " starting tile set!";
@@ -778,7 +775,6 @@ public class TileODesignPage extends JFrame {
 		error.trim();
 		if (error.length()==0) {
 			try{
-				DesignModeController dmc = new DesignModeController();
 				dmc.addDesignTile(chosenXComp, chosenYComp,chosenTile.getActionCommand(), inactive);
 			} 
 			catch (InvalidInputException er) {
@@ -832,7 +828,6 @@ public class TileODesignPage extends JFrame {
 		error.trim();
 		if (error.length() == 0) {
 			
-			DesignModeController dmc = new DesignModeController();
 			try {
 				dmc.createDeck(dieCNum, connectCNum, removeCNum, teleportCNum, turnCNum);
 				error = "Deck created!";
@@ -880,10 +875,10 @@ public class TileODesignPage extends JFrame {
 		}
 		else if (startGameCBox.getItemCount() > 0){
 			try{
-				int gameIndex = startGameCBox.getSelectedIndex(); 
-				PlayModeController pmc = new PlayModeController();			
+				int gameIndex = startGameCBox.getSelectedIndex();			
 				Game selectedGame = TileOApplication.getTileO().getGame(gameIndex);
-				pmc.doStartGame(selectedGame);
+				TileOApplication.getTileO().setCurrentGame(selectedGame);
+				pmc.startGame();
 				TileOApplication.pp.close();
 				close();
 				TileOApplication.pp = new TileOPlayPage();

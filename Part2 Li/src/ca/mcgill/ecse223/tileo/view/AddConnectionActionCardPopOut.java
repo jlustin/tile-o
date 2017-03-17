@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+import ca.mcgill.ecse223.tileo.controller.PlayController;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
 import ca.mcgill.ecse223.tileo.model.Tile;
 
@@ -24,6 +25,8 @@ public class AddConnectionActionCardPopOut extends JDialog {
 	
 	private Tile chosenTile1=null;
 	private Tile chosenTile2=null;
+
+	private PlayController pmc = TileOPlayPage.pmc;
 	
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblChooseYoTiles;
@@ -109,14 +112,13 @@ public class AddConnectionActionCardPopOut extends JDialog {
 			okButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					error = "";
-					PlayModeController pmc = new PlayModeController();
 					   if(chosenTile1==null||chosenTile2==null){
 						   error = "Please choose the tiles first! ";
 					   }
 					   error.trim();
 					   if(error.length()==0) {
 						   try {
-								pmc.doPlayConnectTilesActionCard(chosenTile1, chosenTile2);
+								pmc.playConnectTilesActionCard(chosenTile1, chosenTile2);
 								TileOPlayPage.refreshData();
 								close();
 							} catch (InvalidInputException e1) {

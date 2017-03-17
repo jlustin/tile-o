@@ -157,10 +157,10 @@ public class ActionTile extends Tile
 		currentPlayer.setCurrentTile(this);
 		
 		if (getActionTileStatus() == ActionTileStatus.Inactive) {
-			currentGame.setNextPlayer();
+			currentGame.determineNextPlayer();
 	  	  	// set possible tile that player chose, that it has been visited
 	  	  	this.setHasBeenVisited(true);  	 
-	  	  	currentGame.setMode(Game.Mode.GAME);
+//	  	  	currentGame.setMode(Game.Mode.GAME);
 		}
 		else {
 			Deck deck = currentGame.getDeck();

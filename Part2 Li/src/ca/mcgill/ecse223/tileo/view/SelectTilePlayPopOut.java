@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.DesignModeController;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+import ca.mcgill.ecse223.tileo.controller.PlayController;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
 import ca.mcgill.ecse223.tileo.model.Tile;
 import javax.swing.JLabel;
@@ -24,6 +25,7 @@ import javax.swing.GroupLayout.Alignment;
 public class SelectTilePlayPopOut extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private PlayController pmc = TileOPlayPage.pmc;
 	
 	Tile chosenTile=null;
 	String error;
@@ -87,9 +89,8 @@ public class SelectTilePlayPopOut extends JDialog {
 				JButton okButton = new JButton("Move To This Tile");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						PlayModeController pmc = new PlayModeController();
 						error = "";
-						if(TileOPlayPage.pMoves.isEmpty()){
+						if(pmc.getPossibleMoves().isEmpty()){
 							NoPossibleMovesPopOut npm = new NoPossibleMovesPopOut();
 							npm.setVisible(true);
 							(TileOApplication.getTileO().getCurrentGame()).setNextPlayer();
@@ -102,14 +103,14 @@ public class SelectTilePlayPopOut extends JDialog {
 						if(chosenTile == null){
 							error = "Please choose on tile on the board! ";
 						}
-						if(!TileOPlayPage.pMoves.contains(chosenTile)){
+						if(!TileOPlayPage.possibleMoves.contains(chosenTile)){
 							error = error+ "Please choose one of the highlighted tiles! ";
 						}
 						error.trim();
 						
 						if (error.length()==0){					
 							try {
-								pmc.doLandedOnTile(chosenTile);
+								pmc.land(chosenTile);
 								
 								System.out.println("Successfully(?) landed on tile: x: " + chosenTile.getX() + " y: " + chosenTile.getY());
 								TileOPlayPage.getGrid().isAPlayerTurn = false;	//added by Li	

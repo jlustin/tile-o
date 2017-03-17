@@ -14,28 +14,12 @@ public class ErrorPopOut extends JFrame {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					ErrorPopOut frame = new ErrorPopOut();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
 	/**
 	 * Create the frame.
 	 */
 	public ErrorPopOut() {
 		init();
-		refreshData();
 	}
 	
 	private void init(){
@@ -55,9 +39,4 @@ public class ErrorPopOut extends JFrame {
 		lblThisIsAn.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblThisIsAn, BorderLayout.CENTER);
 	}
-	
-	private void refreshData(){
-		
-	}
-
 }

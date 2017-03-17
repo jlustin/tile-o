@@ -70,40 +70,14 @@ class Game {
 	};
 		
 	public void setNextPlayer() {
-	//helper method for setting the next player
 		List<Player> playerList = getPlayers();
-		Player currentPlayer = getCurrentPlayer();
-		int playerIndex = indexOfPlayer(currentPlayer);
-				
-		//checks if current player is the last player
-		if (playerIndex + 1 == playerList.size()) {
-			//if it is, set the first player to current player
-			setCurrentPlayer(playerList.get(0));
-		}
-		//if it's not, set the next player
-		else {
-			Player nextPlayer = playerList.get(playerIndex + 1);
-			setCurrentPlayer(nextPlayer);
-		}
-		
-		for (Player aPlayer: playerList){
-			//if has a penalty
-			if(aPlayer.getTurnsUntilActive() != 0) {
-				int turnsLeft = aPlayer.getTurnsUntilActive();
-				aPlayer.setTurnsUntilActive(turnsLeft-1);
-			}
-		}		
-		
-		List<Tile> tileList = getTiles();
-		for (Tile aTile: tileList){
-			if (aTile instanceof ActionTile){
-				//if inactive, and turns until active is not 0				
-				if(((ActionTile) aTile).getTileStatus() == TileStatus.Inactive){
-					int turnsTilActive = ((ActionTile) aTile).getTurnsUntilActive();
-					((ActionTile) aTile).setTurnsUntilActive(turnsTilActive-1);
-				}
-			}
-		}		
+			
+			determineNextPlayer();
+	
+	//		for (Player aPlayer: playerList){
+	//			aPlayer.takeTurn();
+	//		}
+			updateTileStatus();
 	};
 }
 
@@ -176,11 +150,20 @@ class ActionTile {
 		Game currentGame = getGame();
 		Player currentPlayer = currentGame.getCurrentPlayer();
 		currentPlayer.setCurrentTile(this);
-		Deck deck = currentGame.getDeck();
-		ActionCard currentCard = deck.getCurrentCard();	  
-		currentGame.setMode(currentCard.getActionCardGameMode());
-		setHasBeenVisited(true);
-		setTurnsUntilActive(inactivityPeriod);
+		
+		if (getActionTileStatus() == ActionTileStatus.Inactive) {
+			currentGame.setNextPlayer();
+	  	  	// set possible tile that player chose, that it has been visited
+	  	  	this.setHasBeenVisited(true);  	 
+	  	  	currentGame.setMode(Game.Mode.GAME);
+		}
+		else {
+			Deck deck = currentGame.getDeck();
+			ActionCard currentCard = deck.getCurrentCard();	  
+			currentGame.setMode(currentCard.getActionCardGameMode());
+			deactivate();
+			setHasBeenVisited(true);			
+		}
 	};
 }
 
@@ -189,6 +172,14 @@ class NormalTile {
 	
 	@Override
   	public void doLand() { 
+  		Game currentGame = getGame();
+  	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 
+  	  	currentPlayer.setCurrentTile(this);  	 
+  	  	currentGame.setNextPlayer();
+  	  	// set possible tile that player chose, that it has been visited
+  	  	this.setHasBeenVisited(true);  	 
+  	  	currentGame.setMode(Game.Mode.GAME);
+ /* 	
 		Game currentGame = this.getGame();
   	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 
   	  	currentPlayer.setCurrentTile(this);  	 
@@ -205,6 +196,7 @@ class NormalTile {
   	  	// set possible tile that player chose, that it has been visited
   	  	this.setHasBeenVisited(true);  	 
   	  	currentGame.setMode(Game.Mode.GAME);
+  	  	*/
 	};
 }
 
@@ -257,14 +249,15 @@ class ActionCard {
 class RollDieActionCard {
 	isA ActionCard;
 	
-	@Override
-	public Game.Mode getActionCardGameMode() {
-		  return Game.Mode.GAME_ROLLDIEACTIONCARD;
-	};
 	public void play(){
 	  Game currentGame = getDeck().getGame();
 	  currentGame.rollDie();
   	};
+  	
+  	@Override
+	public Game.Mode getActionCardGameMode() {
+		  return Game.Mode.GAME_ROLLDIEACTIONCARD;
+	};
 }
 
 class ConnectTilesActionCard {
@@ -340,7 +333,9 @@ class LoseTurnActionCard {
 	
 	//TODO: write the function for this
 	public void play(){
-	
+		Game currentGame = super.getDeck().getGame();
+	   Player currentplayer = currentGame.getCurrentPlayer();
+	   currentplayer.loseTurns(currentGame.numberOfPlayers());
 	};
 }
 

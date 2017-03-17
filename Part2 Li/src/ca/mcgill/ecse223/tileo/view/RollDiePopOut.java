@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ca.mcgill.ecse223.tileo.controller.PlayController;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
 
 import java.awt.event.ActionListener;
@@ -21,6 +22,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class RollDiePopOut extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private PlayController pmc = TileOPlayPage.pmc;
 	private JLabel lblYouHaveDrawn;
 	private JButton cancelButton;
 
@@ -49,8 +51,8 @@ public class RollDiePopOut extends JDialog {
 			cancelButton = new JButton("Roll Die");
 			cancelButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					PlayModeController pmc = new PlayModeController();
-					pmc.doPlayRollDieExtraTurn();
+					
+					pmc.playRollDieActionCard();
 					TileOPlayPage.btnRollDie.doClick();
 					TileOPlayPage.refreshData();
 			

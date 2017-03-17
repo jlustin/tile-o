@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.DesignModeController;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+import ca.mcgill.ecse223.tileo.controller.PlayController;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
 import ca.mcgill.ecse223.tileo.model.Game;
 import ca.mcgill.ecse223.tileo.model.Tile;
@@ -30,25 +31,11 @@ import javax.swing.Action;
 public class TeleportPopOut extends JFrame {
 	Tile chosenTile=null;
 	String error;
+	private PlayController pmc = TileOPlayPage.pmc;
+
 	
 	private JPanel contentPane;
 //	private final Action action = new SwingAction();
-
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TeleportPopOut frame = new TeleportPopOut();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
 	/**
 	 * Create the frame.
@@ -76,14 +63,13 @@ public class TeleportPopOut extends JFrame {
 		btnTeleport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				error = "";
-				PlayModeController pmc = new PlayModeController();
 				if (TileOPlayPage.getGrid().aTileIsSelected){
 					chosenTile = TileOPlayPage.getGrid().selectedTile;
 				if(chosenTile==null){
 					error = error + "Please click a tile on the board! ";
 				}
 					try {
-						pmc.doPlayTeleportActionCard(chosenTile);
+						pmc.playTeleportActionCard(chosenTile);
 						TileOPlayPage.refreshData();
 					} catch (InvalidInputException e1) {
 						throw new RuntimeException(e1.getMessage());
