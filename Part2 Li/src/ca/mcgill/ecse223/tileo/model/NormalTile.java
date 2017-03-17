@@ -40,19 +40,11 @@ public class NormalTile extends Tile
   private static final long serialVersionUID = 6666666666666666666L ;
 // line 189 ../../../../../TileO (updated Feb10).ump
   @Override
-  	public void doLand() {Game currentGame = this.getGame();
+  	public void doLand() {
+	  	Game currentGame = getGame();
   	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 
   	  	currentPlayer.setCurrentTile(this);  	 
-  	  	int playerIndex = currentGame.indexOfPlayer(currentPlayer);  	 
-  	  	int numberOfPlayers = currentGame.numberOfPlayers();  	 
-  	  	if(playerIndex == numberOfPlayers-1){  		  
-  		 	currentGame.setCurrentPlayer(currentGame.getPlayer(0));
-  	  	}
-  	  	else{
-  			// it is now the next player's turn
-  		  	Player followingPlayer = currentGame.getPlayer(currentGame.indexOfPlayer(currentPlayer)+1);  		 
-  		  	currentGame.setCurrentPlayer(followingPlayer);  		 
-  	  	}
+  	  	currentGame.setNextPlayer();
   	  	// set possible tile that player chose, that it has been visited
   	  	this.setHasBeenVisited(true);  	 
   	  	currentGame.setMode(Game.Mode.GAME);};
