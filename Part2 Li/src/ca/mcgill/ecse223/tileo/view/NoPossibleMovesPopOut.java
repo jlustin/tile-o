@@ -9,6 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+import ca.mcgill.ecse223.tileo.controller.PlayController;
+import ca.mcgill.ecse223.tileo.model.Tile;
 
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
@@ -17,6 +20,7 @@ import java.awt.event.ActionEvent;
 public class NoPossibleMovesPopOut extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private PlayController pmc = TileOPlayPage.pmc;
 
 
 	public void close() { 
@@ -49,9 +53,16 @@ public class NoPossibleMovesPopOut extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						TileOPlayPage.refreshData();
 						TileOPlayPage.setError("");
-						(TileOApplication.getTileO().getCurrentGame()).setNextPlayer();
-						TileOPlayPage.refreshData();
+						Tile cTile = TileOApplication.getTileO().getCurrentGame().getCurrentPlayer().getCurrentTile();
+						try {
+							pmc.land(cTile);
+						} catch (InvalidInputException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}						
+						//(TileOApplication.getTileO().getCurrentGame()).setNextPlayer();						
 						close();
+						TileOPlayPage.refreshData();
 					}
 				});
 				okButton.setActionCommand("FeelsBad");

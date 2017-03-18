@@ -103,7 +103,7 @@ public class SelectTilePlayPopOut extends JDialog {
 						if(chosenTile == null){
 							error = "Please choose on tile on the board! ";
 						}
-						if(!TileOPlayPage.possibleMoves.contains(chosenTile)){
+						if(!TileOPlayPage.pMoves.contains(chosenTile)){
 							error = error+ "Please choose one of the highlighted tiles! ";
 						}
 						error.trim();
@@ -116,6 +116,12 @@ public class SelectTilePlayPopOut extends JDialog {
 								TileOPlayPage.getGrid().isAPlayerTurn = false;	//added by Li	
 								TileOPlayPage.refreshData();
 								TileOPlayPage.setError("");
+								
+								TileOPlayPage.getGrid().aTileIsSelected = false;
+								TileOPlayPage.getGrid().aConnectionIsSelected = false;
+								TileOPlayPage.getGrid().selectedConnection = null;
+								TileOPlayPage.getGrid().selectedTile = null;
+								
 								close();
 							} catch (InvalidInputException e) {
 								throw new RuntimeException(e.getMessage());

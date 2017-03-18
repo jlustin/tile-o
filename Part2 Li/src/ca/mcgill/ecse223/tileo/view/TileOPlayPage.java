@@ -36,7 +36,7 @@ public class TileOPlayPage extends JFrame {
 	private static TilePanelPlay grid = new TilePanelPlay(TileOApplication.getTileO().getCurrentGame());
 	public static PlayController pmc = new PlayController();
 	static String currentPlayer;
-	public static List<Tile> possibleMoves;
+	public static List<Tile> pMoves;
 	private static int currentPlayerNb = 1;
 	
 	
@@ -120,21 +120,21 @@ public class TileOPlayPage extends JFrame {
 	    btnRollDie = new JButton("Roll Die");
 	    btnRollDie.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		pmc.rollDie();
+	    		pmc.rollDie();	    		
+	    		pMoves = pmc.getPossibleMoves();
 	    		
-	    		possibleMoves = pmc.getPossibleMoves();
-	    		
-	    		grid.isAPlayerTurn = true;
-	    		grid.aTileIsSelected = false;
-	    		grid.aConnectionIsSelected = false;
-	    		grid.selectedConnection = null;
-	    		grid.selectedTile = null;	    
-	    		
+	    		grid.isAPlayerTurn = true; 	    		
 	    		refreshData();
-	    		grid.possibleMoves = possibleMoves;
+	    		
+	    		TileOPlayPage.getGrid().aTileIsSelected = false;
+				TileOPlayPage.getGrid().aConnectionIsSelected = false;
+				TileOPlayPage.getGrid().selectedConnection = null;
+				TileOPlayPage.getGrid().selectedTile = null;
+	    		
+	    		grid.possibleMoves = pMoves;
 	    		grid.refreshBoard();
 	    		
-	    		if (possibleMoves.isEmpty()){
+	    		if (pMoves.isEmpty()){
 	    			NoPossibleMovesPopOut npm = new NoPossibleMovesPopOut();
 					npm.setVisible(true);					
 					TileOPlayPage.refreshData();
