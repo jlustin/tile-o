@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 53 "../../../../../TileOPersistence.ump"
-// line 195 "../../../../../TileO (updated Feb10).ump"
+// line 217 "../../../../../TileO (updated Feb10).ump"
 public class Connection implements Serializable
 {
 
@@ -183,7 +183,7 @@ public class Connection implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 56 ../../../../../TileOPersistence.ump
+  // line 56 TileOPersistence.ump
   private static final long serialVersionUID = 8888888888888888888L ;
 
   

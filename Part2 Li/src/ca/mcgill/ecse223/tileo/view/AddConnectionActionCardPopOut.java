@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+import ca.mcgill.ecse223.tileo.controller.PlayController;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
 import ca.mcgill.ecse223.tileo.model.Tile;
 
@@ -24,6 +25,8 @@ public class AddConnectionActionCardPopOut extends JDialog {
 	
 	private Tile chosenTile1=null;
 	private Tile chosenTile2=null;
+
+	private PlayController pmc = TileOPlayPage.pmc;
 	
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblChooseYoTiles;
@@ -33,18 +36,6 @@ public class AddConnectionActionCardPopOut extends JDialog {
 	private JButton btnChosenTile;
 	private JButton okButton;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			AddConnectionPlayPopOut dialog = new AddConnectionPlayPopOut();
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	/**
 	 * Create the dialog.
@@ -60,7 +51,7 @@ public class AddConnectionActionCardPopOut extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setAlwaysOnTop(true);
 		setTitle("Add Connection Action Card");
-		setBounds(100, 100, 500, 300);
+		setBounds(500, 200, 500, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -109,21 +100,29 @@ public class AddConnectionActionCardPopOut extends JDialog {
 			okButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					error = "";
-					PlayModeController pmc = new PlayModeController();
 					   if(chosenTile1==null||chosenTile2==null){
 						   error = "Please choose the tiles first! ";
 					   }
 					   error.trim();
 					   if(error.length()==0) {
 						   try {
-								pmc.playConnectTilesActionCard(chosenTile1, chosenTile2);
-								TileOPlayPage.refreshData();
-								close();
-							} catch (InvalidInputException e1) {
-								error = e1.getMessage();
-							}
+							pmc.playConnectTilesActionCard(chosenTile1, chosenTile2);
+							TileOPlayPage.getGrid().selectedTile = null;
+							TileOPlayPage.getGrid().aTileIsSelected = false;
+							TileOPlayPage.refreshData();
+							TileOPlayPage.setError("");
+							
+							TileOPlayPage.getGrid().aTileIsSelected = false;
+							TileOPlayPage.getGrid().aConnectionIsSelected = false;
+							TileOPlayPage.getGrid().selectedConnection = null;
+							TileOPlayPage.getGrid().selectedTile = null;
+						} catch (InvalidInputException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+						close();
 					   }
-					   refreshData();
 				}
 			});
 			okButton.setActionCommand("Connect");

@@ -1,35 +1,39 @@
 class ActionTile {
-	tileStatus {
+	actionTileStatus {
 		Active {
-			land [inactivityPeriod == 0] -> / {
-				doLand();
-			} Active;
-			land [inactivityPeriod > 0] -> / {
-				doLand();
-			} Inactive;
+			deactivate() [getInactivityPeriod() > 0] / {
+				setTurnsUntilActive(getInactivityPeriod() + 1);
+			} -> Inactive;
 		}
 		Inactive {
-			changeTurn [turnsUntilActive == 0] -> Active;
-			changeTurn [turnsUntilActive > 0] -> / {
-				setTurnsUntilActive(getTurnsUntilActive()-1);
-			} Inactive;
+			takeTurn() [getTurnsUntilActive() > 1] / {
+				setTurnsUntilActive(getTurnsUntilActive() - 1);
+			} -> Inactive;
+			takeTurn() [getTurnsUntilActive() <= 1] / {
+				setTurnsUntilActive(0);
+			} -> Active;
 		}
 	}
 }
 
+
 class Player {
 	playerStatus {
-		hasNextTurn{
-			changeTurn [turnsUntilActive == 0] -> hasNextTurn;
-			changeTurn [turnsUntilActive > 0] -> / {
-				setTurnsUntilActive(getTurnsUntilActive()-1);
-			} noNextTurn;
-		}  
-		noNextTurn {
-			changeTurn [turnsUntilActive == 0] -> hasNextTurn;
-			changeTurn [turnsUntilActive > 0] -> / {
-				setTurnsUntilActive(getTurnsUntilActive()-1);
-			} noNextTurn;
+		Active {
+			loseTurns(int n) [n>0] / {
+				setTurnsUntilActive(getTurnsUntilActive() + n);
+			} -> Inactive;
+		}
+		Inactive {
+			takeTurn() [getTurnsUntilActive() > 1] / {
+				setTurnsUntilActive(getTurnsUntilActive() - 1);
+			} -> Inactive;
+			takeTurn() [getTurnsUntilActive() <= 1] / {
+				setTurnsUntilActive(0);
+			} -> Active;
+			loseTurns(int n) [n>0] / {
+				setTurnsUntilActive(getTurnsUntilActive() + n);
+			} -> Inactive;
 		}
 	}
 }

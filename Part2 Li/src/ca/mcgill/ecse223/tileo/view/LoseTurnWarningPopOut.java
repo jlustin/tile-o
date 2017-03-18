@@ -6,6 +6,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+import ca.mcgill.ecse223.tileo.controller.PlayController;
+import ca.mcgill.ecse223.tileo.controller.PlayModeController;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -17,22 +22,8 @@ import java.awt.event.ActionEvent;
 public class LoseTurnWarningPopOut extends JFrame {
 
 	private JPanel contentPane;
+	private PlayController pmc = TileOPlayPage.pmc;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					LoseTurnWarningPopOut frame = new LoseTurnWarningPopOut();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 	
 	public void close() { 
 		this.setVisible(false);
@@ -44,8 +35,9 @@ public class LoseTurnWarningPopOut extends JFrame {
 	 */
 	public LoseTurnWarningPopOut() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(500, 200, 450, 300);
 		contentPane = new JPanel();
+		setAlwaysOnTop(true);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
@@ -56,6 +48,19 @@ public class LoseTurnWarningPopOut extends JFrame {
 		JButton btnOk = new JButton("Ok");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					pmc.playLoseTurnActionCard();
+					TileOPlayPage.setError("");
+					TileOPlayPage.getGrid().aTileIsSelected = false;
+					TileOPlayPage.getGrid().aConnectionIsSelected = false;
+					TileOPlayPage.getGrid().selectedConnection = null;
+					TileOPlayPage.getGrid().selectedTile = null;					
+				} 
+				catch (InvalidInputException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				TileOPlayPage.refreshData();
 				close();
 			}
 		});

@@ -1,7 +1,9 @@
-namespace ca.mcgill.ecse223.tileo.model;
+
 
 use TileOPersistence.ump;
 use TileOStates.ump;
+use playState.ump;
+namespace ca.mcgill.ecse223.tileo.model;
 
 class TileO {
 	1 <@>- * Game games;
@@ -36,42 +38,44 @@ class Game {
 		possibleMoves = currentPlayer.getPossibleMoves(number);
 		return possibleMoves;
 	};
-		
-	public void setNextPlayer() {
-	//helper method for setting the next player
-		List<Player> playerList = getPlayers();
-		Player currentPlayer = getCurrentPlayer();
-		int playerIndex = indexOfPlayer(currentPlayer);
-				
-		//checks if current player is the last player
-		if (playerIndex + 1 == playerList.size()) {
-			//if it is, set the first player to current player
-			setCurrentPlayer(playerList.get(0));
-		}
-		//if it's not, set the next player
-		else {
-			Player nextPlayer = playerList.get(playerIndex + 1);
-			setCurrentPlayer(nextPlayer);
-		}
-		
-		for (Player aPlayer: playerList){
-			//if has a penalty
-			if(aPlayer.getTurnsUntilActive() != 0) {
-				int turnsLeft = aPlayer.getTurnsUntilActive();
-				aPlayer.setTurnsUntilActive(turnsLeft-1);
+	
+	public void determineNextPlayer() {
+		boolean found = false;
+		Player player = getCurrentPlayer();
+		Player nextPlayer;
+		while(!found) {
+			try {
+				nextPlayer = getPlayer(indexOfPlayer(player) + 1);
 			}
-		}		
-		
-		List<Tile> tileList = getTiles();
-		for (Tile aTile: tileList){
-			if (aTile instanceof ActionTile){
-				//if inactive, and turns until active is not 0				
-				if(((ActionTile) aTile).getTileStatus() == TileStatus.Inactive){
-					int turnsTilActive = ((ActionTile) aTile).getTurnsUntilActive();
-					((ActionTile) aTile).setTurnsUntilActive(turnsTilActive-1);
-				}
+			catch (IndexOutOfBoundsException e) {
+				nextPlayer = getPlayer(0);
 			}
-		}		
+			if (nextPlayer.getPlayerStatus() == PlayerStatus.Active) {
+				found = true;
+			}
+			else {
+				nextPlayer.takeTurn();
+			}
+			player = nextPlayer;
+		}
+		List<Player> pList = getPlayers();
+		for (Player p: pList) {
+			p.takeTurn();
+		}
+		setCurrentPlayer(player);		
+	};
+	
+	public void updateTileStatus() {
+		for(Tile tile: getTiles()) {
+			if (tile instanceof ActionTile) {
+				((ActionTile) tile).takeTurn();
+			}
+		}
+	};
+		
+	public void setNextPlayer() {			
+		determineNextPlayer();
+		updateTileStatus();
 	};
 }
 
@@ -126,8 +130,7 @@ class Tile {
 			possibleMoveTiles.addAll(tiles);		  
 	  	}
 	  	return possibleMoveTiles;  
-	};	  
-  
+	};	    
 	// Abstract method for land()
 	public abstract void doLand();
   
@@ -144,10 +147,20 @@ class ActionTile {
 		Game currentGame = getGame();
 		Player currentPlayer = currentGame.getCurrentPlayer();
 		currentPlayer.setCurrentTile(this);
-		Deck deck = currentGame.getDeck();
-		ActionCard currentCard = deck.getCurrentCard();	  
-		currentGame.setMode(currentCard.getActionCardGameMode());
-		setHasBeenVisited(true);
+		
+		if (getActionTileStatus() == ActionTileStatus.Inactive) {
+			currentGame.setNextPlayer();
+	  	  	// set possible tile that player chose, that it has been visited
+	  	  	this.setHasBeenVisited(true);  	 
+	  	  	currentGame.setMode(Game.Mode.GAME);
+		}
+		else {
+			Deck deck = currentGame.getDeck();
+			ActionCard currentCard = deck.getCurrentCard();	  
+			currentGame.setMode(currentCard.getActionCardGameMode());
+			deactivate();
+			setHasBeenVisited(true);			
+		}
 	};
 }
 
@@ -156,21 +169,11 @@ class NormalTile {
 	
 	@Override
   	public void doLand() { 
-		Game currentGame = this.getGame();
+  		Game currentGame = getGame();
   	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 
   	  	currentPlayer.setCurrentTile(this);  	 
-  	  	int playerIndex = currentGame.indexOfPlayer(currentPlayer);  	 
-  	  	int numberOfPlayers = currentGame.numberOfPlayers();  	 
-  	  	if(playerIndex == numberOfPlayers-1){  		  
-  		 	currentGame.setCurrentPlayer(currentGame.getPlayer(0));
-  	  	}
-  	  	else{
-  			// it is now the next player's turn
-  		  	Player followingPlayer = currentGame.getPlayer(currentGame.indexOfPlayer(currentPlayer)+1);  		 
-  		  	currentGame.setCurrentPlayer(followingPlayer);  		 
-  	  	}
-  	  	// set possible tile that player chose, that it has been visited
-  	  	this.setHasBeenVisited(true);  	 
+  	  	currentGame.setNextPlayer();
+  	  	this.setHasBeenVisited(true);
   	  	currentGame.setMode(Game.Mode.GAME);
 	};
 }
@@ -224,14 +227,15 @@ class ActionCard {
 class RollDieActionCard {
 	isA ActionCard;
 	
-	@Override
+	public List<Tile> play(){
+	  Game currentGame = getDeck().getGame();
+	  return currentGame.rollDie();
+  	};
+  	
+  	@Override
 	public Game.Mode getActionCardGameMode() {
 		  return Game.Mode.GAME_ROLLDIEACTIONCARD;
 	};
-	public void play(){
-	  Game currentGame = getDeck().getGame();
-	  currentGame.rollDie();
-  	};
 }
 
 class ConnectTilesActionCard {
@@ -303,6 +307,12 @@ class LoseTurnActionCard {
 	@Override
 	public Game.Mode getActionCardGameMode() {
 		  return Game.Mode.GAME_LOSETURNACTIONCARD;
+	};
+	
+	public void play(){
+		Game currentGame = super.getDeck().getGame();
+	   	Player currentplayer = currentGame.getCurrentPlayer();
+	   	currentplayer.loseTurns(currentGame.numberOfPlayers() + 1);
 	};
 }
 

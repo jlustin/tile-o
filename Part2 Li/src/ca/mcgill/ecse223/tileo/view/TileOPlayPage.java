@@ -13,6 +13,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+import ca.mcgill.ecse223.tileo.controller.PlayController;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
 import ca.mcgill.ecse223.tileo.model.Game;
 import ca.mcgill.ecse223.tileo.model.Game.Mode;
@@ -25,23 +27,31 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JRadioButton;
 import javax.swing.JSplitPane;
 import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.JTextField;
 
 public class TileOPlayPage extends JFrame {
 
 	private static TilePanelPlay grid = new TilePanelPlay(TileOApplication.getTileO().getCurrentGame());
-	
+	public static PlayController pmc = new PlayController();
 	static String currentPlayer;
-	
-	
+	public static List<Tile> pMoves;
+	private static int currentPlayerNb = 1;
 	
 	
 	private JPanel contentPane;
-	private static JLabel playerTurnLabel;
-	private static JLabel currentModeLabel;
-	public static List<Tile> pMoves;
-	TilePanelPlay tpp ;
-	
+	private static JLabel playerTurnLbl;
+	private static JLabel modeLbl;
+	private static JLabel errorLbl;
+	private JPanel actionCardPnl;
 	static JButton btnRollDie;
+	private JButton gotItBtn;
+	private static JLabel gameModeLbl;
+	private static JLabel p1InactivityLbl = new JLabel("");
+	private static JLabel p2InactivityLbl = new JLabel("");
+	private static JLabel p3InactivityLbl = new JLabel("");
+	private static JLabel p4InactivityLbl = new JLabel("");
 	
 
 	/**
@@ -58,6 +68,10 @@ public class TileOPlayPage extends JFrame {
 	    this.dispose();
 	}
 	
+	public static void setError(String error ){
+		errorLbl.setText(error);
+	}
+	
 	private void initComponents(){
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,8 +83,6 @@ public class TileOPlayPage extends JFrame {
 		contentPane.setSize(490, 720);
 
 		contentPane.setVisible(true);
-
-		
 		
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setSize(1200, 720);
@@ -80,20 +92,27 @@ public class TileOPlayPage extends JFrame {
 	    splitPane.setLeftComponent(grid);
 	    splitPane.setRightComponent(contentPane);
 	    
-	    playerTurnLabel = new JLabel("It is currently Player x's turn.");
+	    playerTurnLbl = new JLabel();
+	    playerTurnLbl.setText("It is currently player X's turn.");
+	    playerTurnLbl.setFont(new Font("Lucida Grande", Font.BOLD, 14));
 	    
-	    JLabel lblJlabelForErrors = new JLabel("JLabel for Errors");
+	    errorLbl = new JLabel("");
+	    errorLbl.setForeground(Color.RED);
 	    
-	    currentModeLabel = new JLabel("JLabel for Mode");
+	    modeLbl = new JLabel("");
 	    
-	    JButton btnSave = new JButton("Save");
-	    btnSave.addActionListener(new ActionListener() {
+	    JButton saveBtn = new JButton("Save");
+	    saveBtn.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent arg0) {
-	    		PlayModeController pmc = new PlayModeController();
-	    		pmc.saveGame();
-	    		SavePopOut spo = new SavePopOut();
-	    		spo.setVisible(true);
-	    		refreshData();
+	    		if(pmc.getMode().equals(PlayController.Mode.Ready) || pmc.getMode().equals(PlayController.Mode.Roll)){
+	    			pmc.saveGame();
+		    		SavePopOut spo = new SavePopOut();
+		    		spo.setVisible(true);
+		    		//refreshData();
+	    		}
+	    		else {
+	    			errorLbl.setText("You cannot save during an action");
+	    		}
 	    		
 	    	}
 	    });
@@ -101,55 +120,123 @@ public class TileOPlayPage extends JFrame {
 	    btnRollDie = new JButton("Roll Die");
 	    btnRollDie.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		// TODO: Roll the die
-	    		PlayModeController pmc = new PlayModeController();
-	    		pMoves = pmc.rollDie();
-	    		grid.possibleMoves=pMoves;
+	    		pmc.rollDie();	    		
+	    		pMoves = pmc.getPossibleMoves();
 	    		
-	    		grid.isAPlayerTurn = true;	//added by Li
+	    		grid.isAPlayerTurn = true; 	    		
+	    		refreshData();
 	    		
-	    		SelectTilePlayPopOut stpop = new SelectTilePlayPopOut();
-	    		stpop.setVisible(true);
+	    		TileOPlayPage.getGrid().aTileIsSelected = false;
+				TileOPlayPage.getGrid().aConnectionIsSelected = false;
+				TileOPlayPage.getGrid().selectedConnection = null;
+				TileOPlayPage.getGrid().selectedTile = null;
+	    		
+	    		grid.possibleMoves = pMoves;
+	    		grid.refreshBoard();
+	    		
+	    		if (pMoves.isEmpty()){
+	    			NoPossibleMovesPopOut npm = new NoPossibleMovesPopOut();
+					npm.setVisible(true);					
+					TileOPlayPage.refreshData();
+					//(TileOApplication.getTileO().getCurrentGame()).setNextPlayer();
+					refreshData();
+	    		}
+	    		else {
+	    			SelectTilePlayPopOut stpop = new SelectTilePlayPopOut();
+		    		stpop.setVisible(true);
+	    		}
+	    		
 	    	}
 	    });
+	    
+	    actionCardPnl = new JPanel();
+	    
+	    gotItBtn = new JButton("Got it!");
+	    gotItBtn.setVisible(false);
+	    
+	    gameModeLbl = new JLabel("Game.Mode");
+	    
+//	    p1InactivityLbl.setText("Player1 inactivity:");
+//	    
+//	    p2InactivityLbl.setText("Player 2 inactivity:");
+//	    
+//	    p3InactivityLbl.setText("Player 3 inactivity:");
+//	    
+//	    p4InactivityLbl.setText("Player 4 inactivity:");
 	    GroupLayout gl_contentPane = new GroupLayout(contentPane);
 	    gl_contentPane.setHorizontalGroup(
 	    	gl_contentPane.createParallelGroup(Alignment.LEADING)
 	    		.addGroup(gl_contentPane.createSequentialGroup()
-	    			.addContainerGap(403, Short.MAX_VALUE)
-	    			.addComponent(btnSave)
-	    			.addContainerGap())
+	    			.addGap(30)
+	    			.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+	    				.addComponent(saveBtn)
+	    				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+	    					.addComponent(p2InactivityLbl)
+	    					.addComponent(p1InactivityLbl)
+	    					.addComponent(p3InactivityLbl)
+	    					.addComponent(p4InactivityLbl)))
+	    			.addContainerGap(343, Short.MAX_VALUE))
 	    		.addGroup(gl_contentPane.createSequentialGroup()
-	    			.addGap(198)
-	    			.addComponent(btnRollDie)
-	    			.addContainerGap(198, Short.MAX_VALUE))
-	    		.addGroup(gl_contentPane.createSequentialGroup()
-	    			.addGap(185)
-	    			.addComponent(currentModeLabel)
-	    			.addContainerGap(186, Short.MAX_VALUE))
-	    		.addGroup(gl_contentPane.createSequentialGroup()
-	    			.addGap(183)
-	    			.addComponent(lblJlabelForErrors)
-	    			.addContainerGap(183, Short.MAX_VALUE))
-	    		.addGroup(gl_contentPane.createSequentialGroup()
-	    			.addGap(152)
-	    			.addComponent(playerTurnLabel)
-	    			.addContainerGap(152, Short.MAX_VALUE))
+	    			.addGap(22)
+	    			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+	    				.addGroup(gl_contentPane.createSequentialGroup()
+	    					.addComponent(modeLbl)
+	    					.addContainerGap())
+	    				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+	    					.addGroup(gl_contentPane.createSequentialGroup()
+	    						.addComponent(playerTurnLbl)
+	    						.addContainerGap())
+	    					.addGroup(gl_contentPane.createSequentialGroup()
+	    						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+	    							.addGroup(gl_contentPane.createSequentialGroup()
+	    								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+	    									.addComponent(btnRollDie)
+	    									.addGroup(gl_contentPane.createSequentialGroup()
+	    										.addGap(9)
+	    										.addComponent(gameModeLbl)))
+	    								.addPreferredGap(ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+	    								.addComponent(actionCardPnl, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE))
+	    							.addGroup(gl_contentPane.createSequentialGroup()
+	    								.addComponent(errorLbl)
+	    								.addPreferredGap(ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
+	    								.addComponent(gotItBtn)))
+	    						.addGap(33)))))
 	    );
 	    gl_contentPane.setVerticalGroup(
 	    	gl_contentPane.createParallelGroup(Alignment.LEADING)
 	    		.addGroup(gl_contentPane.createSequentialGroup()
-	    			.addGap(23)
-	    			.addComponent(playerTurnLabel)
-	    			.addGap(18)
-	    			.addComponent(lblJlabelForErrors)
-	    			.addGap(18)
-	    			.addComponent(currentModeLabel)
-	    			.addGap(53)
-	    			.addComponent(btnRollDie)
-	    			.addPreferredGap(ComponentPlacement.RELATED, 432, Short.MAX_VALUE)
-	    			.addComponent(btnSave)
-	    			.addContainerGap())
+	    			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+	    				.addGroup(gl_contentPane.createSequentialGroup()
+	    					.addGap(46)
+	    					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+	    						.addComponent(errorLbl)
+	    						.addComponent(gotItBtn)))
+	    				.addGroup(gl_contentPane.createSequentialGroup()
+	    					.addGap(17)
+	    					.addComponent(playerTurnLbl)))
+	    			.addPreferredGap(ComponentPlacement.RELATED)
+	    			.addComponent(modeLbl)
+	    			.addPreferredGap(ComponentPlacement.RELATED)
+	    			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+	    				.addGroup(gl_contentPane.createSequentialGroup()
+	    					.addGap(62)
+	    					.addComponent(gameModeLbl)
+	    					.addGap(29)
+	    					.addComponent(btnRollDie)
+	    					.addGap(189)
+	    					.addComponent(p1InactivityLbl)
+	    					.addPreferredGap(ComponentPlacement.RELATED)
+	    					.addComponent(p2InactivityLbl)
+	    					.addPreferredGap(ComponentPlacement.RELATED)
+	    					.addComponent(p3InactivityLbl)
+	    					.addPreferredGap(ComponentPlacement.RELATED)
+	    					.addComponent(p4InactivityLbl)
+	    					.addGap(155)
+	    					.addComponent(saveBtn))
+	    				.addGroup(gl_contentPane.createSequentialGroup()
+	    					.addGap(9)
+	    					.addComponent(actionCardPnl, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)))
+	    			.addContainerGap(22, Short.MAX_VALUE))
 	    );
 	    contentPane.setLayout(gl_contentPane);
 
@@ -163,19 +250,28 @@ public class TileOPlayPage extends JFrame {
 		if (tileO.hasGames() && !(tileO.getCurrentGame().getMode() == Mode.DESIGN)){
 			Game currentGame = tileO.getCurrentGame();
 			Game.Mode currentMode = currentGame.getMode();
-			Player player = currentGame.getCurrentPlayer();
+			Player player = currentGame.getCurrentPlayer();						
+			currentPlayerNb = player.getNumber();
 			
-			
-			int playerNumber = player.getNumber();
-			//int playerNumber = player.getNumber(); //gives error if uncommented
-			
-			
-			grid.setGame(TileOApplication.getTileO().getCurrentGame());
+			grid.setGame(currentGame);
+			try {
+				pmc.load(tileO.indexOfGame(currentGame));
+			} catch (InvalidInputException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			grid.setVisible(true);
 			grid.setSize(700, 720);
 			
-			playerTurnLabel.setText("It is currently player " + playerNumber + "'s turn.");
-			currentModeLabel.setText("CurrentMode: " + currentMode.name());
+			playerTurnLbl.setText("It is currently player " + currentPlayerNb + "'s turn.");
+			modeLbl.setText("CurrentMode: " + pmc.getModeFullName());
+			gameModeLbl.setText("CurrentGameMode: " + currentGame.getModeFullName());
+			
+//			p1InactivityLbl.setText("Player 1 inactivity: " + currentGame.getPlayer(0).getTurnsUntilActive());
+//			p2InactivityLbl.setText("Player 2 inactivity: " + currentGame.getPlayer(1).getTurnsUntilActive());
+//			p3InactivityLbl.setText("Player 3 inactivity: " + currentGame.getPlayer(2).getTurnsUntilActive());
+//			p4InactivityLbl.setText("Player 4 inactivity: " + currentGame.getPlayer(3).getTurnsUntilActive());
+
 			
 			switch (currentMode){
 				case GAME_ROLLDIEACTIONCARD:
@@ -194,20 +290,18 @@ public class TileOPlayPage extends JFrame {
 					TeleportPopOut tpo = new TeleportPopOut();
 					tpo.setVisible(true);
 					break;
+				case GAME_LOSETURNACTIONCARD:
+					LoseTurnWarningPopOut ltwpo = new LoseTurnWarningPopOut();
+					ltwpo.setVisible(true);
+					break;
 				case GAME_WON:
 					GameWonPopOut gwpo = new GameWonPopOut();
 					gwpo.setVisible(true);
 				default:
-			}
-				
-		}
-		
-		
-		
-		
+			}				
+		}		
 	}
 	
-
 	public static TilePanelPlay getGrid(){
 		return grid;
 	}

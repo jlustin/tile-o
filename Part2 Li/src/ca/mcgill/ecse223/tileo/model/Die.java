@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Random;
 
 // line 101 "../../../../../TileOPersistence.ump"
-// line 309 "../../../../../TileO (updated Feb10).ump"
+// line 339 "../../../../../TileO (updated Feb10).ump"
 public class Die implements Serializable
 {
 
@@ -54,7 +54,7 @@ public class Die implements Serializable
     }
   }
 
-  // line 311 "../../../../../TileO (updated Feb10).ump"
+  // line 341 "../../../../../TileO (updated Feb10).ump"
    public int roll(){
     int rollNumber;
 		Random randomGenerator = new Random();
@@ -66,7 +66,7 @@ public class Die implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 104 ../../../../../TileOPersistence.ump
+  // line 104 TileOPersistence.ump
   private static final long serialVersionUID = 7070707070707070707L ;
 
   

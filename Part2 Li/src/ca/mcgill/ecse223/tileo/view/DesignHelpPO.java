@@ -7,27 +7,28 @@ import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
 import java.awt.SystemColor;
 
-public class HelpPopOut extends JFrame {
+public class DesignHelpPO extends JFrame {
 	
-	/**
-	 * Create the frame.
-	 */
-	public HelpPopOut() {
+	private JPanel mainPnl;
+	private JTextPane instructionsPnl;
+	
+
+	public DesignHelpPO() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 510, 570);
+		setBounds(100, 100, 510, 580);
 		setTitle("Help");
 		setResizable(false);
 		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
-		getContentPane().add(panel);
+		mainPnl = new JPanel();
+		getContentPane().add(mainPnl);
 		
-		JTextPane txtpnAddATile = new JTextPane();
-		txtpnAddATile.setBackground(SystemColor.window);
-		panel.add(txtpnAddATile);
-		txtpnAddATile.setEditable(false);
-		txtpnAddATile.setText(
+		instructionsPnl = new JTextPane();
+		instructionsPnl.setBackground(SystemColor.window);
+		mainPnl.add(instructionsPnl);
+		instructionsPnl.setEditable(false);
+		instructionsPnl.setText(
 				"\n"
 				+ "\n"
 				+ "Add a tile to the game\n"
@@ -57,7 +58,8 @@ public class HelpPopOut extends JFrame {
 				+ "\n"
 				+ "To start a game, select the game that you want to play.\n"
 				+ "\tIf your present game isn't available, you need to save it first!\n"
-				+ "\tIf you want to start your current game, press \"Start Game\"."
-				);
+				+ "\tIf you want to start your current game, select the current game\n"
+				+ "\tthen press \"Start Game\"."
+			);
 	}
 }

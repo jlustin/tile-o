@@ -7,7 +7,7 @@ import java.io.Serializable;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 
 // line 83 "../../../../../TileOPersistence.ump"
-// line 262 "../../../../../TileO (updated Feb10).ump"
+// line 285 "../../../../../TileO (updated Feb10).ump"
 public class RemoveConnectionActionCard extends ActionCard
 {
 
@@ -33,7 +33,7 @@ public class RemoveConnectionActionCard extends ActionCard
     super.delete();
   }
 
-  // line 266 "../../../../../TileO (updated Feb10).ump"
+  // line 289 "../../../../../TileO (updated Feb10).ump"
    public void play(Connection connection) throws InvalidInputException{
     try{
 		  connection.delete();
@@ -47,9 +47,9 @@ public class RemoveConnectionActionCard extends ActionCard
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 86 ../../../../../TileOPersistence.ump
+  // line 86 TileOPersistence.ump
   private static final long serialVersionUID = 4040404040404040404L ;
-// line 274 ../../../../../TileO (updated Feb10).ump
+// line 297 ../../../../../TileO (updated Feb10).ump
   @Override
 	public Game.Mode getActionCardGameMode() {return Game.Mode.GAME_REMOVECONNECTIONACTIONCARD;};
 

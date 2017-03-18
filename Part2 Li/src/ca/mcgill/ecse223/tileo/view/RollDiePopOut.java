@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ca.mcgill.ecse223.tileo.controller.PlayController;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
 
 import java.awt.event.ActionListener;
@@ -21,6 +22,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class RollDiePopOut extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private PlayController pmc = TileOPlayPage.pmc;
 	private JLabel lblYouHaveDrawn;
 	private JButton cancelButton;
 
@@ -31,13 +33,12 @@ public class RollDiePopOut extends JDialog {
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		setAlwaysOnTop(true);
 		init();
-		refreshData();
 	}
 	
 	private void init(){
 		setTitle("Extra Turn Action Card");
 		setResizable(false);
-		setBounds(100, 100, 450, 300);
+		setBounds(500, 200, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -50,11 +51,15 @@ public class RollDiePopOut extends JDialog {
 			cancelButton = new JButton("Roll Die");
 			cancelButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					PlayModeController pmc = new PlayModeController();
-					pmc.playRollDieExtraTurn();
+					
+					pmc.playRollDieActionCard();
 					TileOPlayPage.btnRollDie.doClick();
-			
-						
+					TileOPlayPage.refreshData();
+					TileOPlayPage.setError("");
+					TileOPlayPage.getGrid().aTileIsSelected = false;
+					TileOPlayPage.getGrid().aConnectionIsSelected = false;
+					TileOPlayPage.getGrid().selectedConnection = null;
+					TileOPlayPage.getGrid().selectedTile = null;
 					close();
 				}
 			});
@@ -89,9 +94,7 @@ public class RollDiePopOut extends JDialog {
 		contentPanel.setLayout(gl_contentPanel);
 	}
 	
-	private void refreshData(){
-		
-	}
+	
 	
 	public void close() { 
 		this.setVisible(false);

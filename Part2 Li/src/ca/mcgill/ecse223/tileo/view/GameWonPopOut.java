@@ -23,18 +23,6 @@ public class GameWonPopOut extends JFrame {
 	
 	private final JPanel contentPanel = new JPanel();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			GameWonPopOut dialog = new GameWonPopOut();
-			dialog.setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	public void close() { 
 		System.exit(0);

@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.DesignModeController;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+import ca.mcgill.ecse223.tileo.controller.PlayController;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
 import ca.mcgill.ecse223.tileo.model.Tile;
 import javax.swing.JLabel;
@@ -24,6 +25,7 @@ import javax.swing.GroupLayout.Alignment;
 public class SelectTilePlayPopOut extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private PlayController pmc = TileOPlayPage.pmc;
 	
 	Tile chosenTile=null;
 	String error;
@@ -51,7 +53,7 @@ public class SelectTilePlayPopOut extends JDialog {
 		setTitle("Move To A Tile");
 		setResizable(false);
 		setAlwaysOnTop(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(500, 200, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -87,15 +89,14 @@ public class SelectTilePlayPopOut extends JDialog {
 				JButton okButton = new JButton("Move To This Tile");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						PlayModeController pmc = new PlayModeController();
 						error = "";
-						if(TileOPlayPage.pMoves.isEmpty()){
-							NoPossibleMovesPopOut npm = new NoPossibleMovesPopOut();
-							npm.setVisible(true);
-							(TileOApplication.getTileO().getCurrentGame()).setNextPlayer();
-							TileOPlayPage.refreshData();
-							refreshData();
-						}
+//						if(pmc.getPossibleMoves().isEmpty()){
+//							NoPossibleMovesPopOut npm = new NoPossibleMovesPopOut();
+//							npm.setVisible(true);
+//							(TileOApplication.getTileO().getCurrentGame()).setNextPlayer();
+//							TileOPlayPage.refreshData();
+//							refreshData();
+//						}
 						if (TileOPlayPage.getGrid().aTileIsSelected){
 							chosenTile = TileOPlayPage.getGrid().selectedTile;
 						}
@@ -109,10 +110,19 @@ public class SelectTilePlayPopOut extends JDialog {
 						
 						if (error.length()==0){					
 							try {
-								pmc.landedOnTile(chosenTile);
-								TileOPlayPage.refreshData();
+								pmc.land(chosenTile);
+								
 								System.out.println("Successfully(?) landed on tile: x: " + chosenTile.getX() + " y: " + chosenTile.getY());
-								TileOPlayPage.getGrid().isAPlayerTurn = false;	//added by Li						
+								TileOPlayPage.getGrid().isAPlayerTurn = false;	//added by Li	
+								TileOPlayPage.refreshData();
+								TileOPlayPage.setError("");
+								
+								TileOPlayPage.getGrid().aTileIsSelected = false;
+								TileOPlayPage.getGrid().aConnectionIsSelected = false;
+								TileOPlayPage.getGrid().selectedConnection = null;
+								TileOPlayPage.getGrid().selectedTile = null;
+								
+								close();
 							} catch (InvalidInputException e) {
 								throw new RuntimeException(e.getMessage());
 							}
@@ -121,6 +131,7 @@ public class SelectTilePlayPopOut extends JDialog {
 						refreshData();
 					}
 				});
+				
 				okButton.setActionCommand("MoveToThisTile");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);

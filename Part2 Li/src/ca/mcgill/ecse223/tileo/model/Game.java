@@ -5,10 +5,10 @@ package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 import java.util.*;
 
-import ca.mcgill.ecse223.tileo.model.ActionTile.TileStatus;
+import ca.mcgill.ecse223.tileo.model.Player.PlayerStatus;
 
 // line 9 "../../../../../TileOPersistence.ump"
-// line 11 "../../../../../TileO (updated Feb10).ump"
+// line 13 "../../../../../TileO (updated Feb10).ump"
 public class Game implements Serializable
 {
 
@@ -573,52 +573,59 @@ public class Game implements Serializable
     placeholderTileO.removeGame(this);
   }
 
-  // line 32 "../../../../../TileO (updated Feb10).ump"
+  // line 34 "../../../../../TileO (updated Feb10).ump"
    public List<Tile> rollDie(){
     List<Tile> possibleMoves = new ArrayList<Tile>();
 		Die die =this.getDie();
 		int number = die.roll();
-		Player currentPlayer =this.getCurrentPlayer();	  
+		Player currentPlayer = this.getCurrentPlayer();	  
 		possibleMoves = currentPlayer.getPossibleMoves(number);
 		return possibleMoves;
   }
 
-  // line 41 "../../../../../TileO (updated Feb10).ump"
+  // line 43 "../../../../../TileO (updated Feb10).ump"
+   public void determineNextPlayer(){
+    boolean found = false;
+		Player player = getCurrentPlayer();
+		Player nextPlayer;
+		while(!found) {
+			try {
+				nextPlayer = getPlayer(indexOfPlayer(player) + 1);
+			}
+			catch (IndexOutOfBoundsException e) {
+				nextPlayer = getPlayer(0);
+			}
+			if (nextPlayer.getPlayerStatus() == PlayerStatus.Active) {
+				found = true;
+			}
+			else {
+				nextPlayer.takeTurn();
+			}
+			player = nextPlayer;
+		}
+		List<Player> pList = getPlayers();
+		for (Player p: pList) {
+			p.takeTurn();
+		}
+		
+		setCurrentPlayer(player);
+  }
+
+  // line 66 "../../../../../TileO (updated Feb10).ump"
+   public void updateTileStatus(){
+    for(Tile tile: getTiles()) {
+			if (tile instanceof ActionTile) {
+				((ActionTile) tile).takeTurn();
+			}
+		}
+  }
+
+  // line 74 "../../../../../TileO (updated Feb10).ump"
    public void setNextPlayer(){
-    //helper method for setting the next player
-		List<Player> playerList = getPlayers();
-		Player currentPlayer = getCurrentPlayer();
-		int playerIndex = indexOfPlayer(currentPlayer);
-				
-		//checks if current player is the last player
-		if (playerIndex + 1 == playerList.size()) {
-			//if it is, set the first player to current player
-			setCurrentPlayer(playerList.get(0));
-		}
-		//if it's not, set the next player
-		else {
-			Player nextPlayer = playerList.get(playerIndex + 1);
-			setCurrentPlayer(nextPlayer);
-		}
-		
-		for (Player aPlayer: playerList){
-			//if has a penalty
-			if(aPlayer.getTurnsUntilActive() != 0) {
-				int turnsLeft = aPlayer.getTurnsUntilActive();
-				aPlayer.setTurnsUntilActive(turnsLeft-1);
-			}
-		}		
-		
-		List<Tile> tileList = getTiles();
-		for (Tile aTile: tileList){
-			if (aTile instanceof ActionTile){
-				//if inactive, and turns until active is not 0				
-				if(((ActionTile) aTile).getTileStatus() == TileStatus.Inactive){
-					int turnsTilActive = ((ActionTile) aTile).getTurnsUntilActive();
-					((ActionTile) aTile).setTurnsUntilActive(turnsTilActive-1);
-				}
-			}
-		}
+    List<Player> playerList = getPlayers();
+			
+			determineNextPlayer();
+			updateTileStatus();
   }
 
 
@@ -638,7 +645,7 @@ public class Game implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 12 ../../../../../TileOPersistence.ump
+  // line 12 TileOPersistence.ump
   private static final long serialVersionUID = 2222222222222222222L ;
 
   

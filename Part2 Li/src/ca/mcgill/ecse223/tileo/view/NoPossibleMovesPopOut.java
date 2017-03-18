@@ -7,6 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ca.mcgill.ecse223.tileo.application.TileOApplication;
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+import ca.mcgill.ecse223.tileo.controller.PlayController;
+import ca.mcgill.ecse223.tileo.model.Tile;
+
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -14,19 +20,9 @@ import java.awt.event.ActionEvent;
 public class NoPossibleMovesPopOut extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private PlayController pmc = TileOPlayPage.pmc;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			NoPossibleMovesPopOut dialog = new NoPossibleMovesPopOut();
-//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//			dialog.setVisible(true);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+
 	public void close() { 
 		this.setVisible(false);
 	    this.dispose();
@@ -38,7 +34,7 @@ public class NoPossibleMovesPopOut extends JDialog {
 		setAlwaysOnTop(true);
 		setResizable(false);
 		setTitle("Sucks For You!");
-		setBounds(100, 100, 450, 300);
+		setBounds(500, 200, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -55,7 +51,18 @@ public class NoPossibleMovesPopOut extends JDialog {
 				JButton okButton = new JButton("Feels Bad, Man.");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						TileOPlayPage.refreshData();
+						TileOPlayPage.setError("");
+						Tile cTile = TileOApplication.getTileO().getCurrentGame().getCurrentPlayer().getCurrentTile();
+						try {
+							pmc.land(cTile);
+						} catch (InvalidInputException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}						
+						//(TileOApplication.getTileO().getCurrentGame()).setNextPlayer();						
 						close();
+						TileOPlayPage.refreshData();
 					}
 				});
 				okButton.setActionCommand("FeelsBad");

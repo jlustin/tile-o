@@ -3,9 +3,10 @@
 
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
+import java.util.List;
 
 // line 71 "../../../../../TileOPersistence.ump"
-// line 224 "../../../../../TileO (updated Feb10).ump"
+// line 246 "../../../../../TileO (updated Feb10).ump"
 public class RollDieActionCard extends ActionCard
 {
 
@@ -31,19 +32,19 @@ public class RollDieActionCard extends ActionCard
     super.delete();
   }
 
-  // line 232 "../../../../../TileO (updated Feb10).ump"
-   public void play(){
+  // line 250 "../../../../../TileO (updated Feb10).ump"
+   public List<Tile> play(){
     Game currentGame = getDeck().getGame();
-	  currentGame.rollDie();
+	  return currentGame.rollDie();
   }
   
   //------------------------
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 74 ../../../../../TileOPersistence.ump
+  // line 74 TileOPersistence.ump
   private static final long serialVersionUID = 2020202020202020202L ;
-// line 227 ../../../../../TileO (updated Feb10).ump
+// line 254 ../../../../../TileO (updated Feb10).ump
   @Override
 	public Game.Mode getActionCardGameMode() {return Game.Mode.GAME_ROLLDIEACTIONCARD;};
 

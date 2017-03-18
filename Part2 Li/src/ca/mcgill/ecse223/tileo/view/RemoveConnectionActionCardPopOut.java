@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.DesignModeController;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+import ca.mcgill.ecse223.tileo.controller.PlayController;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
 import ca.mcgill.ecse223.tileo.model.Connection;
 import ca.mcgill.ecse223.tileo.model.Tile;
@@ -25,6 +26,8 @@ import java.awt.event.ActionEvent;
 
 public class RemoveConnectionActionCardPopOut extends JFrame {
 	
+	private PlayController pmc = TileOPlayPage.pmc;
+	
 	public void close() { 
 		this.setVisible(false);
 	    this.dispose();
@@ -37,22 +40,6 @@ public class RemoveConnectionActionCardPopOut extends JFrame {
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					RemoveConnectionActionCardPopOut frame = new RemoveConnectionActionCardPopOut();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
 	 * Create the frame.
 	 */
 	public RemoveConnectionActionCardPopOut() {
@@ -60,7 +47,7 @@ public class RemoveConnectionActionCardPopOut extends JFrame {
 		setAlwaysOnTop(true);
 		setTitle("Remove Connection Action Card");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(500, 200, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -74,13 +61,17 @@ public class RemoveConnectionActionCardPopOut extends JFrame {
 		JButton btnRemoveConnection = new JButton("Remove Connection");
 		btnRemoveConnection.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PlayModeController pmc = new PlayModeController();
 				if(TileOPlayPage.getGrid().aConnectionIsSelected){
 					chosenConnection = TileOPlayPage.getGrid().selectedConnection;
 					try 
 					{						
 						pmc.playRemoveConnectionActionCard(chosenConnection);
 						TileOPlayPage.refreshData();
+						TileOPlayPage.setError("");
+						TileOPlayPage.getGrid().aTileIsSelected = false;
+						TileOPlayPage.getGrid().aConnectionIsSelected = false;
+						TileOPlayPage.getGrid().selectedConnection = null;
+						TileOPlayPage.getGrid().selectedTile = null;
 						close();
 					}
 					catch (InvalidInputException e2){
