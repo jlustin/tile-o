@@ -32,16 +32,16 @@ public class DesignModeController {
 	
 	
 	//TileType is chosen from UI from a button
-	//How to make sure that you don't add 2 tiles at the same location?
+
 	public void addDesignTile(int x, int y, String TileType, int aInactivityPeriod) throws InvalidInputException {		
 		Game currentGame = TileOApplication.getTileO().getCurrentGame();
 		String error = "";
 		
 		if(x>50||y>50) {
-			error = "The coordinate need to be less than 50!";
+			error = "Please enter a coordinate value of less than 50.";
 		}		
 		if(x<0 || y<0) {
-			error = "The coordinates must be in the positive values!";
+			error = "The coordinate value must be positive!";
 		}		
         for(Tile aTile: currentGame.getTiles()) {	//iterates through each tiles of the currentGame
         	int xTile = aTile.getX();
@@ -51,7 +51,7 @@ public class DesignModeController {
         	}
         }
         if((TileType == "ActionTile") && (aInactivityPeriod<0)) {
-        	error = "The inactive period must be in the positive values!";        	
+        	error = "The inactivity period must be a positive value!";        	
         }
                 
 		if (error.length() > 0) {
@@ -98,21 +98,23 @@ public class DesignModeController {
 	 * 2. Place a tile on the game board
 	 * Chris
 	 */
-	public void placeNormalTile(int x, int y) throws InvalidInputException {
-		//TODO: CHRIS
-	}
-		
+	// deleted method
+	
 	
 	/*
 	 * 3. Remove a tile from the game board
 	 * Li
 	 */
 	public void removeTileFromGame(Tile aTile) throws InvalidInputException{
+		Game currentGame = TileOApplication.getTileO().getCurrentGame();
 		if (aTile.hasConnections()) {
 			String error = "Cannot delete a tile that has connections.";
 			throw new InvalidInputException(error.trim());
 		}
-		try{			
+		try{
+			if(aTile instanceof WinTile){
+				currentGame.setWinTile(null);
+			}
 			aTile.delete();			
 		}
 		catch (RuntimeException e) {

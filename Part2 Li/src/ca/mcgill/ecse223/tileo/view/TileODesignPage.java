@@ -760,13 +760,13 @@ public class TileODesignPage extends JFrame {
 			chosenXComp = Integer.parseInt(xComponent.getText());
 		}
 		catch(NumberFormatException e){
-			error ="The coordinate x needs to be a numerical value!\n";
+			error ="The x-coordinate needs to be a numerical value!\n";
 		}
 		try {
 			chosenYComp = Integer.parseInt(yComponent.getText());
 		}
 		catch(NumberFormatException e){
-			error ="The coordinate y needs to be a numerical value!\n";
+			error ="The y-coordinate needs to be a numerical value!\n";
 		}
 		
 		if(chosenTile != null && chosenTile.getActionCommand() == "ActionTile"){
@@ -774,7 +774,7 @@ public class TileODesignPage extends JFrame {
 				inactive = Integer.parseInt(inactivePeriod.getText());
 			}
 			catch(NumberFormatException e) {
-				error ="The inactive period needs to be a numerical value!\n";
+				error ="The inactivity period needs to be a numerical value!\n";
 			}
 		}
 		
@@ -785,7 +785,7 @@ public class TileODesignPage extends JFrame {
 			} 
 			catch (InvalidInputException er) {
 			error = er.getMessage();
-			}			
+			}
 		}
 		yComponent.setText("");
 		xComponent.setText("");
