@@ -138,7 +138,6 @@ public class TileOPlayPage extends JFrame {
 	    			NoPossibleMovesPopOut npm = new NoPossibleMovesPopOut();
 					npm.setVisible(true);					
 					TileOPlayPage.refreshData();
-					//(TileOApplication.getTileO().getCurrentGame()).setNextPlayer();
 					refreshData();
 	    		}
 	    		else {
