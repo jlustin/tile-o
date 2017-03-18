@@ -769,7 +769,7 @@ public class TileODesignPage extends JFrame {
 			error ="The coordinate y needs to be a numerical value!\n";
 		}
 		
-		if(chosenTile.getActionCommand() == "ActionTile"){
+		if(chosenTile != null && chosenTile.getActionCommand() == "ActionTile"){
 			try {
 				inactive = Integer.parseInt(inactivePeriod.getText());
 			}
