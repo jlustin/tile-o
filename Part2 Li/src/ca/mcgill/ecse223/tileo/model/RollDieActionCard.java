@@ -2,11 +2,11 @@
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
-import java.io.Serializable;
 import java.util.List;
+import java.io.Serializable;
 
 // line 71 "../../../../../TileOPersistence.ump"
-// line 246 "../../../../../TileO (updated Feb10).ump"
+// line 228 "../../../../../TileO (updated Feb10).ump"
 public class RollDieActionCard extends ActionCard
 {
 
@@ -32,7 +32,7 @@ public class RollDieActionCard extends ActionCard
     super.delete();
   }
 
-  // line 250 "../../../../../TileO (updated Feb10).ump"
+  // line 232 "../../../../../TileO (updated Feb10).ump"
    public List<Tile> play(){
     Game currentGame = getDeck().getGame();
 	  return currentGame.rollDie();
@@ -44,7 +44,7 @@ public class RollDieActionCard extends ActionCard
   
   // line 74 TileOPersistence.ump
   private static final long serialVersionUID = 2020202020202020202L ;
-// line 254 ../../../../../TileO (updated Feb10).ump
+// line 236 ../../../../../TileO (updated Feb10).ump
   @Override
 	public Game.Mode getActionCardGameMode() {return Game.Mode.GAME_ROLLDIEACTIONCARD;};
 

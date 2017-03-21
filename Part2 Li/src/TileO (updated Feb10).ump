@@ -18,7 +18,8 @@ class Game {
 			GAME_CONNECTTILESACTIONCARD{} 
 			GAME_REMOVECONNECTIONACTIONCARD{} 
 			GAME_TELEPORTACTIONCARD{} 
-			GAME_LOSETURNACTIONCARD{} }
+			GAME_LOSETURNACTIONCARD{} 
+			GAME_REVEALACTIONCARD{} }
 	1 <@>- 2..4 Player players;
 	1 <@>- * Tile tiles;
 	1 <@>- * Connection connections;
@@ -313,6 +314,36 @@ class LoseTurnActionCard {
 		Game currentGame = super.getDeck().getGame();
 	   	Player currentplayer = currentGame.getCurrentPlayer();
 	   	currentplayer.loseTurns(currentGame.numberOfPlayers() + 1);
+	};
+}
+
+class RevealActionCard {
+	isA ActionCard;
+	
+	@Override
+	public Game.Mode getActionCardGameMode() {
+		return Game.Mode.GAME_REVEALACTIONCARD;
+	};
+	
+	public String play(Tile aTile) throws InvalidInputException {
+		String type = null;
+		String error = "";
+		try {
+			if (aTile instanceof NormalTile) {
+				type = "Normal Tile";
+			}
+			else if (aTile instanceof ActionTile) {
+				type = "Action Tile";
+			}
+			else if (aTile instanceof WinTile) {
+				type = "Win Tile";
+			}
+			return type;
+		}
+		catch (RuntimeException e) {
+			error = e.getMessage();
+			throw new InvalidInputException(error);
+		}	  
 	};
 }
 

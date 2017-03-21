@@ -293,6 +293,10 @@ public class TileOPlayPage extends JFrame {
 					LoseTurnWarningPopOut ltwpo = new LoseTurnWarningPopOut();
 					ltwpo.setVisible(true);
 					break;
+				case GAME_REVEALACTIONCARD:
+					RevealPopOut rpo = new RevealPopOut();
+					rpo.setVisible(true);
+					break;
 				case GAME_WON:
 					GameWonPopOut gwpo = new GameWonPopOut();
 					gwpo.setVisible(true);

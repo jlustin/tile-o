@@ -69,6 +69,9 @@ class PlayController {
 			playLoseTurnActionCard()[isLoseTurnActionCard()] / {
 				doPlayLoseTurnActionCard();
 			} -> Roll;
+			playRevealActionCard(Tile tile)[isRevealActionCard()] / {
+				doPlayRevealActionCard(tile);
+			} -> Roll;
 		}
 		
 		Won {
@@ -327,8 +330,27 @@ class PlayController {
 		catch (RuntimeException e) {
 			throw new InvalidInputException(e.getMessage());
 		}
-			
 	} 
+	
+	
+	/*
+	 * Action card "Reveal the type of a tile"
+	 */
+	private void doPlayRevealActionCard(Tile tile) {
+		TileO tileO = TileOApplication.getTileO();
+		Game currentGame = tileO.getCurrentGame();
+		ActionCard currentCard = drawCard(currentGame);
+		try {
+			if (currentCard instanceof RevealActionCard) {
+				((RevealActionCard) currentCard).play(tile);
+			}
+			currentGame.setNextPlayer();
+			currentGame.setMode(Game.Mode.GAME);	
+		}
+		catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
+	}
 
 	
 	/*
@@ -443,6 +465,14 @@ class PlayController {
 		   return true;
 	   }
 	   return false;	   
+   }
+   
+   private boolean isRevealActionCard() {
+   	   ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
+	   if(aActionCard instanceof RevealActionCard ) {
+		   return true;
+	   }
+	   return false;
    }
    
    private boolean isTeleportAndNormalTile(Tile tile) {

@@ -7,7 +7,7 @@ import java.util.*;
 
 // line 35 "../../../../../TileOPersistence.ump"
 // line 1 "../../../../../TileOStates.ump"
-// line 139 "../../../../../TileO (updated Feb10).ump"
+// line 140 "../../../../../TileO (updated Feb10).ump"
 public class ActionTile extends Tile
 {
 
@@ -79,7 +79,7 @@ public class ActionTile extends Tile
         if (getInactivityPeriod()>0)
         {
         // line 4 "../../../../../TileOStates.ump"
-          setTurnsUntilActive(getInactivityPeriod() +1 );	
+          setTurnsUntilActive(getInactivityPeriod() + 1);
           setActionTileStatus(ActionTileStatus.Inactive);
           wasEventProcessed = true;
           break;
@@ -149,10 +149,9 @@ public class ActionTile extends Tile
   
   // line 38 TileOPersistence.ump
   private static final long serialVersionUID = 5555555555555555555L ;
-// line 145 ../../../../../TileO (updated Feb10).ump
+// line 146 ../../../../../TileO (updated Feb10).ump
   @Override
-	public void doLand() {
-	  Game currentGame = getGame();
+	public void doLand() {Game currentGame = getGame();
 		Player currentPlayer = currentGame.getCurrentPlayer();
 		currentPlayer.setCurrentTile(this);
 		

@@ -27,7 +27,7 @@ public class Game implements Serializable
   private int currentConnectionPieces;
 
   //Game State Machines
-  public enum Mode { DESIGN, GAME, GAME_WON, GAME_ROLLDIEACTIONCARD, GAME_CONNECTTILESACTIONCARD, GAME_REMOVECONNECTIONACTIONCARD, GAME_TELEPORTACTIONCARD, GAME_LOSETURNACTIONCARD }
+  public enum Mode { DESIGN, GAME, GAME_WON, GAME_ROLLDIEACTIONCARD, GAME_CONNECTTILESACTIONCARD, GAME_REMOVECONNECTIONACTIONCARD, GAME_TELEPORTACTIONCARD, GAME_LOSETURNACTIONCARD, GAME_REVEALACTIONCARD }
   private Mode mode;
 
   //Game Associations
@@ -573,17 +573,17 @@ public class Game implements Serializable
     placeholderTileO.removeGame(this);
   }
 
-  // line 34 "../../../../../TileO (updated Feb10).ump"
+  // line 35 "../../../../../TileO (updated Feb10).ump"
    public List<Tile> rollDie(){
     List<Tile> possibleMoves = new ArrayList<Tile>();
 		Die die =this.getDie();
 		int number = die.roll();
-		Player currentPlayer = this.getCurrentPlayer();	  
+		Player currentPlayer =this.getCurrentPlayer();	  
 		possibleMoves = currentPlayer.getPossibleMoves(number);
 		return possibleMoves;
   }
 
-  // line 43 "../../../../../TileO (updated Feb10).ump"
+  // line 44 "../../../../../TileO (updated Feb10).ump"
    public void determineNextPlayer(){
     boolean found = false;
 		Player player = getCurrentPlayer();
@@ -607,11 +607,10 @@ public class Game implements Serializable
 		for (Player p: pList) {
 			p.takeTurn();
 		}
-		
 		setCurrentPlayer(player);
   }
 
-  // line 66 "../../../../../TileO (updated Feb10).ump"
+  // line 70 "../../../../../TileO (updated Feb10).ump"
    public void updateTileStatus(){
     for(Tile tile: getTiles()) {
 			if (tile instanceof ActionTile) {
@@ -620,12 +619,10 @@ public class Game implements Serializable
 		}
   }
 
-  // line 74 "../../../../../TileO (updated Feb10).ump"
+  // line 78 "../../../../../TileO (updated Feb10).ump"
    public void setNextPlayer(){
-    List<Player> playerList = getPlayers();
-			
-			determineNextPlayer();
-			updateTileStatus();
+    determineNextPlayer();
+		updateTileStatus();
   }
 
 
