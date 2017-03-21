@@ -22,6 +22,7 @@ public class PlayController
 
   //PlayController Associations
   private List<Tile> possibleMoves;
+  private Tile revealedTile;
 
   //------------------------
   // CONSTRUCTOR
@@ -30,6 +31,7 @@ public class PlayController
   public PlayController()
   {
     possibleMoves = new ArrayList<Tile>();
+    revealedTile = null;
     setMode(Mode.Ready);
   }
 

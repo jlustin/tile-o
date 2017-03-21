@@ -80,6 +80,7 @@ class PlayController {
 	}
 	
 	1 -> * Tile possibleMoves;
+	1 -> * Tile revealedTile;
 	
 
 	

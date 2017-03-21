@@ -68,21 +68,22 @@ public class TeleportPopOut extends JFrame {
 				if(chosenTile==null){
 					error = error + "Please click a tile on the board! ";
 				}
-					try {
-						pmc.playTeleportActionCard(chosenTile);
-						TileOPlayPage.refreshData();
-						TileOPlayPage.setError("");
-						TileOPlayPage.getGrid().aTileIsSelected = false;
-						TileOPlayPage.getGrid().aConnectionIsSelected = false;
-						TileOPlayPage.getGrid().selectedConnection = null;
-						TileOPlayPage.getGrid().selectedTile = null;
-					} catch (InvalidInputException e1) {
-						throw new RuntimeException(e1.getMessage());
-					}
-			    }
-				close();
-			}
-		});
+				try {
+					pmc.playTeleportActionCard(chosenTile);
+					TileOPlayPage.refreshData();
+					TileOPlayPage.setError("");
+					TileOPlayPage.getGrid().aTileIsSelected = false;
+					TileOPlayPage.getGrid().aConnectionIsSelected = false;
+					TileOPlayPage.getGrid().selectedConnection = null;
+					TileOPlayPage.getGrid().selectedTile = null;
+				} 
+				catch (InvalidInputException e1) {
+					throw new RuntimeException(e1.getMessage());
+				}
+		    }
+			close();
+		}
+	});
 		
 		JLabel lblToTeleportTo = new JLabel("to teleport to the selected tile. ");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
