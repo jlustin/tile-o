@@ -106,6 +106,10 @@ public class RevealPopOut extends JFrame{
 					TileOPlayPage.getGrid().selectedTile = null;
 					close();
 				}
+				else if (chosen == 0){
+					error = "You didn't reveal a tile yet!";
+					errorLbl.setText(error);
+				}
 			}
 		});
 		
