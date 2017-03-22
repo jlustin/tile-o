@@ -80,7 +80,7 @@ class PlayController {
 	}
 	
 	1 -> * Tile possibleMoves;
-	1 -> * Tile revealedTile;
+	lazy String revealedTile;
 	
 
 	
@@ -337,13 +337,13 @@ class PlayController {
 	/*
 	 * Action card "Reveal the type of a tile"
 	 */
-	private void doPlayRevealActionCard(Tile tile) {
+	private void doPlayRevealActionCard(Tile tile) throws InvalidInputException {
 		TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		ActionCard currentCard = drawCard(currentGame);
 		try {
 			if (currentCard instanceof RevealActionCard) {
-				((RevealActionCard) currentCard).play(tile);
+				revealedTile = ((RevealActionCard) currentCard).play(tile);
 			}
 			currentGame.setNextPlayer();
 			currentGame.setMode(Game.Mode.GAME);	
