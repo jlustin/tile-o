@@ -204,22 +204,22 @@ public class TilePanelPlay extends JPanel{
 				Rectangle2D r = tRectangles.get(cTile);
 				String number = String.valueOf(aPlayer.getNumber());
 				
-				g2d.setColor(Color.BLACK);
+//				g2d.setColor(Color.BLACK);
 				
-//				switch (aPlayer.getColor()){
-//					case RED:
-//						g2d.setColor(Color.RED);
-//						break;
-//					case BLUE:
-//						g2d.setColor(Color.BLUE);
-//						break;
-//					case GREEN:
-//						g2d.setColor(Color.GREEN);
-//						break;
-//					case YELLOW:
-//						g2d.setColor(Color.YELLOW);
-//						break;
-//				}
+				switch (aPlayer.getColor()){
+					case RED:
+						g2d.setColor(Color.RED);
+						break;
+					case BLUE:
+						g2d.setColor(Color.BLUE);
+						break;
+					case GREEN:
+						g2d.setColor(Color.GREEN);
+						break;
+					case YELLOW:
+						g2d.setColor(Color.YELLOW);
+						break;
+				}
 				
 				switch (number){
 					case "1":

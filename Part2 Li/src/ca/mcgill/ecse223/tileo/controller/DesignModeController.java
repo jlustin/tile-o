@@ -92,6 +92,7 @@ public class DesignModeController {
 		// Assign player numbers to each player
 		for(int playerNumber = 1; playerNumber <= numberOfPlayers; playerNumber++){
 			game.addPlayer(playerNumber);
+			game.getPlayer(playerNumber-1).setColor(Player.Color.values()[playerNumber-1]);
 		}			
 	}
 	
