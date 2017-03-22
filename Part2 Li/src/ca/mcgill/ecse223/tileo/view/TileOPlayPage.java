@@ -120,30 +120,38 @@ public class TileOPlayPage extends JFrame {
 	    btnRollDie = new JButton("Roll Die");
 	    btnRollDie.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		pmc.rollDie();	    		
-	    		pMoves = pmc.getPossibleMoves();
 	    		
-	    		grid.isAPlayerTurn = true; 	    		
-	    		refreshData();
-	    		
-	    		TileOPlayPage.getGrid().aTileIsSelected = false;
-				TileOPlayPage.getGrid().aConnectionIsSelected = false;
-				TileOPlayPage.getGrid().selectedConnection = null;
-				TileOPlayPage.getGrid().selectedTile = null;
-	    		
-	    		grid.possibleMoves = pMoves;
-	    		grid.refreshBoard();
-	    		
-	    		if (pMoves.isEmpty()){
-	    			NoPossibleMovesPopOut npm = new NoPossibleMovesPopOut();
-					npm.setVisible(true);					
-					TileOPlayPage.refreshData();
-					refreshData();
+	    		if(pmc.getMode() == PlayController.Mode.Roll){
+	    			pmc.rollDie();	    		
+		    		pMoves = pmc.getPossibleMoves();
+		    		
+		    		grid.isAPlayerTurn = true; 	    		
+		    		refreshData();
+		    		
+		    		TileOPlayPage.getGrid().aTileIsSelected = false;
+					TileOPlayPage.getGrid().aConnectionIsSelected = false;
+					TileOPlayPage.getGrid().selectedConnection = null;
+					TileOPlayPage.getGrid().selectedTile = null;
+		    		
+		    		grid.possibleMoves = pMoves;
+		    		grid.refreshBoard();
+		    		
+		    		
+		    		if (pMoves.isEmpty()){
+		    			NoPossibleMovesPopOut npm = new NoPossibleMovesPopOut();
+						npm.setVisible(true);					
+						TileOPlayPage.refreshData();
+						refreshData();
+		    		}
+		    		else {
+		    			SelectTilePlayPopOut stpop = new SelectTilePlayPopOut();
+			    		stpop.setVisible(true);
+		    		}
 	    		}
-	    		else {
-	    			SelectTilePlayPopOut stpop = new SelectTilePlayPopOut();
-		    		stpop.setVisible(true);
+	    		else{
+	    			errorLbl.setText("Can't roll. Lmao.");
 	    		}
+	    		
 	    		
 	    	}
 	    });
