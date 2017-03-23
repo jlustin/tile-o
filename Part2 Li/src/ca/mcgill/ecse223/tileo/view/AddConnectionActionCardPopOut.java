@@ -48,7 +48,7 @@ public class AddConnectionActionCardPopOut extends JDialog {
 	}
 	
 	public AddConnectionActionCardPopOut() {
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		setAlwaysOnTop(true);
 		setTitle("Add Connection Action Card");
 		setBounds(500, 200, 500, 300);
