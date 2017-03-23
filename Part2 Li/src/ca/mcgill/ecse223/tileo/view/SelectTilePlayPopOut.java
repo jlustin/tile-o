@@ -50,6 +50,7 @@ public class SelectTilePlayPopOut extends JDialog {
 	}
 	
 	public SelectTilePlayPopOut() {
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		setTitle("Move To A Tile");
 		setResizable(false);
 		setAlwaysOnTop(true);
