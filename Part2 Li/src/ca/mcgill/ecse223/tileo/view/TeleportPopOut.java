@@ -27,11 +27,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import java.awt.Color;
 
 public class TeleportPopOut extends JFrame {
 	private Tile chosenTile = null;
 	private String error;
 	private PlayController pmc = TileOPlayPage.pmc;
+	JLabel errorLbl = new JLabel("");
 
 	private JPanel contentPane;
 
@@ -45,9 +47,10 @@ public class TeleportPopOut extends JFrame {
 	}
 	
 	public TeleportPopOut() {
+		setResizable(false);
 		setTitle("Teleport Action Card");
 		setAlwaysOnTop(true);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(500, 200, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -65,47 +68,58 @@ public class TeleportPopOut extends JFrame {
 				error = "";
 				if (TileOPlayPage.getGrid().aTileIsSelected){
 					chosenTile = TileOPlayPage.getGrid().selectedTile;
-					if(chosenTile==null){
+					if(chosenTile==null){ //possibly redundant error checking
 						error = error + "Please click a tile on the board! ";
+						errorLbl.setText(error);
 					}
 					try {
 						pmc.playTeleportActionCard(chosenTile);
-						TileOPlayPage.refreshData();
 						TileOPlayPage.setError("");
+						TileOPlayPage.refreshData();
 						TileOPlayPage.getGrid().aTileIsSelected = false;
 						TileOPlayPage.getGrid().aConnectionIsSelected = false;
 						TileOPlayPage.getGrid().selectedConnection = null;
 						TileOPlayPage.getGrid().selectedTile = null;
+						close();
 					} 
 					catch (InvalidInputException e1) {
 						throw new RuntimeException(e1.getMessage());
 					}
 			    }
-				close();
+				else{
+					error = error + "Please click a tile on the board! ";
+					errorLbl.setText(error);
+				}
+				
 			}
 		});
 		
 		JLabel lblToTeleportTo = new JLabel("to teleport to the selected tile. ");
+		
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(36)
 					.addComponent(lblYouHaveDrawn)
-					.addContainerGap(32, Short.MAX_VALUE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(174, Short.MAX_VALUE)
+					.addContainerGap(212, Short.MAX_VALUE)
 					.addComponent(btnTeleport)
 					.addGap(170))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(65)
 					.addComponent(lblOnTheBoard)
-					.addContainerGap(74, Short.MAX_VALUE))
+					.addContainerGap(69, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(115)
-					.addComponent(lblToTeleportTo)
-					.addContainerGap(130, Short.MAX_VALUE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(errorLbl)
+						.addComponent(lblToTeleportTo))
+					.addContainerGap(127, Short.MAX_VALUE))
 		);
+		errorLbl.setForeground(Color.RED);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
@@ -114,7 +128,9 @@ public class TeleportPopOut extends JFrame {
 					.addComponent(lblOnTheBoard)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblToTeleportTo)
-					.addPreferredGap(ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(errorLbl)
+					.addPreferredGap(ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
 					.addComponent(btnTeleport)
 					.addContainerGap())
 		);
