@@ -3,6 +3,9 @@
 use TileOPersistence.ump;
 use TileOStates.ump;
 use playState.ump;
+//Uncomment only if you're going to delete the class in this file below
+//use RevealTileActionCardPart6.ump;
+
 namespace ca.mcgill.ecse223.tileo.model;
 
 class TileO {
