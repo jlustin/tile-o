@@ -40,7 +40,7 @@ public class DesignModeController {
 		String error = "";
 		
 		if(x>50||y>50) {
-			error = "Please enter a coordinate value of less than 50.";
+			error = "To make the screen legible, enter a coordinate value of less than 50.";
 		}		
 		if(x<0 || y<0) {
 			error = "The coordinate value must be positive!";
@@ -306,7 +306,7 @@ public class DesignModeController {
 				|| numberOfTeleportActionCard < 0
 				|| numberOfLoseTurnActionCard < 0
 				|| numberOfRevealActionCard < 0) {
-			error ="The numbers of the cards should bigger than zero!";
+			error = "The number of each action card should be positive!";
 		}
 		if (error.length() > 0) {
 			throw new InvalidInputException(error.trim());
@@ -316,6 +316,12 @@ public class DesignModeController {
 			TileO tileO = TileOApplication.getTileO();
 			Game currentGame = tileO.getCurrentGame();
 			Deck deck = currentGame.getDeck();
+			
+			//remove all cards if deck already has cards
+			if(deck.hasCards()){
+				deck.clearCards();
+			}
+			
 			int i=0;
 			while (i<32){
 				//TODO: change this part so that you can override it
@@ -357,7 +363,7 @@ public class DesignModeController {
 	public Game loadDesign(int index) throws InvalidInputException{
 		String error = "";
 		if (!TileOApplication.getTileO().hasGames()) {
-			error = "The TileOApplication does not have games!";
+			error = "The current TileO does not have games!";
 			throw new InvalidInputException(error.trim());
 		}
 		

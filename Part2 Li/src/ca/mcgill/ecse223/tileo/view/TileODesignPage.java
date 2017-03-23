@@ -514,7 +514,7 @@ public class TileODesignPage extends JFrame {
 					chosenTile1 = TileODesignPage.getGrid().selectedTile;				
 				}
 				if(chosenTile1==null){
-					error = "Please select a tile on the board and then press'Tile 1 Chosen' button! ";
+					error = "Please select a tile on the board and then press the \"Tile 1 Chosen\" button! ";
 				}
 				error.trim();
 				errorLbl.setText(error);
@@ -529,7 +529,7 @@ public class TileODesignPage extends JFrame {
 					chosenTile2 = TileODesignPage.getGrid().selectedTile;
 				}
 				if(chosenTile2==null){
-					error = "Please select a tile on the board and then press'Tile 2 Chosen' button! ";
+					error = "Please select a tile on the board and then press the \"Tile 2 Chosen\" button! ";
 				}
 				error.trim();
 				errorLbl.setText(error);

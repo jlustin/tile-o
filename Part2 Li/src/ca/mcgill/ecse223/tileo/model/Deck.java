@@ -218,6 +218,17 @@ public class Deck implements Serializable
 	  //set current card to the first card.
 	  setCurrentCard(getCards().get(0));
   }
+   
+   public void clearCards(){
+	   while (cards.size() > 0)
+	    {
+	      ActionCard aCard = cards.get(cards.size() - 1);
+	      aCard.delete();
+	      cards.remove(aCard);
+	    }
+	    
+	    currentCard = null;
+   }
   
   //------------------------
   // DEVELOPER CODE - PROVIDED AS-IS

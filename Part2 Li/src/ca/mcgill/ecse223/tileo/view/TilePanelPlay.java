@@ -65,19 +65,22 @@ public class TilePanelPlay extends JPanel{
 			public void mousePressed(MouseEvent e) {
 				int x = e.getX();
 				int y = e.getY();
-				System.out.println("The mouse has been pressed " + "x: " + x + " y:" + y);								
+				//For testing purposes
+				//System.out.println("The mouse has been pressed " + "x: " + x + " y:" + y);								
 				for (Rectangle2D rectangle : rectangles) {
 					if (rectangle.contains(x, y)) {
 						if(tiles.containsKey(rectangle)){
 							selectedTile = tiles.get(rectangle);
 							selectedConnection = null;
-							System.out.println("A legit tile has been selected. " + "x: " + selectedTile.getX() + " y:" + selectedTile.getY());
+							//For testing purposes
+							//System.out.println("A legit tile has been selected. " + "x: " + selectedTile.getX() + " y:" + selectedTile.getY());
 							break;
 						}
 						else if(connections.containsKey(rectangle)){
 							selectedConnection = connections.get(rectangle);
 							selectedTile = null;
-							System.out.println("a legit connection has been selected");
+							//For testing purposes
+							//System.out.println("a legit connection has been selected");
 							break;
 						}
 					}
@@ -331,9 +334,5 @@ public class TilePanelPlay extends JPanel{
 	
 
 }
-
-
-
-
 
 
