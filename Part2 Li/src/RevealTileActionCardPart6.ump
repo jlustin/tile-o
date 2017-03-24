@@ -1,3 +1,7 @@
+class Game {
+	mode { GAME_REVEALACTIONCARD{} }
+}
+
 class RevealActionCard {
 	isA ActionCard;
 	
