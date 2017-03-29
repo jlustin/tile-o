@@ -1,5 +1,0 @@
-best commit na
-
-class TileO {
-
-}

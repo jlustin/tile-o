@@ -2,10 +2,12 @@
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
+import java.io.Serializable;
 import java.util.*;
 
-// line 30 "../../../../../TileO (updated Feb10).ump"
-public abstract class Tile
+// line 29 "../../../../../TileOPersistence.ump"
+// line 32 "../../../../../TileO (updated Feb10).ump"
+public abstract class Tile implements Serializable
 {
 
   //------------------------
@@ -262,5 +264,48 @@ public abstract class Tile
             "hasBeenVisited" + ":" + getHasBeenVisited()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "game = "+(getGame()!=null?Integer.toHexString(System.identityHashCode(getGame())):"null")
      + outputString;
-  }
+  }  
+  
+  //------------------------
+  
+  //Method to get next moves according to the current Tile
+  public List<Tile> getNextMoves (int moveLeft,Tile previousTile) {
+	  	//Create a ArrayList to store the neighbor Tile
+	  List<Tile> possibleMoveTiles =  new ArrayList<>();
+	  List<Connection> connections = new ArrayList<>();
+	  //If the moveLeft is 0, then add Tile itself into list possibleMoveTiles
+	  if(moveLeft==0) {
+		  possibleMoveTiles.add(this);
+		  return possibleMoveTiles;
+	  }
+	  if(this.getConnections().size()==1&&this.getConnections().contains(previousTile)) {
+		  possibleMoveTiles.add(this);
+		  return possibleMoveTiles;
+	  }
+	  
+	  for(int i=0;i<this.getConnections().size();i++){
+		  if(!this.getConnection(i).getTiles().contains(previousTile)){
+			  connections.add(this.getConnection(i));
+		  }
+	  }
+	  for(Connection cnt:connections){
+		  List<Tile> neighborTiles = cnt.getTiles();
+		  int indexOfNeiborTile =neighborTiles.indexOf(this)==0 ? 1:0;
+		  Tile neighborTile = neighborTiles.get(indexOfNeiborTile);
+		  List<Tile> tiles = neighborTile.getNextMoves(moveLeft-1, this);
+		  possibleMoveTiles.addAll(tiles);
+		  
+	  }
+	  return possibleMoveTiles;  
+  }	  
+  
+  // Abstract method for land()
+  public abstract void land();
+  
+  //------------------------
+  
+  // line 32 ../../../../../TileOPersistence.ump
+  private static final long serialVersionUID = 4444444444444444444L ;
+
+  
 }

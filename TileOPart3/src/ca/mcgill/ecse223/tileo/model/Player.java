@@ -2,10 +2,12 @@
 /*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
+import java.io.Serializable;
 import java.util.*;
 
-// line 22 "../../../../../TileO (updated Feb10).ump"
-public class Player
+// line 16 "../../../../../TileOPersistence.ump"
+// line 24 "../../../../../TileO (updated Feb10).ump"
+public class Player implements Serializable
 {
 
   //------------------------
@@ -199,6 +201,14 @@ public class Player
     placeholderGame.removePlayer(this);
   }
 
+  // line 22 "../../../../../TileOPersistence.ump"
+   public static void reinitializeUniquePlayer(List<Player> players){
+    playersByNumber = new HashMap<Integer, Player>();
+	for(Player player : players) {
+		playersByNumber.put(player.getNumber(), player);
+		}
+  }
+
 
   public String toString()
   {
@@ -210,5 +220,23 @@ public class Player
             "  " + "currentTile = "+(getCurrentTile()!=null?Integer.toHexString(System.identityHashCode(getCurrentTile())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "game = "+(getGame()!=null?Integer.toHexString(System.identityHashCode(getGame())):"null")
      + outputString;
+  }  
+  
+  
+  //------------------------
+  
+  //Method to get all the possible moves of current player according to his current Tile.
+  public List<Tile> getPossibleMoves(int moveLeft) { 
+	
+	  Tile currentTile=this.getCurrentTile();
+	  List<Tile> possibleMoves = currentTile.getNextMoves(moveLeft, null) ;   	  
+      return possibleMoves;	  	  
   }
+  
+  //------------------------
+  
+  // line 19 ../../../../../TileOPersistence.ump
+  private static final long serialVersionUID = 3333333333333333333L ;
+
+  
 }
