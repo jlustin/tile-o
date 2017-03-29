@@ -1,9 +1,13 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.22.0.5146 modeling language!*/
+/*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
+import java.util.*;
 
-// line 41 "../../../../../TileO.ump"
+/**
+ * this type of tile will be turned into Grey when a player lands on it and will end the game
+ */
+// line 148 "../../../../../TileO.ump"
 public class HiddenTile extends Tile
 {
 
@@ -15,9 +19,9 @@ public class HiddenTile extends Tile
   // CONSTRUCTOR
   //------------------------
 
-  public HiddenTile(String aColour, Location aLocation, boolean aIsBeingSteppedOn, boolean aHasBeenVisited)
+  public HiddenTile(Location aLocationOfTile, Board aBoard)
   {
-    super(aColour, aLocation, aIsBeingSteppedOn, aHasBeenVisited);
+    super(aLocationOfTile, aBoard);
   }
 
   //------------------------
