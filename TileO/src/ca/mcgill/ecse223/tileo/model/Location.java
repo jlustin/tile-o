@@ -1,9 +1,13 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.22.0.5146 modeling language!*/
+/*This code was generated using the UMPLE 1.25.0-9e8af9e modeling language!*/
 
 package ca.mcgill.ecse223.tileo.model;
 
-// line 28 "../../../../../TileO.ump"
+/**
+ * helper class to store the location
+ * The origin will be at the top left corner of the Board. The positive x axis will go to the right while the positive y axis will go down.
+ */
+// line 168 "../../../../../TileO.ump"
 public class Location
 {
 
@@ -12,47 +16,53 @@ public class Location
   //------------------------
 
   //Location Attributes
-  private int xComponent;
-  private int yComponent;
+  private int xLocation;
+  private int yLocation;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public Location(int aXComponent, int aYComponent)
+  public Location(int aXLocation, int aYLocation)
   {
-    xComponent = aXComponent;
-    yComponent = aYComponent;
+    xLocation = aXLocation;
+    yLocation = aYLocation;
   }
 
   //------------------------
   // INTERFACE
   //------------------------
 
-  public boolean setXComponent(int aXComponent)
+  public boolean setXLocation(int aXLocation)
   {
     boolean wasSet = false;
-    xComponent = aXComponent;
+    xLocation = aXLocation;
     wasSet = true;
     return wasSet;
   }
 
-  public boolean setYComponent(int aYComponent)
+  public boolean setYLocation(int aYLocation)
   {
     boolean wasSet = false;
-    yComponent = aYComponent;
+    yLocation = aYLocation;
     wasSet = true;
     return wasSet;
   }
 
-  public int getXComponent()
+  /**
+   * Horizontal distance from the origin
+   */
+  public int getXLocation()
   {
-    return xComponent;
+    return xLocation;
   }
 
-  public int getYComponent()
+  /**
+   * Vertical distance from the origin
+   */
+  public int getYLocation()
   {
-    return yComponent;
+    return yLocation;
   }
 
   public void delete()
@@ -61,10 +71,10 @@ public class Location
 
   public String toString()
   {
-	  String outputString = "";
+    String outputString = "";
     return super.toString() + "["+
-            "xComponent" + ":" + getXComponent()+ "," +
-            "yComponent" + ":" + getYComponent()+ "]"
+            "xLocation" + ":" + getXLocation()+ "," +
+            "yLocation" + ":" + getYLocation()+ "]"
      + outputString;
   }
 }
