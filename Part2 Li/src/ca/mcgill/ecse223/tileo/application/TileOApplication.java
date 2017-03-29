@@ -8,7 +8,7 @@ import ca.mcgill.ecse223.tileo.view.WelcomePage;
 import ca.mcgill.ecse223.tileo.model.Game;
 import ca.mcgill.ecse223.tileo.model.Game.Mode;
 import ca.mcgill.ecse223.tileo.model.Player;
-
+//TileOApplication
 public class TileOApplication {
 	private static TileO tileO;
 	private static String filename = "data.tileO";
