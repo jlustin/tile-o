@@ -103,3 +103,52 @@ class Die {
 	isA Serializable;
 	private static final long serialVersionUID = 7070707070707070707L;	
 }
+
+class LoseTurnRandomlyActionCard {
+  	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 1029384756019283745L;
+	
+}
+
+class RevealActionTilesActionCard {
+  	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 1098766543012347859L;
+	
+}
+
+class TurnActionInactiveActionCard {
+  	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 3829385123748593214L;
+	
+}
+
+class WinTileHintActionCard {
+  	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 1337133713371337133L;
+	
+}
+
+class SendBackToStartActionCard {
+  	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 9483212342385938245L;
+	
+}
+
+class TeleportOtherActionCard {
+  	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 1230984328754368234L;
+	
+}
+
+class RevealActionCard {
+  	depend java.io.Serializable;
+	isA Serializable;
+	private static final long serialVersionUID = 4938573821423152358L;
+	
+}

@@ -385,7 +385,7 @@ class RevealActionTilesActionCard {
   	isA ActionCard;
 }
 
-class TurnActionInactiveActionCard {
+class TurnActionTilesInactiveActionCard {
   	isA ActionCard;
 }
 
