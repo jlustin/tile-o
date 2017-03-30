@@ -75,19 +75,19 @@ class PlayController {
 			playLoseTurnRandomlyActionCard()[isLoseTurnRandomlyActionCard()] / {
 				doLoseTurnRandomlyActionCard();
 			} -> Roll;
-			RevealActionTilesActionCard()[isRevealActionTilesActionCard()] / {
+			playRevealActionTilesActionCard()[isRevealActionTilesActionCard()] / {
 				doRevealActionTilesActionCard();
 			} -> Roll;
-			TurnActionTilesInactiveActionCard()[isTurnActionTilesInactiveActionCard()] / {
+			playTurnActionTilesInactiveActionCard()[isTurnActionTilesInactiveActionCard()] / {
 				doTurnActionTilesInactiveActionCard();
 			} -> Roll;
-			WinTileHintActionCard()[isWinTileHintActionCard()] / {
+			playWinTileHintActionCard()[isWinTileHintActionCard()] / {
 				doWinTileHintActionCard();
 			} -> Roll;
-			SendBackToStartActionCard(Player player)[isSendBackToStartActionCard()] / {
+			playSendBackToStartActionCard(Player player)[isSendBackToStartActionCard()] / {
 				doSendBackToStartActionCard();
 			} -> Roll;
-			TeleportOtherActionCard(Tile tile, int playerNumber)[isTeleportOtherActionCard()] / {
+			playTeleportOtherActionCard(Tile tile, int playerNumber)[isTeleportOtherActionCard()] / {
 				doTeleportOtherActionCard(tile,playerNumber);
 			} -> Roll;	
 		}
