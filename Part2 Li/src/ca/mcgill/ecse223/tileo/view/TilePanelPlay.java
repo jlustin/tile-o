@@ -65,19 +65,22 @@ public class TilePanelPlay extends JPanel{
 			public void mousePressed(MouseEvent e) {
 				int x = e.getX();
 				int y = e.getY();
-				System.out.println("The mouse has been pressed " + "x: " + x + " y:" + y);								
+				//For testing purposes
+				//System.out.println("The mouse has been pressed " + "x: " + x + " y:" + y);								
 				for (Rectangle2D rectangle : rectangles) {
 					if (rectangle.contains(x, y)) {
 						if(tiles.containsKey(rectangle)){
 							selectedTile = tiles.get(rectangle);
 							selectedConnection = null;
-							System.out.println("A legit tile has been selected. " + "x: " + selectedTile.getX() + " y:" + selectedTile.getY());
+							//For testing purposes
+							//System.out.println("A legit tile has been selected. " + "x: " + selectedTile.getX() + " y:" + selectedTile.getY());
 							break;
 						}
 						else if(connections.containsKey(rectangle)){
 							selectedConnection = connections.get(rectangle);
 							selectedTile = null;
-							System.out.println("a legit connection has been selected");
+							//For testing purposes
+							//System.out.println("a legit connection has been selected");
 							break;
 						}
 					}
@@ -203,8 +206,38 @@ public class TilePanelPlay extends JPanel{
 				Tile cTile = aPlayer.getCurrentTile();
 				Rectangle2D r = tRectangles.get(cTile);
 				String number = String.valueOf(aPlayer.getNumber());
-				g2d.setColor(Color.BLACK);
-				g2d.drawString(number, (int) r.getCenterX()-10, (int) r.getCenterY());
+				
+//				g2d.setColor(Color.BLACK);
+				
+				switch (aPlayer.getColor()){
+					case RED:
+						g2d.setColor(Color.RED);
+						break;
+					case BLUE:
+						g2d.setColor(Color.BLUE);
+						break;
+					case GREEN:
+						g2d.setColor(Color.GREEN);
+						break;
+					case YELLOW:
+						g2d.setColor(Color.YELLOW);
+						break;
+				}
+				
+				switch (number){
+					case "1":
+						g2d.drawString(number, (int) r.getCenterX()-13, (int) r.getCenterY()-3);
+						break;
+					case "2":
+						g2d.drawString(number, (int) r.getCenterX()+5, (int) r.getCenterY()-3);
+						break;
+					case "3":
+						g2d.drawString(number, (int) r.getCenterX()-13, (int) r.getCenterY()+13);
+						break;
+					case "4":
+						g2d.drawString(number, (int) r.getCenterX()+5, (int) r.getCenterY()+13);
+						break;
+				}
 			}
 			
 			
@@ -301,9 +334,5 @@ public class TilePanelPlay extends JPanel{
 	
 
 }
-
-
-
-
 
 

@@ -50,6 +50,7 @@ public class SelectTilePlayPopOut extends JDialog {
 	}
 	
 	public SelectTilePlayPopOut() {
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		setTitle("Move To A Tile");
 		setResizable(false);
 		setAlwaysOnTop(true);
@@ -111,8 +112,8 @@ public class SelectTilePlayPopOut extends JDialog {
 						if (error.length()==0){					
 							try {
 								pmc.land(chosenTile);
-								
-								System.out.println("Successfully(?) landed on tile: x: " + chosenTile.getX() + " y: " + chosenTile.getY());
+								//For testing purposes
+								//System.out.println("Successfully(?) landed on tile: x: " + chosenTile.getX() + " y: " + chosenTile.getY());
 								TileOPlayPage.getGrid().isAPlayerTurn = false;	//added by Li	
 								TileOPlayPage.refreshData();
 								TileOPlayPage.setError("");

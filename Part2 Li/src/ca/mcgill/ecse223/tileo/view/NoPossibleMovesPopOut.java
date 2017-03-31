@@ -16,11 +16,14 @@ import ca.mcgill.ecse223.tileo.model.Tile;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class NoPossibleMovesPopOut extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private PlayController pmc = TileOPlayPage.pmc;
+	private JLabel lblLooksLikeYoure;
 
 
 	public void close() { 
@@ -36,13 +39,35 @@ public class NoPossibleMovesPopOut extends JDialog {
 		setTitle("Sucks For You!");
 		setBounds(500, 200, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
-			JLabel lblLooksLikeYoure = new JLabel("Looks like you're stuck on a tile :( Pass your turn.");
-			contentPanel.add(lblLooksLikeYoure);
+			lblLooksLikeYoure = new JLabel("Looks like you're stuck on a tile :(");
 		}
+		JLabel lblNewLabel = new JLabel("You will land on your own tile once again");
+		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
+		gl_contentPanel.setHorizontalGroup(
+			gl_contentPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addGap(81)
+							.addComponent(lblNewLabel))
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addGap(108)
+							.addComponent(lblLooksLikeYoure)))
+					.addContainerGap(100, Short.MAX_VALUE))
+		);
+		gl_contentPanel.setVerticalGroup(
+			gl_contentPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addGap(22)
+					.addComponent(lblLooksLikeYoure)
+					.addGap(18)
+					.addComponent(lblNewLabel)
+					.addContainerGap(157, Short.MAX_VALUE))
+		);
+		contentPanel.setLayout(gl_contentPanel);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

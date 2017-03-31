@@ -3,6 +3,9 @@
 use TileOPersistence.ump;
 use TileOStates.ump;
 use playState.ump;
+//Uncomment only if you're going to delete the class in this file below
+//use RevealTileActionCardPart6.ump;
+
 namespace ca.mcgill.ecse223.tileo.model;
 
 class TileO {
@@ -18,7 +21,15 @@ class Game {
 			GAME_CONNECTTILESACTIONCARD{} 
 			GAME_REMOVECONNECTIONACTIONCARD{} 
 			GAME_TELEPORTACTIONCARD{} 
-			GAME_LOSETURNACTIONCARD{} }
+			GAME_LOSETURNACTIONCARD{} 
+			GAME_REVEALACTIONCARD{}
+			GAME_LOSETURNRANDOMLYACTIONCARD{}
+			GAME_REVEALACTIONTILESACTIONCARD{}
+			GAME_TURNACTIONTILESINACTIVEACTIONCARD{}
+			GAME_WINTILEHINTACTIONCARD{}
+			GAME_SENDBACKTOSTARTACTIONCARD{}
+			GAME_TELEPORTOTHERACTIONCARD{}
+			 }
 	1 <@>- 2..4 Player players;
 	1 <@>- * Tile tiles;
 	1 <@>- * Connection connections;
@@ -93,6 +104,15 @@ class Player {
 		Tile currentTile=this.getCurrentTile();
 		List<Tile> possibleMoves = currentTile.getNextMoves(moveLeft, null) ;   	  
 		return possibleMoves;	  	  
+	};
+}
+
+class Die {
+	public int roll(){
+		int rollNumber;
+		Random randomGenerator = new Random();
+		rollNumber = randomGenerator.nextInt(6)+1;
+		return rollNumber;
 	};
 }
 
@@ -215,6 +235,17 @@ class Deck {
 	  //set current card to the first card.
 	  setCurrentCard(getCards().get(0));
 	};
+	
+	public void clearCards(){
+	   while (cards.size() > 0)
+	    {
+	      ActionCard aCard = cards.get(cards.size() - 1);
+	      aCard.delete();
+	      cards.remove(aCard);
+	    }
+	    
+	    currentCard = null;
+   }
 }
 
 class ActionCard {
@@ -316,11 +347,58 @@ class LoseTurnActionCard {
 	};
 }
 
-class Die {
-	public int roll(){
-		int rollNumber;
-		Random randomGenerator = new Random();
-		rollNumber = randomGenerator.nextInt(6)+1;
-		return rollNumber;
+class RevealActionCard {
+	isA ActionCard;
+	
+	@Override
+	public Game.Mode getActionCardGameMode() {
+		return Game.Mode.GAME_REVEALACTIONCARD;
+	};
+	
+	public String play(Tile aTile) throws InvalidInputException {
+		String type = null;
+		String error = "";
+		try {
+			if (aTile instanceof NormalTile) {
+				type = "Normal Tile";
+			}
+			else if (aTile instanceof ActionTile) {
+				type = "Action Tile";
+			}
+			else if (aTile instanceof WinTile) {
+				type = "Win Tile";
+			}
+			return type;
+		}
+		catch (RuntimeException e) {
+			error = e.getMessage();
+			throw new InvalidInputException(error);
+		}	  
 	};
 }
+
+class LoseTurnRandomlyActionCard {
+  	isA ActionCard;
+}
+
+class RevealActionTilesActionCard {
+  	isA ActionCard;
+}
+
+class TurnActionTilesInactiveActionCard {
+  	isA ActionCard;
+}
+
+class WinTileHintActionCard {
+  	isA ActionCard;
+}
+
+class SendBackToStartActionCard {
+  	isA ActionCard;
+}
+
+class TeleportOtherActionCard {
+  	isA ActionCard;
+}
+
+

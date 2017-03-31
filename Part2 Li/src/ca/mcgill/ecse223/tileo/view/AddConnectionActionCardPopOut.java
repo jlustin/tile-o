@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 import ca.mcgill.ecse223.tileo.controller.PlayController;
 import ca.mcgill.ecse223.tileo.controller.PlayModeController;
+import ca.mcgill.ecse223.tileo.model.Connection;
 import ca.mcgill.ecse223.tileo.model.Tile;
 
 import javax.swing.JLabel;
@@ -48,7 +49,7 @@ public class AddConnectionActionCardPopOut extends JDialog {
 	}
 	
 	public AddConnectionActionCardPopOut() {
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		setAlwaysOnTop(true);
 		setTitle("Add Connection Action Card");
 		setBounds(500, 200, 500, 300);
@@ -101,25 +102,35 @@ public class AddConnectionActionCardPopOut extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					error = "";
 					   if(chosenTile1==null||chosenTile2==null){
-						   error = "Please choose the tiles first! ";
+						   error = error + "Please choose the tiles first!";
+					   }
+					   else{
+						   if(!isAdjacent(chosenTile1, chosenTile2)){
+							   error = error + "Chosen tiles are not adjacent!";
+						   }
+						   if (isConnected(chosenTile1, chosenTile2)){
+							   error = error + "Chosen tiles are already connected!";
+						   }
 					   }
 					   error.trim();
+					   errorMessage.setText(error);
+					   
 					   if(error.length()==0) {
-						   try {
+						try {
 							pmc.playConnectTilesActionCard(chosenTile1, chosenTile2);
-							TileOPlayPage.getGrid().selectedTile = null;
-							TileOPlayPage.getGrid().aTileIsSelected = false;
-							TileOPlayPage.refreshData();
-							TileOPlayPage.setError("");
-							
-							TileOPlayPage.getGrid().aTileIsSelected = false;
-							TileOPlayPage.getGrid().aConnectionIsSelected = false;
-							TileOPlayPage.getGrid().selectedConnection = null;
-							TileOPlayPage.getGrid().selectedTile = null;
 						} catch (InvalidInputException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
+						TileOPlayPage.getGrid().selectedTile = null;
+						TileOPlayPage.getGrid().aTileIsSelected = false;
+						TileOPlayPage.refreshData();
+						TileOPlayPage.setError("");
+						
+						TileOPlayPage.getGrid().aTileIsSelected = false;
+						TileOPlayPage.getGrid().aConnectionIsSelected = false;
+						TileOPlayPage.getGrid().selectedConnection = null;
+						TileOPlayPage.getGrid().selectedTile = null;
 						
 						close();
 					   }
@@ -172,12 +183,36 @@ public class AddConnectionActionCardPopOut extends JDialog {
 		);
 		contentPanel.setLayout(gl_contentPanel);
 	}
-	private void refreshData() {
-		errorMessage.setText("<html>"+error+"<html>");
-		if(error == null || error.length()==0){
-			close();
+	//helper method to check if two tiles are adjacent
+		public boolean isAdjacent(Tile tile1, Tile tile2) {
+			int x1 = tile1.getX();
+			int y1 = tile1.getY();
+			int x2 = tile2.getX();
+			int y2 = tile2.getY();
+			if (x1-x2 == -1 || x1-x2 == 1){
+				if(y1-y2 ==0){
+					return true;
+				}
+			}
+			if (y1-y2 == -1 || y1-y2 == 1){
+				if(x1-x2 ==0){
+					return true;
+				}
+			}
+			return false;
 		}
-	}
+		
+		//helper method two tiles are already connected
+		public boolean isConnected (Tile tile1, Tile tile2){
+			for (Connection c1: tile1.getConnections()){
+				for (Connection c2: tile2.getConnections()){
+					if (c1 == c2){
+						return true;
+					}
+				}
+			}
+			return false;
+		}
 
 }
 

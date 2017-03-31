@@ -13,6 +13,7 @@ import ca.mcgill.ecse223.tileo.model.LoseTurnActionCard;
 import ca.mcgill.ecse223.tileo.model.NormalTile;
 import ca.mcgill.ecse223.tileo.model.Player;
 import ca.mcgill.ecse223.tileo.model.RemoveConnectionActionCard;
+import ca.mcgill.ecse223.tileo.model.RevealActionCard;
 import ca.mcgill.ecse223.tileo.model.RollDieActionCard;
 import ca.mcgill.ecse223.tileo.model.TeleportActionCard;
 import ca.mcgill.ecse223.tileo.model.Tile;
@@ -29,19 +30,20 @@ public class DesignModeController {
 	private static final String teleportInstruction = "Move your playing piece to an arbitray tile that is not your current tile.";
 	private static final String removeConnectionInstruction = "Remove a connectio piece from the board and place it in the pile of spare connection pieces.";
 	private static final String loseTurnInstruction = "You lose your next turn.";
+	private static final String revealInstruction = "Choose a tile to reveal its type";
 	
 	
 	//TileType is chosen from UI from a button
-	//How to make sure that you don't add 2 tiles at the same location?
+
 	public void addDesignTile(int x, int y, String TileType, int aInactivityPeriod) throws InvalidInputException {		
 		Game currentGame = TileOApplication.getTileO().getCurrentGame();
 		String error = "";
 		
 		if(x>50||y>50) {
-			error = "The coordinate need to be less than 50!";
+			error = "To make the screen legible, enter a coordinate value of less than 50.";
 		}		
 		if(x<0 || y<0) {
-			error = "The coordinates must be in the positive values!";
+			error = "The coordinate value must be positive!";
 		}		
         for(Tile aTile: currentGame.getTiles()) {	//iterates through each tiles of the currentGame
         	int xTile = aTile.getX();
@@ -51,7 +53,7 @@ public class DesignModeController {
         	}
         }
         if((TileType == "ActionTile") && (aInactivityPeriod<0)) {
-        	error = "The inactive period must be in the positive values!";        	
+        	error = "The inactivity period must be a positive value!";        	
         }
                 
 		if (error.length() > 0) {
@@ -90,6 +92,7 @@ public class DesignModeController {
 		// Assign player numbers to each player
 		for(int playerNumber = 1; playerNumber <= numberOfPlayers; playerNumber++){
 			game.addPlayer(playerNumber);
+			game.getPlayer(playerNumber-1).setColor(Player.Color.values()[playerNumber-1]);
 		}			
 	}
 	
@@ -98,21 +101,23 @@ public class DesignModeController {
 	 * 2. Place a tile on the game board
 	 * Chris
 	 */
-	public void placeNormalTile(int x, int y) throws InvalidInputException {
-		//TODO: CHRIS
-	}
-		
+	// deleted method
+	
 	
 	/*
 	 * 3. Remove a tile from the game board
 	 * Li
 	 */
 	public void removeTileFromGame(Tile aTile) throws InvalidInputException{
+		Game currentGame = TileOApplication.getTileO().getCurrentGame();
 		if (aTile.hasConnections()) {
 			String error = "Cannot delete a tile that has connections.";
 			throw new InvalidInputException(error.trim());
 		}
-		try{			
+		try{
+			if(aTile instanceof WinTile){
+				currentGame.setWinTile(null);
+			}
 			aTile.delete();			
 		}
 		catch (RuntimeException e) {
@@ -281,14 +286,16 @@ public class DesignModeController {
 			int numberOfConnectTilesActionCard,
 			int numberOfRemoveConnectionActionCard,
 			int numberOfTeleportActionCard,
-			int numberOfLoseTurnActionCard) throws InvalidInputException {
+			int numberOfLoseTurnActionCard,
+			int numberOfRevealActionCard) throws InvalidInputException {
 		
 		String error = "";
 		int totalCards = numberOfRollDieActionCard 
 				+ numberOfConnectTilesActionCard 
 				+ numberOfRemoveConnectionActionCard
 				+ numberOfTeleportActionCard
-				+ numberOfLoseTurnActionCard;
+				+ numberOfLoseTurnActionCard
+				+ numberOfRevealActionCard;
 		
 		if(totalCards != 32) {
 			error = "The sum of numbers of different types of acton cards should be 32!";
@@ -297,8 +304,9 @@ public class DesignModeController {
 				|| numberOfConnectTilesActionCard < 0 
 				|| numberOfRemoveConnectionActionCard < 0 
 				|| numberOfTeleportActionCard < 0
-				|| numberOfLoseTurnActionCard < 0) {
-			error ="The numbers of the cards should bigger than zero!";
+				|| numberOfLoseTurnActionCard < 0
+				|| numberOfRevealActionCard < 0) {
+			error = "The number of each action card should be positive!";
 		}
 		if (error.length() > 0) {
 			throw new InvalidInputException(error.trim());
@@ -308,6 +316,12 @@ public class DesignModeController {
 			TileO tileO = TileOApplication.getTileO();
 			Game currentGame = tileO.getCurrentGame();
 			Deck deck = currentGame.getDeck();
+			
+			//remove all cards if deck already has cards
+			if(deck.hasCards()){
+				deck.clearCards();
+			}
+			
 			int i=0;
 			while (i<32){
 				//TODO: change this part so that you can override it
@@ -325,7 +339,10 @@ public class DesignModeController {
 				}
 				for (int j = 0; j < numberOfLoseTurnActionCard; j++, i++) {
 					deck.addCardAt( new LoseTurnActionCard(loseTurnInstruction,deck), i);
-				}								
+				}	
+				for (int j = 0; j < numberOfRevealActionCard; j++, i++) {
+					deck.addCardAt( new RevealActionCard(revealInstruction,deck), i);
+				}
 			}
 		}
 		catch (RuntimeException e) {
@@ -346,7 +363,7 @@ public class DesignModeController {
 	public Game loadDesign(int index) throws InvalidInputException{
 		String error = "";
 		if (!TileOApplication.getTileO().hasGames()) {
-			error = "The TileOApplication does not have games!";
+			error = "The current TileO does not have games!";
 			throw new InvalidInputException(error.trim());
 		}
 		

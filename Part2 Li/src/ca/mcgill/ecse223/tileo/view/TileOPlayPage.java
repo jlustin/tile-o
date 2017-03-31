@@ -120,31 +120,38 @@ public class TileOPlayPage extends JFrame {
 	    btnRollDie = new JButton("Roll Die");
 	    btnRollDie.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		pmc.rollDie();	    		
-	    		pMoves = pmc.getPossibleMoves();
 	    		
-	    		grid.isAPlayerTurn = true; 	    		
-	    		refreshData();
-	    		
-	    		TileOPlayPage.getGrid().aTileIsSelected = false;
-				TileOPlayPage.getGrid().aConnectionIsSelected = false;
-				TileOPlayPage.getGrid().selectedConnection = null;
-				TileOPlayPage.getGrid().selectedTile = null;
-	    		
-	    		grid.possibleMoves = pMoves;
-	    		grid.refreshBoard();
-	    		
-	    		if (pMoves.isEmpty()){
-	    			NoPossibleMovesPopOut npm = new NoPossibleMovesPopOut();
-					npm.setVisible(true);					
-					TileOPlayPage.refreshData();
-					//(TileOApplication.getTileO().getCurrentGame()).setNextPlayer();
-					refreshData();
+	    		if(pmc.getMode() == PlayController.Mode.Roll){
+	    			pmc.rollDie();	    		
+		    		pMoves = pmc.getPossibleMoves();
+		    		
+		    		grid.isAPlayerTurn = true; 	    		
+		    		refreshData();
+		    		
+		    		TileOPlayPage.getGrid().aTileIsSelected = false;
+					TileOPlayPage.getGrid().aConnectionIsSelected = false;
+					TileOPlayPage.getGrid().selectedConnection = null;
+					TileOPlayPage.getGrid().selectedTile = null;
+		    		
+		    		grid.possibleMoves = pMoves;
+		    		grid.refreshBoard();
+		    		
+		    		
+		    		if (pMoves.isEmpty()){
+		    			NoPossibleMovesPopOut npm = new NoPossibleMovesPopOut();
+						npm.setVisible(true);					
+						TileOPlayPage.refreshData();
+						refreshData();
+		    		}
+		    		else {
+		    			SelectTilePlayPopOut stpop = new SelectTilePlayPopOut();
+			    		stpop.setVisible(true);
+		    		}
 	    		}
-	    		else {
-	    			SelectTilePlayPopOut stpop = new SelectTilePlayPopOut();
-		    		stpop.setVisible(true);
+	    		else{
+	    			errorLbl.setText("Can't roll. Lmao.");
 	    		}
+	    		
 	    		
 	    	}
 	    });
@@ -293,6 +300,10 @@ public class TileOPlayPage extends JFrame {
 				case GAME_LOSETURNACTIONCARD:
 					LoseTurnWarningPopOut ltwpo = new LoseTurnWarningPopOut();
 					ltwpo.setVisible(true);
+					break;
+				case GAME_REVEALACTIONCARD:
+					RevealPopOut rpo = new RevealPopOut();
+					rpo.setVisible(true);
 					break;
 				case GAME_WON:
 					GameWonPopOut gwpo = new GameWonPopOut();

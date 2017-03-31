@@ -69,6 +69,27 @@ class PlayController {
 			playLoseTurnActionCard()[isLoseTurnActionCard()] / {
 				doPlayLoseTurnActionCard();
 			} -> Roll;
+			playRevealActionCard(Tile tile)[isRevealActionCard()] / {
+				doPlayRevealActionCard(tile);
+			} -> Roll;
+			playLoseTurnRandomlyActionCard()[isLoseTurnRandomlyActionCard()] / {
+				doLoseTurnRandomlyActionCard();
+			} -> Roll;
+			playRevealActionTilesActionCard()[isRevealActionTilesActionCard()] / {
+				doRevealActionTilesActionCard();
+			} -> Roll;
+			playTurnActionTilesInactiveActionCard()[isTurnActionTilesInactiveActionCard()] / {
+				doTurnActionTilesInactiveActionCard();
+			} -> Roll;
+			playWinTileHintActionCard()[isWinTileHintActionCard()] / {
+				doWinTileHintActionCard();
+			} -> Roll;
+			playSendBackToStartActionCard(Player player)[isSendBackToStartActionCard()] / {
+				doSendBackToStartActionCard();
+			} -> Roll;
+			playTeleportOtherActionCard(Tile tile, int playerNumber)[isTeleportOtherActionCard()] / {
+				doTeleportOtherActionCard(tile,playerNumber);
+			} -> Roll;	
 		}
 		
 		Won {
@@ -77,6 +98,7 @@ class PlayController {
 	}
 	
 	1 -> * Tile possibleMoves;
+	lazy String revealedTile;
 	
 
 	
@@ -327,8 +349,27 @@ class PlayController {
 		catch (RuntimeException e) {
 			throw new InvalidInputException(e.getMessage());
 		}
-			
 	} 
+	
+	
+	/*
+	 * Action card "Reveal the type of a tile"
+	 */
+	private void doPlayRevealActionCard(Tile tile) throws InvalidInputException {
+		TileO tileO = TileOApplication.getTileO();
+		Game currentGame = tileO.getCurrentGame();
+		ActionCard currentCard = drawCard(currentGame);
+		try {
+			if (currentCard instanceof RevealActionCard) {
+				revealedTile = ((RevealActionCard) currentCard).play(tile);
+			}
+			currentGame.setNextPlayer();
+			currentGame.setMode(Game.Mode.GAME);	
+		}
+		catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
+	}
 
 	
 	/*
@@ -445,6 +486,14 @@ class PlayController {
 	   return false;	   
    }
    
+   private boolean isRevealActionCard() {
+   	   ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
+	   if(aActionCard instanceof RevealActionCard ) {
+		   return true;
+	   }
+	   return false;
+   }
+   
    private boolean isTeleportAndNormalTile(Tile tile) {
 	   ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof TeleportActionCard && tile instanceof NormalTile ) {
@@ -483,6 +532,53 @@ class PlayController {
 	   if(aActionCard instanceof TeleportActionCard && 
 	   		tile instanceof ActionTile &&
 	   		((ActionTile)tile).getActionTileStatus().equals(ActionTileStatus.Active)) {
+		   return true;
+	   }
+	   return false;
+   }
+   private boolean isLoseTurnRandomlyActionCard() {
+  	 ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
+	   if(aActionCard instanceof LoseTurnRandomlyActionCard ) {
+		   return true;
+	   }
+	   return false;
+   }
+
+   private boolean isRevealActionTilesActionCard() {
+  	 ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
+	   if(aActionCard instanceof RevealActionTilesActionCard ) {
+		   return true;
+	   }
+	   return false;
+   }
+
+   private boolean isTurnActionTilesInactiveActionCard() {
+  	 ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
+	   if(aActionCard instanceof TurnActionTilesInactiveActionCard ) {
+		   return true;
+	   }
+	   return false;
+   }
+
+   private boolean isWinTileHintActionCard() {
+  	 ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
+	   if(aActionCard instanceof WinTileHintActionCard ) {
+		   return true;
+	   }
+	   return false;
+   }
+
+   private boolean isSendBackToStartActionCard() {
+  	 ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
+	   if(aActionCard instanceof SendBackToStartActionCard ) {
+		   return true;
+	   }
+	   return false;
+   }
+
+   private boolean isTeleportOtherActionCard() {
+  	 ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
+	   if(aActionCard instanceof TeleportOtherActionCard ) {
 		   return true;
 	   }
 	   return false;
