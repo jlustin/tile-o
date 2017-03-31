@@ -8,7 +8,7 @@ import java.util.*;
 import ca.mcgill.ecse223.tileo.model.Player.PlayerStatus;
 
 // line 9 "../../../../../TileOPersistence.ump"
-// line 13 "../../../../../TileO (updated Feb10).ump"
+// line 16 "../../../../../TileO (updated Feb10).ump"
 public class Game implements Serializable
 {
 
@@ -27,7 +27,7 @@ public class Game implements Serializable
   private int currentConnectionPieces;
 
   //Game State Machines
-  public enum Mode { DESIGN, GAME, GAME_WON, GAME_ROLLDIEACTIONCARD, GAME_CONNECTTILESACTIONCARD, GAME_REMOVECONNECTIONACTIONCARD, GAME_TELEPORTACTIONCARD, GAME_LOSETURNACTIONCARD, GAME_REVEALACTIONCARD }
+  public enum Mode { DESIGN, GAME, GAME_WON, GAME_ROLLDIEACTIONCARD, GAME_CONNECTTILESACTIONCARD, GAME_REMOVECONNECTIONACTIONCARD, GAME_TELEPORTACTIONCARD, GAME_LOSETURNACTIONCARD, GAME_REVEALACTIONCARD, GAME_LOSETURNRANDOMLYACTIONCARD, GAME_REVEALACTIONTILESACTIONCARD, GAME_TURNACTIONTILESINACTIVEACTIONCARD, GAME_WINTILEHINTACTIONCARD, GAME_SENDBACKTOSTARTACTIONCARD, GAME_TELEPORTOTHERACTIONCARD }
   private Mode mode;
 
   //Game Associations
@@ -573,7 +573,7 @@ public class Game implements Serializable
     placeholderTileO.removeGame(this);
   }
 
-  // line 35 "../../../../../TileO (updated Feb10).ump"
+  // line 45 "../../../../../TileO (updated Feb10).ump"
    public List<Tile> rollDie(){
     List<Tile> possibleMoves = new ArrayList<Tile>();
 		Die die =this.getDie();
@@ -583,7 +583,7 @@ public class Game implements Serializable
 		return possibleMoves;
   }
 
-  // line 44 "../../../../../TileO (updated Feb10).ump"
+  // line 54 "../../../../../TileO (updated Feb10).ump"
    public void determineNextPlayer(){
     boolean found = false;
 		Player player = getCurrentPlayer();
@@ -610,7 +610,7 @@ public class Game implements Serializable
 		setCurrentPlayer(player);
   }
 
-  // line 70 "../../../../../TileO (updated Feb10).ump"
+  // line 80 "../../../../../TileO (updated Feb10).ump"
    public void updateTileStatus(){
     for(Tile tile: getTiles()) {
 			if (tile instanceof ActionTile) {
@@ -619,7 +619,7 @@ public class Game implements Serializable
 		}
   }
 
-  // line 78 "../../../../../TileO (updated Feb10).ump"
+  // line 88 "../../../../../TileO (updated Feb10).ump"
    public void setNextPlayer(){
     determineNextPlayer();
 		updateTileStatus();

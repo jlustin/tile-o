@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 47 "../../../../../TileOPersistence.ump"
-// line 182 "../../../../../TileO (updated Feb10).ump"
+// line 199 "../../../../../TileO (updated Feb10).ump"
 public class WinTile extends Tile
 {
 
@@ -31,6 +31,15 @@ public class WinTile extends Tile
   {
     super.delete();
   }
+
+  // line 203 "../../../../../TileO (updated Feb10).ump"
+   public void doLand(){
+    Game currentGame = this.getGame();  	  
+  	  	this.setHasBeenVisited(true);  	 
+  	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 
+  	  	currentPlayer.setCurrentTile(this); 
+  	  	currentGame.setMode(Game.Mode.GAME_WON);
+  }
   
   //------------------------
   // DEVELOPER CODE - PROVIDED AS-IS
@@ -38,17 +47,6 @@ public class WinTile extends Tile
   
   // line 50 TileOPersistence.ump
   private static final long serialVersionUID = 7777777777777777777L ;
-// line 185 ../../../../../TileO (updated Feb10).ump
-  @Override
-  	public void doLand() {// get the current game
-  	  	Game currentGame = this.getGame();  	  
-  	  	this.setHasBeenVisited(true);  	  
-  	  	// get the current player
-  	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 
-  	  	// set the player's current tile to the tile he has to move to
-  	  	// possible moves from Charles
-  	  	currentPlayer.setCurrentTile(this); //not in the sequence diagram though  	 
-  	  	currentGame.setMode(Game.Mode.GAME_WON);};
 
   
 }
