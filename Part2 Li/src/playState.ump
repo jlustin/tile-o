@@ -101,6 +101,8 @@ class PlayController {
 	lazy String revealedTile;
 	
 
+	
+   
    //Guards
 	
 	private boolean isNormalTile (Tile selectedTile) {
@@ -368,54 +370,7 @@ class PlayController {
 			throw new InvalidInputException(e.getMessage());
 		}
 	}
-	
 
-	/*
-	 * Action card "Lose Turn Randomly"
-	 */
-	 private void doLoseTurnRandomlyActionCard() {
-	 	//TODO: lose turn random
-	 }
-
-
-	/*
-	 * Action card "Reveal Action tiles"
-	 */
-	 private void doRevealActionTilesActionCard() {
-	 
-	 }
-	 
-	/*
-	 * Action card "Turn Action Tiles Inactive"
-	 */
-	 private void doTurnActionTilesInactiveActionCard(){
-	 
-	 }
-	 
-	 
-	/*
-	 * Action card "Win Tile Hint"
-	 */
-	 private void doWinTileHintActionCard() {
-	 
-	 }
-	 
-	 
-	/*
-	 * Action card "Send Back To Start"
-	 */
-	 private void doSendBackToStartActionCard() {
-	 
-	 }
-	 
-	/*
-	 * Action card "Teleport Other"
-	 */
-	 private void doTeleportOtherActionCard(Tile tile, int playerNumber) {
-	 
-	 }
-	 
-	 
 	
 	/*
 	 * 9. Save and load game to continue playing at a later point

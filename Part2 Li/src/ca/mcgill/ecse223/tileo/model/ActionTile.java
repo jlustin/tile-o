@@ -7,7 +7,7 @@ import java.util.*;
 
 // line 35 "../../../../../TileOPersistence.ump"
 // line 1 "../../../../../TileOStates.ump"
-// line 159 "../../../../../TileO (updated Feb10).ump"
+// line 140 "../../../../../TileO (updated Feb10).ump"
 public class ActionTile extends Tile
 {
 
@@ -134,27 +134,6 @@ public class ActionTile extends Tile
     super.delete();
   }
 
-  // line 166 "../../../../../TileO (updated Feb10).ump"
-   public void doLand(){
-    Game currentGame = getGame();
-		Player currentPlayer = currentGame.getCurrentPlayer();
-		currentPlayer.setCurrentTile(this);
-		
-		if (getActionTileStatus() == ActionTileStatus.Inactive) {
-			currentGame.setNextPlayer();
-	  	  	// set possible tile that player chose, that it has been visited
-	  	  	this.setHasBeenVisited(true);  	 
-	  	  	currentGame.setMode(Game.Mode.GAME);
-		}
-		else {
-			Deck deck = currentGame.getDeck();
-			ActionCard currentCard = deck.getCurrentCard();	  
-			currentGame.setMode(currentCard.getActionCardGameMode());
-			deactivate();
-			setHasBeenVisited(true);			
-		}
-  }
-
 
   public String toString()
   {
@@ -170,6 +149,25 @@ public class ActionTile extends Tile
   
   // line 38 TileOPersistence.ump
   private static final long serialVersionUID = 5555555555555555555L ;
+// line 146 ../../../../../TileO (updated Feb10).ump
+  @Override
+	public void doLand() {Game currentGame = getGame();
+		Player currentPlayer = currentGame.getCurrentPlayer();
+		currentPlayer.setCurrentTile(this);
+		
+		if (getActionTileStatus() == ActionTileStatus.Inactive) {
+			currentGame.setNextPlayer();
+	  	  	// set possible tile that player chose, that it has been visited
+	  	  	this.setHasBeenVisited(true);  	 
+	  	  	currentGame.setMode(Game.Mode.GAME);
+		}
+		else {
+			Deck deck = currentGame.getDeck();
+			ActionCard currentCard = deck.getCurrentCard();	  
+			currentGame.setMode(currentCard.getActionCardGameMode());
+			deactivate();
+			setHasBeenVisited(true);			
+		}};
 
   
 }
