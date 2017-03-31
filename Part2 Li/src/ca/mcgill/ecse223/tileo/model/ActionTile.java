@@ -7,7 +7,7 @@ import java.util.*;
 
 // line 35 "../../../../../TileOPersistence.ump"
 // line 1 "../../../../../TileOStates.ump"
-// line 140 "../../../../../TileO (updated Feb10).ump"
+// line 159 "../../../../../TileO (updated Feb10).ump"
 public class ActionTile extends Tile
 {
 
@@ -134,24 +134,9 @@ public class ActionTile extends Tile
     super.delete();
   }
 
-
-  public String toString()
-  {
-    String outputString = "";
-    return super.toString() + "["+
-            "inactivityPeriod" + ":" + getInactivityPeriod()+ "," +
-            "turnsUntilActive" + ":" + getTurnsUntilActive()+ "]"
-     + outputString;
-  }  
-  //------------------------
-  // DEVELOPER CODE - PROVIDED AS-IS
-  //------------------------
-  
-  // line 38 TileOPersistence.ump
-  private static final long serialVersionUID = 5555555555555555555L ;
-// line 146 ../../../../../TileO (updated Feb10).ump
-  @Override
-	public void doLand() {Game currentGame = getGame();
+  // line 166 "../../../../../TileO (updated Feb10).ump"
+   public void doLand(){
+    Game currentGame = getGame();
 		Player currentPlayer = currentGame.getCurrentPlayer();
 		currentPlayer.setCurrentTile(this);
 		
@@ -167,7 +152,24 @@ public class ActionTile extends Tile
 			currentGame.setMode(currentCard.getActionCardGameMode());
 			deactivate();
 			setHasBeenVisited(true);			
-		}};
+		}
+  }
+
+
+  public String toString()
+  {
+    String outputString = "";
+    return super.toString() + "["+
+            "inactivityPeriod" + ":" + getInactivityPeriod()+ "," +
+            "turnsUntilActive" + ":" + getTurnsUntilActive()+ "]"
+     + outputString;
+  }  
+  //------------------------
+  // DEVELOPER CODE - PROVIDED AS-IS
+  //------------------------
+  
+  // line 38 TileOPersistence.ump
+  private static final long serialVersionUID = 5555555555555555555L ;
 
   
 }

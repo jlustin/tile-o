@@ -162,7 +162,6 @@ class ActionTile {
 	immutable Integer inactivityPeriod;
 	Integer turnsUntilActive= 0;
 	  
-	@Override
 	public void doLand() {
 		Game currentGame = getGame();
 		Player currentPlayer = currentGame.getCurrentPlayer();
@@ -186,8 +185,7 @@ class ActionTile {
 
 class NormalTile {
 	isA Tile;
-	
-	@Override
+		
   	public void doLand() { 
   		Game currentGame = getGame();
   	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 
@@ -201,16 +199,11 @@ class NormalTile {
 class WinTile {
 	isA Tile;
 	
-	@Override
   	public void doLand() { 
-  	  	// get the current game
   	  	Game currentGame = this.getGame();  	  
-  	  	this.setHasBeenVisited(true);  	  
-  	  	// get the current player
+  	  	this.setHasBeenVisited(true);  	 
   	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 
-  	  	// set the player's current tile to the tile he has to move to
-  	  	// possible moves from Charles
-  	  	currentPlayer.setCurrentTile(this); //not in the sequence diagram though  	 
+  	  	currentPlayer.setCurrentTile(this); 
   	  	currentGame.setMode(Game.Mode.GAME_WON); 
 	};
 }
@@ -227,25 +220,23 @@ class Deck {
 	  Random randomGenerator = new Random();
 	  int randomPosition;	  
 	  //Pick the firstCard of the deck, and add it in a random position in the deck, repeat these steps 300 times.
-	  for (int i = 0;i<300;i++){
+	  for (int i = 0; i < 300; i++){
 		  randomPosition = randomGenerator.nextInt(32);
 		  tmpCard = getCard(0);
 		  addOrMoveCardAt(tmpCard,randomPosition);
 	  }	  
-	  //set current card to the first card.
 	  setCurrentCard(getCards().get(0));
 	};
 	
 	public void clearCards(){
-	   while (cards.size() > 0)
-	    {
+		while (cards.size() > 0) {
 	      ActionCard aCard = cards.get(cards.size() - 1);
 	      aCard.delete();
 	      cards.remove(aCard);
-	    }
-	    
-	    currentCard = null;
-   }
+		}	    
+		currentCard = null;
+   };
+   
 }
 
 class ActionCard {
@@ -263,7 +254,6 @@ class RollDieActionCard {
 	  return currentGame.rollDie();
   	};
   	
-  	@Override
 	public Game.Mode getActionCardGameMode() {
 		  return Game.Mode.GAME_ROLLDIEACTIONCARD;
 	};
@@ -288,7 +278,6 @@ class ConnectTilesActionCard {
 	  	}
   	};
   
-	@Override
 	public Game.Mode getActionCardGameMode() {
 	  	return Game.Mode.GAME_CONNECTTILESACTIONCARD;
 	};
@@ -306,7 +295,6 @@ class RemoveConnectionActionCard {
 	  }
 	};
 	
-	@Override
 	public Game.Mode getActionCardGameMode() {
 		  return Game.Mode.GAME_REMOVECONNECTIONACTIONCARD;
 	};
@@ -315,7 +303,6 @@ class RemoveConnectionActionCard {
 class TeleportActionCard {
 	isA ActionCard;
 	
-	@Override
   	public Game.Mode getActionCardGameMode() {
 		return Game.Mode.GAME_TELEPORTACTIONCARD;
   	};
@@ -335,7 +322,6 @@ class TeleportActionCard {
 class LoseTurnActionCard {
 	isA ActionCard;
 	
-	@Override
 	public Game.Mode getActionCardGameMode() {
 		  return Game.Mode.GAME_LOSETURNACTIONCARD;
 	};
@@ -350,7 +336,6 @@ class LoseTurnActionCard {
 class RevealActionCard {
 	isA ActionCard;
 	
-	@Override
 	public Game.Mode getActionCardGameMode() {
 		return Game.Mode.GAME_REVEALACTIONCARD;
 	};
@@ -383,6 +368,10 @@ class LoseTurnRandomlyActionCard {
 
 class RevealActionTilesActionCard {
   	isA ActionCard;
+  	
+  	public Game.Mode getActionCardGameMore() {
+  		return Game.Mode.GAME_REVEALACTIONTILESACTIONCARD;
+  	};
 }
 
 class TurnActionTilesInactiveActionCard {

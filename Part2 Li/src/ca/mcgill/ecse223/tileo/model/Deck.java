@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 59 "../../../../../TileOPersistence.ump"
-// line 202 "../../../../../TileO (updated Feb10).ump"
+// line 214 "../../../../../TileO (updated Feb10).ump"
 public class Deck implements Serializable
 {
 
@@ -204,31 +204,29 @@ public class Deck implements Serializable
     }
   }
 
-  // line 207 "../../../../../TileO (updated Feb10).ump"
+  // line 219 "../../../../../TileO (updated Feb10).ump"
    public void shuffle(){
     ActionCard tmpCard;
 	  Random randomGenerator = new Random();
 	  int randomPosition;	  
 	  //Pick the firstCard of the deck, and add it in a random position in the deck, repeat these steps 300 times.
-	  for (int i = 0;i<300;i++){
+	  for (int i = 0; i < 300; i++){
 		  randomPosition = randomGenerator.nextInt(32);
 		  tmpCard = getCard(0);
 		  addOrMoveCardAt(tmpCard,randomPosition);
 	  }	  
-	  //set current card to the first card.
 	  setCurrentCard(getCards().get(0));
   }
-   
+
+  // line 232 "../../../../../TileO (updated Feb10).ump"
    public void clearCards(){
-	   while (cards.size() > 0)
-	    {
+    while (cards.size() > 0) {
 	      ActionCard aCard = cards.get(cards.size() - 1);
 	      aCard.delete();
 	      cards.remove(aCard);
-	    }
-	    
-	    currentCard = null;
-   }
+		}	    
+		currentCard = null;
+  }
   
   //------------------------
   // DEVELOPER CODE - PROVIDED AS-IS
