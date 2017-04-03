@@ -81,14 +81,14 @@ class PlayController {
 			playTurnActionTilesInactiveActionCard()[isTurnActionTilesInactiveActionCard()] / {
 				doTurnActionTilesInactiveActionCard();
 			} -> Roll;
-			playWinTileHintActionCard()[isWinTileHintActionCard()] / {
-				doWinTileHintActionCard();
+			playWinTileHintActionCard(Tile tile)[isWinTileHintActionCard()] / {
+				doWinTileHintActionCard(tile);
 			} -> Roll;
 			playSendBackToStartActionCard(Player player)[isSendBackToStartActionCard()] / {
-				doSendBackToStartActionCard();
+				doSendBackToStartActionCard(player);
 			} -> Roll;
 			playTeleportOtherActionCard(Tile tile, int playerNumber)[isTeleportOtherActionCard()] / {
-				doTeleportOtherActionCard(tile,playerNumber);
+				doTeleportOtherActionCard(tile, playerNumber);
 			} -> Roll;	
 		}
 		
@@ -408,7 +408,7 @@ class PlayController {
 	}
 	
 	//Victor swag
-	private void doTeleportOtherActionCard(int playerNumber, Tile aTile) {
+	private void doTeleportOtherActionCard(Tile aTile, int playerNumber) {
 
 	}
 

@@ -85,7 +85,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean load(int gameIndex)
+  public boolean load(int gameIndex) throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -145,7 +145,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean land(Tile tile)
+  public boolean land(Tile tile) throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -217,7 +217,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playConnectTilesActionCard(Tile tile1,Tile tile2)
+  public boolean playConnectTilesActionCard(Tile tile1,Tile tile2) throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -241,7 +241,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playRemoveConnectionActionCard(Connection c)
+  public boolean playRemoveConnectionActionCard(Connection c) throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -433,7 +433,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playWinTileHintActionCard()
+  public boolean playWinTileHintActionCard(Tile tile)
   {
     boolean wasEventProcessed = false;
     
@@ -444,7 +444,7 @@ public class PlayController
         if (isWinTileHintActionCard())
         {
         // line 84 "../../../../../PlayStateUpdatedApril3.ump"
-          doWinTileHintActionCard();
+          doWinTileHintActionCard(tile);
           setMode(Mode.Roll);
           wasEventProcessed = true;
           break;
@@ -468,7 +468,7 @@ public class PlayController
         if (isSendBackToStartActionCard())
         {
         // line 87 "../../../../../PlayStateUpdatedApril3.ump"
-          doSendBackToStartActionCard();
+          doSendBackToStartActionCard(player);
           setMode(Mode.Roll);
           wasEventProcessed = true;
           break;
@@ -492,7 +492,7 @@ public class PlayController
         if (isTeleportOtherActionCard())
         {
         // line 90 "../../../../../PlayStateUpdatedApril3.ump"
-          doTeleportOtherActionCard(tile,playerNumber);
+          doTeleportOtherActionCard(tile, playerNumber);
           setMode(Mode.Roll);
           wasEventProcessed = true;
           break;
@@ -901,7 +901,7 @@ public class PlayController
    * Chuyang Lee
    */
   // line 389 "../../../../../PlayStateUpdatedApril3.ump"
-   private void revealActionTilesActionCard(){
+   private void doRevealActionTilesActionCard(){
     
   }
 
@@ -909,8 +909,8 @@ public class PlayController
   /**
    * Charles
    */
-  // line 393 "../../../../../PlayStateUpdatedApril3.ump"
-   private void turnActionTilesInactiveActionCard(){
+  // line 394 "../../../../../PlayStateUpdatedApril3.ump"
+   private void doTurnActionTilesInactiveActionCard(){
     
   }
 
@@ -920,7 +920,7 @@ public class PlayController
    * or one of its neighbour is the WinTile
    */
   // line 400 "../../../../../PlayStateUpdatedApril3.ump"
-   private void winTileHintActionCard(Tile aTile){
+   private void doWinTileHintActionCard(Tile aTile){
     
   }
 
@@ -929,8 +929,17 @@ public class PlayController
    * Chris Chan
    * Action card "Send a player back to its starting position"
    */
-  // line 407 "../../../../../PlayStateUpdatedApril3.ump"
-   private void sendBackToStartActionCard(Player aPlayer){
+  // line 408 "../../../../../PlayStateUpdatedApril3.ump"
+   private void doSendBackToStartActionCard(Player aPlayer){
+    
+  }
+
+
+  /**
+   * Victor swag
+   */
+  // line 413 "../../../../../PlayStateUpdatedApril3.ump"
+   private void doTeleportOtherActionCard(Tile aTile, int playerNumber){
     
   }
 
@@ -939,12 +948,12 @@ public class PlayController
    * 9. Save and load game to continue playing at a later point
    * Li
    */
-  // line 419 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 421 "../../../../../PlayStateUpdatedApril3.ump"
    public void saveGame(){
     TileOApplication.save();
   }
 
-  // line 423 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 425 "../../../../../PlayStateUpdatedApril3.ump"
    public Game loadGame(int index) throws InvalidInputException{
     TileO tileO = TileOApplication.getTileO();
 		try {
@@ -960,7 +969,7 @@ public class PlayController
   /**
    * Helper method to check if two tiles are adjacent
    */
-  // line 439 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 441 "../../../../../PlayStateUpdatedApril3.ump"
    public boolean isAdjacent(Tile tile1, Tile tile2){
     int x1 = tile1.getX();
 		int y1 = tile1.getY();
@@ -983,7 +992,7 @@ public class PlayController
   /**
    * Helper method to check if two tiles are already connected
    */
-  // line 461 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 463 "../../../../../PlayStateUpdatedApril3.ump"
    public boolean isConnected(Tile tile1, Tile tile2){
     for (Connection c1: tile1.getConnections()){
 			for (Connection c2: tile2.getConnections()){
@@ -999,7 +1008,7 @@ public class PlayController
   /**
    * Guards
    */
-  // line 473 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 475 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isInGameMode(int gameIndex){
     Game selectedGame = TileOApplication.getTileO().getGame(gameIndex);
 	   if(selectedGame.getMode().equals(Game.Mode.GAME)) {
@@ -1008,7 +1017,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 481 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 483 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isInWonMode(int gameIndex){
     Game selectedGame = TileOApplication.getTileO().getGame(gameIndex);
 	   if(selectedGame.getMode().equals(Game.Mode.GAME_WON)){
@@ -1017,7 +1026,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 489 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 491 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isNotInGameOrWonMode(int gameIndex){
     Game selectedGame = TileOApplication.getTileO().getGame(gameIndex);
 	   if(selectedGame.getMode().equals(Game.Mode.GAME)||selectedGame.getMode().equals(Game.Mode.GAME_WON)){
@@ -1026,7 +1035,7 @@ public class PlayController
 	   return true;
   }
 
-  // line 497 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 499 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isRollDieActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof RollDieActionCard ) {
@@ -1035,7 +1044,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 505 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 507 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isConnectTilesActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof ConnectTilesActionCard ) {
@@ -1044,7 +1053,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 513 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 515 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isRemoveConnectionActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof RemoveConnectionActionCard ) {
@@ -1053,7 +1062,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 521 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 523 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isLoseTurnActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof LoseTurnActionCard ) {
@@ -1062,7 +1071,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 529 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 531 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isRevealActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof RevealActionCard ) {
@@ -1071,7 +1080,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 537 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 539 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isTeleportAndNormalTile(Tile tile){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof TeleportActionCard && tile instanceof NormalTile ) {
@@ -1080,7 +1089,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 545 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 547 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isTeleportAndWinTile(Tile tile){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof TeleportActionCard && tile instanceof WinTile ) {
@@ -1089,7 +1098,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 553 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 555 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isTeleportAndInactiveActionTile(Tile tile){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();   		
    		if (aActionCard instanceof TeleportActionCard && 
@@ -1100,7 +1109,7 @@ public class PlayController
    		return false;
   }
 
-  // line 563 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 565 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isActionTileAndInactive(Tile tile){
     if (tile instanceof ActionTile && ((ActionTile)tile).getActionTileStatus().equals(ActionTileStatus.Inactive)) {
 			return true;
@@ -1108,7 +1117,7 @@ public class PlayController
 		return false;
   }
 
-  // line 570 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 572 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isTeleportAndActiveActionTile(Tile tile){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof TeleportActionCard && 
@@ -1119,7 +1128,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 579 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 581 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isLoseTurnRandomlyActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof LoseTurnRandomlyActionCard ) {
@@ -1128,7 +1137,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 587 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 589 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isRevealActionTilesActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof RevealActionTilesActionCard ) {
@@ -1137,7 +1146,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 595 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 597 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isTurnActionTilesInactiveActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof TurnActionTilesInactiveActionCard ) {
@@ -1146,7 +1155,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 603 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 605 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isWinTileHintActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof WinTileHintActionCard ) {
@@ -1155,7 +1164,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 611 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 613 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isSendBackToStartActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof SendBackToStartActionCard ) {
@@ -1164,7 +1173,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 619 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 621 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isTeleportOtherActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof TeleportOtherActionCard ) {
@@ -1180,16 +1189,5 @@ public class PlayController
     return super.toString() + "["+
             "revealedTile" + ":" + getRevealedTile()+ "]"
      + outputString;
-  }  
-  //------------------------
-  // DEVELOPER CODE - PROVIDED AS-IS
-  //------------------------
-  
-  // line 409 ../../../../../PlayStateUpdatedApril3.ump
-  private void teleportOtherActionCard (int playerNumber, Tile aTile) 
-  {
-    
   }
-
-  
 }
