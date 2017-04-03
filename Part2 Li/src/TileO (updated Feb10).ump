@@ -379,6 +379,15 @@ class RevealActionCard {
 
 class LoseTurnRandomlyActionCard {
   	isA ActionCard;
+	
+	//@Override
+	public Game.Mode getActionCardGameMode() {
+		return Game.Mode.GAME_LOSETURNRANDOMLYACTIONCARD;
+	};
+	
+	public void play(){
+		
+	};
 }
 
 class RevealActionTilesActionCard {
