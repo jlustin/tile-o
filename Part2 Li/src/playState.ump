@@ -370,6 +370,10 @@ class PlayController {
 			throw new InvalidInputException(e.getMessage());
 		}
 	}
+	
+	private void doLoseTurnRandActionCard(Tile tile) {
+
+	}
 
 	
 	/*

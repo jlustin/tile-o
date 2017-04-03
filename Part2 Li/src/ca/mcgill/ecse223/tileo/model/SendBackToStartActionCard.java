@@ -4,9 +4,9 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
-// line 95 "../../../../../TileOPersistence.ump"
-// line 333 "../../../../../TileO (updated April3).ump"
-public class LoseTurnActionCard extends ActionCard
+// line 135 "../../../../../TileOPersistence.ump"
+// line 430 "../../../../../TileO (updated April3).ump"
+public class SendBackToStartActionCard extends ActionCard
 {
 
   //------------------------
@@ -17,7 +17,7 @@ public class LoseTurnActionCard extends ActionCard
   // CONSTRUCTOR
   //------------------------
 
-  public LoseTurnActionCard(String aInstructions, Deck aDeck)
+  public SendBackToStartActionCard(String aInstructions, Deck aDeck)
   {
     super(aInstructions, aDeck);
   }
@@ -35,24 +35,22 @@ public class LoseTurnActionCard extends ActionCard
   /**
    * @Override
    */
-  // line 338 "../../../../../TileO (updated April3).ump"
+  // line 435 "../../../../../TileO (updated April3).ump"
    public Game.Mode getActionCardGameMode(){
-    return Game.Mode.GAME_LOSETURNACTIONCARD;
+    return Game.Mode.GAME_SENDBACKTOSTARTACTIONCARD;
   }
 
-  // line 342 "../../../../../TileO (updated April3).ump"
-   public void play(){
-    Game currentGame = super.getDeck().getGame();
-	   	Player currentplayer = currentGame.getCurrentPlayer();
-	   	currentplayer.loseTurns(currentGame.numberOfPlayers() + 1);
+  // line 439 "../../../../../TileO (updated April3).ump"
+   public void play(Player aPlayer){
+    
   }
   
   //------------------------
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 98 TileOPersistence.ump
-  private static final long serialVersionUID = 6060606060606060606L ;
+  // line 138 TileOPersistence.ump
+  private static final long serialVersionUID = 1483212342385938245L ;
 
   
 }
