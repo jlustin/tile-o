@@ -37,6 +37,7 @@ public class WinTile extends Tile
    * @Override
    */
   // line 204 "../../../../../TileO (updated April3).ump"
+  @Override
    public void doLand(){
     // get the current game
   	  	Game currentGame = this.getGame();  	  

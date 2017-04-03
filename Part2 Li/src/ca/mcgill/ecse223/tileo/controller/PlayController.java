@@ -85,7 +85,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean load(int gameIndex) throws InvalidInputException
+  public boolean load(int gameIndex)
   {
     boolean wasEventProcessed = false;
     
@@ -145,7 +145,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean land(Tile tile) throws InvalidInputException
+  public boolean land(Tile tile)
   {
     boolean wasEventProcessed = false;
     
@@ -217,7 +217,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playConnectTilesActionCard(Tile tile1,Tile tile2) throws InvalidInputException
+  public boolean playConnectTilesActionCard(Tile tile1,Tile tile2)
   {
     boolean wasEventProcessed = false;
     
@@ -241,7 +241,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playRemoveConnectionActionCard(Connection c) throws InvalidInputException
+  public boolean playRemoveConnectionActionCard(Connection c)
   {
     boolean wasEventProcessed = false;
     
@@ -433,7 +433,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playWinTileHintActionCard(Tile aTile)
+  public boolean playWinTileHintActionCard()
   {
     boolean wasEventProcessed = false;
     
@@ -444,7 +444,7 @@ public class PlayController
         if (isWinTileHintActionCard())
         {
         // line 84 "../../../../../PlayStateUpdatedApril3.ump"
-          doWinTileHintActionCard(aTile);
+          doWinTileHintActionCard();
           setMode(Mode.Roll);
           wasEventProcessed = true;
           break;
@@ -468,7 +468,7 @@ public class PlayController
         if (isSendBackToStartActionCard())
         {
         // line 87 "../../../../../PlayStateUpdatedApril3.ump"
-          doSendBackToStartActionCard(player);
+          doSendBackToStartActionCard();
           setMode(Mode.Roll);
           wasEventProcessed = true;
           break;
@@ -481,7 +481,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playTeleportOtherActionCard(Tile aTile, int playerNumber)
+  public boolean playTeleportOtherActionCard(Tile tile,int playerNumber)
   {
     boolean wasEventProcessed = false;
     
@@ -492,7 +492,7 @@ public class PlayController
         if (isTeleportOtherActionCard())
         {
         // line 90 "../../../../../PlayStateUpdatedApril3.ump"
-          doTeleportOtherActionCard(aTile, playerNumber);
+          doTeleportOtherActionCard(tile,playerNumber);
           setMode(Mode.Roll);
           wasEventProcessed = true;
           break;
@@ -901,7 +901,7 @@ public class PlayController
    * Chuyang Lee
    */
   // line 389 "../../../../../PlayStateUpdatedApril3.ump"
-   private void doRevealActionTilesActionCard(){
+   private void revealActionTilesActionCard(){
     
   }
 
@@ -910,17 +910,17 @@ public class PlayController
    * Charles
    */
   // line 393 "../../../../../PlayStateUpdatedApril3.ump"
-   private void doTurnActionTilesInactiveActionCard(){
+   private void turnActionTilesInactiveActionCard(){
     
   }
 
 
   /**
-   * Justin (Jun Yu) Lei Action card “Click on a tile to know if it
+   * Justin (Jun Yu) Lei Action card ï¿½Click on a tile to know if it
    * or one of its neighbour is the WinTile
    */
   // line 400 "../../../../../PlayStateUpdatedApril3.ump"
-   private void doWinTileHintActionCard(Tile aTile){
+   private void winTileHintActionCard(Tile aTile){
     
   }
 
@@ -930,7 +930,7 @@ public class PlayController
    * Action card "Send a player back to its starting position"
    */
   // line 407 "../../../../../PlayStateUpdatedApril3.ump"
-   private void doSendBackToStartActionCard(Player aPlayer){
+   private void sendBackToStartActionCard(Player aPlayer){
     
   }
 
@@ -1186,7 +1186,7 @@ public class PlayController
   //------------------------
   
   // line 409 ../../../../../PlayStateUpdatedApril3.ump
-  private void doTeleportOtherActionCard (Tile aTile, int playerNumber) 
+  private void teleportOtherActionCard (int playerNumber, Tile aTile) 
   {
     
   }

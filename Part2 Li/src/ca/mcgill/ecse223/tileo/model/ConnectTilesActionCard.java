@@ -51,10 +51,9 @@ public class ConnectTilesActionCard extends ActionCard
   }
 
 
-  /**
-   * @Override
-   */
+  
   // line 291 "../../../../../TileO (updated April3).ump"
+   @Override
    public Game.Mode getActionCardGameMode(){
     return Game.Mode.GAME_CONNECTTILESACTIONCARD;
   }

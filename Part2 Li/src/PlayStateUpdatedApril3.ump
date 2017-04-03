@@ -384,29 +384,31 @@ class PlayController {
 	 * Action card "Reveal all action tiles for 5 seconds"
 	 * Chuyang Lee
 	 */
-	private void revealActionTilesActionCard() {
-
-	}
-	// Charles
-	private void turnActionTilesInactiveActionCard() {
+	private void doRevealActionTilesActionCard() {
 
 	}
 	
-	// Justin (Jun Yu) Lei Action card “Click on a tile to know if it 
-	// or one of its neighbour is the WinTile
- 
-	private void winTileHintActionCard(Tile aTile) {
+	// Charles
+	private void doTurnActionTilesInactiveActionCard() {
 
 	}
+	
+	// Justin (Jun Yu) Lei Action card ï¿½Click on a tile to know if it 
+	// or one of its neighbour is the WinTile
+	private void doWinTileHintActionCard(Tile aTile) {
+
+	}
+	
 	/*
 	 * Chris Chan
 	 * Action card "Send a player back to its starting position"
 	 */
-	private void sendBackToStartActionCard(Player aPlayer) {
+	private void doSendBackToStartActionCard(Player aPlayer) {
 
 	}
+	
 	//Victor swag
-	private void teleportOtherActionCard(int playerNumber Tile aTile) {
+	private void doTeleportOtherActionCard(int playerNumber, Tile aTile) {
 
 	}
 

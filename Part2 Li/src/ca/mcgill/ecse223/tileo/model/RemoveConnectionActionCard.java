@@ -44,10 +44,9 @@ public class RemoveConnectionActionCard extends ActionCard
   }
 
 
-  /**
-   * @Override
-   */
+ 
   // line 309 "../../../../../TileO (updated April3).ump"
+   @Override
    public Game.Mode getActionCardGameMode(){
     return Game.Mode.GAME_REMOVECONNECTIONACTIONCARD;
   }

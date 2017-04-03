@@ -36,6 +36,7 @@ public class RevealActionTilesActionCard extends ActionCard
    * @Override
    */
   // line 395 "../../../../../TileO (updated April3).ump"
+  @Override
    public Game.Mode getActionCardGameMode(){
     return Game.Mode.GAME_REVEALACTIONTILESACTIONCARD;
   }

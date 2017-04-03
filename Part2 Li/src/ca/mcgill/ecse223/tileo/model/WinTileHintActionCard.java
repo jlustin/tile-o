@@ -36,6 +36,7 @@ public class WinTileHintActionCard extends ActionCard
    * @Override
    */
   // line 421 "../../../../../TileO (updated April3).ump"
+  @Override
    public Game.Mode getActionCardGameMode(){
     return Game.Mode.GAME_WINTILEHINTACTIONCARD;
   }

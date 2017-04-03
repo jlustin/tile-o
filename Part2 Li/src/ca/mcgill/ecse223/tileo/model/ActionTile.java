@@ -135,10 +135,9 @@ public class ActionTile extends Tile
   }
 
 
-  /**
-   * @Override
-   */
+  
   // line 165 "../../../../../TileO (updated April3).ump"
+  @Override
    public void doLand(){
     Game currentGame = getGame();
 		Player currentPlayer = currentGame.getCurrentPlayer();
