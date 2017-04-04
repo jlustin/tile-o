@@ -30,6 +30,7 @@ public class TilePanelDesign extends JPanel{
 	public boolean aConnectionIsSelected = false;
 	public Connection selectedConnection;
 
+	public boolean isTileModified = false;
 
 	//UI elements
 	private List<Rectangle2D> rectangles = new ArrayList<Rectangle2D>();
@@ -81,8 +82,9 @@ public class TilePanelDesign extends JPanel{
 	
 	public void setGame(Game game) {
 		init(game);
-		repaint();
+		//repaint();
 	}
+
 	
 	//below are 3 helper methods, DONT TOUCH :)))
 	public int getXAxis(Game aGame) {
@@ -137,7 +139,9 @@ public class TilePanelDesign extends JPanel{
 			float locationX = SPACING;
 			float locationY = SPACING;
 			
+			//iterates through all the tiles of the game
 			for (Tile aTile: myGame.getTiles()) {
+				// drawing colored tiles ------------
 				int x = aTile.getX()-1;
 				int y = aTile.getY()-1;
 				locationX = (float) (SPACING + gridspace*x);
@@ -167,6 +171,10 @@ public class TilePanelDesign extends JPanel{
 				g2d.draw(rect);
 				g2d.fill(rect);
 				
+				//---------------end of colored tiles
+				
+				
+				//write for each action tile the # for inactivity period
 				if (aTile instanceof ActionTile) {
 					Rectangle2D r = tRectangles.get(aTile);
 					String inactive = String.valueOf(((ActionTile) aTile).getInactivityPeriod());
@@ -175,23 +183,27 @@ public class TilePanelDesign extends JPanel{
 							(int) r.getCenterX(), 
 							(int) r.getCenterY());
 				}
+				//-------------end of inactivity period
 				
-				if (selectedTile != null && selectedTile.equals(aTile)) {
-					aTileIsSelected = true;
-					Rectangle2D rectangle = tRectangles.get(aTile);
-					
-					g2d.setColor(Color.PINK);
 				
-					g2d.fill(rectangle);
-				}
 				repaint();
 			}
+		
+			//if a tile is selected, color it in pink
+			if (selectedTile != null) {
+				aTileIsSelected = true;
+				Rectangle2D rectangle = tRectangles.get(selectedTile);				
+				g2d.setColor(Color.PINK);			
+				g2d.fill(rectangle);
+			}
 			
+			//iterates through the connections of the game
 			for (Connection aConnection: myGame.getConnections()){
 				List<Tile> tempTiles = aConnection.getTiles();
 				if(tempTiles.size() == 2){
 					Tile tile1 = tempTiles.get(0);
 					Tile tile2 = tempTiles.get(1);
+					
 					//horizontal
 					if (isH(tile1, tile2)) {				
 						locationX = (float) (SPACING + squareSize + smallestXIndex(tile1, tile2)*gridspace);
@@ -209,7 +221,7 @@ public class TilePanelDesign extends JPanel{
 						g2d.fill(rect);
 					}					
 					//vertical			
-					else if(isV(tile1, tile2)) {
+					else {
 						locationX = (float) (((700/axisSize)/2 - SPACING/2) + smallestXIndex(tile1, tile2)*gridspace);
 						locationY = (float) (SPACING + squareSize + smallestYIndex(tile1, tile2)*gridspace);
 
@@ -224,15 +236,16 @@ public class TilePanelDesign extends JPanel{
 						g2d.setColor(Color.BLACK);
 						g2d.fill(rect);
 					}										
-				}
-				
-				if (selectedConnection != null && selectedConnection.equals(aConnection)){
-					aConnectionIsSelected = true;
-					Rectangle2D rectangle = cRectangles.get(aConnection);
-					g2d.setColor(Color.PINK);
-					g2d.fill(rectangle);
-				}				
-			}			
+				}			
+			}
+			
+			//if a connection is selected
+			if (selectedConnection != null){
+				aConnectionIsSelected = true;
+				Rectangle2D rectangle = cRectangles.get(selectedConnection);
+				g2d.setColor(Color.PINK);
+				g2d.fill(rectangle);
+			}	
 		}
 	}
 	

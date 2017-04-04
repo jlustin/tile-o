@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.tileo.controller.PlayController;
-import ca.mcgill.ecse223.tileo.controller.PlayModeController;
+
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

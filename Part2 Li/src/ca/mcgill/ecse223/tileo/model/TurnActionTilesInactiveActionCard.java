@@ -3,11 +3,10 @@
 
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
-import java.util.List;
 
-// line 71 "../../../../../TileOPersistence.ump"
-// line 256 "../../../../../TileO (updated April3).ump"
-public class RollDieActionCard extends ActionCard
+// line 121 "../../../../../TileOPersistence.ump"
+// line 403 "../../../../../TileO (updated April3).ump"
+public class TurnActionTilesInactiveActionCard extends ActionCard
 {
 
   //------------------------
@@ -18,7 +17,7 @@ public class RollDieActionCard extends ActionCard
   // CONSTRUCTOR
   //------------------------
 
-  public RollDieActionCard(String aInstructions, Deck aDeck)
+  public TurnActionTilesInactiveActionCard(String aInstructions, Deck aDeck)
   {
     super(aInstructions, aDeck);
   }
@@ -32,27 +31,27 @@ public class RollDieActionCard extends ActionCard
     super.delete();
   }
 
-  // line 260 "../../../../../TileO (updated April3).ump"
-   public List<Tile> play(){
-    Game currentGame = getDeck().getGame();
-	  return currentGame.rollDie();
-  }
-
 
   /**
    * @Override
    */
-  // line 266 "../../../../../TileO (updated April3).ump"
+  // line 407 "../../../../../TileO (updated April3).ump"
+  @Override
    public Game.Mode getActionCardGameMode(){
-    return Game.Mode.GAME_ROLLDIEACTIONCARD;
+    return Game.Mode.GAME_TURNACTIONTILESINACTIVEACTIONCARD;
+  }
+
+  // line 412 "../../../../../TileO (updated April3).ump"
+   public void play(){
+    
   }
   
   //------------------------
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 74 TileOPersistence.ump
-  private static final long serialVersionUID = 2020202020202020202L ;
+  // line 124 TileOPersistence.ump
+  private static final long serialVersionUID = 3829385123748593214L ;
 
   
 }
