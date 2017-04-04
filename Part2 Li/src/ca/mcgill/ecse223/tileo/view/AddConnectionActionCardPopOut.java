@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 import ca.mcgill.ecse223.tileo.controller.PlayController;
-import ca.mcgill.ecse223.tileo.controller.PlayModeController;
+
 import ca.mcgill.ecse223.tileo.model.Connection;
 import ca.mcgill.ecse223.tileo.model.Tile;
 
