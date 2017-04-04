@@ -870,7 +870,7 @@ public class PlayController
    */
   // line 359 "../../../../../PlayStateUpdatedApril3.ump"
    private void doPlayRevealActionCard(Tile tile) throws InvalidInputException{
-    TileO tileO = TileOApplication.getTileO();
+	   	TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		ActionCard currentCard = drawCard(currentGame);
 		try {
@@ -892,7 +892,15 @@ public class PlayController
    */
   // line 381 "../../../../../PlayStateUpdatedApril3.ump"
    private void doLoseTurnRandomlyActionCard(){
-    
+	   	TileO tileO = TileOApplication.getTileO();
+		Game currentGame = tileO.getCurrentGame();
+		ActionCard currentCard = drawCard(currentGame);
+
+		if (currentCard instanceof LoseTurnRandomlyActionCard) {
+			((LoseTurnRandomlyActionCard) currentCard).play();
+		}
+		currentGame.setNextPlayer();
+		currentGame.setMode(Game.Mode.GAME);
   }
 
 
