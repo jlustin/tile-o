@@ -4,6 +4,10 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
+import javax.swing.JRadioButton;
+
+import ca.mcgill.ecse223.tileo.view.SendBackToStartPopOut;
+
 // line 135 "../../../../../TileOPersistence.ump"
 // line 430 "../../../../../TileO (updated April3).ump"
 public class SendBackToStartActionCard extends ActionCard
@@ -42,7 +46,11 @@ public class SendBackToStartActionCard extends ActionCard
 
   // line 439 "../../../../../TileO (updated April3).ump"
    public void play(Player aPlayer){
-    
+	   Game currentGame = super.getDeck().getGame();
+	   int chosenPlayer = 0;
+	   aPlayer = currentGame.getPlayer(chosenPlayer);
+	   Tile startingTile = aPlayer.getStartingTile();
+	   aPlayer.setCurrentTile(startingTile);
   }
   
   //------------------------

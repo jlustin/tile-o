@@ -457,7 +457,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playSendBackToStartActionCard(Player player)
+  public boolean playSendBackToStartActionCard(Player player) throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -930,7 +930,20 @@ public class PlayController
    * Action card "Send a player back to its starting position"
    */
   // line 408 "../../../../../PlayStateUpdatedApril3.ump"
-   private void doSendBackToStartActionCard(Player aPlayer){
+   private void doSendBackToStartActionCard(Player aPlayer) throws InvalidInputException{
+	   TileO tileO = TileOApplication.getTileO();
+	   Game currentGame = tileO.getCurrentGame();
+	   ActionCard currentCard = drawCard(currentGame);
+	   
+	   try{
+		   if(currentCard instanceof SendBackToStartActionCard){
+			   ((SendBackToStartActionCard) currentCard).play(aPlayer);
+		   }
+		   currentGame.setNextPlayer();
+		   currentGame.setMode(Game.Mode.GAME);
+	   }catch (RuntimeException e) {
+		   throw new InvalidInputException (e.getMessage());
+	   }
     
   }
 
