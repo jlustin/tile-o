@@ -43,7 +43,9 @@ public class TeleportOtherActionCard extends ActionCard
 
   // line 453 "../../../../../TileO (updated April3).ump"
    public void play(int playerNumber, Tile aTile){
-    
+    Game currentGame = super.getDeck().getGame();
+    Player chosenPlayer = currentGame.getPlayer(playerNumber + 1);
+    chosenPlayer.setCurrentTile(aTile);
   }
   
   //------------------------

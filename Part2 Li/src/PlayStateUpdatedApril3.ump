@@ -408,7 +408,7 @@ class PlayController {
 	}
 	
 	//Victor swag
-	private void doTeleportOtherActionCard(Tile aTile, int playerNumber) {
+	private void doTeleportOtherActionCard(int playerNumber, Tile aTile) {
 
 	}
 
