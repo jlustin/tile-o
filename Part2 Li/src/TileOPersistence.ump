@@ -118,7 +118,7 @@ class RevealActionTilesActionCard {
 	
 }
 
-class TurnActionInactiveActionCard {
+class TurnActionTilesInactiveActionCard {
   	depend java.io.Serializable;
 	isA Serializable;
 	private static final long serialVersionUID = 3829385123748593214L;
@@ -135,7 +135,7 @@ class WinTileHintActionCard {
 class SendBackToStartActionCard {
   	depend java.io.Serializable;
 	isA Serializable;
-	private static final long serialVersionUID = 9483212342385938245L;
+	private static final long serialVersionUID = 1483212342385938245L;
 	
 }
 

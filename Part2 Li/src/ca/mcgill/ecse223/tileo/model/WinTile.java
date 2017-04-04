@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 47 "../../../../../TileOPersistence.ump"
-// line 182 "../../../../../TileO (updated Feb10).ump"
+// line 199 "../../../../../TileO (updated April3).ump"
 public class WinTile extends Tile
 {
 
@@ -31,16 +31,15 @@ public class WinTile extends Tile
   {
     super.delete();
   }
-  
-  //------------------------
-  // DEVELOPER CODE - PROVIDED AS-IS
-  //------------------------
-  
-  // line 50 TileOPersistence.ump
-  private static final long serialVersionUID = 7777777777777777777L ;
-// line 185 ../../../../../TileO (updated Feb10).ump
+
+
+  /**
+   * @Override
+   */
+  // line 204 "../../../../../TileO (updated April3).ump"
   @Override
-  	public void doLand() {// get the current game
+   public void doLand(){
+    // get the current game
   	  	Game currentGame = this.getGame();  	  
   	  	this.setHasBeenVisited(true);  	  
   	  	// get the current player
@@ -48,7 +47,15 @@ public class WinTile extends Tile
   	  	// set the player's current tile to the tile he has to move to
   	  	// possible moves from Charles
   	  	currentPlayer.setCurrentTile(this); //not in the sequence diagram though  	 
-  	  	currentGame.setMode(Game.Mode.GAME_WON);};
+  	  	currentGame.setMode(Game.Mode.GAME_WON);
+  }
+  
+  //------------------------
+  // DEVELOPER CODE - PROVIDED AS-IS
+  //------------------------
+  
+  // line 50 TileOPersistence.ump
+  private static final long serialVersionUID = 7777777777777777777L ;
 
   
 }

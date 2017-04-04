@@ -5,7 +5,7 @@ package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
 // line 95 "../../../../../TileOPersistence.ump"
-// line 305 "../../../../../TileO (updated Feb10).ump"
+// line 333 "../../../../../TileO (updated April3).ump"
 public class LoseTurnActionCard extends ActionCard
 {
 
@@ -31,7 +31,15 @@ public class LoseTurnActionCard extends ActionCard
     super.delete();
   }
 
-  // line 314 "../../../../../TileO (updated Feb10).ump"
+
+  
+  // line 338 "../../../../../TileO (updated April3).ump"
+  @Override
+   public Game.Mode getActionCardGameMode(){
+    return Game.Mode.GAME_LOSETURNACTIONCARD;
+  }
+
+  // line 342 "../../../../../TileO (updated April3).ump"
    public void play(){
     Game currentGame = super.getDeck().getGame();
 	   	Player currentplayer = currentGame.getCurrentPlayer();
@@ -44,9 +52,6 @@ public class LoseTurnActionCard extends ActionCard
   
   // line 98 TileOPersistence.ump
   private static final long serialVersionUID = 6060606060606060606L ;
-// line 308 ../../../../../TileO (updated Feb10).ump
-  @Override
-	public Game.Mode getActionCardGameMode() {return Game.Mode.GAME_LOSETURNACTIONCARD;};
 
   
 }
