@@ -9,7 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 import ca.mcgill.ecse223.tileo.controller.PlayController;
-import ca.mcgill.ecse223.tileo.controller.PlayModeController;
+
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;

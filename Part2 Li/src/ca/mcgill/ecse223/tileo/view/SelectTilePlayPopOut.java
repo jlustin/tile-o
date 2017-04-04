@@ -13,7 +13,7 @@ import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.DesignModeController;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 import ca.mcgill.ecse223.tileo.controller.PlayController;
-import ca.mcgill.ecse223.tileo.controller.PlayModeController;
+
 import ca.mcgill.ecse223.tileo.model.Tile;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
