@@ -42,10 +42,11 @@ import javax.swing.JSpinner;
 public class TileODesignPage extends JFrame {
 
 	private static TilePanelDesign grid = new TilePanelDesign(TileOApplication.getTileO().getCurrentGame());
-	private DesignModeController dmc = new DesignModeController();
+	public static DesignModeController dmc = new DesignModeController();
 	private PlayController pmc = new PlayController();
 	private static DesignHelpPO helpPop = new DesignHelpPO();
 	private static SavePopOut savePop = new SavePopOut();
+	private static DeckPopOut deckPop = new DeckPopOut();
 	public static int numberOfPlayers;
 	private static int numberOfGames = 0;
 	private JPanel contentPane;
@@ -87,21 +88,9 @@ public class TileODesignPage extends JFrame {
 	private JButton removeConnectionBtn;
 	
 	//Create deck Panel
+	private JLabel createDeckLBl;
 	private JPanel createDeckPnl;
-	private JLabel createDeckLbl;
-	private JLabel teleportCardLbl;
-	private JLabel removeConnectionCardLbl;
-	private JLabel rollDieCardLbl;
-	private JLabel connectTilesCardLbl;
-	private JLabel loseTurnCardsLbl;
-	private JLabel revealCardsLbl;
     private JButton createDeckBtn;
-    private JTextField removeConnectionNum;
-	private JTextField teleportNum;
-	private JTextField rollDieNum;
-	private JTextField connectTileNum;
-	private JTextField loseTurnNum;
-	private JTextField revealNum;
 	
 	//Setting player starting tile Panel
 	private JPanel startingTilePnl;
@@ -119,6 +108,7 @@ public class TileODesignPage extends JFrame {
 	private JButton startGameBtn;
 	private JLabel unclearLbl;
 	private JButton helpBtn;
+	
 	
 	
     
@@ -203,18 +193,18 @@ public class TileODesignPage extends JFrame {
 	    		.addGroup(gl_removeConnectionPnl.createSequentialGroup()
 	    			.addGap(17)
 	    			.addComponent(removeConnectionLbl)
-	    			.addPreferredGap(ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
-	    			.addComponent(removeConnectionBtn))
+	    			.addPreferredGap(ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+	    			.addComponent(removeConnectionBtn)
+	    			.addGap(32))
 	    );
 	    gl_removeConnectionPnl.setVerticalGroup(
 	    	gl_removeConnectionPnl.createParallelGroup(Alignment.LEADING)
-	    		.addGap(0, 44, Short.MAX_VALUE)
 	    		.addGroup(gl_removeConnectionPnl.createSequentialGroup()
 	    			.addContainerGap()
 	    			.addGroup(gl_removeConnectionPnl.createParallelGroup(Alignment.BASELINE)
 	    				.addComponent(removeConnectionLbl)
 	    				.addComponent(removeConnectionBtn))
-	    			.addContainerGap(18, Short.MAX_VALUE))
+	    			.addContainerGap(7, Short.MAX_VALUE))
 	    );
 	    removeConnectionPnl.setLayout(gl_removeConnectionPnl);
 	    
@@ -233,14 +223,25 @@ public class TileODesignPage extends JFrame {
 	    			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 	    				.addGroup(gl_contentPane.createSequentialGroup()
 	    					.addContainerGap()
-	    					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-	    						.addComponent(savePnl, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE)
-	    						.addComponent(startingTilePnl, GroupLayout.PREFERRED_SIZE, 472, GroupLayout.PREFERRED_SIZE)
-	    						.addComponent(createDeckPnl, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE)
-	    						.addComponent(removeConnectionPnl, GroupLayout.PREFERRED_SIZE, 474, GroupLayout.PREFERRED_SIZE)
-	    						.addComponent(addConnectionPnl, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE)
-	    						.addComponent(removeTilePnl, GroupLayout.PREFERRED_SIZE, 474, GroupLayout.PREFERRED_SIZE)
-	    						.addComponent(AddTilePnl, GroupLayout.PREFERRED_SIZE, 475, GroupLayout.PREFERRED_SIZE)))
+	    					.addComponent(savePnl, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE))
+	    				.addGroup(gl_contentPane.createSequentialGroup()
+	    					.addContainerGap()
+	    					.addComponent(startingTilePnl, GroupLayout.PREFERRED_SIZE, 472, GroupLayout.PREFERRED_SIZE))
+	    				.addGroup(gl_contentPane.createSequentialGroup()
+	    					.addContainerGap()
+	    					.addComponent(createDeckPnl, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE))
+	    				.addGroup(gl_contentPane.createSequentialGroup()
+	    					.addContainerGap()
+	    					.addComponent(removeConnectionPnl, GroupLayout.PREFERRED_SIZE, 474, GroupLayout.PREFERRED_SIZE))
+	    				.addGroup(gl_contentPane.createSequentialGroup()
+	    					.addContainerGap()
+	    					.addComponent(addConnectionPnl, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE))
+	    				.addGroup(gl_contentPane.createSequentialGroup()
+	    					.addContainerGap()
+	    					.addComponent(removeTilePnl, GroupLayout.PREFERRED_SIZE, 474, GroupLayout.PREFERRED_SIZE))
+	    				.addGroup(gl_contentPane.createSequentialGroup()
+	    					.addContainerGap()
+	    					.addComponent(AddTilePnl, GroupLayout.PREFERRED_SIZE, 475, GroupLayout.PREFERRED_SIZE))
 	    				.addGroup(gl_contentPane.createSequentialGroup()
 	    					.addGap(17)
 	    					.addComponent(errorLbl)))
@@ -249,23 +250,23 @@ public class TileODesignPage extends JFrame {
 	    gl_contentPane.setVerticalGroup(
 	    	gl_contentPane.createParallelGroup(Alignment.TRAILING)
 	    		.addGroup(gl_contentPane.createSequentialGroup()
-	    			.addContainerGap(7, Short.MAX_VALUE)
+	    			.addGap(29)
 	    			.addComponent(errorLbl)
-	    			.addGap(18)
+	    			.addPreferredGap(ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
 	    			.addComponent(AddTilePnl, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
 	    			.addPreferredGap(ComponentPlacement.RELATED)
-	    			.addComponent(removeTilePnl, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+	    			.addComponent(removeTilePnl, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
 	    			.addPreferredGap(ComponentPlacement.RELATED)
 	    			.addComponent(addConnectionPnl, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 	    			.addPreferredGap(ComponentPlacement.RELATED)
-	    			.addComponent(removeConnectionPnl, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+	    			.addComponent(removeConnectionPnl, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
 	    			.addPreferredGap(ComponentPlacement.RELATED)
-	    			.addComponent(createDeckPnl, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE)
+	    			.addComponent(createDeckPnl, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
 	    			.addPreferredGap(ComponentPlacement.RELATED)
 	    			.addComponent(startingTilePnl, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-	    			.addPreferredGap(ComponentPlacement.UNRELATED)
-	    			.addComponent(savePnl, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-	    			.addContainerGap())
+	    			.addPreferredGap(ComponentPlacement.RELATED)
+	    			.addComponent(savePnl, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+	    			.addGap(25))
 	    );
 	    
 	    
@@ -398,108 +399,37 @@ public class TileODesignPage extends JFrame {
 	    );
 	    startingTilePnl.setLayout(gl_startingTilePnl);
 	    
-	    createDeckLbl = new JLabel("Create a deck of 32 action cards");
-	    
-	    teleportCardLbl = new JLabel("Teleport cards");
-	    teleportNum = new JTextField();
-	    teleportNum.setColumns(10);
-	    	    
-	    removeConnectionCardLbl = new JLabel("Remove connection cards");	    
-	    removeConnectionNum = new JTextField();
-	    removeConnectionNum.setColumns(10);
-	    
-	    rollDieCardLbl = new JLabel("Roll die cards");
-	    rollDieNum = new JTextField();
-	    rollDieNum.setColumns(10);	    
-	    
-	    connectTilesCardLbl = new JLabel("Connect tiles cards");	    	    	   
-	    connectTileNum = new JTextField();
-	    connectTileNum.setColumns(10);
-	    
-	    loseTurnCardsLbl = new JLabel("Lose turn cards");	    
-	    loseTurnNum = new JTextField();
-	    loseTurnNum.setColumns(10);
-	    
 	    createDeckBtn = new JButton("Create Deck");
 	    createDeckBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {	
-				btnCreateActionPerformed(evt); 
+				deckPop.setVisible(true);;
 			}
 		});
 	    
-	    revealCardsLbl = new JLabel("Reveal cards");
 	    
-	    revealNum = new JTextField();
-	    revealNum.setColumns(10);
+	    createDeckLBl = new JLabel("Create a new Deck");
 	    
 	    
 	    GroupLayout gl_createDeckPnl = new GroupLayout(createDeckPnl);
 	    gl_createDeckPnl.setHorizontalGroup(
 	    	gl_createDeckPnl.createParallelGroup(Alignment.TRAILING)
 	    		.addGroup(gl_createDeckPnl.createSequentialGroup()
-	    			.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.TRAILING)
-	    				.addGroup(gl_createDeckPnl.createSequentialGroup()
-	    					.addGap(14)
-	    					.addComponent(createDeckLbl)
-	    					.addPreferredGap(ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-	    					.addComponent(createDeckBtn))
-	    				.addGroup(gl_createDeckPnl.createSequentialGroup()
-	    					.addGap(22)
-	    					.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.TRAILING)
-	    						.addGroup(gl_createDeckPnl.createSequentialGroup()
-	    							.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.LEADING)
-	    								.addComponent(teleportCardLbl)
-	    								.addComponent(connectTilesCardLbl))
-	    							.addGap(52))
-	    						.addGroup(gl_createDeckPnl.createSequentialGroup()
-	    							.addComponent(removeConnectionCardLbl)
-	    							.addPreferredGap(ComponentPlacement.UNRELATED)))
-	    					.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.LEADING)
-	    						.addGroup(gl_createDeckPnl.createSequentialGroup()
-	    							.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.LEADING)
-	    								.addComponent(teleportNum, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-	    								.addComponent(removeConnectionNum, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
-	    							.addGap(18)
-	    							.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.LEADING)
-	    								.addComponent(rollDieCardLbl)
-	    								.addComponent(loseTurnCardsLbl)))
-	    						.addGroup(gl_createDeckPnl.createSequentialGroup()
-	    							.addComponent(connectTileNum, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-	    							.addGap(18)
-	    							.addComponent(revealCardsLbl)))
-	    					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-	    					.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.LEADING, false)
-	    						.addComponent(revealNum, 0, 0, Short.MAX_VALUE)
-	    						.addComponent(loseTurnNum, GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
-	    						.addComponent(rollDieNum, GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
-	    					.addGap(11)))
-	    			.addGap(136))
+	    			.addGap(41)
+	    			.addComponent(createDeckLBl)
+	    			.addPreferredGap(ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+	    			.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.LEADING)
+	    				.addGroup(Alignment.TRAILING, gl_createDeckPnl.createSequentialGroup()
+	    					.addComponent(createDeckBtn)
+	    					.addGap(55))))
 	    );
 	    gl_createDeckPnl.setVerticalGroup(
 	    	gl_createDeckPnl.createParallelGroup(Alignment.TRAILING)
 	    		.addGroup(gl_createDeckPnl.createSequentialGroup()
-	    			.addGap(11)
+	    			.addGap(14)
 	    			.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.BASELINE)
-	    				.addComponent(createDeckLbl)
+	    				.addComponent(createDeckLBl)
 	    				.addComponent(createDeckBtn))
-	    			.addPreferredGap(ComponentPlacement.UNRELATED)
-	    			.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.BASELINE)
-	    				.addComponent(teleportCardLbl)
-	    				.addComponent(teleportNum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-	    				.addComponent(rollDieCardLbl)
-	    				.addComponent(rollDieNum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-	    			.addGap(16)
-	    			.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.BASELINE)
-	    				.addComponent(removeConnectionCardLbl)
-	    				.addComponent(removeConnectionNum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-	    				.addComponent(loseTurnCardsLbl)
-	    				.addComponent(loseTurnNum, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
-	    			.addPreferredGap(ComponentPlacement.UNRELATED)
-	    			.addGroup(gl_createDeckPnl.createParallelGroup(Alignment.BASELINE)
-	    				.addComponent(connectTilesCardLbl)
-	    				.addComponent(connectTileNum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-	    				.addComponent(revealCardsLbl)
-	    				.addComponent(revealNum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+	    			.addGap(89)
 	    			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 	    );
 	    createDeckPnl.setLayout(gl_createDeckPnl);
@@ -619,21 +549,21 @@ public class TileODesignPage extends JFrame {
 	    GroupLayout gl_removeTilePnl = new GroupLayout(removeTilePnl);
 	    gl_removeTilePnl.setHorizontalGroup(
 	    	gl_removeTilePnl.createParallelGroup(Alignment.LEADING)
-	    		.addGroup(gl_removeTilePnl.createSequentialGroup()
+	    		.addGroup(Alignment.TRAILING, gl_removeTilePnl.createSequentialGroup()
 	    			.addGap(17)
 	    			.addComponent(removeTileLbl)
-	    			.addPreferredGap(ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+	    			.addPreferredGap(ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
 	    			.addComponent(removeTileBtn)
-	    			.addGap(32))
+	    			.addGap(31))
 	    );
 	    gl_removeTilePnl.setVerticalGroup(
 	    	gl_removeTilePnl.createParallelGroup(Alignment.LEADING)
-	    		.addGroup(gl_removeTilePnl.createSequentialGroup()
-	    			.addContainerGap()
+	    		.addGroup(Alignment.TRAILING, gl_removeTilePnl.createSequentialGroup()
+	    			.addContainerGap(17, Short.MAX_VALUE)
 	    			.addGroup(gl_removeTilePnl.createParallelGroup(Alignment.BASELINE)
-	    				.addComponent(removeTileLbl)
-	    				.addComponent(removeTileBtn))
-	    			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+	    				.addComponent(removeTileBtn)
+	    				.addComponent(removeTileLbl))
+	    			.addContainerGap())
 	    );
 	    removeTilePnl.setLayout(gl_removeTilePnl);
 	    
@@ -807,74 +737,9 @@ public class TileODesignPage extends JFrame {
 		inactivePeriod.setText("");
 		refreshData();		
 	}
-	
-	private void btnCreateActionPerformed(java.awt.event.ActionEvent evt)  {
-		int teleportCNum = 0;
-		int connectCNum = 0;
-		int removeCNum = 0;
-		int dieCNum = 0;
-		int turnCNum = 0;
-		int revealCNum = 0;
-	    error = "";
-		try{
-			teleportCNum = Integer.parseInt(teleportNum.getText());
-		}
-		catch(NumberFormatException e) {
-			error ="The number of teleport action cards needs to be a numerical value!";
-		}
-		try{
-			revealCNum = Integer.parseInt(revealNum.getText());
-		}
-		catch(NumberFormatException e) {
-			error ="The number of reveal action cards needs to be a numerical value!";
-		}
-		try{
-			connectCNum = Integer.parseInt(connectTileNum.getText());
-		}
-		catch(NumberFormatException e) {
-			error = "The number of connect tile action cards needs to be a numerical value!";
-		}
-		try{
-			removeCNum = Integer.parseInt(removeConnectionNum.getText());
-		}
-		catch(NumberFormatException e) {
-			error = "The number of remove connection action cards needs to be a numerical value!";
-		}
-		try{
-			dieCNum = Integer.parseInt(rollDieNum.getText());
-		}
-		catch(NumberFormatException e) {
-			error = "The number of roll die action cards needs to be a numerical value! ";
-		}
-		try{
-			turnCNum = Integer.parseInt(loseTurnNum.getText());
-		}
-		catch(NumberFormatException e) {
-			error = "The number of lose turn action cards needs to be a numerical value! ";
-		}
-		error.trim();
-		if (error.length() == 0) {
-			
-			try {
-				dmc.createDeck(dieCNum, connectCNum, removeCNum, teleportCNum, turnCNum, revealCNum);
-				error = "Deck created!";
-				removeConnectionNum.setText("");
-				teleportNum.setText("");
-				rollDieNum.setText("");
-				connectTileNum.setText("");
-				loseTurnNum.setText("");
-				revealNum.setText("");
-			} 
-			catch (InvalidInputException e) {
-				error = e.getMessage();
-			}
-		}
-		refreshData();
-	}
 		
 	public static void refreshData(){
 		grid.setGame(TileOApplication.getTileO().getCurrentGame());
-		errorLbl.setText(error);
 		
 		if (TileOApplication.getTileO().hasCurrentGame()){
 			String[] playerNum = new String[TileOApplication.getTileO().getCurrentGame().numberOfPlayers()];
