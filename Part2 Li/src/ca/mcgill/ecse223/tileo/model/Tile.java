@@ -6,7 +6,11 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 29 "../../../../../TileOPersistence.ump"
+<<<<<<< HEAD
 // line 100 "../../../../../TileO (updated Feb10).ump"
+=======
+// line 117 "../../../../../TileO (updated April3).ump"
+>>>>>>> master
 public abstract class Tile implements Serializable
 {
 
@@ -254,7 +258,11 @@ public abstract class Tile implements Serializable
     placeholderGame.removeTile(this);
   }
 
+<<<<<<< HEAD
   // line 109 "../../../../../TileO (updated Feb10).ump"
+=======
+  // line 126 "../../../../../TileO (updated April3).ump"
+>>>>>>> master
    public List<Tile> getNextMoves(int moveLeft, Tile previousTile){
     //Create a ArrayList to store the neighbor Tile
 		List<Tile> possibleMoveTiles =  new ArrayList<>();

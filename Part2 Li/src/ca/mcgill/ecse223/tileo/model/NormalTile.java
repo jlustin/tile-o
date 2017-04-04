@@ -6,7 +6,11 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 41 "../../../../../TileOPersistence.ump"
+<<<<<<< HEAD
 // line 168 "../../../../../TileO (updated Feb10).ump"
+=======
+// line 185 "../../../../../TileO (updated April3).ump"
+>>>>>>> master
 public class NormalTile extends Tile
 {
 
@@ -31,6 +35,22 @@ public class NormalTile extends Tile
   {
     super.delete();
   }
+<<<<<<< HEAD
+=======
+
+
+  
+  // line 190 "../../../../../TileO (updated April3).ump"
+  @Override
+  public void doLand(){
+    Game currentGame = getGame();
+  	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 
+  	  	currentPlayer.setCurrentTile(this);  	 
+  	  	currentGame.setNextPlayer();
+  	  	this.setHasBeenVisited(true);
+  	  	currentGame.setMode(Game.Mode.GAME);
+  }
+>>>>>>> master
   
   //------------------------
   // DEVELOPER CODE - PROVIDED AS-IS
@@ -38,6 +58,7 @@ public class NormalTile extends Tile
   
   // line 44 TileOPersistence.ump
   private static final long serialVersionUID = 6666666666666666666L ;
+<<<<<<< HEAD
 // line 171 ../../../../../TileO (updated Feb10).ump
   @Override
   	public void doLand() {Game currentGame = getGame();
@@ -46,6 +67,8 @@ public class NormalTile extends Tile
   	  	currentGame.setNextPlayer();
   	  	this.setHasBeenVisited(true);
   	  	currentGame.setMode(Game.Mode.GAME);};
+=======
+>>>>>>> master
 
   
 }

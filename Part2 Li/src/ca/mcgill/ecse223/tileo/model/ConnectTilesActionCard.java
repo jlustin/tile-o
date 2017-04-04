@@ -7,7 +7,11 @@ import java.io.Serializable;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 
 // line 77 "../../../../../TileOPersistence.ump"
+<<<<<<< HEAD
 // line 242 "../../../../../TileO (updated Feb10).ump"
+=======
+// line 270 "../../../../../TileO (updated April3).ump"
+>>>>>>> master
 public class ConnectTilesActionCard extends ActionCard
 {
 
@@ -33,7 +37,11 @@ public class ConnectTilesActionCard extends ActionCard
     super.delete();
   }
 
+<<<<<<< HEAD
   // line 246 "../../../../../TileO (updated Feb10).ump"
+=======
+  // line 274 "../../../../../TileO (updated April3).ump"
+>>>>>>> master
    public void play(Tile tile1, Tile tile2) throws InvalidInputException{
     // Get game of the card
 	  	Game currentGame = super.getDeck().getGame();
@@ -49,6 +57,17 @@ public class ConnectTilesActionCard extends ActionCard
 			throw new InvalidInputException(error);
 	  	}
   }
+<<<<<<< HEAD
+=======
+
+
+  
+  // line 291 "../../../../../TileO (updated April3).ump"
+   @Override
+   public Game.Mode getActionCardGameMode(){
+    return Game.Mode.GAME_CONNECTTILESACTIONCARD;
+  }
+>>>>>>> master
   
   //------------------------
   // DEVELOPER CODE - PROVIDED AS-IS
@@ -56,9 +75,12 @@ public class ConnectTilesActionCard extends ActionCard
   
   // line 80 TileOPersistence.ump
   private static final long serialVersionUID = 3030303030303030303L ;
+<<<<<<< HEAD
 // line 261 ../../../../../TileO (updated Feb10).ump
   @Override
 	public Game.Mode getActionCardGameMode() {return Game.Mode.GAME_CONNECTTILESACTIONCARD;};
+=======
+>>>>>>> master
 
   
 }

@@ -22,7 +22,18 @@ class Game {
 			GAME_REMOVECONNECTIONACTIONCARD{} 
 			GAME_TELEPORTACTIONCARD{} 
 			GAME_LOSETURNACTIONCARD{} 
+<<<<<<< HEAD
 			GAME_REVEALACTIONCARD{} }
+=======
+			GAME_REVEALACTIONCARD{}
+			GAME_LOSETURNRANDOMLYACTIONCARD{}
+			GAME_REVEALACTIONTILESACTIONCARD{}
+			GAME_TURNACTIONTILESINACTIVEACTIONCARD{}
+			GAME_WINTILEHINTACTIONCARD{}
+			GAME_SENDBACKTOSTARTACTIONCARD{}
+			GAME_TELEPORTOTHERACTIONCARD{}
+			 }
+>>>>>>> master
 	1 <@>- 2..4 Player players;
 	1 <@>- * Tile tiles;
 	1 <@>- * Connection connections;
@@ -100,6 +111,18 @@ class Player {
 	};
 }
 
+<<<<<<< HEAD
+=======
+class Die {
+	public int roll(){
+		int rollNumber;
+		Random randomGenerator = new Random();
+		rollNumber = randomGenerator.nextInt(6)+1;
+		return rollNumber;
+	};
+}
+
+>>>>>>> master
 class Tile {
 	abstract;
 	
@@ -361,6 +384,7 @@ class RevealActionCard {
 	};
 }
 
+<<<<<<< HEAD
 class Die {
 	public int roll(){
 		int rollNumber;
@@ -369,3 +393,39 @@ class Die {
 		return rollNumber;
 	};
 }
+=======
+class LoseTurnRandomlyActionCard {
+  	isA ActionCard;
+	
+	//@Override
+	public Game.Mode getActionCardGameMode() {
+		return Game.Mode.GAME_LOSETURNRANDOMLYACTIONCARD;
+	};
+	
+	public void play(){
+		
+	};
+}
+
+class RevealActionTilesActionCard {
+  	isA ActionCard;
+}
+
+class TurnActionTilesInactiveActionCard {
+  	isA ActionCard;
+}
+
+class WinTileHintActionCard {
+  	isA ActionCard;
+}
+
+class SendBackToStartActionCard {
+  	isA ActionCard;
+}
+
+class TeleportOtherActionCard {
+  	isA ActionCard;
+}
+
+
+>>>>>>> master

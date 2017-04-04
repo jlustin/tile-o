@@ -7,7 +7,11 @@ import java.util.*;
 
 // line 35 "../../../../../TileOPersistence.ump"
 // line 1 "../../../../../TileOStates.ump"
+<<<<<<< HEAD
 // line 140 "../../../../../TileO (updated Feb10).ump"
+=======
+// line 157 "../../../../../TileO (updated April3).ump"
+>>>>>>> master
 public class ActionTile extends Tile
 {
 
@@ -34,7 +38,11 @@ public class ActionTile extends Tile
     turnsUntilActive = 0;
     setActionTileStatus(ActionTileStatus.Active);
   }
+<<<<<<< HEAD
 //test commit after merge
+=======
+
+>>>>>>> master
   //------------------------
   // INTERFACE
   //------------------------
@@ -135,6 +143,7 @@ public class ActionTile extends Tile
   }
 
 
+<<<<<<< HEAD
   public String toString()
   {
     String outputString = "";
@@ -152,6 +161,13 @@ public class ActionTile extends Tile
 // line 146 ../../../../../TileO (updated Feb10).ump
   @Override
 	public void doLand() {Game currentGame = getGame();
+=======
+  
+  // line 165 "../../../../../TileO (updated April3).ump"
+  @Override
+   public void doLand(){
+    Game currentGame = getGame();
+>>>>>>> master
 		Player currentPlayer = currentGame.getCurrentPlayer();
 		currentPlayer.setCurrentTile(this);
 		
@@ -167,7 +183,28 @@ public class ActionTile extends Tile
 			currentGame.setMode(currentCard.getActionCardGameMode());
 			deactivate();
 			setHasBeenVisited(true);			
+<<<<<<< HEAD
 		}};
+=======
+		}
+  }
+
+
+  public String toString()
+  {
+    String outputString = "";
+    return super.toString() + "["+
+            "inactivityPeriod" + ":" + getInactivityPeriod()+ "," +
+            "turnsUntilActive" + ":" + getTurnsUntilActive()+ "]"
+     + outputString;
+  }  
+  //------------------------
+  // DEVELOPER CODE - PROVIDED AS-IS
+  //------------------------
+  
+  // line 38 TileOPersistence.ump
+  private static final long serialVersionUID = 5555555555555555555L ;
+>>>>>>> master
 
   
 }

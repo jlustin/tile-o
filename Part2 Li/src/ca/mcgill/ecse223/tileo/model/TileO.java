@@ -6,7 +6,11 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 3 "../../../../../TileOPersistence.ump"
+<<<<<<< HEAD
 // line 8 "../../../../../TileO (updated Feb10).ump"
+=======
+// line 9 "../../../../../TileO (updated April3).ump"
+>>>>>>> master
 public class TileO implements Serializable
 {
 
