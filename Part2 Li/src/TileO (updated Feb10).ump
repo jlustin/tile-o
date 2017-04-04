@@ -22,7 +22,14 @@ class Game {
 			GAME_REMOVECONNECTIONACTIONCARD{} 
 			GAME_TELEPORTACTIONCARD{} 
 			GAME_LOSETURNACTIONCARD{} 
-			GAME_REVEALACTIONCARD{} }
+			GAME_REVEALACTIONCARD{}
+			GAME_LOSETURNRANDOMLYACTIONCARD{}
+			GAME_REVEALACTIONTILESACTIONCARD{}
+			GAME_TURNACTIONTILESINACTIVEACTIONCARD{}
+			GAME_WINTILEHINTACTIONCARD{}
+			GAME_SENDBACKTOSTARTACTIONCARD{}
+			GAME_TELEPORTOTHERACTIONCARD{}
+			 }
 	1 <@>- 2..4 Player players;
 	1 <@>- * Tile tiles;
 	1 <@>- * Connection connections;
@@ -97,6 +104,15 @@ class Player {
 		Tile currentTile=this.getCurrentTile();
 		List<Tile> possibleMoves = currentTile.getNextMoves(moveLeft, null) ;   	  
 		return possibleMoves;	  	  
+	};
+}
+
+class Die {
+	public int roll(){
+		int rollNumber;
+		Random randomGenerator = new Random();
+		rollNumber = randomGenerator.nextInt(6)+1;
+		return rollNumber;
 	};
 }
 
@@ -361,11 +377,37 @@ class RevealActionCard {
 	};
 }
 
-class Die {
-	public int roll(){
-		int rollNumber;
-		Random randomGenerator = new Random();
-		rollNumber = randomGenerator.nextInt(6)+1;
-		return rollNumber;
+class LoseTurnRandomlyActionCard {
+  	isA ActionCard;
+	
+	//@Override
+	public Game.Mode getActionCardGameMode() {
+		return Game.Mode.GAME_LOSETURNRANDOMLYACTIONCARD;
+	};
+	
+	public void play(){
+		
 	};
 }
+
+class RevealActionTilesActionCard {
+  	isA ActionCard;
+}
+
+class TurnActionTilesInactiveActionCard {
+  	isA ActionCard;
+}
+
+class WinTileHintActionCard {
+  	isA ActionCard;
+}
+
+class SendBackToStartActionCard {
+  	isA ActionCard;
+}
+
+class TeleportOtherActionCard {
+  	isA ActionCard;
+}
+
+
