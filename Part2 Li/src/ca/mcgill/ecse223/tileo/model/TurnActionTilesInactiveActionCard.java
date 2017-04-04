@@ -4,6 +4,8 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
+
 // line 121 "../../../../../TileOPersistence.ump"
 // line 403 "../../../../../TileO (updated April3).ump"
 public class TurnActionTilesInactiveActionCard extends ActionCard
@@ -30,7 +32,7 @@ public class TurnActionTilesInactiveActionCard extends ActionCard
   {
     super.delete();
   }
-
+//test commit
 
   /**
    * @Override
@@ -42,8 +44,11 @@ public class TurnActionTilesInactiveActionCard extends ActionCard
   }
 
   // line 412 "../../../../../TileO (updated April3).ump"
-   public void play(){
-    
+   public void play() throws InvalidInputException{
+    String error = "";
+    try {
+    	
+    }
   }
   
   //------------------------
