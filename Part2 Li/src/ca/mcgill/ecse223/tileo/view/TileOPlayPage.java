@@ -311,25 +311,16 @@ public class TileOPlayPage extends JFrame {
 					revealPO.setVisible(true);
 					break;
 					
-				case GAME_LOSETURNRANDOMLYACTIONCARD:
-					break;
+
 				case GAME_REVEALACTIONTILESACTIONCARD:
 					revealTilesPO.setVisible(true);
 					break;
-				case GAME_TURNACTIONTILESINACTIVEACTIONCARD:
-					break;
-				case GAME_WINTILEHINTACTIONCARD:
-					break;
-				case GAME_SENDBACKTOSTARTACTIONCARD:
-					break;
-				case GAME_TELEPORTOTHERACTIONCARD:
-					break;
+
 				case GAME_LOSETURNRANDOMLYACTIONCARD:
 					LoseTurnRandomlyPopOut ltrpo= new LoseTurnRandomlyPopOut();
 					ltrpo.setVisible(true);
 					break;
-				case GAME_REVEALACTIONTILESACTIONCARD:				
-					break;
+
 				case GAME_TURNACTIONTILESINACTIVEACTIONCARD:
 					TurnActionTilesInactiveActionCardPopOut tatipo= new TurnActionTilesInactiveActionCardPopOut();
 					tatipo.setVisible(true);
