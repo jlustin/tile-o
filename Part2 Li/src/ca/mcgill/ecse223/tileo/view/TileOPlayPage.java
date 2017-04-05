@@ -49,7 +49,7 @@ public class TileOPlayPage extends JFrame {
 //	private static SavePopOut savePO = new SavePopOut();
 //	private static SelectTilePlayPopOut selectTilePO = new SelectTilePlayPopOut();
 	private static TeleportPopOut teleportPO = new TeleportPopOut();
-	private static RevealTilesPopOut revealTilesPO = new RevealTilesPopOut();
+	private static RevealPopOut revealTilesPO = new RevealPopOut();
 	
 	private JPanel contentPane;
 	private static JLabel playerTurnLbl;
