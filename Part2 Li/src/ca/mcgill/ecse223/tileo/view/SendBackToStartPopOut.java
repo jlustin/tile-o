@@ -69,9 +69,9 @@ public class SendBackToStartPopOut extends JFrame {
 				error.trim();
 				if(error.length()==0){
 					try{
-					PlayController pmc = new PlayController();
-					int index = Integer.parseInt(chosenPlayer.getActionCommand());
-					pmc.playSendBackToStartActionCard(index);
+						PlayController pmc = new PlayController();
+						int index = Integer.parseInt(chosenPlayer.getActionCommand());
+						pmc.playSendBackToStartActionCard(index+1);
 					}
 					catch(InvalidInputException e1){
 						throw new RuntimeException(e1.getMessage());
