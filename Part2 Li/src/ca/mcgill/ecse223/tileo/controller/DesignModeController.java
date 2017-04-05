@@ -10,30 +10,39 @@ import ca.mcgill.ecse223.tileo.model.Deck;
 import ca.mcgill.ecse223.tileo.model.Game;
 import ca.mcgill.ecse223.tileo.model.Game.Mode;
 import ca.mcgill.ecse223.tileo.model.LoseTurnActionCard;
+import ca.mcgill.ecse223.tileo.model.LoseTurnRandomlyActionCard;
 import ca.mcgill.ecse223.tileo.model.NormalTile;
 import ca.mcgill.ecse223.tileo.model.Player;
 import ca.mcgill.ecse223.tileo.model.RemoveConnectionActionCard;
 import ca.mcgill.ecse223.tileo.model.RevealActionCard;
+import ca.mcgill.ecse223.tileo.model.RevealActionTilesActionCard;
 import ca.mcgill.ecse223.tileo.model.RollDieActionCard;
+import ca.mcgill.ecse223.tileo.model.SendBackToStartActionCard;
 import ca.mcgill.ecse223.tileo.model.TeleportActionCard;
+import ca.mcgill.ecse223.tileo.model.TeleportOtherActionCard;
 import ca.mcgill.ecse223.tileo.model.Tile;
 import ca.mcgill.ecse223.tileo.model.TileO;
+import ca.mcgill.ecse223.tileo.model.TurnActionTilesInactiveActionCard;
 import ca.mcgill.ecse223.tileo.model.WinTile;
+import ca.mcgill.ecse223.tileo.model.WinTileHintActionCard;
 
 
 public class DesignModeController {
 	
 
-	//METHODS
 	private static final String rollDieInstruction = "Roll the die for an extra turn.";
 	private static final String connectTilesInstruction = "Connect two adjacent tiles with a connection piece from the pile of spare connection pieces."; 
-	private static final String teleportInstruction = "Move your playing piece to an arbitray tile that is not your current tile.";
-	private static final String removeConnectionInstruction = "Remove a connectio piece from the board and place it in the pile of spare connection pieces.";
+	private static final String teleportInstruction = "Move your playing piece to an arbitrary tile that is not your current tile.";
+	private static final String removeConnectionInstruction = "Remove a connection piece from the board and place it in the pile of spare connection pieces.";
 	private static final String loseTurnInstruction = "You lose your next turn.";
-	private static final String revealInstruction = "Choose a tile to reveal its type";
-	
-	
-	//TileType is chosen from UI from a button
+	private static final String revealInstruction = "Choose a tile to reveal its type.";
+	private static final String loseTurnRandomlyInstruction = "Make all players lose their turns a random number of times.";
+	private static final String revealActionTilesInstruction = "Show all action tiles for 5 seconds.";
+	private static final String sendBackToStartInstruction = "Send other player back to start.";
+	private static final String teleportOtherInstruction = "Move a player other than yourself to another tile.";
+	private static final String turnActiontilesInactiveInstruction = "Make all active tiles inactive.";
+	private static final String winTileHintInstruction = "Choose a tile to see if it is connected to the win tile";
+
 
 	public void addDesignTile(int x, int y, String TileType, int aInactivityPeriod) throws InvalidInputException {		
 		Game currentGame = TileOApplication.getTileO().getCurrentGame();
@@ -282,32 +291,46 @@ public class DesignModeController {
 	 * 9. Select 32 cards from predefined choices
 	 * Charles
 	 */
-	public void createDeck(int numberOfRollDieActionCard, 
-			int numberOfConnectTilesActionCard,
-			int numberOfRemoveConnectionActionCard,
-			int numberOfTeleportActionCard,
-			int numberOfLoseTurnActionCard,
-			int numberOfRevealActionCard) throws InvalidInputException {
+	public void createDeck(int connectTiles, 
+			int loseTurn,
+			int loseTurnRdm,
+			int removeConnection,
+			int reveal,
+			int revealActionTiles,
+			int rollDie,
+			int sendBackStart,
+			int teleport,
+			int teleportOther,
+			int turnInactive,
+			int winHint) throws InvalidInputException {
+		
+		int cards[] = new int[]{
+			connectTiles, 
+			loseTurn,
+			loseTurnRdm,
+			removeConnection,
+			reveal,
+			revealActionTiles,
+			rollDie,
+			sendBackStart,
+			teleport,
+			teleportOther,
+			turnInactive,
+			winHint
+		};
 		
 		String error = "";
-		int totalCards = numberOfRollDieActionCard 
-				+ numberOfConnectTilesActionCard 
-				+ numberOfRemoveConnectionActionCard
-				+ numberOfTeleportActionCard
-				+ numberOfLoseTurnActionCard
-				+ numberOfRevealActionCard;
+		int totalCards = 0;
+		for (int i = 0; i<cards.length; i++){
+			totalCards += cards[i];
+			if(cards[i]<0) {
+				error = "The number of each action card should be positive";
+			}
+		}
 		
 		if(totalCards != 32) {
-			error = "The sum of numbers of different types of acton cards should be 32!";
-		}
-		if(numberOfRollDieActionCard < 0 
-				|| numberOfConnectTilesActionCard < 0 
-				|| numberOfRemoveConnectionActionCard < 0 
-				|| numberOfTeleportActionCard < 0
-				|| numberOfLoseTurnActionCard < 0
-				|| numberOfRevealActionCard < 0) {
-			error = "The number of each action card should be positive!";
-		}
+			error = "The sum of numbers of different types of action cards should be 32!";
+		}		
 		if (error.length() > 0) {
 			throw new InvalidInputException(error.trim());
 		}
@@ -322,29 +345,45 @@ public class DesignModeController {
 				deck.clearCards();
 			}
 			
-			int i=0;
-			while (i<32){
-				//TODO: change this part so that you can override it
-				for (int j = 0; j < numberOfRollDieActionCard; j++, i++){
-					deck.addCardAt( new RollDieActionCard(rollDieInstruction, deck), i);
-				}
-				for (int j = 0; j < numberOfConnectTilesActionCard; j++, i++) {
-					deck.addCardAt( new ConnectTilesActionCard(connectTilesInstruction,deck), i);
-				}
-				for (int j = 0; j < numberOfRemoveConnectionActionCard; j++, i++){
-					deck.addCardAt( new RemoveConnectionActionCard(removeConnectionInstruction,deck), i);
-				}
-				for (int j = 0; j < numberOfTeleportActionCard; j++, i++) {
-					deck.addCardAt( new TeleportActionCard(teleportInstruction,deck), i);
-				}
-				for (int j = 0; j < numberOfLoseTurnActionCard; j++, i++) {
-					deck.addCardAt( new LoseTurnActionCard(loseTurnInstruction,deck), i);
-				}	
-				for (int j = 0; j < numberOfRevealActionCard; j++, i++) {
-					deck.addCardAt( new RevealActionCard(revealInstruction,deck), i);
-				}
+			int i = 0;
+			for (int j = 0; j < cards[0]; j++, i++){
+				deck.addCardAt( new ConnectTilesActionCard(connectTilesInstruction, deck), i);
 			}
-		}
+			for (int j = 0; j < cards[1]; j++, i++) {
+				deck.addCardAt( new LoseTurnActionCard(loseTurnInstruction,deck), i);
+			}
+			for (int j = 0; j < cards[2]; j++, i++){
+				deck.addCardAt( new LoseTurnRandomlyActionCard(loseTurnRandomlyInstruction,deck), i);
+			}
+			for (int j = 0; j < cards[3]; j++, i++) {
+				deck.addCardAt( new RemoveConnectionActionCard(removeConnectionInstruction,deck), i);
+			}
+			for (int j = 0; j < cards[4]; j++, i++) {
+				deck.addCardAt( new RevealActionCard(revealInstruction,deck), i);
+			}
+			for (int j = 0; j < cards[5]; j++, i++) {
+				deck.addCardAt( new RevealActionTilesActionCard(revealActionTilesInstruction,deck), i);
+			}
+			for (int j = 0; j < cards[6]; j++, i++) {
+				deck.addCardAt( new RollDieActionCard(rollDieInstruction,deck), i);
+			}
+			for (int j = 0; j < cards[7]; j++, i++) {
+				deck.addCardAt( new SendBackToStartActionCard(sendBackToStartInstruction,deck), i);
+			}
+			for (int j = 0; j < cards[8]; j++, i++) {
+				deck.addCardAt( new TeleportActionCard(teleportInstruction,deck), i);
+			}
+			for (int j = 0; j < cards[9]; j++, i++) {
+				deck.addCardAt( new TeleportOtherActionCard(teleportOtherInstruction,deck), i);
+			}
+			for (int j = 0; j < cards[10]; j++, i++) {
+				deck.addCardAt( new TurnActionTilesInactiveActionCard(turnActiontilesInactiveInstruction,deck), i);
+			}
+			for (int j = 0; j < cards[11]; j++, i++) {
+				deck.addCardAt( new WinTileHintActionCard(winTileHintInstruction,deck), i);
+			}
+			
+		}	
 		catch (RuntimeException e) {
 			throw new InvalidInputException(error);
 		}
