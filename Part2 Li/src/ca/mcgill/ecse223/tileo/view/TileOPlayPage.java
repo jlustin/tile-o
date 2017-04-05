@@ -50,6 +50,7 @@ public class TileOPlayPage extends JFrame {
 //	private static SelectTilePlayPopOut selectTilePO = new SelectTilePlayPopOut();
 	private static TeleportPopOut teleportPO = new TeleportPopOut();
 	private static RevealPopOut revealTilesPO = new RevealPopOut();
+	private static TeleportOtherPopOut teleportOtherPO = new TeleportOtherPopOut();
 	
 	private JPanel contentPane;
 	private static JLabel playerTurnLbl;
@@ -323,6 +324,7 @@ public class TileOPlayPage extends JFrame {
 				case GAME_SENDBACKTOSTARTACTIONCARD:
 					break;
 				case GAME_TELEPORTOTHERACTIONCARD:
+					teleportOtherPO.setVisible(true);
 					break;
 				case GAME_WON:
 					GameWonPopOut gameWonPO = new GameWonPopOut();
