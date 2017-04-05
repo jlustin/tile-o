@@ -98,6 +98,6 @@ public class RollDiePopOut extends JDialog {
 	
 	public void close() { 
 		this.setVisible(false);
-	    this.dispose();
+//	    this.dispose();
 	}
 }

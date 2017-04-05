@@ -46,8 +46,12 @@ public class RevealPopOut extends JFrame{
 	 */
 	public void close() { 
 		this.setVisible(false);
-		this.setAlwaysOnTop(true);
-	    this.dispose();
+		chosen = 0;
+		error = null;
+		chosenTile = null;
+		tileType = "";
+		
+//	    this.dispose();
 	}
 	
 	public RevealPopOut() {

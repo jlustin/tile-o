@@ -45,7 +45,10 @@ public class AddConnectionActionCardPopOut extends JDialog {
 	
 	public void close() { 
 		this.setVisible(false);
-	    this.dispose();
+		chosenTile1 = null;
+		chosenTile2 = null;
+		error = "";
+//	    this.dispose();
 	}
 	
 	public AddConnectionActionCardPopOut() {
