@@ -7,8 +7,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ca.mcgill.ecse223.tileo.application.TileOApplication;
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 import ca.mcgill.ecse223.tileo.controller.PlayController;
+import ca.mcgill.ecse223.tileo.model.Game;
+import ca.mcgill.ecse223.tileo.model.Player;
+import ca.mcgill.ecse223.tileo.model.TileO;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
@@ -64,7 +68,24 @@ public class SendBackToStartPopOut extends JFrame {
 		btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				error = "";
+				TileO tileO = TileOApplication.getTileO();
+				Game currentGame = tileO.getCurrentGame();
+				Player currentPlayer = currentGame.getCurrentPlayer();
+				int number = getWithNumber(currentPlayer);
+
 				ButtonModel chosenPlayer = buttonGroup.getSelection();
+				
+				if(chosenPlayer.getActionCommand() == null){
+					error = error + "Please select a player";
+				}
+				
+				
+				if(Integer.parseInt(chosenPlayer.getActionCommand()) == number){
+					error = error + "You cannot send yourself back to your starting position!";
+					
+				}
+				
+				
 				
 				error.trim();
 				if(error.length()==0){
@@ -80,6 +101,16 @@ public class SendBackToStartPopOut extends JFrame {
 				
 				
 				
+			}
+
+			private int getWithNumber(Player currentPlayer) {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+
+			private String parsInt(String actionCommand) {
+				// TODO Auto-generated method stub
+				return null;
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
