@@ -23,14 +23,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Color;
 
 public class TeleportOtherPopOut extends JFrame {
-	public void close() { 
-		this.setVisible(false);
-		chosenTile = null;
-		error = "";
-	}
 
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -62,15 +56,12 @@ String error = "";
 	 * Create the frame.
 	 */
 	public TeleportOtherPopOut() {
-		setAlwaysOnTop(true);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel errorLbl = new JLabel("");
-		errorLbl.setForeground(Color.RED);
 		JLabel lblNewLabel = new JLabel("You have drawn a TeleportOther Action Card!");
 		
 		JLabel lblPleaseSelectA = new JLabel("Please select a player you would like to move and the tile");
@@ -85,21 +76,17 @@ String error = "";
 				
 				if (TileOPlayPage.getGrid().aTileIsSelected){
 					chosenTile = TileOPlayPage.getGrid().selectedTile;
-					//if(chosenTile==null){ //possibly redundant error checking
-					//	error = error + "Please click a tile on the board! ";
+					if(chosenTile==null){ //possibly redundant error checking
+						error = error + "Please click a tile on the board! ";
 					//	errorLbl.setText(error);
-					//}
+					}
 				}
 				
 				error = "";
-				int chosenPlayerNumber = comboBox.getSelectedIndex();
-				//Tile chosenTile = null;
-//				if (TileODesignPage.getGrid().aTileIsSelected){
-//					chosenTile = TileODesignPage.getGrid().selectedTile;
-//				}
-				if (chosenPlayerNumber == TileOApplication.getTileO().getCurrentGame().getCurrentPlayer().getNumber() - 1)
-				{
-					error = "You cannot teleport yourself!";
+				int chosenPlayerNumber = comboBox.getSelectedIndex() + 1;
+				Tile chosenTile = null;
+				if (TileODesignPage.getGrid().aTileIsSelected){
+					chosenTile = TileODesignPage.getGrid().selectedTile;
 				}
 				if(chosenTile == null){
 					error = "Please choose a tile on the board!";
@@ -113,18 +100,11 @@ String error = "";
 					TileOPlayPage.getGrid().aConnectionIsSelected = false;
 					TileOPlayPage.getGrid().selectedConnection = null;
 					TileOPlayPage.getGrid().selectedTile = null;
-					close();
-				}
-				else
-				{
-					errorLbl.setText(error);
 				}
 				//refreshData();		
 				
 			}
 		});
-		
-		
 		
 		//JComboBox comboBox = new JComboBox();
 		
@@ -141,17 +121,14 @@ String error = "";
 					.addContainerGap(46, Short.MAX_VALUE)
 					.addComponent(lblPleaseSelectA)
 					.addGap(35))
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-					.addGap(77)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(errorLbl, GroupLayout.PREFERRED_SIZE, 303, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
-							.addComponent(btnMove)
-							.addGap(98))))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(187, Short.MAX_VALUE)
+					.addComponent(btnMove)
+					.addGap(176))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(198, Short.MAX_VALUE)
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(190))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -161,12 +138,10 @@ String error = "";
 					.addGap(18)
 					.addComponent(lblPleaseSelectA)
 					.addGap(18)
-					.addComponent(errorLbl, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-					.addGap(44)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnMove)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(88, Short.MAX_VALUE))
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(43)
+					.addComponent(btnMove)
+					.addContainerGap(95, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
