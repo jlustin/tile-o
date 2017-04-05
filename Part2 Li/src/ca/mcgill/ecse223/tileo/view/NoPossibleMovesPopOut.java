@@ -28,7 +28,7 @@ public class NoPossibleMovesPopOut extends JDialog {
 
 	public void close() { 
 		this.setVisible(false);
-	    this.dispose();
+//	    this.dispose();
 	}
 	/**
 	 * Create the dialog.

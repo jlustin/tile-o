@@ -385,7 +385,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playRevealActionTilesActionCard()
+  public boolean playRevealActionTilesActionCard() throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -909,8 +909,20 @@ public class PlayController
    * Chuyang Lee
    */
   // line 389 "../../../../../PlayStateUpdatedApril3.ump"
-   private void doRevealActionTilesActionCard(){
-    
+   private void doRevealActionTilesActionCard() throws InvalidInputException {
+	   TileO tileO = TileOApplication.getTileO();
+	   Game currentGame = tileO.getCurrentGame();
+		ActionCard currentCard = drawCard(currentGame);
+		try {
+//			if (currentCard instanceof RevealActionTilesActionCard) {
+//				((RevealActionTilesActionCard) currentCard).play();
+//			}
+			currentGame.setNextPlayer();
+			currentGame.setMode(Game.Mode.GAME);	
+		}
+		catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
   }
 
 

@@ -740,6 +740,7 @@ public class TileODesignPage extends JFrame {
 		
 	public static void refreshData(){
 		grid.setGame(TileOApplication.getTileO().getCurrentGame());
+		errorLbl.setText(error);
 		
 		if (TileOApplication.getTileO().hasCurrentGame()){
 			String[] playerNum = new String[TileOApplication.getTileO().getCurrentGame().numberOfPlayers()];
