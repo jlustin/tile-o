@@ -15,6 +15,7 @@ import ca.mcgill.ecse223.tileo.model.Player;
 import ca.mcgill.ecse223.tileo.model.TileO;
 
 import javax.swing.ButtonModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComboBox;
@@ -53,11 +54,52 @@ public class SendBackToStartPopOut extends JFrame {
 		
 		
 		
-		String[] playerNum = new String[]
+		
+		String[] playerNum = new String[TileOApplication.getTileO().getCurrentGame().numberOfPlayers()];
+		addNums(playerNum, TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
+		comboBox_1.setModel(new DefaultComboBoxModel(playerNum));
+			
+		
 		
 		JButton btnSend = new JButton("Send");
 		btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				error = "";
+				TileO tileO = TileOApplication.getTileO();
+				Game currentGame = tileO.getCurrentGame();
+				Player currentPlayer = currentGame.getCurrentPlayer();
+				int number = getWithNumber(currentPlayer);
+
+				
+				
+				if(chosenPlayer.getActionCommand() == null){
+					error = error + "Please select a player";
+				}
+				
+				
+				
+				if(Integer.parseInt(chosenPlayer.getActionCommand()) == number){
+					error = error + "You cannot send yourself back to your starting position!";
+					
+				}
+				
+				
+				
+				error.trim();
+				if(error.length()==0){
+					try{
+						PlayController pmc = new PlayController();
+						int index = Integer.parseInt(chosenPlayer.getActionCommand());
+						pmc.playSendBackToStartActionCard(index+1);
+					}
+					catch(InvalidInputException e1){
+						throw new RuntimeException(e1.getMessage());
+					}
+				}
+				
+				
+				
+			}
 				
 				
 				
@@ -99,5 +141,11 @@ public class SendBackToStartPopOut extends JFrame {
 					.addGap(31))
 		);
 		contentPane.setLayout(gl_contentPane);
+	}
+	
+	public static void addNums(String[] str, int number){
+		for (int i = 1; i < number+1 ; i++){
+			str[i-1] = String.valueOf(i);			
+		}
 	}
 }
