@@ -32,18 +32,18 @@ public class TeleportOtherPopOut extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TeleportOtherPopOut frame = new TeleportOtherPopOut();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					TeleportOtherPopOut frame = new TeleportOtherPopOut();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 private PlayController pmc = TileOPlayPage.pmc;
 private Tile chosenTile = null;
 String error = "";
@@ -94,12 +94,12 @@ String error = "";
 				error.trim();
 				if(error.length()==0) {
 					pmc.playTeleportOtherActionCard(chosenPlayerNumber, chosenTile);
-					error = "Player " + chosenPlayerNumber + " starting tile set!";
-					
-					
-					
-					//grid.aTileIsSelected = false;
-					//grid.selectedTile = null;	
+					TileOPlayPage.setError("");
+					TileOPlayPage.refreshData();
+					TileOPlayPage.getGrid().aTileIsSelected = false;
+					TileOPlayPage.getGrid().aConnectionIsSelected = false;
+					TileOPlayPage.getGrid().selectedConnection = null;
+					TileOPlayPage.getGrid().selectedTile = null;
 				}
 				//refreshData();		
 				
