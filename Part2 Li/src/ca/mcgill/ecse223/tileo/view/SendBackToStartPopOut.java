@@ -7,8 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 import ca.mcgill.ecse223.tileo.controller.PlayController;
 
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -24,6 +27,7 @@ public class SendBackToStartPopOut extends JFrame {
 	private String error;
 
 	private JPanel contentPane;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -60,16 +64,36 @@ public class SendBackToStartPopOut extends JFrame {
 		JLabel lblBack = new JLabel("back to his/her starting position.");
 		
 		JRadioButton radioButton = new JRadioButton("1");
+		buttonGroup.add(radioButton);
 		
 		JRadioButton radioButton_1 = new JRadioButton("2");
+		buttonGroup.add(radioButton_1);
 		
 		JRadioButton radioButton_2 = new JRadioButton("3");
+		buttonGroup.add(radioButton_2);
 		
 		JRadioButton radioButton_3 = new JRadioButton("4");
+		buttonGroup.add(radioButton_3);
 		
 		JButton btnSend = new JButton("Send");
 		btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				error = "";
+				ButtonModel chosenPlayer = buttonGroup.getSelection();
+				
+				error.trim();
+				if(error.length()==0){
+					try{
+					PlayController pmc = new PlayController();
+					int index = Integer.parseInt(chosenPlayer.getActionCommand());
+					pmc.playSendBackToStartActionCard(index);
+					}
+					catch(InvalidInputException e1){
+						throw new RuntimeException(e1.getMessage());
+					}
+				}
+				
+				
 				
 			}
 		});

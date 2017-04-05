@@ -434,7 +434,7 @@ class SendBackToStartActionCard {
 	public Game.Mode getActionCardGameMode() {
 		return Game.Mode.GAME_SENDBACKTOSTARTACTIONCARD;
 	};
-	public void play(Player aPlayer){
+	public void play(int index){
 		
 	};
 

@@ -45,12 +45,12 @@ public class SendBackToStartActionCard extends ActionCard
   }
 
   // line 439 "../../../../../TileO (updated April3).ump"
-   public void play(Player aPlayer){
+   public void play(int index){
 	   Game currentGame = super.getDeck().getGame();
-	   int chosenPlayer = 0;
-	   aPlayer = currentGame.getPlayer(chosenPlayer);
-	   Tile startingTile = aPlayer.getStartingTile();
-	   aPlayer.setCurrentTile(startingTile);
+	   Player chosenPlayer;
+	   chosenPlayer = currentGame.getPlayer(index);
+	   Tile startingTile = chosenPlayer.getStartingTile();
+	   chosenPlayer.setCurrentTile(startingTile);
   }
   
   //------------------------
