@@ -920,15 +920,17 @@ public class PlayController
    * or one of its neighbour is the WinTile
    */
   // line 400 "../../../../../PlayStateUpdatedApril3.ump"
-   private void doWinTileHintActionCard(Tile aTile) throws InvalidInputException{
+   private boolean doWinTileHintActionCard(Tile aTile) throws InvalidInputException{
 	   	TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		WinTileHintActionCard winTileHintActionCard = (WinTileHintActionCard) drawCard(currentGame);
-
+		boolean hint;
+		
 		try {
-			winTileHintActionCard.play(aTile);			
+			hint = winTileHintActionCard.play(aTile);			
 			currentGame.setNextPlayer();
-			currentGame.setMode(Game.Mode.GAME);	
+			currentGame.setMode(Game.Mode.GAME);
+			return hint;
 		}
 		catch (RuntimeException e) {
 			throw new InvalidInputException(e.getMessage());
