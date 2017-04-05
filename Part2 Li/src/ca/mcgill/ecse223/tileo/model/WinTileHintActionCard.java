@@ -48,10 +48,10 @@ public class WinTileHintActionCard extends ActionCard
 	   	Game currentGame = super.getDeck().getGame();
 	    boolean hint = false;
 	    
-	    Tile topTile;
-	    Tile bottomTile;
-	    Tile rightTile;
-	    Tile leftTile;
+	    Tile topTile = null;
+	    Tile bottomTile = null;
+	    Tile rightTile = null;
+	    Tile leftTile = null;
 	    
 	    String error = "";
 
@@ -102,7 +102,8 @@ public class WinTileHintActionCard extends ActionCard
 				throw new InvalidInputException(error);
 			}
 	  }
-  }
+  
+
   
   //------------------------
   // DEVELOPER CODE - PROVIDED AS-IS
