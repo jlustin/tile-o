@@ -27,7 +27,7 @@ public class LoseTurnWarningPopOut extends JFrame {
 	
 	public void close() { 
 		this.setVisible(false);
-	    this.dispose();
+//	    this.dispose();
 	}
 
 	/**

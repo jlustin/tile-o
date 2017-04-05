@@ -33,7 +33,7 @@ public class TeleportPopOut extends JFrame {
 	private Tile chosenTile = null;
 	private String error;
 	private PlayController pmc = TileOPlayPage.pmc;
-	JLabel errorLbl = new JLabel("");
+	private JLabel errorLbl = new JLabel("");
 
 	private JPanel contentPane;
 
@@ -42,8 +42,8 @@ public class TeleportPopOut extends JFrame {
 	 */
 	public void close() { 
 		this.setVisible(false);
-		this.setAlwaysOnTop(true);
-	    this.dispose();
+		chosenTile = null;
+		error = "";
 	}
 	
 	public TeleportPopOut() {

@@ -384,9 +384,21 @@ class PlayController {
 	 * Action card "Reveal all action tiles for 5 seconds"
 	 * Chuyang Lee
 	 */
-	private void doRevealActionTilesActionCard() {
-
-	}
+	private void doRevealActionTilesActionCard() throws InvalidInputException {
+	   TileO tileO = TileOApplication.getTileO();
+	   Game currentGame = tileO.getCurrentGame();
+		ActionCard currentCard = drawCard(currentGame);
+		try {
+			if (currentCard instanceof RevealActionTilesActionCard) {
+				((RevealActionTilesActionCard) currentCard).play();
+			}
+			currentGame.setNextPlayer();
+			currentGame.setMode(Game.Mode.GAME);	
+		}
+		catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
+  }
 	
 	// Charles
 	private void doTurnActionTilesInactiveActionCard() {

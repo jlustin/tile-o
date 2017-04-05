@@ -33,6 +33,8 @@ public class TilePanelPlay extends JPanel{
 	public Connection selectedConnection;
 
 	public boolean isAPlayerTurn = false;
+	
+	public boolean showActionTiles = false;
 
 	//UI elements
 	private List<Rectangle2D> rectangles = new ArrayList<Rectangle2D>();
@@ -200,6 +202,17 @@ public class TilePanelPlay extends JPanel{
 //							(int) r.getCenterX(), 
 //							(int) r.getCenterY());
 //				}
+			}
+			
+			if (showActionTiles) {
+				for (Tile aTile: myGame.getTiles()){
+					if (aTile instanceof ActionTile){
+						Rectangle2D r = tRectangles.get(aTile);
+						g2d.setColor(Color.RED);
+						g2d.draw(r);
+						g2d.fill(r);
+					}
+				}
 			}
 			
 			for (Player aPlayer: myGame.getPlayers()){
