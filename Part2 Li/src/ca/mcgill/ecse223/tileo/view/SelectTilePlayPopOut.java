@@ -27,9 +27,9 @@ public class SelectTilePlayPopOut extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private PlayController pmc = TileOPlayPage.pmc;
 	
-	Tile chosenTile=null;
-	String error;
-    JLabel errorMessage;
+	private Tile chosenTile=null;
+	private String error = "";
+    private JLabel errorMessage;
     private JLabel lblPleaseClickOn;
 	
 
@@ -39,14 +39,10 @@ public class SelectTilePlayPopOut extends JDialog {
 	
 	public void close() { 
 		this.setVisible(false);
-	    this.dispose();
-	}
-	
-	private void refreshData() {
-		errorMessage.setText("<html>"+error+"<html>");
-		if(error == null || error.length()==0){
-			close();
-		}
+		chosenTile = null;
+		error = "";
+		errorMessage.setText("");
+//	    this.dispose();
 	}
 	
 	public SelectTilePlayPopOut() {
@@ -91,13 +87,6 @@ public class SelectTilePlayPopOut extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						error = "";
-//						if(pmc.getPossibleMoves().isEmpty()){
-//							NoPossibleMovesPopOut npm = new NoPossibleMovesPopOut();
-//							npm.setVisible(true);
-//							(TileOApplication.getTileO().getCurrentGame()).setNextPlayer();
-//							TileOPlayPage.refreshData();
-//							refreshData();
-//						}
 						if (TileOPlayPage.getGrid().aTileIsSelected){
 							chosenTile = TileOPlayPage.getGrid().selectedTile;
 						}
@@ -129,7 +118,6 @@ public class SelectTilePlayPopOut extends JDialog {
 							}
 							
 						}
-						refreshData();
 					}
 				});
 				
