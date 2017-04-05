@@ -3,6 +3,7 @@
 
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
+import java.util.List;
 
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 
@@ -44,11 +45,14 @@ public class TurnActionTilesInactiveActionCard extends ActionCard
   }
 
   // line 412 "../../../../../TileO (updated April3).ump"
-   public void play() throws InvalidInputException{
-    String error = "";
-    try {
-    	
-    }
+   public void play(){
+	   Game currentGame = super.getDeck().getGame();
+	   List<Tile> tiles = currentGame.getTiles();
+	   for(Tile aTile:tiles) {
+		   if (aTile instanceof ActionTile){
+			   ((ActionTile) aTile).deactivate();
+		   }
+	   }
   }
   
   //------------------------
