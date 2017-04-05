@@ -31,13 +31,14 @@ public class WinTileHintActionCardPopOut extends JFrame {
 	private JLabel errorLabel;
 	private JLabel hintLabel;
 	
-	private JButton revealBtn;
-	private JButton rememberBtn;
+	private JButton getHintButton;
+	private JButton willRemButton;
 	
 	private boolean chosen = false;
+	private Tile chosenTile = null;
 	private String error;
 	private String hint;
-	private Tile chosenTile = null;
+	
 	
 	
 	
@@ -76,8 +77,8 @@ public class WinTileHintActionCardPopOut extends JFrame {
 		selectTileLabel = new JLabel("Select a tile on the board to check if it, or one of its neighbours is the Win Tile!");
 		selectTileLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JButton btnGetHint = new JButton("Get Hint!");
-		revealBtn.addActionListener(new ActionListener() {
+		getHintButton = new JButton("Get Hint!");
+		getHintButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				hint = "";
 				error = "";
@@ -96,8 +97,9 @@ public class WinTileHintActionCardPopOut extends JFrame {
 							hint = "The selected tile is not the Win Tile and there are no Win Tiles around! Good luck!";
 							chosen = true;
 						}
-						catch(InvalidInputException er){
-							throw new RuntimeException(er.getMessage());
+						catch(InvalidInputException f)
+						{
+							throw new RuntimeException(f.getMessage());
 						}
 					}
 				}
@@ -108,12 +110,24 @@ public class WinTileHintActionCardPopOut extends JFrame {
 			}
 		});
 		
-		JButton btnIWillRemember = new JButton("I will remember!");
-		
-		
-		
-		
-		
+		willRemButton = new JButton("I will remember!");
+		willRemButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (chosen == true) {
+					TileOPlayPage.setError("");
+					TileOPlayPage.refreshData();
+					TileOPlayPage.getGrid().aTileIsSelected = false;
+					TileOPlayPage.getGrid().aConnectionIsSelected = false;
+					TileOPlayPage.getGrid().selectedConnection = null;
+					TileOPlayPage.getGrid().selectedTile = null;
+					close();
+				}
+				else {
+					error = "You have not select a tile yet! Select a tile to know whether it is the Win Tile!";
+					errorLabel.setText(error);
+				}
+			}
+		});
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -134,9 +148,9 @@ public class WinTileHintActionCardPopOut extends JFrame {
 					.addContainerGap(39, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(72)
-					.addComponent(btnGetHint)
+					.addComponent(getHintButton)
 					.addPreferredGap(ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-					.addComponent(btnIWillRemember)
+					.addComponent(willRemButton)
 					.addGap(83))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -152,10 +166,16 @@ public class WinTileHintActionCardPopOut extends JFrame {
 					.addComponent(hintLabel)
 					.addPreferredGap(ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnGetHint)
-						.addComponent(btnIWillRemember))
+						.addComponent(getHintButton)
+						.addComponent(willRemButton))
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
+	}
+	
+	public void close() { 
+		this.setVisible(false);
+		this.setAlwaysOnTop(true);
+	    this.dispose();
 	}
 }

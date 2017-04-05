@@ -56,16 +56,16 @@ public class WinTileHintActionCard extends ActionCard
 	    String error = "";
 
 			for (Tile tileInGame : currentGame.getTiles()){
-				if (aTile.getY() == tileInGame.getY() -1){
+				if (aTile.getY() == tileInGame.getY() - 1){
 					topTile = tileInGame;
 				}
-				if (aTile.getY() == tileInGame.getY() +1){
+				if (aTile.getY() == tileInGame.getY() + 1){
 					bottomTile = tileInGame;
 				}
-				if (aTile.getX() == tileInGame.getX() -1){
+				if (aTile.getX() == tileInGame.getX() - 1){
 					leftTile = tileInGame;
 				}
-				if (aTile.getX() == tileInGame.getY() +1){
+				if (aTile.getX() == tileInGame.getY() + 1){
 					rightTile = tileInGame;
 				}
 			}
@@ -109,7 +109,5 @@ public class WinTileHintActionCard extends ActionCard
   //------------------------
   
   // line 131 TileOPersistence.ump
-  private static final long serialVersionUID = 1337133713371337133L ;
-
-  
+  private static final long serialVersionUID = 1337133713371337133L ; 
 }
