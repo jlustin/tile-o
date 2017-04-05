@@ -27,18 +27,17 @@ import java.awt.event.ActionEvent;
 public class RemoveConnectionActionCardPopOut extends JFrame {
 	
 	private PlayController pmc = TileOPlayPage.pmc;
+	private JPanel contentPane;
+	private Connection chosenConnection=null;
+	private String error = "";
 	
 	public void close() { 
 		this.setVisible(false);
-	    this.dispose();
+		chosenConnection = null;
+		error = "";
+//	    this.dispose();
 	}
 	
-	Connection chosenConnection=null;
-	String error;
-	
-
-	private JPanel contentPane;
-
 	/**
 	 * Create the frame.
 	 */

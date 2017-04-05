@@ -39,6 +39,17 @@ public class TileOPlayPage extends JFrame {
 	public static List<Tile> pMoves;
 	private static int currentPlayerNb = 1;
 	
+	//all our pop outs
+	private static AddConnectionActionCardPopOut addConnectionPO = new AddConnectionActionCardPopOut();
+	private static LoseTurnWarningPopOut loseTurnPO = new LoseTurnWarningPopOut();
+//	private static NoPossibleMovesPopOut noMovesPO = new NoPossibleMovesPopOut();
+	private static RemoveConnectionActionCardPopOut removeConnectionPO = new RemoveConnectionActionCardPopOut();
+	private static RevealPopOut revealPO = new RevealPopOut();
+	private static RollDiePopOut rollPO = new RollDiePopOut();
+//	private static SavePopOut savePO = new SavePopOut();
+//	private static SelectTilePlayPopOut selectTilePO = new SelectTilePlayPopOut();
+	private static TeleportPopOut teleportPO = new TeleportPopOut();
+	private static RevealPopOut revealTilesPO = new RevealPopOut();
 	
 	private JPanel contentPane;
 	private static JLabel playerTurnLbl;
@@ -282,34 +293,42 @@ public class TileOPlayPage extends JFrame {
 			
 			switch (currentMode){
 				case GAME_ROLLDIEACTIONCARD:
-					RollDiePopOut rdpo = new RollDiePopOut();
-					rdpo.setVisible(true);
+					rollPO.setVisible(true);
 					break;
 				case GAME_CONNECTTILESACTIONCARD:
-					AddConnectionActionCardPopOut acacpo = new AddConnectionActionCardPopOut();
-					acacpo.setVisible(true);
+					addConnectionPO.setVisible(true);
 					break;
 				case GAME_REMOVECONNECTIONACTIONCARD:
-					RemoveConnectionActionCardPopOut rcacpo = new RemoveConnectionActionCardPopOut();
-					rcacpo.setVisible(true);
+					removeConnectionPO.setVisible(true);
 					break;
 				case GAME_TELEPORTACTIONCARD:
-					TeleportPopOut tpo = new TeleportPopOut();
-					tpo.setVisible(true);
+					teleportPO.setVisible(true);
 					break;
 				case GAME_LOSETURNACTIONCARD:
-					LoseTurnWarningPopOut ltwpo = new LoseTurnWarningPopOut();
-					ltwpo.setVisible(true);
+					loseTurnPO.setVisible(true);
 					break;
 				case GAME_REVEALACTIONCARD:
-					RevealPopOut rpo = new RevealPopOut();
-					rpo.setVisible(true);
+					revealPO.setVisible(true);
+					break;
+					
+				case GAME_LOSETURNRANDOMLYACTIONCARD:
+					break;
+				case GAME_REVEALACTIONTILESACTIONCARD:
+					revealTilesPO.setVisible(true);
+					break;
+				case GAME_TURNACTIONTILESINACTIVEACTIONCARD:
+					break;
+				case GAME_WINTILEHINTACTIONCARD:
+					break;
+				case GAME_SENDBACKTOSTARTACTIONCARD:
+					break;
+				case GAME_TELEPORTOTHERACTIONCARD:
 					break;
 				case GAME_WON:
-					GameWonPopOut gwpo = new GameWonPopOut();
-					gwpo.setVisible(true);
+					GameWonPopOut gameWonPO = new GameWonPopOut();
+					gameWonPO.setVisible(true);
 				default:
-			}				
+			}
 		}		
 	}
 	
