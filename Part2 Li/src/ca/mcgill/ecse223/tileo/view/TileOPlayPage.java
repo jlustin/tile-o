@@ -334,8 +334,8 @@ public class TileOPlayPage extends JFrame {
 					sbtspo.setVisible(true);
 					break;
 				case GAME_TELEPORTOTHERACTIONCARD:
-					//TeleportOtherPopOut topo = new TeleportOtherPopOut();
-					//topo.setVisible(true);
+					TeleportOtherPopOut topo = new TeleportOtherPopOut();
+					topo.setVisible(true);
 					break;
 				case GAME_WON:
 					GameWonPopOut gameWonPO = new GameWonPopOut();
