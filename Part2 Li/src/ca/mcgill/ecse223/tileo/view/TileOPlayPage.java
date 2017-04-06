@@ -317,8 +317,8 @@ public class TileOPlayPage extends JFrame {
 					break;
 
 				case GAME_LOSETURNRANDOMLYACTIONCARD:
-					//LoseTurnRandomlyPopOut ltrpo= new LoseTurnRandomlyPopOut();
-					//ltrpo.setVisible(true);
+					LoseTurnRandomlyPopOut ltrpo= new LoseTurnRandomlyPopOut();
+					ltrpo.setVisible(true);
 					break;
 
 				case GAME_TURNACTIONTILESINACTIVEACTIONCARD:
@@ -326,8 +326,8 @@ public class TileOPlayPage extends JFrame {
 					tatipo.setVisible(true);
 					break;
 				case GAME_WINTILEHINTACTIONCARD:
-					//WinTileHintActionCardPopOut wthpo = new WinTileHintActionCardPopOut();
-					//wthpo.setVisible(true);
+					WinTileHintActionCardPopOut wthpo = new WinTileHintActionCardPopOut();
+					wthpo.setVisible(true);
 					break;
 				case GAME_SENDBACKTOSTARTACTIONCARD:
 					SendBackToStartPopOut sbtspo = new SendBackToStartPopOut();
