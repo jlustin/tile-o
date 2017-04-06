@@ -4,8 +4,6 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
-import ca.mcgill.ecse223.tileo.view.SendBackToStartPopOut;
-
 // line 135 "../../../../../TileOPersistence.ump"
 // line 430 "../../../../../TileO (updated April3).ump"
 public class SendBackToStartActionCard extends 	ActionCard

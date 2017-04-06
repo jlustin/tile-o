@@ -53,6 +53,9 @@ public class TilePanelPlay extends JPanel{
 		super();
 		init(game);		
 	}
+//	public void setShowActionTiles(boolean show){
+//		showActionTiles = show;
+//	}
 	
 	
 	private void init(Game game) {
@@ -93,6 +96,16 @@ public class TilePanelPlay extends JPanel{
 	}
 	
 	public void setGame(Game game) {
+//		if (showActionTiles){
+//			init(game);
+//			repaint();
+//			try {
+//				Thread.sleep(5000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
 		init(game);
 		repaint();
 	}

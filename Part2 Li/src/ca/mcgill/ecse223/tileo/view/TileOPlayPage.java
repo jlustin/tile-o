@@ -39,22 +39,23 @@ public class TileOPlayPage extends JFrame {
 	public static List<Tile> pMoves;
 	private static int currentPlayerNb = 1;
 	
+	
 	//all our pop outs
 	private static AddConnectionActionCardPopOut addConnectionPO = new AddConnectionActionCardPopOut();
 	private static LoseTurnWarningPopOut loseTurnPO = new LoseTurnWarningPopOut();
-//	private static NoPossibleMovesPopOut noMovesPO = new NoPossibleMovesPopOut();
 	private static RemoveConnectionActionCardPopOut removeConnectionPO = new RemoveConnectionActionCardPopOut();
 	private static RevealPopOut revealPO = new RevealPopOut();
 	private static RollDiePopOut rollPO = new RollDiePopOut();
-//	private static SavePopOut savePO = new SavePopOut();
-//	private static SelectTilePlayPopOut selectTilePO = new SelectTilePlayPopOut();
 	private static TeleportPopOut teleportPO = new TeleportPopOut();
-	private static RevealPopOut revealTilesPO = new RevealPopOut();
-//	private static LoseTurnRandomlyPopOut ltrpo = new LoseTurnRandomlyPopOut();
-	private static TurnActionTilesInactiveActionCardPopOut tatipo= new TurnActionTilesInactiveActionCardPopOut();
-	private static WinTileHintActionCardPopOut wthpo = new WinTileHintActionCardPopOut();
-	private static SendBackToStartPopOut sbtspo = new SendBackToStartPopOut();
-	private static TeleportOtherPopOut topo = new TeleportOtherPopOut();
+	private static RevealTilesPopOut revealTilesPO = new RevealTilesPopOut();
+//	private static TurnActionTilesInactiveActionCardPopOut tatipo= new TurnActionTilesInactiveActionCardPopOut();
+//	private static WinTileHintActionCardPopOut wthpo = new WinTileHintActionCardPopOut();
+//	private static SendBackToStartPopOut sbtspo = new SendBackToStartPopOut();
+//	private static TeleportOtherPopOut topo = new TeleportOtherPopOut();
+	
+	
+	
+	
 	private JPanel contentPane;
 	private static JLabel playerTurnLbl;
 	private static JLabel modeLbl;
@@ -63,6 +64,9 @@ public class TileOPlayPage extends JFrame {
 	static JButton btnRollDie;
 	private JButton gotItBtn;
 	private static JLabel gameModeLbl;
+	
+	
+	
 	private static JLabel p1InactivityLbl = new JLabel("");
 	private static JLabel p2InactivityLbl = new JLabel("");
 	private static JLabel p3InactivityLbl = new JLabel("");
@@ -316,7 +320,7 @@ public class TileOPlayPage extends JFrame {
 					break;
 					
 
-				case GAME_REVEALACTIONTILESACTIONCARD:
+				case GAME_REVEALACTIONTILESACTIONCARD:					
 					revealTilesPO.setVisible(true);
 					break;
 
@@ -325,26 +329,26 @@ public class TileOPlayPage extends JFrame {
 					break;
 
 				case GAME_TURNACTIONTILESINACTIVEACTIONCARD:
-					tatipo.setVisible(true);
+//					tatipo.setVisible(true);
 					break;
 				case GAME_WINTILEHINTACTIONCARD:
-					wthpo.setVisible(true);
+//					wthpo.setVisible(true);
 					break;
 				
 				case GAME_SENDBACKTOSTARTACTIONCARD:
 
-					sbtspo.setVisible(true);
-					SendBackToStartPopOut.refreshComboxBox(TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
+//					sbtspo.setVisible(true);
+//					SendBackToStartPopOut.refreshComboxBox(TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
 					break;
 					
 				case GAME_TELEPORTOTHERACTIONCARD:
-					topo.setVisible(true);
-					TeleportOtherPopOut.refreshComboBox(TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
+//					topo.setVisible(true);
+//					TeleportOtherPopOut.refreshComboBox(TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
 					break;
 					
 				case GAME_WON:
-					GameWonPopOut gameWonPO = new GameWonPopOut();
-					gameWonPO.setVisible(true);
+//					GameWonPopOut gameWonPO = new GameWonPopOut();
+//					gameWonPO.setVisible(true);
 				default:
 			}
 		}		

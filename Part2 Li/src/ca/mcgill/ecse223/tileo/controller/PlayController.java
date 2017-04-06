@@ -964,9 +964,6 @@ public class PlayController
 		   sendBackToStartActionCard.play(index);
 		   currentGame.setMode(Game.Mode.GAME);
 		   currentGame.setNextPlayer();
-		   
-	  
-    
   }
 
 
