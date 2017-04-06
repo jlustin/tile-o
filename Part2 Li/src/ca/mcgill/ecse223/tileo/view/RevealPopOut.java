@@ -47,11 +47,11 @@ public class RevealPopOut extends JFrame{
 	public void close() { 
 		this.setVisible(false);
 		chosen = 0;
-		error = null;
+		error = "";
 		chosenTile = null;
 		tileType = "";
-		
-//	    this.dispose();
+		errorLbl.setText(error);
+		chosenTileLbl.setText(tileType);
 	}
 	
 	public RevealPopOut() {

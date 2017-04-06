@@ -44,63 +44,52 @@ public class WinTileHintActionCard extends ActionCard
   }
 
   // line 426 "../../../../../TileO (updated April3).ump"
-   public boolean play(Tile aTile) throws InvalidInputException {
+   public boolean play(Tile aTile) {
 	   	Game currentGame = super.getDeck().getGame();
 	    boolean hint = false;
-	    
 	    Tile topTile = null;
 	    Tile bottomTile = null;
 	    Tile rightTile = null;
 	    Tile leftTile = null;
-	    
-	    String error = "";
-
 			for (Tile tileInGame : currentGame.getTiles()){
-				if (aTile.getY() == tileInGame.getY() - 1){
+				if ((aTile.getY() == tileInGame.getY() - 1) && (aTile.getX() == tileInGame.getX())){
 					topTile = tileInGame;
 				}
-				if (aTile.getY() == tileInGame.getY() + 1){
+				if (aTile.getY() == tileInGame.getY() + 1 && (aTile.getX() == tileInGame.getX())){
 					bottomTile = tileInGame;
 				}
-				if (aTile.getX() == tileInGame.getX() - 1){
+				if (aTile.getX() == tileInGame.getX() - 1 && (aTile.getY() == tileInGame.getY())){
 					leftTile = tileInGame;
 				}
-				if (aTile.getX() == tileInGame.getY() + 1){
+				if (aTile.getX() == tileInGame.getX() + 1 && (aTile.getY() == tileInGame.getY())){
 					rightTile = tileInGame;
 				}
 			}
-	    
-			try {
-				if (aTile instanceof WinTile) {
-					hint  = true;
-				}
-				if (topTile != null){
-					if (topTile instanceof WinTile) {
-						hint = true;
-					}
-				}
-				if (bottomTile != null) {
-					
-					if (bottomTile instanceof WinTile) {
-						hint = true;
-					}
-				}
-				if (rightTile != null) {
-					if (rightTile instanceof WinTile) {
-						hint = true;
-					}				
-				}
-				if (leftTile != null) {
-					if (leftTile instanceof WinTile) {
-						hint = true;
-					}
-				}
-				return hint;
+			if (aTile instanceof WinTile) {
+				hint  = true;
 			}
-			catch (RuntimeException e) {
-				error = e.getMessage();
-				throw new InvalidInputException(error);
+			if (topTile != null){
+				if (topTile instanceof WinTile) {
+					hint = true;
+				}
 			}
+			if (bottomTile != null) {
+				
+				if (bottomTile instanceof WinTile) {
+					hint = true;
+				}
+			}
+			if (rightTile != null) {
+				if (rightTile instanceof WinTile) {
+					hint = true;
+				}				
+			}
+			if (leftTile != null) {
+				if (leftTile instanceof WinTile) {
+					hint = true;
+				}
+			}
+			return hint;			
 	  }
   
 

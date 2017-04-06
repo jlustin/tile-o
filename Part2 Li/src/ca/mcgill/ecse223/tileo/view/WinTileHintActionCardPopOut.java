@@ -1,7 +1,9 @@
 package ca.mcgill.ecse223.tileo.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -34,31 +36,23 @@ public class WinTileHintActionCardPopOut extends JFrame {
 	private JButton getHintButton;
 	private JButton willRemButton;
 	
-	private boolean chosen = false;
+	private int chosen = 0;
 	private Tile chosenTile = null;
-	private String error;
-	private String hint;
+	private String error = "";
+	private String hint = "";
+	private boolean isWin;
 	
-	
-	
-	
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					WinTileHintActionCardPopOut frame = new WinTileHintActionCardPopOut();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public void close() { 
+		this.setVisible(false);
+		chosen = 0;
+		error = "";
+		hint = "";
+		errorLabel.setText(error);
+		hintLabel.setText(hint);
+		chosenTile = null;
 	}
-
+	
+	
 	/**
 	 * Create the frame.
 	 */
@@ -80,30 +74,38 @@ public class WinTileHintActionCardPopOut extends JFrame {
 		getHintButton = new JButton("Get Hint!");
 		getHintButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				hint = "";
 				error = "";
-				if (chosen == false){
+				chosenTile = null;
+				if (TileOPlayPage.getGrid().aTileIsSelected){
+					chosenTile = TileOPlayPage.getGrid().selectedTile;
+				}
+				if (chosenTile == null){
+					error = "Please click a tile on the board! ";
+				}
+				if (chosen == 0){
 					if (chosenTile == null){
 						error = "Please click a tile on the board! ";
+					}
+				
+					if(error.length() == 0){
+						errorLabel.setText("");
+						
+						pmc.playWinTileHintActionCard(chosenTile);
+						isWin = pmc.isWinTile;
+						if (isWin == true){
+							hint = "Win Tile around here!";
+						}
+						else if (isWin == false) {
+							hint = "No Win Tile Here!";
+						}
+						hintLabel.setText(hint);
+						chosen = 1;
+					}
+					else{
 						errorLabel.setText(error);
 					}
-					if (TileOPlayPage.getGrid().aTileIsSelected){
-						chosenTile = TileOPlayPage.getGrid().selectedTile;
-						try
-						{
-							if (pmc.playWinTileHintActionCard(chosenTile)){
-								hint = "The selected tile or one of its neighbours is the Win Tile! Good luck!";
-							};
-							hint = "The selected tile is not the Win Tile and there are no Win Tiles around! Good luck!";
-							chosen = true;
-						}
-						catch(InvalidInputException f)
-						{
-							throw new RuntimeException(f.getMessage());
-						}
-					}
 				}
-				else if (chosen = true){
+				else if (chosen == 1){
 					error = "You have already selected a tile!";
 					errorLabel.setText(error);
 				}
@@ -113,7 +115,7 @@ public class WinTileHintActionCardPopOut extends JFrame {
 		willRemButton = new JButton("I will remember!");
 		willRemButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (chosen == true) {
+				if (chosen == 1) {
 					TileOPlayPage.setError("");
 					TileOPlayPage.refreshData();
 					TileOPlayPage.getGrid().aTileIsSelected = false;
@@ -123,11 +125,17 @@ public class WinTileHintActionCardPopOut extends JFrame {
 					close();
 				}
 				else {
-					error = "You have not select a tile yet! Select a tile to know whether it is the Win Tile!";
+					error = "You have not select a tile yet!";
 					errorLabel.setText(error);
 				}
 			}
 		});
+		
+		hintLabel = new JLabel("");
+		hintLabel.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		
+		errorLabel = new JLabel("");
+		errorLabel.setForeground(Color.RED);
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -135,47 +143,44 @@ public class WinTileHintActionCardPopOut extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(74)
+							.addComponent(getHintButton)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(willRemButton)
+							.addGap(94))
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(84)
-							.addComponent(drawnCardLabel, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE))
+							.addComponent(hintLabel, GroupLayout.PREFERRED_SIZE, 282, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(selectTileLabel))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(173)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(errorLabel)
-								.addComponent(hintLabel))))
-					.addContainerGap(39, Short.MAX_VALUE))
+							.addGap(110)
+							.addComponent(errorLabel, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(44, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(72)
-					.addComponent(getHintButton)
-					.addPreferredGap(ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-					.addComponent(willRemButton)
-					.addGap(83))
+					.addGap(25)
+					.addComponent(selectTileLabel)
+					.addContainerGap(49, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(82)
+					.addComponent(drawnCardLabel)
+					.addContainerGap(120, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
+					.addGap(20)
 					.addComponent(drawnCardLabel)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(selectTileLabel)
-					.addGap(41)
+					.addGap(26)
 					.addComponent(errorLabel)
 					.addGap(18)
 					.addComponent(hintLabel)
-					.addPreferredGap(ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(getHintButton)
 						.addComponent(willRemButton))
-					.addContainerGap())
+					.addGap(64))
 		);
 		contentPane.setLayout(gl_contentPane);
-	}
-	
-	public void close() { 
-		this.setVisible(false);
-		this.setAlwaysOnTop(true);
-	    this.dispose();
 	}
 }
