@@ -123,6 +123,10 @@ String error = "";
 			}
 		});
 		
+		JLabel lblWarningIfYou = new JLabel("Warning: if you teleport a player to the WinTile, the game keeps going!");
+		
+		JLabel lblEvenIfThe = new JLabel("This will also set the WinTile as visited... The mind games are real :)");
+		
 	
 		
 		//JComboBox comboBox = new JComboBox();
@@ -137,20 +141,26 @@ String error = "";
 					.addComponent(lblNewLabel)
 					.addContainerGap(73, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(46, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(lblPleaseSelectA)
-							.addGap(35))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnMove)
-							.addGap(62))))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(btnMove)
+					.addGap(62))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap(73, Short.MAX_VALUE)
 					.addComponent(errorLbl, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
 					.addGap(62))
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addComponent(lblWarningIfYou)
+					.addContainerGap(41, Short.MAX_VALUE))
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addGap(12)
+					.addComponent(lblEvenIfThe)
+					.addContainerGap(46, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap(46, Short.MAX_VALUE)
+					.addComponent(lblPleaseSelectA)
+					.addGap(38))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -165,7 +175,11 @@ String error = "";
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnMove))
-					.addGap(53))
+					.addGap(18)
+					.addComponent(lblWarningIfYou, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+					.addGap(3)
+					.addComponent(lblEvenIfThe)
+					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
