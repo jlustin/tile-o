@@ -50,7 +50,6 @@ public class TileOPlayPage extends JFrame {
 //	private static SelectTilePlayPopOut selectTilePO = new SelectTilePlayPopOut();
 	private static TeleportPopOut teleportPO = new TeleportPopOut();
 	private static RevealTilesPopOut revealTilesPO = new RevealTilesPopOut();
-//	private static LoseTurnRandomlyPopOut loseTurnRandomlyPO = new LoseTurnRandomlyPopOut();
 	
 	private JPanel contentPane;
 	private static JLabel playerTurnLbl;
@@ -313,8 +312,6 @@ public class TileOPlayPage extends JFrame {
 					break;
 					
 				case GAME_LOSETURNRANDOMLYACTIONCARD:
-					LoseTurnRandomlyPopOut loseTurnRandomlyPO = new LoseTurnRandomlyPopOut();
-					loseTurnRandomlyPO.setVisible(true);
 					break;
 				case GAME_REVEALACTIONTILESACTIONCARD:
 					revealTilesPO.setVisible(true);
