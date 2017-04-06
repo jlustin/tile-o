@@ -621,8 +621,8 @@ public class Game implements Serializable
 
   // line 86 "../../../../../TileO (updated April3).ump"
    public void setNextPlayer(){
-    determineNextPlayer();
-		updateTileStatus();
+	   determineNextPlayer();
+	   updateTileStatus();
   }
 
 
