@@ -433,7 +433,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playWinTileHintActionCard(Tile tile)
+  public boolean playWinTileHintActionCard(Tile tile) throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -933,12 +933,25 @@ public class PlayController
 
 
   /**
-   * Justin (Jun Yu) Lei Action card �Click on a tile to know if it
+   * Justin (Jun Yu) Lei Action card :Click on a tile to know if it
    * or one of its neighbour is the WinTile
    */
   // line 400 "../../../../../PlayStateUpdatedApril3.ump"
-   private void doWinTileHintActionCard(Tile aTile){
-    
+   private boolean doWinTileHintActionCard(Tile aTile) throws InvalidInputException{
+	   	TileO tileO = TileOApplication.getTileO();
+		Game currentGame = tileO.getCurrentGame();
+		WinTileHintActionCard winTileHintActionCard = (WinTileHintActionCard) drawCard(currentGame);
+		boolean hint;
+		
+		try {
+			hint = winTileHintActionCard.play(aTile);			
+			currentGame.setNextPlayer();
+			currentGame.setMode(Game.Mode.GAME);
+			return hint;
+		}
+		catch (RuntimeException e) {
+			throw new InvalidInputException(e.getMessage());
+		}
   }
 
 

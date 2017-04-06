@@ -421,7 +421,7 @@ class WinTileHintActionCard {
 		return Game.Mode.GAME_WINTILEHINTACTIONCARD;
 	};
 	
-	public void play(Tile aTile){
+	public boolean play(Tile aTile){
 		
 	};
 

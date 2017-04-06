@@ -407,7 +407,7 @@ class PlayController {
 	
 	// Justin (Jun Yu) Lei Action card �Click on a tile to know if it 
 	// or one of its neighbour is the WinTile
-	private void doWinTileHintActionCard(Tile aTile) {
+	private boolean doWinTileHintActionCard(Tile aTile) {
 
 	}
 	
