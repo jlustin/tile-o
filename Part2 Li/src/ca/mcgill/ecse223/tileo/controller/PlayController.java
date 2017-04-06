@@ -869,13 +869,9 @@ public class PlayController
    * Action card "Reveal the type of a tile"
    */
   // line 359 "../../../../../PlayStateUpdatedApril3.ump"
-<<<<<<< HEAD
+
    public void doPlayRevealActionCard(Tile tile) throws InvalidInputException{
-    TileO tileO = TileOApplication.getTileO();
-=======
-   private void doPlayRevealActionCard(Tile tile) throws InvalidInputException{
 	   	TileO tileO = TileOApplication.getTileO();
->>>>>>> refs/remotes/origin/LoseTurnRandomlyActionCard-CM
 		Game currentGame = tileO.getCurrentGame();
 		ActionCard currentCard = drawCard(currentGame);
 		try {
