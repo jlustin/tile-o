@@ -50,6 +50,7 @@ public class TileOPlayPage extends JFrame {
 //	private static SelectTilePlayPopOut selectTilePO = new SelectTilePlayPopOut();
 	private static TeleportPopOut teleportPO = new TeleportPopOut();
 	private static RevealTilesPopOut revealTilesPO = new RevealTilesPopOut();
+	private static WinTileHintActionCardPopOut winTileHintActionCardPO = new WinTileHintActionCardPopOut();
 	
 	private JPanel contentPane;
 	private static JLabel playerTurnLbl;
@@ -319,6 +320,7 @@ public class TileOPlayPage extends JFrame {
 				case GAME_TURNACTIONTILESINACTIVEACTIONCARD:
 					break;
 				case GAME_WINTILEHINTACTIONCARD:
+					winTileHintActionCardPO.setVisible(true);
 					break;
 				case GAME_SENDBACKTOSTARTACTIONCARD:
 					break;

@@ -25,6 +25,7 @@ public class PlayController
 
   //PlayController Associations
   private List<Tile> possibleMoves;
+  public boolean isWinTile;
 
   //------------------------
   // CONSTRUCTOR
@@ -433,7 +434,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playWinTileHintActionCard(Tile tile) throws InvalidInputException
+  public boolean playWinTileHintActionCard(Tile tile)
   {
     boolean wasEventProcessed = false;
     
@@ -453,7 +454,6 @@ public class PlayController
       default:
         // Other states do respond to this event
     }
-
     return wasEventProcessed;
   }
 
@@ -869,7 +869,7 @@ public class PlayController
    * Action card "Reveal the type of a tile"
    */
   // line 359 "../../../../../PlayStateUpdatedApril3.ump"
-   private void doPlayRevealActionCard(Tile tile) throws InvalidInputException{
+   public void doPlayRevealActionCard(Tile tile) throws InvalidInputException{
     TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		ActionCard currentCard = drawCard(currentGame);
@@ -932,21 +932,18 @@ public class PlayController
    * or one of its neighbour is the WinTile
    */
   // line 400 "../../../../../PlayStateUpdatedApril3.ump"
-   private boolean doWinTileHintActionCard(Tile aTile) throws InvalidInputException{
+   private void doWinTileHintActionCard(Tile aTile){
 	   	TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		WinTileHintActionCard winTileHintActionCard = (WinTileHintActionCard) drawCard(currentGame);
 		boolean hint;
+	
+		hint = winTileHintActionCard.play(aTile);			
+		currentGame.setNextPlayer();
+		currentGame.setMode(Game.Mode.GAME);
 		
-		try {
-			hint = winTileHintActionCard.play(aTile);			
-			currentGame.setNextPlayer();
-			currentGame.setMode(Game.Mode.GAME);
-			return hint;
-		}
-		catch (RuntimeException e) {
-			throw new InvalidInputException(e.getMessage());
-		}
+		
+		isWinTile = hint;
   }
 
 
