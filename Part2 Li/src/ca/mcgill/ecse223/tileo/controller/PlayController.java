@@ -923,6 +923,11 @@ public class PlayController
    */
   // line 394 "../../../../../PlayStateUpdatedApril3.ump"
    private void doTurnActionTilesInactiveActionCard(){
+	    TileO tileO = TileOApplication.getTileO();
+		Game currentGame = tileO.getCurrentGame();		
+		TurnActionTilesInactiveActionCard turnActionTilesInactiveActionCard = (TurnActionTilesInactiveActionCard) drawCard(currentGame);		
+		turnActionTilesInactiveActionCard.play();
+		currentGame.setMode(Game.Mode.GAME);
     
   }
 
