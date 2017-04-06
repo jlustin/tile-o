@@ -47,6 +47,8 @@ public class WinTileHintActionCardPopOut extends JFrame {
 		chosen = 0;
 		error = "";
 		hint = "";
+		errorLabel.setText(error);
+		hintLabel.setText(hint);
 		chosenTile = null;
 	}
 	

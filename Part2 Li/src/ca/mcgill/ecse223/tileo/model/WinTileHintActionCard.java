@@ -47,14 +47,10 @@ public class WinTileHintActionCard extends ActionCard
    public boolean play(Tile aTile) {
 	   	Game currentGame = super.getDeck().getGame();
 	    boolean hint = false;
-	    
 	    Tile topTile = null;
 	    Tile bottomTile = null;
 	    Tile rightTile = null;
 	    Tile leftTile = null;
-	    
-	    String error = "";
-
 			for (Tile tileInGame : currentGame.getTiles()){
 				if ((aTile.getY() == tileInGame.getY() - 1) && (aTile.getX() == tileInGame.getX())){
 					topTile = tileInGame;
@@ -69,8 +65,6 @@ public class WinTileHintActionCard extends ActionCard
 					rightTile = tileInGame;
 				}
 			}
-	    
-			
 			if (aTile instanceof WinTile) {
 				hint  = true;
 			}
@@ -96,7 +90,6 @@ public class WinTileHintActionCard extends ActionCard
 				}
 			}
 			return hint;			
-			
 	  }
   
 
