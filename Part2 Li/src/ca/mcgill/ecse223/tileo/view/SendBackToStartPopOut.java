@@ -24,6 +24,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class SendBackToStartPopOut extends JFrame {
 	
@@ -40,12 +41,14 @@ public class SendBackToStartPopOut extends JFrame {
 	 * Create the frame.
 	 */
 	public SendBackToStartPopOut() {
+		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
+		JLabel errorLbl = new JLabel("");
+		errorLbl.setForeground(Color.RED);
 		
 		JLabel lblYouHaveDrawn = new JLabel("You have drawn a Send Back To Start Action Card, please select");
 		
@@ -56,7 +59,6 @@ public class SendBackToStartPopOut extends JFrame {
 //		JComboBox comboBox_1 = new JComboBox();
 		
 		
-		System.out.println("Hello" + TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
 		
 		String[] playerNum = new String[TileOApplication.getTileO().getCurrentGame().numberOfPlayers()];
 		addNums(playerNum, TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
@@ -78,10 +80,10 @@ public class SendBackToStartPopOut extends JFrame {
 				
 				
 				
-				if(i == number){
-					error = error + "You cannot send yourself back to your starting position!";
-					
-				}
+//				if(i == number){
+//					error = "You cannot send yourself back to your starting position!";
+//					
+//				}
 				
 				
 				
@@ -93,29 +95,44 @@ public class SendBackToStartPopOut extends JFrame {
 						TileOPlayPage.refreshData();
 
 					close();
+					error = "";
+					errorLbl.setText("");
 				}
+//				else
+//				{
+//					errorLbl.setText(error);
+//				}
 				
 				
 			}
 		});
+		
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(26)
-					.addComponent(lblYouHaveDrawn))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(96)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblThatPlayerBack)
-						.addComponent(lblAPleyerTo)))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(185)
-					.addComponent(btnSend))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(196, Short.MAX_VALUE)
-					.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(192))
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(lblYouHaveDrawn)
+							.addGap(16))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(lblAPleyerTo)
+							.addGap(89))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(lblThatPlayerBack)
+							.addGap(89))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(192))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(btnSend)
+							.addGap(178))))
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(errorLbl, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -126,9 +143,11 @@ public class SendBackToStartPopOut extends JFrame {
 					.addComponent(lblAPleyerTo)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblThatPlayerBack)
-					.addPreferredGap(ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+					.addGap(28)
+					.addComponent(errorLbl, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
 					.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(45)
+					.addGap(18)
 					.addComponent(btnSend)
 					.addGap(31))
 		);
@@ -150,5 +169,4 @@ public class SendBackToStartPopOut extends JFrame {
 		addNums(playerNum, numberOfPlayers);
 		comboBox_1.setModel(new DefaultComboBoxModel(playerNum));
 	}
-
 }
