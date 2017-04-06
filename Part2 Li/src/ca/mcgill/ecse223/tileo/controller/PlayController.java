@@ -957,7 +957,12 @@ public class PlayController
    */
   // line 413 "../../../../../PlayStateUpdatedApril3.ump"
    private void doTeleportOtherActionCard(int playerNumber, Tile aTile){
-
+	   TileO tileO = TileOApplication.getTileO();
+	   Game currentGame = tileO.getCurrentGame();
+	   TeleportOtherActionCard teleportOtherActionCard = (TeleportOtherActionCard) drawCard(currentGame);
+	   teleportOtherActionCard.play(playerNumber, aTile);
+	   currentGame.setNextPlayer();
+	   currentGame.setMode(Game.Mode.GAME);
   }
 
 
