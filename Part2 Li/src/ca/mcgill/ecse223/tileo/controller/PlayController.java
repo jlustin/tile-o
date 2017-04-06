@@ -936,6 +936,7 @@ public class PlayController
 		Game currentGame = tileO.getCurrentGame();		
 		TurnActionTilesInactiveActionCard turnActionTilesInactiveActionCard = (TurnActionTilesInactiveActionCard) drawCard(currentGame);		
 		turnActionTilesInactiveActionCard.play();
+		currentGame.setNextPlayer();
 		currentGame.setMode(Game.Mode.GAME);
   }
 
