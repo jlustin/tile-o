@@ -67,6 +67,7 @@ public class SendBackToStartPopOut extends JFrame {
 		JButton btnSend = new JButton("Send");
 		btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				error = "";
 				TileO tileO = TileOApplication.getTileO();
 				Game currentGame = tileO.getCurrentGame();

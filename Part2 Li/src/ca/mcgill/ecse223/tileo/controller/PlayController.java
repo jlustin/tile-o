@@ -952,11 +952,9 @@ public class PlayController
    private void doSendBackToStartActionCard(int index) {
 	   TileO tileO = TileOApplication.getTileO();
 	   Game currentGame = tileO.getCurrentGame();
-	   SendBackToStartActionCard currentCard = (SendBackToStartActionCard)drawCard(currentGame);
-	   
-	   
+	   SendBackToStartActionCard sendBackToStartActionCard = (SendBackToStartActionCard)drawCard(currentGame);
 		   System.out.println("inside of doSendBlah");
-		   currentCard.play(index);
+		   sendBackToStartActionCard.play(index);
 		   currentGame.setMode(Game.Mode.GAME);
 		   currentGame.setNextPlayer();
 		   

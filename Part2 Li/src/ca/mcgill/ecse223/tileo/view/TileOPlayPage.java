@@ -50,7 +50,11 @@ public class TileOPlayPage extends JFrame {
 //	private static SelectTilePlayPopOut selectTilePO = new SelectTilePlayPopOut();
 	private static TeleportPopOut teleportPO = new TeleportPopOut();
 	private static RevealPopOut revealTilesPO = new RevealPopOut();
-	
+	private static LoseTurnRandomlyPopOut ltrpo = new LoseTurnRandomlyPopOut();
+	private static TurnActionTilesInactiveActionCardPopOut tatipo= new TurnActionTilesInactiveActionCardPopOut();
+	private static WinTileHintActionCardPopOut wthpo = new WinTileHintActionCardPopOut();
+	private static SendBackToStartPopOut sbtspo = new SendBackToStartPopOut();
+	private static TeleportOtherPopOut topo = new TeleportOtherPopOut();
 	private JPanel contentPane;
 	private static JLabel playerTurnLbl;
 	private static JLabel modeLbl;
@@ -317,24 +321,33 @@ public class TileOPlayPage extends JFrame {
 					break;
 
 				case GAME_LOSETURNRANDOMLYACTIONCARD:
+<<<<<<< HEAD
 					//LoseTurnRandomlyPopOut ltrpo= new LoseTurnRandomlyPopOut();
 					//ltrpo.setVisible(true);
+=======
+					ltrpo.setVisible(true);
+>>>>>>> master
 					break;
 
 				case GAME_TURNACTIONTILESINACTIVEACTIONCARD:
-					TurnActionTilesInactiveActionCardPopOut tatipo= new TurnActionTilesInactiveActionCardPopOut();
+				
 					tatipo.setVisible(true);
 					break;
 				case GAME_WINTILEHINTACTIONCARD:
+<<<<<<< HEAD
 					//WinTileHintActionCardPopOut wthpo = new WinTileHintActionCardPopOut();
 					//wthpo.setVisible(true);
 					break;
 				case GAME_SENDBACKTOSTARTACTIONCARD:
 					SendBackToStartPopOut sbtspo = new SendBackToStartPopOut();
+=======
+					wthpo.setVisible(true);
+					break;
+				case GAME_SENDBACKTOSTARTACTIONCARD:
+>>>>>>> master
 					sbtspo.setVisible(true);
 					break;
 				case GAME_TELEPORTOTHERACTIONCARD:
-					TeleportOtherPopOut topo = new TeleportOtherPopOut();
 					topo.setVisible(true);
 					break;
 				case GAME_WON:
