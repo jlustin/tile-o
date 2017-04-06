@@ -53,7 +53,7 @@ public class SelectTilePlayPopOut extends JDialog {
 		setBounds(500, 200, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		getContentPane().add(contentPanel, BorderLayout.WEST);
 		{
 			lblPleaseClickOn = new JLabel("Please click on a highlighted tile on the board in order to move to it.");
 		}
@@ -63,10 +63,13 @@ public class SelectTilePlayPopOut extends JDialog {
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(lblPleaseClickOn)
 				.addGroup(gl_contentPanel.createSequentialGroup()
-					.addGap(56)
-					.addComponent(errorMessage))
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblPleaseClickOn)
+						.addGroup(gl_contentPanel.createSequentialGroup()
+							.addGap(56)
+							.addComponent(errorMessage)))
+					.addContainerGap(10, Short.MAX_VALUE))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -75,7 +78,7 @@ public class SelectTilePlayPopOut extends JDialog {
 					.addComponent(lblPleaseClickOn)
 					.addGap(65)
 					.addComponent(errorMessage)
-					.addContainerGap(112, Short.MAX_VALUE))
+					.addContainerGap(143, Short.MAX_VALUE))
 		);
 		contentPanel.setLayout(gl_contentPanel);
 		{
@@ -94,7 +97,7 @@ public class SelectTilePlayPopOut extends JDialog {
 							error = "Please choose on tile on the board! ";
 						}
 						if(!TileOPlayPage.pMoves.contains(chosenTile)){
-							error = error+ "Please choose one of the highlighted tiles! ";
+							error = "Please choose one of the highlighted tiles! ";
 						}
 						error.trim();
 						
@@ -118,6 +121,8 @@ public class SelectTilePlayPopOut extends JDialog {
 							}
 							
 						}
+						else
+							errorMessage.setText(error);
 					}
 				});
 				
