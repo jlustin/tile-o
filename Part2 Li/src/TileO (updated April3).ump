@@ -449,8 +449,10 @@ class TeleportOtherActionCard {
 	};
 	
 	public void play(int playerNumber, Tile aTile){
-		
-	};
+    Game currentGame = super.getDeck().getGame();
+    Player chosenPlayer = currentGame.getPlayer(playerNumber);
+    chosenPlayer.setCurrentTile(aTile);
+  }
 
 
 }

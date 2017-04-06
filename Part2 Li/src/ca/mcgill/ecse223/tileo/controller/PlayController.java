@@ -481,7 +481,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playTeleportOtherActionCard(Tile tile,int playerNumber)
+  public boolean playTeleportOtherActionCard(int playerNumber,Tile aTile)
   {
     boolean wasEventProcessed = false;
     
@@ -492,7 +492,7 @@ public class PlayController
         if (isTeleportOtherActionCard())
         {
         // line 90 "../../../../../PlayStateUpdatedApril3.ump"
-          doTeleportOtherActionCard(tile, playerNumber);
+          doTeleportOtherActionCard(playerNumber, aTile);
           setMode(Mode.Roll);
           wasEventProcessed = true;
           break;
@@ -956,8 +956,13 @@ public class PlayController
    * Victor swag
    */
   // line 413 "../../../../../PlayStateUpdatedApril3.ump"
-   private void doTeleportOtherActionCard(Tile aTile, int playerNumber){
-    
+   private void doTeleportOtherActionCard(int playerNumber, Tile aTile){
+	   TileO tileO = TileOApplication.getTileO();
+	   Game currentGame = tileO.getCurrentGame();
+	   TeleportOtherActionCard teleportOtherActionCard = (TeleportOtherActionCard) drawCard(currentGame);
+	   teleportOtherActionCard.play(playerNumber, aTile);
+	   currentGame.setNextPlayer();
+	   currentGame.setMode(Game.Mode.GAME);
   }
 
 
