@@ -4,9 +4,11 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
+import ca.mcgill.ecse223.tileo.view.SendBackToStartPopOut;
+
 // line 135 "../../../../../TileOPersistence.ump"
 // line 430 "../../../../../TileO (updated April3).ump"
-public class SendBackToStartActionCard extends ActionCard
+public class SendBackToStartActionCard extends 	ActionCard
 {
 
   //------------------------
@@ -41,8 +43,12 @@ public class SendBackToStartActionCard extends ActionCard
   }
 
   // line 439 "../../../../../TileO (updated April3).ump"
-   public void play(Player aPlayer){
-    
+   public void play(int index){
+	   Game currentGame = super.getDeck().getGame();
+	   Player chosenPlayer;
+	   chosenPlayer = currentGame.getPlayer(index);
+	   Tile startingTile = chosenPlayer.getStartingTile();
+	   chosenPlayer.setCurrentTile(startingTile);
   }
   
   //------------------------

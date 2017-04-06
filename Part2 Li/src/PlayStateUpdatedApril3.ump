@@ -84,7 +84,7 @@ class PlayController {
 			playWinTileHintActionCard(Tile tile)[isWinTileHintActionCard()] / {
 				doWinTileHintActionCard(tile);
 			} -> Roll;
-			playSendBackToStartActionCard(Player player)[isSendBackToStartActionCard()] / {
+			playSendBackToStartActionCard(int index)[isSendBackToStartActionCard()] / {
 				doSendBackToStartActionCard(player);
 			} -> Roll;
 			playTeleportOtherActionCard(int playerNumber, Tile aTile)[isTeleportOtherActionCard()] / {

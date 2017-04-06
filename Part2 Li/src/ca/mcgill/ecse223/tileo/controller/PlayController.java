@@ -457,7 +457,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playSendBackToStartActionCard(Player player)
+  public boolean playSendBackToStartActionCard(int index) 
   {
     boolean wasEventProcessed = false;
     
@@ -468,7 +468,7 @@ public class PlayController
         if (isSendBackToStartActionCard())
         {
         // line 87 "../../../../../PlayStateUpdatedApril3.ump"
-          doSendBackToStartActionCard(player);
+          doSendBackToStartActionCard(index);
           setMode(Mode.Roll);
           wasEventProcessed = true;
           break;
@@ -947,7 +947,15 @@ public class PlayController
    * Action card "Send a player back to its starting position"
    */
   // line 408 "../../../../../PlayStateUpdatedApril3.ump"
-   private void doSendBackToStartActionCard(Player aPlayer){
+   private void doSendBackToStartActionCard(int index) {
+	   TileO tileO = TileOApplication.getTileO();
+	   Game currentGame = tileO.getCurrentGame();
+	   SendBackToStartActionCard sendBackToStartActionCard = (SendBackToStartActionCard)drawCard(currentGame);
+		   sendBackToStartActionCard.play(index);
+		   currentGame.setMode(Game.Mode.GAME);
+		   currentGame.setNextPlayer();
+		   
+	  
     
   }
 
