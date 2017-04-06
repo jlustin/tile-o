@@ -46,6 +46,7 @@ public class TeleportOtherActionCard extends ActionCard
     Game currentGame = super.getDeck().getGame();
     Player chosenPlayer = currentGame.getPlayer(playerNumber);
     chosenPlayer.setCurrentTile(aTile);
+    aTile.setHasBeenVisited(true);
   }
   
   //------------------------
