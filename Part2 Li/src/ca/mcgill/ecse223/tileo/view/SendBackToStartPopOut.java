@@ -60,9 +60,9 @@ public class SendBackToStartPopOut extends JFrame {
 		
 		
 		
-		String[] playerNum = new String[TileOApplication.getTileO().getCurrentGame().numberOfPlayers()];
-		addNums(playerNum, TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
-		comboBox_1.setModel(new DefaultComboBoxModel(playerNum));
+//		String[] playerNum = new String[TileOApplication.getTileO().getCurrentGame().numberOfPlayers()];
+//		addNums(playerNum, TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
+//		comboBox_1.setModel(new DefaultComboBoxModel(playerNum));
 			
 		
 		

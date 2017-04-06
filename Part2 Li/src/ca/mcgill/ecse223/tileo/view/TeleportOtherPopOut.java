@@ -81,9 +81,9 @@ String error = "";
 		errorLbl.setForeground(Color.RED);
 		JLabel lblPleaseSelectA = new JLabel("Please select a player you would like to move and the tile");
 		
-		String[] playerNum = new String[TileOApplication.getTileO().getCurrentGame().numberOfPlayers()];
-		addNums(playerNum, TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
-		comboBox.setModel(new DefaultComboBoxModel(playerNum));	
+//		String[] playerNum = new String[TileOApplication.getTileO().getCurrentGame().numberOfPlayers()];
+//		addNums(playerNum, TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
+//		comboBox.setModel(new DefaultComboBoxModel(playerNum));	
 		
 		JButton btnMove = new JButton("Move");
 		btnMove.addActionListener(new ActionListener() {
