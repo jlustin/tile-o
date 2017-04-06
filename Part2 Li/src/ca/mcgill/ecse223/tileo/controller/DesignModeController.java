@@ -51,8 +51,8 @@ public class DesignModeController {
 		if(x>50||y>50) {
 			error = "To make the screen legible, enter a coordinate value of less than 50.";
 		}		
-		if(x<0 || y<0) {
-			error = "The coordinate value must be positive!";
+		if(x<=0 || y<=0) {
+			error = "The coordinate value must be greater than zero! (The origin is (1,1)).";
 		}		
         for(Tile aTile: currentGame.getTiles()) {	//iterates through each tiles of the currentGame
         	int xTile = aTile.getX();
