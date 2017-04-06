@@ -31,6 +31,7 @@ public class SendBackToStartPopOut extends JFrame {
 	private JPanel contentPane;
 	public static int numberOfPlayers;
 	String error;
+	private PlayController pmc = new PlayController();
 
 		
 
@@ -70,12 +71,9 @@ public class SendBackToStartPopOut extends JFrame {
 				TileO tileO = TileOApplication.getTileO();
 				Game currentGame = tileO.getCurrentGame();
 				Player currentPlayer = currentGame.getCurrentPlayer();
-				int number = currentPlayer.getNumber();
-				Integer i = (Integer)comboBox_1.getSelectedItem();
+				int number = currentPlayer.getNumber()-1;
+				int i = (comboBox_1.getSelectedIndex());
 				
-				if(i == null){
-					error = error + "Please select a player";
-				}
 				
 				
 				
@@ -88,14 +86,10 @@ public class SendBackToStartPopOut extends JFrame {
 				
 				error.trim();
 				if(error.length()==0){
-					try{
-						PlayController pmc = new PlayController();
-						int index = i;
+				
+						System.out.println("inside of popout");
 						pmc.playSendBackToStartActionCard(i);
-					}
-					catch(InvalidInputException e1){
-						throw new RuntimeException(e1.getMessage());
-					}
+
 					close();
 				}
 				
@@ -146,6 +140,6 @@ public class SendBackToStartPopOut extends JFrame {
 	}
 	public void close() { 
 		this.setVisible(false);
-//	    this.dispose();
+	    this.dispose();
 	}
 }

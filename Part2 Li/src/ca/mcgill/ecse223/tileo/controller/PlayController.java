@@ -457,7 +457,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playSendBackToStartActionCard(int index) throws InvalidInputException
+  public boolean playSendBackToStartActionCard(int index) 
   {
     boolean wasEventProcessed = false;
     
@@ -465,9 +465,11 @@ public class PlayController
     switch (aMode)
     {
       case ActionCard:
+    	  System.out.println("inside of play before if");
         if (isSendBackToStartActionCard())
         {
         // line 87 "../../../../../PlayStateUpdatedApril3.ump"
+        	System.out.println("inside of playSendBlah");
           doSendBackToStartActionCard(index);
           setMode(Mode.Roll);
           wasEventProcessed = true;
@@ -947,20 +949,18 @@ public class PlayController
    * Action card "Send a player back to its starting position"
    */
   // line 408 "../../../../../PlayStateUpdatedApril3.ump"
-   private void doSendBackToStartActionCard(int index) throws InvalidInputException{
+   private void doSendBackToStartActionCard(int index) {
 	   TileO tileO = TileOApplication.getTileO();
 	   Game currentGame = tileO.getCurrentGame();
-	   ActionCard currentCard = drawCard(currentGame);
+	   SendBackToStartActionCard currentCard = (SendBackToStartActionCard)drawCard(currentGame);
 	   
-	   try{
-		   if(currentCard instanceof SendBackToStartActionCard){
-			   ((SendBackToStartActionCard) currentCard).play(index);
-		   }
-		   currentGame.setNextPlayer();
+	   
+		   System.out.println("inside of doSendBlah");
+		   currentCard.play(index);
 		   currentGame.setMode(Game.Mode.GAME);
-	   }catch (RuntimeException e) {
-		   throw new InvalidInputException (e.getMessage());
-	   }
+		   currentGame.setNextPlayer();
+		   
+	  
     
   }
 

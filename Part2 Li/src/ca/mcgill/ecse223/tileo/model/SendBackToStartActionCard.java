@@ -10,7 +10,7 @@ import ca.mcgill.ecse223.tileo.view.SendBackToStartPopOut;
 
 // line 135 "../../../../../TileOPersistence.ump"
 // line 430 "../../../../../TileO (updated April3).ump"
-public class SendBackToStartActionCard extends ActionCard
+public class SendBackToStartActionCard extends 	ActionCard
 {
 
   //------------------------
@@ -51,6 +51,7 @@ public class SendBackToStartActionCard extends ActionCard
 	   chosenPlayer = currentGame.getPlayer(index);
 	   Tile startingTile = chosenPlayer.getStartingTile();
 	   chosenPlayer.setCurrentTile(startingTile);
+	   System.out.println("inside of play method");
   }
   
   //------------------------
