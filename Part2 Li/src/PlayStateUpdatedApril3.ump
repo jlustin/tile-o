@@ -87,7 +87,7 @@ class PlayController {
 			playSendBackToStartActionCard(Player player)[isSendBackToStartActionCard()] / {
 				doSendBackToStartActionCard(player);
 			} -> Roll;
-			playTeleportOtherActionCard(Tile tile, int playerNumber)[isTeleportOtherActionCard()] / {
+			playTeleportOtherActionCard(int playerNumber, Tile aTile)[isTeleportOtherActionCard()] / {
 				doTeleportOtherActionCard(tile, playerNumber);
 			} -> Roll;	
 		}
@@ -420,9 +420,14 @@ class PlayController {
 	}
 	
 	//Victor swag
-	private void doTeleportOtherActionCard(Tile aTile, int playerNumber) {
-
-	}
+	 private void doTeleportOtherActionCard(int playerNumber, Tile aTile){
+	   TileO tileO = TileOApplication.getTileO();
+	   Game currentGame = tileO.getCurrentGame();
+	   TeleportOtherActionCard teleportOtherActionCard = (TeleportOtherActionCard) drawCard(currentGame);
+	   teleportOtherActionCard.play(playerNumber, aTile);
+	   currentGame.setNextPlayer();
+	   currentGame.setMode(Game.Mode.GAME);
+  }
 
 	
 	/*
