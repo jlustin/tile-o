@@ -54,7 +54,8 @@ public class TileOPlayPage extends JFrame {
 	private static WinTileHintActionCardPopOut winHintPO = new WinTileHintActionCardPopOut();
 	private static SendBackToStartPopOut sendStartPO = new SendBackToStartPopOut();
 	private static TeleportOtherPopOut teleportOtherPO = new TeleportOtherPopOut();
-	private static LoseTurnRandomlyPopOut loseTurnRandomlyPO = new LoseTurnRandomlyPopOut();
+	//doesn't work like this lmao
+//	private static LoseTurnRandomlyPopOut loseTurnRandomlyPO = new LoseTurnRandomlyPopOut();
 	
 	
 	private JPanel contentPane;
@@ -318,6 +319,7 @@ public class TileOPlayPage extends JFrame {
 					revealTilesPO.setVisible(true);
 					break;
 				case GAME_LOSETURNRANDOMLYACTIONCARD:
+					LoseTurnRandomlyPopOut loseTurnRandomlyPO = new LoseTurnRandomlyPopOut();
 					loseTurnRandomlyPO.setVisible(true);
 					break;
 				case GAME_TURNACTIONTILESINACTIVEACTIONCARD:
