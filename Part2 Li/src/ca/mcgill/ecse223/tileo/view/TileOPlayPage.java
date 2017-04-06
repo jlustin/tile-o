@@ -52,7 +52,7 @@ public class TileOPlayPage extends JFrame {
 	private static RevealPopOut revealTilesPO = new RevealPopOut();
 //	private static LoseTurnRandomlyPopOut ltrpo = new LoseTurnRandomlyPopOut();
 	private static TurnActionTilesInactiveActionCardPopOut tatipo= new TurnActionTilesInactiveActionCardPopOut();
-//	private static WinTileHintActionCardPopOut wthpo = new WinTileHintActionCardPopOut();
+	private static WinTileHintActionCardPopOut wthpo = new WinTileHintActionCardPopOut();
 	private static SendBackToStartPopOut sbtspo = new SendBackToStartPopOut();
 	private static TeleportOtherPopOut topo = new TeleportOtherPopOut();
 	private JPanel contentPane;
@@ -328,6 +328,7 @@ public class TileOPlayPage extends JFrame {
 					tatipo.setVisible(true);
 					break;
 				case GAME_WINTILEHINTACTIONCARD:
+					wthpo.setVisible(true);
 					break;
 				
 				case GAME_SENDBACKTOSTARTACTIONCARD:
