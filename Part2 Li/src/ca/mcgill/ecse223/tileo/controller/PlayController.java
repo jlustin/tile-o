@@ -362,7 +362,7 @@ public class PlayController
     return wasEventProcessed;
   }
 
-  public boolean playLoseTurnRandomlyActionCard()
+  public boolean playLoseTurnRandomlyActionCard(int p1LostTurns, int p2LostTurns, int p3LostTurns, int p4LostTurns)
   {
     boolean wasEventProcessed = false;
     
@@ -373,7 +373,7 @@ public class PlayController
         if (isLoseTurnRandomlyActionCard())
         {
         // line 75 "../../../../../PlayStateUpdatedApril3.ump"
-          doLoseTurnRandomlyActionCard();
+          doLoseTurnRandomlyActionCard(p1LostTurns, p2LostTurns, p3LostTurns, p4LostTurns);
           setMode(Mode.Roll);
           wasEventProcessed = true;
           break;
@@ -869,8 +869,13 @@ public class PlayController
    * Action card "Reveal the type of a tile"
    */
   // line 359 "../../../../../PlayStateUpdatedApril3.ump"
+<<<<<<< HEAD
    public void doPlayRevealActionCard(Tile tile) throws InvalidInputException{
     TileO tileO = TileOApplication.getTileO();
+=======
+   private void doPlayRevealActionCard(Tile tile) throws InvalidInputException{
+	   	TileO tileO = TileOApplication.getTileO();
+>>>>>>> refs/remotes/origin/LoseTurnRandomlyActionCard-CM
 		Game currentGame = tileO.getCurrentGame();
 		ActionCard currentCard = drawCard(currentGame);
 		try {
@@ -891,8 +896,17 @@ public class PlayController
    * Chun Ming
    */
   // line 381 "../../../../../PlayStateUpdatedApril3.ump"
-   private void doLoseTurnRandomlyActionCard(){
-    
+   private void doLoseTurnRandomlyActionCard(int p1LostTurns, int p2LostTurns, int p3LostTurns, int p4LostTurns
+		   ){
+	   	TileO tileO = TileOApplication.getTileO();
+		Game currentGame = tileO.getCurrentGame();
+		ActionCard currentCard = drawCard(currentGame);
+
+		if (currentCard instanceof LoseTurnRandomlyActionCard) {
+			((LoseTurnRandomlyActionCard) currentCard).play(p1LostTurns, p2LostTurns, p3LostTurns, p4LostTurns);
+		}
+		currentGame.setNextPlayer();
+		currentGame.setMode(Game.Mode.GAME);
   }
 
 
