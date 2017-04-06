@@ -339,6 +339,7 @@ public class TileOPlayPage extends JFrame {
 					
 				case GAME_TELEPORTOTHERACTIONCARD:
 					topo.setVisible(true);
+					TeleportOtherPopOut.refreshComboBox(TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
 					break;
 					
 				case GAME_WON:

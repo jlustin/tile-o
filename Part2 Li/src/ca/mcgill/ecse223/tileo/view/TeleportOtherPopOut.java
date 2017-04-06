@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 
 public class TeleportOtherPopOut extends JFrame {
+	
 	public void close() { 
 		this.setVisible(false);
 		chosenTile = null;
@@ -34,7 +35,13 @@ public class TeleportOtherPopOut extends JFrame {
 
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-
+	public static JComboBox comboBox = new JComboBox();
+	
+	public static void refreshComboBox(int numberOfPlayers){
+		String[] playerNum = new String[numberOfPlayers];
+		addNums(playerNum, numberOfPlayers);
+		comboBox.setModel(new DefaultComboBoxModel(playerNum));
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -73,7 +80,7 @@ String error = "";
 		JLabel errorLbl = new JLabel("");
 		errorLbl.setForeground(Color.RED);
 		JLabel lblPleaseSelectA = new JLabel("Please select a player you would like to move and the tile");
-		JComboBox comboBox = new JComboBox();
+		
 		String[] playerNum = new String[TileOApplication.getTileO().getCurrentGame().numberOfPlayers()];
 		addNums(playerNum, TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
 		comboBox.setModel(new DefaultComboBoxModel(playerNum));	
@@ -183,4 +190,5 @@ String error = "";
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+	
 }
