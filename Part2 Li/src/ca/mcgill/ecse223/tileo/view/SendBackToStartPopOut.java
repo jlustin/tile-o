@@ -29,10 +29,10 @@ public class SendBackToStartPopOut extends JFrame {
 	
 
 	private JPanel contentPane;
-	public static int numberOfPlayers;
+	//public static int numberOfPlayers;
 	String error;
 	private PlayController pmc = TileOPlayPage.pmc;
-
+	public static JComboBox comboBox_1 = new JComboBox();
 		
 
 
@@ -53,10 +53,10 @@ public class SendBackToStartPopOut extends JFrame {
 		
 		JLabel lblThatPlayerBack = new JLabel("that player back to its starting position.");
 		
-		JComboBox comboBox_1 = new JComboBox();
+//		JComboBox comboBox_1 = new JComboBox();
 		
 		
-		
+		System.out.println("Hello" + TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
 		
 		String[] playerNum = new String[TileOApplication.getTileO().getCurrentGame().numberOfPlayers()];
 		addNums(playerNum, TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
@@ -144,4 +144,11 @@ public class SendBackToStartPopOut extends JFrame {
 		this.setVisible(false);
 	    this.dispose();
 	}
+	
+	public static void refreshComboxBox(int numberOfPlayers){
+		String[] playerNum = new String[numberOfPlayers];
+		addNums(playerNum, numberOfPlayers);
+		comboBox_1.setModel(new DefaultComboBoxModel(playerNum));
+	}
+
 }

@@ -334,6 +334,7 @@ public class TileOPlayPage extends JFrame {
 				case GAME_SENDBACKTOSTARTACTIONCARD:
 
 					sbtspo.setVisible(true);
+					SendBackToStartPopOut.refreshComboxBox(TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
 					break;
 					
 				case GAME_TELEPORTOTHERACTIONCARD:
