@@ -37,7 +37,6 @@ public class RevealTilesPopOut extends JFrame{
 	private String error = "";
 	private JButton revealBtn;
 	private JButton btnClose;
-//	private JButton btnNewButton;
 	
 	public static boolean used = false;
 	public static boolean showing = true;
@@ -53,15 +52,7 @@ public class RevealTilesPopOut extends JFrame{
 		error = "";
 		errorLbl.setText(error);
 		TileOPlayPage.getGrid().showActionTiles = false;
-
 		TileOPlayPage.refreshData();
-//		try {
-//			pmc.playRevealActionTilesActionCard();
-//		} catch (InvalidInputException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
 	}
 	
 	public RevealTilesPopOut() {
@@ -80,47 +71,40 @@ public class RevealTilesPopOut extends JFrame{
 		lblWhenReady.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		revealBtn = new JButton("Reveal Tiles");
-		revealBtn.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent evt) {
-					showAllActionTilesActionPerformed(evt);
-				}});
-//			public void actionPerformed(ActionEvent e) {
-//				if (used){
-//					error = "You have already revealed the action tiles!";
-//					errorLbl.setText(error);
-//				}
-//				else {
-//					TileOPlayPage.getGrid().showActionTiles = showing;
-////					TileOPlayPage.getGrid().setGame(TileOApplication.getTileO().getCurrentGame());
-//					TileOPlayPage.refreshData();
-//					try {
-//						pmc.playRevealActionTilesActionCard();
-//					} catch (InvalidInputException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
+		revealBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (used){
+					error = "You have already revealed the action tiles!";
+					errorLbl.setText(error);
+				}
+				else {
+					TileOPlayPage.getGrid().showActionTiles = showing;
+					TileOPlayPage.getGrid().setGame(TileOApplication.getTileO().getCurrentGame());
+					TileOPlayPage.refreshData();
+					try {
+						pmc.playRevealActionTilesActionCard();
+					} catch (InvalidInputException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+//					long startTime = System.nanoTime();
+//					long fiveSec = (long) (5* Math.pow(10, 9));
+//					long currentTime = System.nanoTime();
+//					
+//					while (currentTime < startTime + fiveSec)  {
+//						currentTime = System.nanoTime();
 //					}
-//					error = "";
-//					errorLbl.setText("");
-//					used = true;
-////					time();
-//					
-//				
-//					
-////					TileOPlayPage.getGrid().showActionTiles = false;
-////					TileOPlayPage.getGrid().setGame(TileOApplication.getTileO().getCurrentGame());
-////					TileOPlayPage.refreshData();
-////					time();m
-////					TileOPlayPage.getGrid().showActionTiles = false;
-////					TileOPlayPage.getGrid().refreshBoard();
-////					
-////					time();
-////					TileOPlayPage.getGrid().showActionTiles = false;					
-//				}
-////				time();
-////				refresh();
-//			}
+//					TileOPlayPage.getGrid().showActionTiles = false;
+//					TileOPlayPage.getGrid().setGame(TileOApplication.getTileO().getCurrentGame());
+//					TileOPlayPage.refreshData();
+					error = "";
+					errorLbl.setText("");
+					used = true;	
+				}
+			}
 			
-//		);
+	});
 		
 		errorLbl = new JLabel("");
 		errorLbl.setForeground(Color.RED);
@@ -188,52 +172,23 @@ public class RevealTilesPopOut extends JFrame{
 		contentPane.setLayout(gl_contentPane);
 	}
 	
-	protected void refresh() {
-		if (used){
-			time();
-			TileOPlayPage.getGrid().showActionTiles = false;
-			TileOPlayPage.getGrid().refreshBoard();
-		}
-	}
+//	protected void refresh() {
+//		if (used){
+//			time();
+//			TileOPlayPage.getGrid().showActionTiles = false;
+//			TileOPlayPage.getGrid().refreshBoard();
+//		}
+//	}
 
-	private void time(){
-		long startTime = System.nanoTime();
-		long fiveSec = (long) (5* Math.pow(10, 9));
-		long currentTime = System.nanoTime();
-		
-		while (currentTime < startTime + fiveSec)  {
-			currentTime = System.nanoTime();
-		}
-	}
+	//waits 5 seconds
+//	private void time(){
+//		long startTime = System.nanoTime();
+//		long fiveSec = (long) (5* Math.pow(10, 9));
+//		long currentTime = System.nanoTime();
+//		
+//		while (currentTime < startTime + fiveSec)  {
+//			currentTime = System.nanoTime();
+//		}
+//	}
 	
-	private void showAllActionTilesActionPerformed(java.awt.event.ActionEvent evt) {
-		error = null;
-//		PlayController pc = new PlayController();
-		try {
-
-			if (pmc.playRevealActionTilesActionCard()) {
-				System.out.println("showing");
-
-				TileOPlayPage.getGrid().showActionTiles = true;
-				TileOPlayPage.getGrid().setGame(TileOApplication.getTileO().getCurrentGame());
-				TileOPlayPage.refreshData();
-				
-				long startTime = System.nanoTime();
-				long fiveSec = (long) (5* Math.pow(10, 9));
-				long currentTime = System.nanoTime();
-				
-				while (currentTime < startTime + fiveSec)  {
-					currentTime = System.nanoTime();
-				}
-				
-				TileOPlayPage.getGrid().showActionTiles = false;
-				used = true;
-			}
-		}
-		catch (InvalidInputException e) {
-			error = e.getMessage();
-		}
-		
-		TileOPlayPage.refreshData();
-	}
 }

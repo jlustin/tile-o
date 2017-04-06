@@ -53,9 +53,6 @@ public class TilePanelPlay extends JPanel{
 		super();
 		init(game);		
 	}
-//	public void setShowActionTiles(boolean show){
-//		showActionTiles = show;
-//	}
 	
 	
 	private void init(Game game) {
@@ -96,16 +93,6 @@ public class TilePanelPlay extends JPanel{
 	}
 	
 	public void setGame(Game game) {
-//		if (showActionTiles){
-//			init(game);
-//			repaint();
-//			try {
-//				Thread.sleep(5000);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
 		init(game);
 		repaint();
 	}
@@ -182,12 +169,14 @@ public class TilePanelPlay extends JPanel{
 				g2d.setColor(Color.black);
 				g2d.draw(rect);				
 			
+				//displays if the tile has been visited
 				if(aTile.getHasBeenVisited()){
 					Rectangle2D r = tRectangles.get(aTile);
 					g2d.setColor(Color.GRAY);
 					g2d.fill(r);
 				}
 				
+				//displays the selected tile
 				if (selectedTile != null && selectedTile.equals(aTile)) {
 					aTileIsSelected = true;
 					Rectangle2D rectangle = tRectangles.get(aTile);
@@ -197,6 +186,7 @@ public class TilePanelPlay extends JPanel{
 					g2d.fill(rectangle);						
 				}				
 				
+				//show possible moves
 				if(isAPlayerTurn){	//added by Li
 					if(possibleMoves != null) {
 						if(possibleMoves.contains(aTile)){
@@ -206,6 +196,7 @@ public class TilePanelPlay extends JPanel{
 						}
 					}
 				}
+				
 				//inactivity period show
 //				if (aTile instanceof ActionTile) {
 //					Rectangle2D r = tRectangles.get(aTile);
@@ -217,6 +208,7 @@ public class TilePanelPlay extends JPanel{
 //				}
 			}
 			
+			//Action Card 3: show all action tiles for 5 seconds
 			if (showActionTiles) {
 				for (Tile aTile: myGame.getTiles()){
 					if (aTile instanceof ActionTile){
@@ -233,8 +225,9 @@ public class TilePanelPlay extends JPanel{
 				Rectangle2D r = tRectangles.get(cTile);
 				String number = String.valueOf(aPlayer.getNumber());
 				
-//				g2d.setColor(Color.BLACK);
+//				g2d.setColor(Color.BLACK);	-- default
 				
+				//gets the color of the player and uses it to write the player number
 				switch (aPlayer.getColor()){
 					case RED:
 						g2d.setColor(Color.RED);
@@ -305,6 +298,7 @@ public class TilePanelPlay extends JPanel{
 					}										
 				}
 				
+				//displays the selected connection
 				if (selectedConnection != null && selectedConnection.equals(aConnection)){
 					aConnectionIsSelected = true;
 					Rectangle2D rectangle = cRectangles.get(aConnection);
@@ -353,7 +347,6 @@ public class TilePanelPlay extends JPanel{
 		repaint();
 	}
 	
-
 	public void refreshBoard(){
 		repaint();
 	}

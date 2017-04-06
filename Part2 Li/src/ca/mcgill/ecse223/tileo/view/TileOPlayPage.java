@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.List;
 
 import javax.swing.GroupLayout;
@@ -48,11 +50,10 @@ public class TileOPlayPage extends JFrame {
 	private static RollDiePopOut rollPO = new RollDiePopOut();
 	private static TeleportPopOut teleportPO = new TeleportPopOut();
 	private static RevealTilesPopOut revealTilesPO = new RevealTilesPopOut();
-//	private static TurnActionTilesInactiveActionCardPopOut tatipo= new TurnActionTilesInactiveActionCardPopOut();
-//	private static WinTileHintActionCardPopOut wthpo = new WinTileHintActionCardPopOut();
-//	private static SendBackToStartPopOut sbtspo = new SendBackToStartPopOut();
-//	private static TeleportOtherPopOut topo = new TeleportOtherPopOut();
-	
+	private static TurnActionTilesInactiveActionCardPopOut turnInactivePO= new TurnActionTilesInactiveActionCardPopOut();
+	private static WinTileHintActionCardPopOut winHintPO = new WinTileHintActionCardPopOut();
+	private static SendBackToStartPopOut sendStartPO = new SendBackToStartPopOut();
+	private static TeleportOtherPopOut teleportOtherPO = new TeleportOtherPopOut();
 	
 	
 	
@@ -92,7 +93,6 @@ public class TileOPlayPage extends JFrame {
 	}
 	
 	private void initComponents(){
-		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 		this.setSize(1200, 720);
@@ -132,7 +132,6 @@ public class TileOPlayPage extends JFrame {
 	    		else {
 	    			errorLbl.setText("You cannot save during an action");
 	    		}
-	    		
 	    	}
 	    });
 	    
@@ -155,7 +154,6 @@ public class TileOPlayPage extends JFrame {
 		    		grid.possibleMoves = pMoves;
 		    		grid.refreshBoard();
 		    		
-		    		
 		    		if (pMoves.isEmpty()){
 		    			NoPossibleMovesPopOut npm = new NoPossibleMovesPopOut();
 						npm.setVisible(true);					
@@ -170,8 +168,6 @@ public class TileOPlayPage extends JFrame {
 	    		else{
 	    			errorLbl.setText("Can't roll. Lmao.");
 	    		}
-	    		
-	    		
 	    	}
 	    });
 	    
@@ -267,8 +263,6 @@ public class TileOPlayPage extends JFrame {
 	    contentPane.setLayout(gl_contentPane);
 
 	    getContentPane().add(splitPane);
-	    
-	    
 	}
 		
 	public static void refreshData(){
@@ -323,32 +317,28 @@ public class TileOPlayPage extends JFrame {
 				case GAME_REVEALACTIONTILESACTIONCARD:					
 					revealTilesPO.setVisible(true);
 					break;
-
 				case GAME_LOSETURNRANDOMLYACTIONCARD:
 					//ltrpo.setVisible(true);
 					break;
-
 				case GAME_TURNACTIONTILESINACTIVEACTIONCARD:
-//					tatipo.setVisible(true);
+					turnInactivePO.setVisible(true);
 					break;
 				case GAME_WINTILEHINTACTIONCARD:
-//					wthpo.setVisible(true);
+					winHintPO.setVisible(true);
 					break;
 				
 				case GAME_SENDBACKTOSTARTACTIONCARD:
-
-//					sbtspo.setVisible(true);
-//					SendBackToStartPopOut.refreshComboxBox(TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
+					sendStartPO.setVisible(true);
+					SendBackToStartPopOut.refreshComboxBox(TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
 					break;
 					
 				case GAME_TELEPORTOTHERACTIONCARD:
-//					topo.setVisible(true);
-//					TeleportOtherPopOut.refreshComboBox(TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
+					teleportOtherPO.setVisible(true);
+					TeleportOtherPopOut.refreshComboBox(TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
 					break;
-					
 				case GAME_WON:
-//					GameWonPopOut gameWonPO = new GameWonPopOut();
-//					gameWonPO.setVisible(true);
+					GameWonPopOut gameWonPO = new GameWonPopOut();
+					gameWonPO.setVisible(true);
 				default:
 			}
 		}		
