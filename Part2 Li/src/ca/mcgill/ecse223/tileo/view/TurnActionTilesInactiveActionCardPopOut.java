@@ -25,18 +25,18 @@ public class TurnActionTilesInactiveActionCardPopOut extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TurnActionTilesInactiveActionCardPopOut frame = new TurnActionTilesInactiveActionCardPopOut();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					TurnActionTilesInactiveActionCardPopOut frame = new TurnActionTilesInactiveActionCardPopOut();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -59,6 +59,7 @@ public class TurnActionTilesInactiveActionCardPopOut extends JFrame {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pmc.playTurnActionTilesInactiveActionCard();
+				TileOPlayPage.refreshData();
 				close();
 			}
 		});
