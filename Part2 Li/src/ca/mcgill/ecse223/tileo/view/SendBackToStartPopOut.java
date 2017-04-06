@@ -26,9 +26,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class SendBackToStartPopOut extends JFrame {
+	
 
 	private JPanel contentPane;
 	public static int numberOfPlayers;
+	String error;
 
 		
 
@@ -37,12 +39,12 @@ public class SendBackToStartPopOut extends JFrame {
 	 * Create the frame.
 	 */
 	public SendBackToStartPopOut() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		String error;
+		
 		
 		JLabel lblYouHaveDrawn = new JLabel("You have drawn a Send Back To Start Action Card, please select");
 		
@@ -68,17 +70,16 @@ public class SendBackToStartPopOut extends JFrame {
 				TileO tileO = TileOApplication.getTileO();
 				Game currentGame = tileO.getCurrentGame();
 				Player currentPlayer = currentGame.getCurrentPlayer();
-				int number = getWithNumber(currentPlayer);
-
+				int number = currentPlayer.getNumber();
+				Integer i = (Integer)comboBox_1.getSelectedItem();
 				
-				
-				if(chosenPlayer.getActionCommand() == null){
+				if(i == null){
 					error = error + "Please select a player";
 				}
 				
 				
 				
-				if(Integer.parseInt(chosenPlayer.getActionCommand()) == number){
+				if(i == number){
 					error = error + "You cannot send yourself back to your starting position!";
 					
 				}
@@ -89,19 +90,14 @@ public class SendBackToStartPopOut extends JFrame {
 				if(error.length()==0){
 					try{
 						PlayController pmc = new PlayController();
-						int index = Integer.parseInt(chosenPlayer.getActionCommand());
-						pmc.playSendBackToStartActionCard(index+1);
+						int index = i;
+						pmc.playSendBackToStartActionCard(i);
 					}
 					catch(InvalidInputException e1){
 						throw new RuntimeException(e1.getMessage());
 					}
+					close();
 				}
-				
-				
-				
-			}
-				
-				
 				
 				
 			}
@@ -147,5 +143,9 @@ public class SendBackToStartPopOut extends JFrame {
 		for (int i = 1; i < number+1 ; i++){
 			str[i-1] = String.valueOf(i);			
 		}
+	}
+	public void close() { 
+		this.setVisible(false);
+//	    this.dispose();
 	}
 }
