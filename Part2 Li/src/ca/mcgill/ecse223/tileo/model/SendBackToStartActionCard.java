@@ -4,8 +4,6 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
-import javax.swing.JRadioButton;
-
 import ca.mcgill.ecse223.tileo.view.SendBackToStartPopOut;
 
 // line 135 "../../../../../TileOPersistence.ump"
@@ -51,7 +49,6 @@ public class SendBackToStartActionCard extends 	ActionCard
 	   chosenPlayer = currentGame.getPlayer(index);
 	   Tile startingTile = chosenPlayer.getStartingTile();
 	   chosenPlayer.setCurrentTile(startingTile);
-	   System.out.println("inside of play method");
   }
   
   //------------------------

@@ -465,11 +465,9 @@ public class PlayController
     switch (aMode)
     {
       case ActionCard:
-    	  System.out.println("inside of play before if");
         if (isSendBackToStartActionCard())
         {
         // line 87 "../../../../../PlayStateUpdatedApril3.ump"
-        	System.out.println("inside of playSendBlah");
           doSendBackToStartActionCard(index);
           setMode(Mode.Roll);
           wasEventProcessed = true;
@@ -953,7 +951,6 @@ public class PlayController
 	   TileO tileO = TileOApplication.getTileO();
 	   Game currentGame = tileO.getCurrentGame();
 	   SendBackToStartActionCard sendBackToStartActionCard = (SendBackToStartActionCard)drawCard(currentGame);
-		   System.out.println("inside of doSendBlah");
 		   sendBackToStartActionCard.play(index);
 		   currentGame.setMode(Game.Mode.GAME);
 		   currentGame.setNextPlayer();

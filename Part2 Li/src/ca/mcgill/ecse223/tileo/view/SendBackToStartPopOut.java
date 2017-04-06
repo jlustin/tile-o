@@ -31,7 +31,7 @@ public class SendBackToStartPopOut extends JFrame {
 	private JPanel contentPane;
 	public static int numberOfPlayers;
 	String error;
-	private PlayController pmc = new PlayController();
+	private PlayController pmc = TileOPlayPage.pmc;
 
 		
 
@@ -88,8 +88,9 @@ public class SendBackToStartPopOut extends JFrame {
 				error.trim();
 				if(error.length()==0){
 				
-						System.out.println("inside of popout");
+						
 						pmc.playSendBackToStartActionCard(i);
+						TileOPlayPage.refreshData();
 
 					close();
 				}
