@@ -93,6 +93,7 @@ public class WelcomePage extends JFrame {
 						TileOApplication.dp = new TileODesignPage();	
 						TileOApplication.dp.setVisible(true);									
 						close();
+						TileOApplication.pp.close();
 					} 
 					catch (InvalidInputException e) {			
 						error = e.getMessage();

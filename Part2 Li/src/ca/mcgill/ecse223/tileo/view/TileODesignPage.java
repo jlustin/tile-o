@@ -120,6 +120,7 @@ public class TileODesignPage extends JFrame {
 	public TileODesignPage() {
 		Game currentGame = TileOApplication.getTileO().getCurrentGame();
 		setTitle("Design Mode: Game  " + String.valueOf(TileOApplication.getTileO().indexOfGame(currentGame)+1));
+		numberOfPlayers = currentGame.numberOfPlayers();
 		initComponents();
 		refreshData();
 	}
@@ -142,6 +143,7 @@ public class TileODesignPage extends JFrame {
 		errorLbl.setForeground(Color.RED);
 		String[] games = new String[TileOApplication.getTileO().numberOfGames()];
 		addNums(games, TileOApplication.getTileO().numberOfGames());
+	
 		
 		grid.setVisible(true);
 		grid.setSize(700, 720);
@@ -781,7 +783,7 @@ public class TileODesignPage extends JFrame {
 		}
 		yComponent.setText("");
 		xComponent.setText("");
-		inactivePeriod.setText("");
+//		inactivePeriod.setText("");
 		refreshData();		
 	}
 		
@@ -789,11 +791,11 @@ public class TileODesignPage extends JFrame {
 		grid.setGame(TileOApplication.getTileO().getCurrentGame());
 		errorLbl.setText(error);
 		
-		if (TileOApplication.getTileO().hasCurrentGame()){
-			String[] playerNum = new String[TileOApplication.getTileO().getCurrentGame().numberOfPlayers()];
-			addNums(playerNum, TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
-			playerNumCBox.setModel(new DefaultComboBoxModel(playerNum));					
-		}
+//		if (TileOApplication.getTileO().hasCurrentGame()){
+//			String[] playerNum = new String[TileOApplication.getTileO().getCurrentGame().numberOfPlayers()];
+//			addNums(playerNum, TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
+//			playerNumCBox.setModel(new DefaultComboBoxModel(playerNum));					
+//		}
 		
 		List<Game> games = TileOApplication.getTileO().getGames();	
 		numberOfGames = 0;
