@@ -15,7 +15,7 @@ public class DesignHelpPO extends JFrame {
 
 	public DesignHelpPO() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 510, 580);
+		setBounds(250, 50, 510, 660);
 		setTitle("Help");
 		setResizable(false);
 		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
@@ -59,7 +59,11 @@ public class DesignHelpPO extends JFrame {
 				+ "To start a game, select the game that you want to play.\n"
 				+ "\tIf your present game isn't available, you need to save it first!\n"
 				+ "\tIf you want to start your current game, select the current game\n"
-				+ "\tthen press \"Start Game\"."
+				+ "\tthen press \"Start Game\".\n"
+				+ "If you start and clone a game, the index of the cloned game will be\n"
+				+ "\tone higher than the current game.\n"
+				+ "\tThe current game will be in game mode,\n"
+				+ "\tand the cloned game will be the design layout."
 			);
 	}
 }
