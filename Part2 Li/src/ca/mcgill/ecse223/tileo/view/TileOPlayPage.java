@@ -57,7 +57,6 @@ public class TileOPlayPage extends JFrame {
 	//doesn't work like this lmao
 //	private static LoseTurnRandomlyPopOut loseTurnRandomlyPO = new LoseTurnRandomlyPopOut();
 	
-	
 	private JPanel contentPane;
 	private static JLabel playerTurnLbl;
 	private static JLabel modeLbl;
@@ -66,7 +65,6 @@ public class TileOPlayPage extends JFrame {
 	static JButton btnRollDie;
 	private JButton gotItBtn;
 	private static JLabel gameModeLbl;
-	
 	
 	
 	private static JLabel p1InactivityLbl = new JLabel("");
@@ -179,7 +177,6 @@ public class TileOPlayPage extends JFrame {
 	    gotItBtn.setVisible(false);
 	    
 	    gameModeLbl = new JLabel("Game.Mode");
-	    
 //	    p1InactivityLbl.setText("Player1 inactivity:");
 //	    
 //	    p2InactivityLbl.setText("Player 2 inactivity:");
@@ -193,13 +190,15 @@ public class TileOPlayPage extends JFrame {
 	    		.addGroup(gl_contentPane.createSequentialGroup()
 	    			.addGap(30)
 	    			.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-	    				.addComponent(saveBtn)
 	    				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 	    					.addComponent(p2InactivityLbl)
 	    					.addComponent(p1InactivityLbl)
 	    					.addComponent(p3InactivityLbl)
-	    					.addComponent(p4InactivityLbl)))
-	    			.addContainerGap(343, Short.MAX_VALUE))
+	    					.addComponent(p4InactivityLbl))
+	    				.addGroup(gl_contentPane.createSequentialGroup()
+	    					.addComponent(saveBtn)
+	    					.addGap(33)))
+	    			.addContainerGap(350, Short.MAX_VALUE))
 	    		.addGroup(gl_contentPane.createSequentialGroup()
 	    			.addGap(22)
 	    			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -260,7 +259,7 @@ public class TileOPlayPage extends JFrame {
 	    				.addGroup(gl_contentPane.createSequentialGroup()
 	    					.addGap(9)
 	    					.addComponent(actionCardPnl, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)))
-	    			.addContainerGap(22, Short.MAX_VALUE))
+	    			.addContainerGap(86, Short.MAX_VALUE))
 	    );
 	    contentPane.setLayout(gl_contentPane);
 
@@ -316,7 +315,7 @@ public class TileOPlayPage extends JFrame {
 					break;
 					
 
-				case GAME_REVEALACTIONTILESACTIONCARD:					
+				case GAME_REVEALACTIONTILESACTIONCARD:
 					revealTilesPO.setVisible(true);
 					break;
 				case GAME_LOSETURNRANDOMLYACTIONCARD:
@@ -346,6 +345,8 @@ public class TileOPlayPage extends JFrame {
 			}
 		}		
 	}
+	
+
 	
 	public static TilePanelPlay getGrid(){
 		return grid;

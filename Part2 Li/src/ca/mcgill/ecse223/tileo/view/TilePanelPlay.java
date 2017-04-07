@@ -208,7 +208,12 @@ public class TilePanelPlay extends JPanel{
 //				}
 			}
 			
+			
+			
 			//Action Card 3: show all action tiles for 5 seconds
+			//hiding
+			
+			//showing
 			if (showActionTiles) {
 				for (Tile aTile: myGame.getTiles()){
 					if (aTile instanceof ActionTile){
@@ -219,6 +224,7 @@ public class TilePanelPlay extends JPanel{
 					}
 				}
 			}
+			
 			
 			for (Player aPlayer: myGame.getPlayers()){
 				Tile cTile = aPlayer.getCurrentTile();

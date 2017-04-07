@@ -23,7 +23,7 @@ public class TileOApplication {
 		// TODO startup the UI corresponding to the right mode?
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            	new WelcomePage().setVisible(true);;
+            	new WelcomePage().setVisible(true);
                 if (tileO.hasGames()) {
                 	if (getTileO().getCurrentGame().getMode() == Mode.DESIGN){
                     	dp.setVisible(true);       

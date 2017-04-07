@@ -39,7 +39,6 @@ public class RevealTilesPopOut extends JFrame{
 	private JButton btnClose;
 	
 	public static boolean used = false;
-	public static boolean showing = true;
 	
 
 	/**
@@ -78,9 +77,22 @@ public class RevealTilesPopOut extends JFrame{
 					errorLbl.setText(error);
 				}
 				else {
-					TileOPlayPage.getGrid().showActionTiles = showing;
-					TileOPlayPage.getGrid().setGame(TileOApplication.getTileO().getCurrentGame());
-					TileOPlayPage.refreshData();
+					TileOPlayPage.getGrid().showActionTiles = true;
+					TileOPlayPage.getGrid().refreshBoard();
+					Thread thread = new Thread(new Runnable() {
+					    @Override
+					    public void run() {
+					    	try {
+								Thread.sleep(5000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							TileOPlayPage.getGrid().showActionTiles = false;
+							TileOPlayPage.getGrid().refreshBoard();
+					    }
+					});
+					thread.start();
 					try {
 						pmc.playRevealActionTilesActionCard();
 					} catch (InvalidInputException e1) {
@@ -88,18 +100,7 @@ public class RevealTilesPopOut extends JFrame{
 						e1.printStackTrace();
 					}
 					
-//					long startTime = System.nanoTime();
-//					long fiveSec = (long) (5* Math.pow(10, 9));
-//					long currentTime = System.nanoTime();
-//					
-//					while (currentTime < startTime + fiveSec)  {
-//						currentTime = System.nanoTime();
-//					}
-//					TileOPlayPage.getGrid().showActionTiles = false;
-//					TileOPlayPage.getGrid().setGame(TileOApplication.getTileO().getCurrentGame());
-//					TileOPlayPage.refreshData();
 					error = "";
-					errorLbl.setText("");
 					used = true;	
 				}
 			}
@@ -171,24 +172,5 @@ public class RevealTilesPopOut extends JFrame{
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
-	
-//	protected void refresh() {
-//		if (used){
-//			time();
-//			TileOPlayPage.getGrid().showActionTiles = false;
-//			TileOPlayPage.getGrid().refreshBoard();
-//		}
-//	}
-
-	//waits 5 seconds
-//	private void time(){
-//		long startTime = System.nanoTime();
-//		long fiveSec = (long) (5* Math.pow(10, 9));
-//		long currentTime = System.nanoTime();
-//		
-//		while (currentTime < startTime + fiveSec)  {
-//			currentTime = System.nanoTime();
-//		}
-//	}
 	
 }
