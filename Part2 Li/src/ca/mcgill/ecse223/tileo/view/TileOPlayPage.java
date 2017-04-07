@@ -328,7 +328,6 @@ public class TileOPlayPage extends JFrame {
 				case GAME_WINTILEHINTACTIONCARD:
 					winHintPO.setVisible(true);
 					break;
-				
 				case GAME_SENDBACKTOSTARTACTIONCARD:
 					sendStartPO.setVisible(true);
 					SendBackToStartPopOut.refreshComboxBox(TileOApplication.getTileO().getCurrentGame().numberOfPlayers());
