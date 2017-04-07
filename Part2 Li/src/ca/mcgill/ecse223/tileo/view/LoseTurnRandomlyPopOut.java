@@ -35,10 +35,6 @@ public class LoseTurnRandomlyPopOut extends JDialog {
 
 	
 	public void close() { 
-		player1LostTurns = 3;
-		player2LostTurns = 3;
-		player3LostTurns = 3;
-		player4LostTurns = 3;
 		setVisible(false);
 		TileOPlayPage.refreshData();
 	}
@@ -49,7 +45,7 @@ public class LoseTurnRandomlyPopOut extends JDialog {
 	public LoseTurnRandomlyPopOut() {
 		
 		generateLostTurns();
-		System.out.println("A new window has been created");
+		//System.out.println("A new window has been created");
 		setTitle("Lose Turn Randomly Action Card");
 		setResizable(false);
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);

@@ -585,31 +585,31 @@ public class Game implements Serializable
   }
 
   // line 52 "../../../../../TileO (updated April3).ump"
-   public void determineNextPlayer(){
-    boolean found = false;
-		Player player = getCurrentPlayer();
-		Player nextPlayer;
-		while(!found) {
-			try {
-				nextPlayer = getPlayer(indexOfPlayer(player) + 1);
-			}
-			catch (IndexOutOfBoundsException e) {
-				nextPlayer = getPlayer(0);
-			}
-			if (nextPlayer.getPlayerStatus() == PlayerStatus.Active) {
-				found = true;
-			}
-			else {
-				nextPlayer.takeTurn();
-			}
-			player = nextPlayer;
-		}
-		List<Player> pList = getPlayers();
-		for (Player p: pList) {
-			p.takeTurn();
-		}
-		setCurrentPlayer(player);
-  }
+//   public void determineNextPlayer(){
+//    boolean found = false;
+//		Player player = getCurrentPlayer();
+//		Player nextPlayer;
+//		while(!found) {
+//			try {
+//				nextPlayer = getPlayer(indexOfPlayer(player) + 1);
+//			}
+//			catch (IndexOutOfBoundsException e) {
+//				nextPlayer = getPlayer(0);
+//			}
+//			if (nextPlayer.getPlayerStatus() == PlayerStatus.Active) {
+//				found = true;
+//			}
+//			else {
+//				nextPlayer.takeTurn();
+//			}
+//			player = nextPlayer;
+//		}
+//		List<Player> pList = getPlayers();
+//		for (Player p: pList) {
+//			p.takeTurn();
+//		}
+//		setCurrentPlayer(player);
+//  }
 
   // line 78 "../../../../../TileO (updated April3).ump"
    public void updateTileStatus(){
@@ -622,8 +622,32 @@ public class Game implements Serializable
 
   // line 86 "../../../../../TileO (updated April3).ump"
    public void setNextPlayer(){
-	   determineNextPlayer();
+	   Player player = getCurrentPlayer();
+	   Player nextPlayer;
+	   
+	   //Decrement each player (i.e. pretraversal)
+	   List<Player> pList = getPlayers();
+	   for (Player p: pList) {
+		   p.takeTurn();
+	   }
 	   updateTileStatus();
+	   
+	   try {
+		   nextPlayer = getPlayer(indexOfPlayer(player) + 1);
+	   }
+	   catch (IndexOutOfBoundsException e) {
+		   nextPlayer = getPlayer(0);
+	   }
+	   
+	   if(nextPlayer.getPlayerStatus() == PlayerStatus.Active) {
+		   setCurrentPlayer(nextPlayer);
+	   }
+	   else if (nextPlayer.getPlayerStatus() == PlayerStatus.Inactive){ //must be inactive
+		   setCurrentPlayer(nextPlayer);
+		   setNextPlayer();
+	   }
+	   //determineNextPlayer();
+	   
   }
    
    public Game clone(){

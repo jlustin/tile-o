@@ -288,8 +288,8 @@ public class TileOPlayPage extends JFrame {
 			modeLbl.setText("CurrentMode: " + pmc.getModeFullName());
 			gameModeLbl.setText("CurrentGameMode: " + currentGame.getModeFullName());
 			
-			p1InactivityLbl.setText("Player 1 inactivity: " + currentGame.getPlayer(0).getTurnsUntilActive());
-			p2InactivityLbl.setText("Player 2 inactivity: " + currentGame.getPlayer(1).getTurnsUntilActive());
+//			p1InactivityLbl.setText("Player 1 inactivity: " + currentGame.getPlayer(0).getTurnsUntilActive());
+//			p2InactivityLbl.setText("Player 2 inactivity: " + currentGame.getPlayer(1).getTurnsUntilActive());
 //			p3InactivityLbl.setText("Player 3 inactivity: " + currentGame.getPlayer(2).getTurnsUntilActive());
 //			p4InactivityLbl.setText("Player 4 inactivity: " + currentGame.getPlayer(3).getTurnsUntilActive());
 
