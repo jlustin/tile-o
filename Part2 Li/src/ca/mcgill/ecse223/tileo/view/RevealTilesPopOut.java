@@ -83,7 +83,11 @@ public class RevealTilesPopOut extends JFrame{
 					    @Override
 					    public void run() {
 					    	try {
-								Thread.sleep(5000);
+					    		for (int i = 5; i > 0; i--){
+					    			errorLbl.setText(Integer.toString(i));
+					    			Thread.sleep(1000);
+					    		}
+					    		errorLbl.setText("");
 							} catch (InterruptedException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
