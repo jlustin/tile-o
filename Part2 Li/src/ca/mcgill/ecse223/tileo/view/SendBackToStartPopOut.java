@@ -41,6 +41,7 @@ public class SendBackToStartPopOut extends JFrame {
 	 * Create the frame.
 	 */
 	public SendBackToStartPopOut() {
+		setTitle("Send Back To Start Action Card");
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
