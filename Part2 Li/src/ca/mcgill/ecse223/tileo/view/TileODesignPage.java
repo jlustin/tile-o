@@ -581,6 +581,9 @@ public class TileODesignPage extends JFrame {
 	    		if (!grid.aTileIsSelected){
 	    			error = "Please select a tile to delete.";	    			
 	    		}
+	    		if (grid.selectedTile.hasConnections()){
+	    			error = "You cannot delete a tile that has connections.";
+	    		}
 	    		else {
 	    			try {
 	    				dmc.removeTileFromGame(grid.selectedTile);

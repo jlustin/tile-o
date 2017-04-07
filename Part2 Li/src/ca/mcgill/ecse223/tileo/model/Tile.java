@@ -5,7 +5,7 @@ package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 import java.util.*;
 
-// line 29 "../../../../../TileOPersistence.ump"
+// line 22 "../../../../../TileOPersistence.ump"
 // line 118 "../../../../../TileO (updated April3).ump"
 public abstract class Tile implements Serializable
 {
@@ -303,7 +303,7 @@ public abstract class Tile implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 32 TileOPersistence.ump
+  // line 25 TileOPersistence.ump
   private static final long serialVersionUID = 4444444444444444444L ;
 
   

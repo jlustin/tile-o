@@ -50,6 +50,7 @@ public class RevealTilesPopOut extends JFrame{
 		this.setVisible(false);
 		used = false;
 		error = "";
+		lblCountdown.setText("");
 		errorLbl.setText(error);
 		TileOPlayPage.getGrid().showActionTiles = false;
 		TileOPlayPage.refreshData();
@@ -58,6 +59,7 @@ public class RevealTilesPopOut extends JFrame{
 	public RevealTilesPopOut() {
 		setTitle("Reveal Action Tiles Action Card");
 		setAlwaysOnTop(true);
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(500, 200, 450, 300);
 		contentPane = new JPanel();
@@ -83,12 +85,12 @@ public class RevealTilesPopOut extends JFrame{
 					Thread thread = new Thread(new Runnable() {
 					    @Override
 					    public void run() {
-					    	try {
-					    		for (int i = 5; i > 0; i--){
+					    	try {					    		
+				    			for (int i = 5; i > 0; i--){
 					    			lblCountdown.setText(Integer.toString(i));
 					    			Thread.sleep(1000);
 					    		}
-					    		lblCountdown.setText("");
+					    		lblCountdown.setText("");					    		
 							} catch (InterruptedException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();

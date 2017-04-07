@@ -48,7 +48,7 @@ public class TileOPlayPage extends JFrame {
 	private static RemoveConnectionActionCardPopOut removeConnectionPO = new RemoveConnectionActionCardPopOut();
 	private static RevealPopOut revealPO = new RevealPopOut();
 	private static RollDiePopOut rollPO = new RollDiePopOut();
-	private static TeleportPopOut teleportPO = new TeleportPopOut();
+//	private static TeleportPopOut teleportPO = new TeleportPopOut();
 	private static RevealTilesPopOut revealTilesPO = new RevealTilesPopOut();
 	private static TurnActionTilesInactiveActionCardPopOut turnInactivePO= new TurnActionTilesInactiveActionCardPopOut();
 	private static WinTileHintActionCardPopOut winHintPO = new WinTileHintActionCardPopOut();
@@ -284,6 +284,7 @@ public class TileOPlayPage extends JFrame {
 					removeConnectionPO.setVisible(true);
 					break;
 				case GAME_TELEPORTACTIONCARD:
+					TeleportPopOut teleportPO = new TeleportPopOut();
 					teleportPO.setVisible(true);
 					break;
 				case GAME_LOSETURNACTIONCARD:

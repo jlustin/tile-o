@@ -5,7 +5,7 @@ package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 import java.util.List;
 
-// line 71 "../../../../../TileOPersistence.ump"
+// line 64 "../../../../../TileOPersistence.ump"
 // line 256 "../../../../../TileO (updated April3).ump"
 public class RollDieActionCard extends ActionCard
 {
@@ -51,7 +51,7 @@ public class RollDieActionCard extends ActionCard
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 74 TileOPersistence.ump
+  // line 67 TileOPersistence.ump
   private static final long serialVersionUID = 2020202020202020202L ;
 
   

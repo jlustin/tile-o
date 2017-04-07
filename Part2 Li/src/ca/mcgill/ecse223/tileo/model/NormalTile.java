@@ -5,7 +5,7 @@ package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 import java.util.*;
 
-// line 41 "../../../../../TileOPersistence.ump"
+// line 34 "../../../../../TileOPersistence.ump"
 // line 186 "../../../../../TileO (updated April3).ump"
 public class NormalTile extends Tile
 {
@@ -50,7 +50,7 @@ public class NormalTile extends Tile
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 44 TileOPersistence.ump
+  // line 37 TileOPersistence.ump
   private static final long serialVersionUID = 6666666666666666666L ;
 
   

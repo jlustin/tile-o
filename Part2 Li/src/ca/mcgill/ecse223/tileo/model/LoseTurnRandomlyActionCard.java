@@ -4,7 +4,7 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
-// line 107 "../../../../../TileOPersistence.ump"
+// line 100 "../../../../../TileOPersistence.ump"
 // line 378 "../../../../../TileO (updated April3).ump"
 public class LoseTurnRandomlyActionCard extends ActionCard
 {
@@ -66,7 +66,7 @@ public class LoseTurnRandomlyActionCard extends ActionCard
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 110 TileOPersistence.ump
+  // line 103 TileOPersistence.ump
   private static final long serialVersionUID = 1029384756019283745L ;
 
   

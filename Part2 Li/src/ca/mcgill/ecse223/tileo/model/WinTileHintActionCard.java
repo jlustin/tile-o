@@ -4,7 +4,7 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
-// line 128 "../../../../../TileOPersistence.ump"
+// line 121 "../../../../../TileOPersistence.ump"
 // line 434 "../../../../../TileO (updated April3).ump"
 public class WinTileHintActionCard extends ActionCard
 {
@@ -93,7 +93,7 @@ public class WinTileHintActionCard extends ActionCard
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 131 TileOPersistence.ump
+  // line 124 TileOPersistence.ump
   private static final long serialVersionUID = 1337133713371337133L ;
 
   

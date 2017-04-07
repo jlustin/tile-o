@@ -3,7 +3,6 @@
 
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
 
 // line 16 "../../../../../TileOPersistence.ump"
@@ -259,14 +258,6 @@ public class Player implements Serializable
     this.game = null;
     placeholderGame.removePlayer(this);
   }
-
-  // line 22 "../../../../../TileOPersistence.ump"
-//   public static  void reinitializeUniquePlayer(List<Player> players){
-//    playersByNumber = new HashMap<Integer, Player>();
-//	for(Player player : players) {
-//		playersByNumber.put(player.getNumber(), player);
-//		}
-//  }
 
   // line 103 "../../../../../TileO (updated April3).ump"
    public List<Tile> getPossibleMoves(int moveLeft){

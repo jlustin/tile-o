@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
 
-// line 89 "../../../../../TileOPersistence.ump"
+// line 82 "../../../../../TileOPersistence.ump"
 // line 313 "../../../../../TileO (updated April3).ump"
 public class TeleportActionCard extends ActionCard
 {
@@ -58,7 +58,7 @@ public class TeleportActionCard extends ActionCard
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 92 TileOPersistence.ump
+  // line 85 TileOPersistence.ump
   private static final long serialVersionUID = 5050505050505050505L ;
 
   

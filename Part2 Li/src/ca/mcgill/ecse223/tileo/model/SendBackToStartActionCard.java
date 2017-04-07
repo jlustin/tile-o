@@ -4,7 +4,7 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
-// line 135 "../../../../../TileOPersistence.ump"
+// line 128 "../../../../../TileOPersistence.ump"
 // line 492 "../../../../../TileO (updated April3).ump"
 public class SendBackToStartActionCard extends ActionCard
 {
@@ -53,7 +53,7 @@ public class SendBackToStartActionCard extends ActionCard
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 138 TileOPersistence.ump
+  // line 131 TileOPersistence.ump
   private static final long serialVersionUID = 1483212342385938245L ;
 
   

@@ -5,7 +5,7 @@ package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 import java.util.Random;
 
-// line 101 "../../../../../TileOPersistence.ump"
+// line 94 "../../../../../TileOPersistence.ump"
 // line 109 "../../../../../TileO (updated April3).ump"
 public class Die implements Serializable
 {
@@ -66,7 +66,7 @@ public class Die implements Serializable
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
-  // line 104 TileOPersistence.ump
+  // line 97 TileOPersistence.ump
   private static final long serialVersionUID = 7070707070707070707L ;
 
   
