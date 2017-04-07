@@ -27,10 +27,14 @@ import java.awt.Color;
 
 public class TeleportOtherPopOut extends JFrame {
 	
+	JLabel errorLbl;
+	
 	public void close() { 
 		this.setVisible(false);
 		chosenTile = null;
 		error = "";
+		errorLbl.setText(error);
+		
 	}
 
 	private JPanel contentPane;
@@ -77,7 +81,7 @@ String error = "";
 		setContentPane(contentPane);
 		
 		JLabel lblNewLabel = new JLabel("You have drawn a TeleportOther Action Card!");
-		JLabel errorLbl = new JLabel("");
+		errorLbl = new JLabel("");
 		errorLbl.setForeground(Color.RED);
 		JLabel lblPleaseSelectA = new JLabel("Please select a player you would like to move and the tile");
 		
