@@ -157,7 +157,7 @@ public class DeckPopOut extends JFrame {
 		cards[11] = winHintNum = new JTextField();
 		winHintNum.setColumns(10);
 		
-		JButton cancelBtn = new JButton("Cancel");
+		JButton cancelBtn = new JButton("Close");
 		cancelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {	
 				setVisible(false);

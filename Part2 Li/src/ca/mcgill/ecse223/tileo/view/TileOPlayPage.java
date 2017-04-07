@@ -61,9 +61,7 @@ public class TileOPlayPage extends JFrame {
 	private static JLabel playerTurnLbl;
 	private static JLabel modeLbl;
 	private static JLabel errorLbl;
-	private JPanel actionCardPnl;
 	static JButton btnRollDie;
-	private JButton gotItBtn;
 	private static JLabel gameModeLbl;
 	
 	
@@ -171,11 +169,6 @@ public class TileOPlayPage extends JFrame {
 	    	}
 	    });
 	    
-	    actionCardPnl = new JPanel();
-	    
-	    gotItBtn = new JButton("Got it!");
-	    gotItBtn.setVisible(false);
-	    
 	    gameModeLbl = new JLabel("Game.Mode");
 //	    p1InactivityLbl.setText("Player1 inactivity:");
 //	    
@@ -203,27 +196,21 @@ public class TileOPlayPage extends JFrame {
 	    			.addGap(22)
 	    			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 	    				.addGroup(gl_contentPane.createSequentialGroup()
-	    					.addComponent(modeLbl)
+	    					.addComponent(btnRollDie)
 	    					.addContainerGap())
 	    				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 	    					.addGroup(gl_contentPane.createSequentialGroup()
-	    						.addComponent(playerTurnLbl)
+	    						.addComponent(gameModeLbl)
 	    						.addContainerGap())
-	    					.addGroup(gl_contentPane.createSequentialGroup()
-	    						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-	    							.addGroup(gl_contentPane.createSequentialGroup()
-	    								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-	    									.addComponent(btnRollDie)
-	    									.addGroup(gl_contentPane.createSequentialGroup()
-	    										.addGap(9)
-	    										.addComponent(gameModeLbl)))
-	    								.addPreferredGap(ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
-	    								.addComponent(actionCardPnl, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE))
-	    							.addGroup(gl_contentPane.createSequentialGroup()
-	    								.addComponent(errorLbl)
-	    								.addPreferredGap(ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
-	    								.addComponent(gotItBtn)))
-	    						.addGap(33)))))
+	    					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+	    						.addGroup(gl_contentPane.createSequentialGroup()
+	    							.addComponent(modeLbl)
+	    							.addContainerGap())
+	    						.addGroup(gl_contentPane.createSequentialGroup()
+	    							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+	    								.addComponent(playerTurnLbl)
+	    								.addComponent(errorLbl))
+	    							.addContainerGap(256, Short.MAX_VALUE))))))
 	    );
 	    gl_contentPane.setVerticalGroup(
 	    	gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -231,34 +218,26 @@ public class TileOPlayPage extends JFrame {
 	    			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 	    				.addGroup(gl_contentPane.createSequentialGroup()
 	    					.addGap(46)
-	    					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-	    						.addComponent(errorLbl)
-	    						.addComponent(gotItBtn)))
+	    					.addComponent(errorLbl))
 	    				.addGroup(gl_contentPane.createSequentialGroup()
 	    					.addGap(17)
 	    					.addComponent(playerTurnLbl)))
 	    			.addPreferredGap(ComponentPlacement.RELATED)
 	    			.addComponent(modeLbl)
+	    			.addGap(62)
+	    			.addComponent(gameModeLbl)
+	    			.addGap(29)
+	    			.addComponent(btnRollDie)
+	    			.addGap(189)
+	    			.addComponent(p1InactivityLbl)
 	    			.addPreferredGap(ComponentPlacement.RELATED)
-	    			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-	    				.addGroup(gl_contentPane.createSequentialGroup()
-	    					.addGap(62)
-	    					.addComponent(gameModeLbl)
-	    					.addGap(29)
-	    					.addComponent(btnRollDie)
-	    					.addGap(189)
-	    					.addComponent(p1InactivityLbl)
-	    					.addPreferredGap(ComponentPlacement.RELATED)
-	    					.addComponent(p2InactivityLbl)
-	    					.addPreferredGap(ComponentPlacement.RELATED)
-	    					.addComponent(p3InactivityLbl)
-	    					.addPreferredGap(ComponentPlacement.RELATED)
-	    					.addComponent(p4InactivityLbl)
-	    					.addGap(155)
-	    					.addComponent(saveBtn))
-	    				.addGroup(gl_contentPane.createSequentialGroup()
-	    					.addGap(9)
-	    					.addComponent(actionCardPnl, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE)))
+	    			.addComponent(p2InactivityLbl)
+	    			.addPreferredGap(ComponentPlacement.RELATED)
+	    			.addComponent(p3InactivityLbl)
+	    			.addPreferredGap(ComponentPlacement.RELATED)
+	    			.addComponent(p4InactivityLbl)
+	    			.addGap(155)
+	    			.addComponent(saveBtn)
 	    			.addContainerGap(86, Short.MAX_VALUE))
 	    );
 	    contentPane.setLayout(gl_contentPane);
