@@ -393,7 +393,7 @@ class PlayController {
 
 	/*
 	 * Action card "Reveal all action tiles for 5 seconds"
-	 * Chuyang Lee
+	 * Li Zhang
 	 */
 	 private void doRevealActionTilesActionCard() throws InvalidInputException {
 	   TileO tileO = TileOApplication.getTileO();

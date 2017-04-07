@@ -909,7 +909,7 @@ public class PlayController
 
   /**
    * Action card "Reveal all action tiles for 5 seconds"
-   * Chuyang Lee
+   * Li Zhang
    */
   // line 399 "../../../../../PlayStateUpdatedApril3.ump"
    private void doRevealActionTilesActionCard() throws InvalidInputException{
