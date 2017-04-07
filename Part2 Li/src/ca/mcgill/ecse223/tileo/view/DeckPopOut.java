@@ -68,7 +68,12 @@ public class DeckPopOut extends JFrame {
 
 	public void close() { 
 		this.setVisible(false);
-	    this.dispose();
+		error = "";
+		errorMessage.setText(error);
+		for (int i=0; i<cards.length; i++){
+			cards[i].setText("");
+		}
+		
 	}
 	
 	/**
@@ -160,8 +165,9 @@ public class DeckPopOut extends JFrame {
 		JButton cancelBtn = new JButton("Close");
 		cancelBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {	
-				setVisible(false);
+				close();
 			}
+			
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(

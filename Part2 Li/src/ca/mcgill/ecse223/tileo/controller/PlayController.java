@@ -915,6 +915,7 @@ public class PlayController
    private void doRevealActionTilesActionCard() throws InvalidInputException{
     TileO tileO = TileOApplication.getTileO();
 	   Game currentGame = tileO.getCurrentGame();
+	   ActionCard currentCard = drawCard(currentGame);
 		try {
 			currentGame.setNextPlayer();
 			currentGame.setMode(Game.Mode.GAME);	
