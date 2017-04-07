@@ -9,7 +9,7 @@ import ca.mcgill.ecse223.tileo.model.Player.PlayerStatus;
 import ca.mcgill.ecse223.tileo.util.Cloner;
 
 // line 9 "../../../../../TileOPersistence.ump"
-// line 14 "../../../../../TileO (updated April3).ump"
+// line 16 "../../../../../TileO (updated April3).ump"
 public class Game implements Serializable
 {
 
@@ -574,7 +574,7 @@ public class Game implements Serializable
     placeholderTileO.removeGame(this);
   }
 
-  // line 43 "../../../../../TileO (updated April3).ump"
+  // line 45 "../../../../../TileO (updated April3).ump"
    public List<Tile> rollDie(){
     List<Tile> possibleMoves = new ArrayList<Tile>();
 		Die die =this.getDie();
@@ -584,34 +584,7 @@ public class Game implements Serializable
 		return possibleMoves;
   }
 
-  // line 52 "../../../../../TileO (updated April3).ump"
-//   public void determineNextPlayer(){
-//    boolean found = false;
-//		Player player = getCurrentPlayer();
-//		Player nextPlayer;
-//		while(!found) {
-//			try {
-//				nextPlayer = getPlayer(indexOfPlayer(player) + 1);
-//			}
-//			catch (IndexOutOfBoundsException e) {
-//				nextPlayer = getPlayer(0);
-//			}
-//			if (nextPlayer.getPlayerStatus() == PlayerStatus.Active) {
-//				found = true;
-//			}
-//			else {
-//				nextPlayer.takeTurn();
-//			}
-//			player = nextPlayer;
-//		}
-//		List<Player> pList = getPlayers();
-//		for (Player p: pList) {
-//			p.takeTurn();
-//		}
-//		setCurrentPlayer(player);
-//  }
-
-  // line 78 "../../../../../TileO (updated April3).ump"
+  // line 54 "../../../../../TileO (updated April3).ump"
    public void updateTileStatus(){
     for(Tile tile: getTiles()) {
 			if (tile instanceof ActionTile) {
@@ -620,12 +593,11 @@ public class Game implements Serializable
 		}
   }
 
-  // line 86 "../../../../../TileO (updated April3).ump"
+  // line 62 "../../../../../TileO (updated April3).ump"
    public void setNextPlayer(){
-	   Player player = getCurrentPlayer();
+    Player player = getCurrentPlayer();
 	   Player nextPlayer;
 	   
-	   //Decrement each player (i.e. pretraversal)
 	   List<Player> pList = getPlayers();
 	   for (Player p: pList) {
 		   p.takeTurn();
@@ -646,13 +618,12 @@ public class Game implements Serializable
 		   setCurrentPlayer(nextPlayer);
 		   setNextPlayer();
 	   }
-	   //determineNextPlayer();
-	   
   }
-   
+
+  // line 88 "../../../../../TileO (updated April3).ump"
    public Game clone(){
-	   return (Game) Cloner.clone(this);
-   }
+    return (Game) Cloner.clone(this);
+  }
 
 
   public String toString()

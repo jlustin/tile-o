@@ -5,7 +5,7 @@ package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
 // line 114 "../../../../../TileOPersistence.ump"
-// line 391 "../../../../../TileO (updated April3).ump"
+// line 408 "../../../../../TileO (updated April3).ump"
 public class RevealActionTilesActionCard extends ActionCard
 {
 
@@ -35,8 +35,7 @@ public class RevealActionTilesActionCard extends ActionCard
   /**
    * @Override
    */
-  // line 395 "../../../../../TileO (updated April3).ump"
-  @Override
+  // line 412 "../../../../../TileO (updated April3).ump"
    public Game.Mode getActionCardGameMode(){
     return Game.Mode.GAME_REVEALACTIONTILESACTIONCARD;
   }

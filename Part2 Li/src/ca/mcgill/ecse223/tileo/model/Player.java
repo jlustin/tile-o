@@ -3,19 +3,14 @@
 
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
 
 // line 16 "../../../../../TileOPersistence.ump"
 // line 20 "../../../../../TileOStates.ump"
-// line 91 "../../../../../TileO (updated April3).ump"
+// line 92 "../../../../../TileO (updated April3).ump"
 public class Player implements Serializable
 {
-
-  //------------------------
-  // STATIC VARIABLES
-  //------------------------
-
-  private static Map<Integer, Player> playersByNumber = new HashMap<Integer, Player>();
 
   //------------------------
   // MEMBER VARIABLES
@@ -42,11 +37,8 @@ public class Player implements Serializable
 
   public Player(int aNumber, Game aGame)
   {
+    number = aNumber;
     turnsUntilActive = 0;
-    if (!setNumber(aNumber))
-    {
-      throw new RuntimeException("Cannot create due to duplicate number");
-    }
     boolean didAddGame = setGame(aGame);
     if (!didAddGame)
     {
@@ -63,16 +55,8 @@ public class Player implements Serializable
   public boolean setNumber(int aNumber)
   {
     boolean wasSet = false;
-    Integer anOldNumber = getNumber();
-    if (hasWithNumber(aNumber)) {
-      return wasSet;
-    }
     number = aNumber;
     wasSet = true;
-    if (anOldNumber != null) {
-      playersByNumber.remove(anOldNumber);
-    }
-    playersByNumber.put(aNumber, this);
     return wasSet;
   }
 
@@ -87,16 +71,6 @@ public class Player implements Serializable
   public int getNumber()
   {
     return number;
-  }
-
-  public static Player getWithNumber(int aNumber)
-  {
-    return playersByNumber.get(aNumber);
-  }
-
-  public static boolean hasWithNumber(int aNumber)
-  {
-    return getWithNumber(aNumber) != null;
   }
 
   public int getTurnsUntilActive()
@@ -279,7 +253,6 @@ public class Player implements Serializable
 
   public void delete()
   {
-    playersByNumber.remove(getNumber());
     startingTile = null;
     currentTile = null;
     Game placeholderGame = game;
@@ -288,14 +261,14 @@ public class Player implements Serializable
   }
 
   // line 22 "../../../../../TileOPersistence.ump"
-   public static  void reinitializeUniquePlayer(List<Player> players){
-    playersByNumber = new HashMap<Integer, Player>();
-	for(Player player : players) {
-		playersByNumber.put(player.getNumber(), player);
-		}
-  }
+//   public static  void reinitializeUniquePlayer(List<Player> players){
+//    playersByNumber = new HashMap<Integer, Player>();
+//	for(Player player : players) {
+//		playersByNumber.put(player.getNumber(), player);
+//		}
+//  }
 
-  // line 102 "../../../../../TileO (updated April3).ump"
+  // line 103 "../../../../../TileO (updated April3).ump"
    public List<Tile> getPossibleMoves(int moveLeft){
     Tile currentTile=this.getCurrentTile();
 		List<Tile> possibleMoves = currentTile.getNextMoves(moveLeft, null) ;   	  

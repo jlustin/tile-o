@@ -6,8 +6,8 @@ class PlayController {
 	Mode {
     
 		Ready {
-			startGame / {
-				doStartGame(TileOApplication.getTileO().getCurrentGame());
+			startGame (boolean isCloned) / {
+				doStartGame(TileOApplication.getTileO().getCurrentGame(), isCloned);
 			} -> Roll;
 			load(int gameIndex) [isInGameMode(gameIndex)] / {
 				loadGame(gameIndex);
@@ -72,8 +72,8 @@ class PlayController {
 			playRevealActionCard(Tile tile)[isRevealActionCard()] / {
 				doPlayRevealActionCard(tile);
 			} -> Roll;
-			playLoseTurnRandomlyActionCard()[isLoseTurnRandomlyActionCard()] / {
-				doLoseTurnRandomlyActionCard();
+			playLoseTurnRandomlyActionCard(int p1LostTurns, int p2LostTurns, int p3LostTurns, int p4LostTurns)[isLoseTurnRandomlyActionCard()] / {
+				doLoseTurnRandomlyActionCard(p1LostTurns, p2LostTurns, p3LostTurns, p4LostTurns);
 			} -> Roll;
 			playRevealActionTilesActionCard()[isRevealActionTilesActionCard()] / {
 				doRevealActionTilesActionCard();
@@ -85,10 +85,10 @@ class PlayController {
 				doWinTileHintActionCard(tile);
 			} -> Roll;
 			playSendBackToStartActionCard(int index)[isSendBackToStartActionCard()] / {
-				doSendBackToStartActionCard(player);
+				doSendBackToStartActionCard(index);
 			} -> Roll;
 			playTeleportOtherActionCard(int playerNumber, Tile aTile)[isTeleportOtherActionCard()] / {
-				doTeleportOtherActionCard(tile, playerNumber);
+				doTeleportOtherActionCard(playerNumber, aTile);
 			} -> Roll;	
 		}
 		
@@ -99,7 +99,7 @@ class PlayController {
 	
 	1 -> * Tile possibleMoves;
 	lazy String revealedTile;
-	public boolean isWinTile;
+	public boolean isTheWinTile;
 
 	
    
@@ -121,8 +121,11 @@ class PlayController {
 	}
 	
 	
-	private void doStartGame(Game selectedGame) throws InvalidInputException {
-		//TODO: CHARLES
+	private void doStartGame(Game selectedGame, boolean isCloned) throws InvalidInputException{
+    //TODO: CHARLES
+	   	if(isCloned){
+	   		cloneGame();
+	   	}
 		String error = "";
 		if(selectedGame.getDeck().numberOfCards() != 32) {
 			error = "The action cards in the deck must be equal to 32.";
@@ -161,8 +164,8 @@ class PlayController {
 		catch(RuntimeException e){
 			error = e.getMessage();
 			throw new InvalidInputException(error);
-		}		
-	}
+		}
+  }
 
 	
 	/*
@@ -376,8 +379,7 @@ class PlayController {
 	 * Action card "Make all players lose a random number of turns"
 	 * Chun Ming
 	 */
-	 private void doLoseTurnRandomlyActionCard(int p1LostTurns, int p2LostTurns, int p3LostTurns, int p4LostTurns
-		   ){
+	 private void doLoseTurnRandomlyActionCard(int p1LostTurns, int p2LostTurns, int p3LostTurns, int p4LostTurns){
 	   	TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		ActionCard currentCard = drawCard(currentGame);
@@ -426,7 +428,7 @@ class PlayController {
 		currentGame.setNextPlayer();
 		currentGame.setMode(Game.Mode.GAME);
 		
-		isWinTile = hint;
+		isTheWinTile = hint;
   	}
 	
 	/*

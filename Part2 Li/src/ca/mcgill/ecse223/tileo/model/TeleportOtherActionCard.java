@@ -5,7 +5,7 @@ package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
 // line 142 "../../../../../TileOPersistence.ump"
-// line 443 "../../../../../TileO (updated April3).ump"
+// line 509 "../../../../../TileO (updated April3).ump"
 public class TeleportOtherActionCard extends ActionCard
 {
 
@@ -35,18 +35,17 @@ public class TeleportOtherActionCard extends ActionCard
   /**
    * @Override
    */
-  // line 448 "../../../../../TileO (updated April3).ump"
-  @Override
+  // line 514 "../../../../../TileO (updated April3).ump"
    public Game.Mode getActionCardGameMode(){
     return Game.Mode.GAME_TELEPORTOTHERACTIONCARD;
   }
 
-  // line 453 "../../../../../TileO (updated April3).ump"
+  // line 518 "../../../../../TileO (updated April3).ump"
    public void play(int playerNumber, Tile aTile){
     Game currentGame = super.getDeck().getGame();
-    Player chosenPlayer = currentGame.getPlayer(playerNumber);
-    chosenPlayer.setCurrentTile(aTile);
-    aTile.setHasBeenVisited(true);
+    	Player chosenPlayer = currentGame.getPlayer(playerNumber);
+    	chosenPlayer.setCurrentTile(aTile);
+    	aTile.setHasBeenVisited(true);
   }
   
   //------------------------

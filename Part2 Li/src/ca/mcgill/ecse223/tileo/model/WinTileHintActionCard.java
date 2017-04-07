@@ -4,10 +4,8 @@
 package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
-import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
-
 // line 128 "../../../../../TileOPersistence.ump"
-// line 416 "../../../../../TileO (updated April3).ump"
+// line 434 "../../../../../TileO (updated April3).ump"
 public class WinTileHintActionCard extends ActionCard
 {
 
@@ -37,15 +35,14 @@ public class WinTileHintActionCard extends ActionCard
   /**
    * @Override
    */
-  // line 421 "../../../../../TileO (updated April3).ump"
-  @Override
+  // line 439 "../../../../../TileO (updated April3).ump"
    public Game.Mode getActionCardGameMode(){
     return Game.Mode.GAME_WINTILEHINTACTIONCARD;
   }
 
-  // line 426 "../../../../../TileO (updated April3).ump"
-   public boolean play(Tile aTile) {
-	   	Game currentGame = super.getDeck().getGame();
+  // line 443 "../../../../../TileO (updated April3).ump"
+   public boolean play(Tile aTile){
+    Game currentGame = super.getDeck().getGame();
 	    boolean hint = false;
 	    Tile topTile = null;
 	    Tile bottomTile = null;
@@ -89,15 +86,15 @@ public class WinTileHintActionCard extends ActionCard
 					hint = true;
 				}
 			}
-			return hint;			
-	}
-  
-
+			return hint;
+  }
   
   //------------------------
   // DEVELOPER CODE - PROVIDED AS-IS
   //------------------------
   
   // line 131 TileOPersistence.ump
-  private static final long serialVersionUID = 1337133713371337133L ; 
+  private static final long serialVersionUID = 1337133713371337133L ;
+
+  
 }

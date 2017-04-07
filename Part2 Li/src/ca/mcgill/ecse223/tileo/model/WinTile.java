@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 47 "../../../../../TileOPersistence.ump"
-// line 199 "../../../../../TileO (updated April3).ump"
+// line 200 "../../../../../TileO (updated April3).ump"
 public class WinTile extends Tile
 {
 
@@ -36,8 +36,7 @@ public class WinTile extends Tile
   /**
    * @Override
    */
-  // line 204 "../../../../../TileO (updated April3).ump"
-  @Override
+  // line 205 "../../../../../TileO (updated April3).ump"
    public void doLand(){
     // get the current game
   	  	Game currentGame = this.getGame();  	  

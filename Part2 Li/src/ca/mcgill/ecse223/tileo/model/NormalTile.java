@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 41 "../../../../../TileOPersistence.ump"
-// line 185 "../../../../../TileO (updated April3).ump"
+// line 186 "../../../../../TileO (updated April3).ump"
 public class NormalTile extends Tile
 {
 
@@ -33,10 +33,11 @@ public class NormalTile extends Tile
   }
 
 
-  
-  // line 190 "../../../../../TileO (updated April3).ump"
-  @Override
-  public void doLand(){
+  /**
+   * @Override
+   */
+  // line 191 "../../../../../TileO (updated April3).ump"
+   public void doLand(){
     Game currentGame = getGame();
   	  	Player currentPlayer = currentGame.getCurrentPlayer();  	 
   	  	currentPlayer.setCurrentTile(this);  	 

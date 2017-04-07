@@ -5,10 +5,8 @@ package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 import java.util.List;
 
-import ca.mcgill.ecse223.tileo.controller.InvalidInputException;
-
 // line 121 "../../../../../TileOPersistence.ump"
-// line 403 "../../../../../TileO (updated April3).ump"
+// line 416 "../../../../../TileO (updated April3).ump"
 public class TurnActionTilesInactiveActionCard extends ActionCard
 {
 
@@ -33,20 +31,19 @@ public class TurnActionTilesInactiveActionCard extends ActionCard
   {
     super.delete();
   }
-//test commit
+
 
   /**
    * @Override
    */
-  // line 407 "../../../../../TileO (updated April3).ump"
-  @Override
+  // line 420 "../../../../../TileO (updated April3).ump"
    public Game.Mode getActionCardGameMode(){
     return Game.Mode.GAME_TURNACTIONTILESINACTIVEACTIONCARD;
   }
 
-  // line 412 "../../../../../TileO (updated April3).ump"
+  // line 424 "../../../../../TileO (updated April3).ump"
    public void play(){
-	   Game currentGame = super.getDeck().getGame();
+    Game currentGame = super.getDeck().getGame();
 	   List<Tile> tiles = currentGame.getTiles();
 	   for(Tile aTile:tiles) {
 		   if (aTile instanceof ActionTile){

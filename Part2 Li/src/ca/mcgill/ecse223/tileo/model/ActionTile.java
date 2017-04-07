@@ -7,7 +7,7 @@ import java.util.*;
 
 // line 35 "../../../../../TileOPersistence.ump"
 // line 1 "../../../../../TileOStates.ump"
-// line 157 "../../../../../TileO (updated April3).ump"
+// line 158 "../../../../../TileO (updated April3).ump"
 public class ActionTile extends Tile
 {
 
@@ -135,9 +135,10 @@ public class ActionTile extends Tile
   }
 
 
-  
-  // line 165 "../../../../../TileO (updated April3).ump"
-  @Override
+  /**
+   * @Override
+   */
+  // line 166 "../../../../../TileO (updated April3).ump"
    public void doLand(){
     Game currentGame = getGame();
 		Player currentPlayer = currentGame.getCurrentPlayer();

@@ -85,7 +85,7 @@ public abstract class ActionCard implements Serializable
     placeholderDeck.removeCard(this);
   }
 
-  public abstract Game.Mode getActionCardGameMode();
+   public abstract Game.Mode getActionCardGameMode();
 
   public String toString()
   {

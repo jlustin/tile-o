@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 // line 59 "../../../../../TileOPersistence.ump"
-// line 219 "../../../../../TileO (updated April3).ump"
+// line 220 "../../../../../TileO (updated April3).ump"
 public class Deck implements Serializable
 {
 
@@ -204,7 +204,7 @@ public class Deck implements Serializable
     }
   }
 
-  // line 224 "../../../../../TileO (updated April3).ump"
+  // line 225 "../../../../../TileO (updated April3).ump"
    public void shuffle(){
     ActionCard tmpCard;
 	  Random randomGenerator = new Random();
@@ -219,7 +219,7 @@ public class Deck implements Serializable
 	  setCurrentCard(getCards().get(0));
   }
 
-  // line 238 "../../../../../TileO (updated April3).ump"
+  // line 239 "../../../../../TileO (updated April3).ump"
    public void clearCards(){
     while (cards.size() > 0)
 	    {
@@ -227,7 +227,6 @@ public class Deck implements Serializable
 	      aCard.delete();
 	      cards.remove(aCard);
 	    }
-	    
 	    currentCard = null;
   }
   

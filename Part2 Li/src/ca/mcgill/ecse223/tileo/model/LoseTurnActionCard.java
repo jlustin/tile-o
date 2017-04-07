@@ -32,9 +32,10 @@ public class LoseTurnActionCard extends ActionCard
   }
 
 
-  
+  /**
+   * @Override
+   */
   // line 338 "../../../../../TileO (updated April3).ump"
-  @Override
    public Game.Mode getActionCardGameMode(){
     return Game.Mode.GAME_LOSETURNACTIONCARD;
   }

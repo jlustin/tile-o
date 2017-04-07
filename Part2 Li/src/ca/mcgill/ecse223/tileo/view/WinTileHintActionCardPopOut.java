@@ -91,7 +91,7 @@ public class WinTileHintActionCardPopOut extends JFrame {
 						errorLabel.setText("");
 						
 						pmc.playWinTileHintActionCard(chosenTile);
-						isWin = pmc.isWinTile;
+						isWin = pmc.isTheWinTile;
 						if (isWin == true){
 							hint = "Win Tile around here!";
 						}

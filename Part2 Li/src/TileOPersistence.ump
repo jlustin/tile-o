@@ -17,13 +17,6 @@ class Player {
 	depend java.io.Serializable;
 	isA Serializable;
 	private static final long serialVersionUID = 3333333333333333333L;
-	
-	public static void reinitializeUniquePlayer(List<Player> players){
-	playersByNumber = new HashMap<Integer, Player>();
-	for(Player player : players) {
-		playersByNumber.put(player.getNumber(), player);
-		}
-	}
 }
 
 class Tile {

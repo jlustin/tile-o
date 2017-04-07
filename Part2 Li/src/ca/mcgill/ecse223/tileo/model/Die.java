@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Random;
 
 // line 101 "../../../../../TileOPersistence.ump"
-// line 108 "../../../../../TileO (updated April3).ump"
+// line 109 "../../../../../TileO (updated April3).ump"
 public class Die implements Serializable
 {
 
@@ -54,7 +54,7 @@ public class Die implements Serializable
     }
   }
 
-  // line 110 "../../../../../TileO (updated April3).ump"
+  // line 111 "../../../../../TileO (updated April3).ump"
    public int roll(){
     int rollNumber;
 		Random randomGenerator = new Random();

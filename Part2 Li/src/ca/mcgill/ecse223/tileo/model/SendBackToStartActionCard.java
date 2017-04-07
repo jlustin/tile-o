@@ -5,8 +5,8 @@ package ca.mcgill.ecse223.tileo.model;
 import java.io.Serializable;
 
 // line 135 "../../../../../TileOPersistence.ump"
-// line 430 "../../../../../TileO (updated April3).ump"
-public class SendBackToStartActionCard extends 	ActionCard
+// line 492 "../../../../../TileO (updated April3).ump"
+public class SendBackToStartActionCard extends ActionCard
 {
 
   //------------------------
@@ -35,14 +35,14 @@ public class SendBackToStartActionCard extends 	ActionCard
   /**
    * @Override
    */
-  // line 435 "../../../../../TileO (updated April3).ump"
+  // line 497 "../../../../../TileO (updated April3).ump"
    public Game.Mode getActionCardGameMode(){
     return Game.Mode.GAME_SENDBACKTOSTARTACTIONCARD;
   }
 
-  // line 439 "../../../../../TileO (updated April3).ump"
+  // line 500 "../../../../../TileO (updated April3).ump"
    public void play(int index){
-	   Game currentGame = super.getDeck().getGame();
+    Game currentGame = super.getDeck().getGame();
 	   Player chosenPlayer;
 	   chosenPlayer = currentGame.getPlayer(index);
 	   Tile startingTile = chosenPlayer.getStartingTile();

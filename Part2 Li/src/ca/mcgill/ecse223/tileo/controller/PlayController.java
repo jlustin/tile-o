@@ -25,7 +25,6 @@ public class PlayController
 
   //PlayController Associations
   private List<Tile> possibleMoves;
-  public boolean isWinTile;
 
   //------------------------
   // CONSTRUCTOR
@@ -454,10 +453,11 @@ public class PlayController
       default:
         // Other states do respond to this event
     }
+
     return wasEventProcessed;
   }
 
-  public boolean playSendBackToStartActionCard(int index) 
+  public boolean playSendBackToStartActionCard(int index)
   {
     boolean wasEventProcessed = false;
     
@@ -872,9 +872,8 @@ public class PlayController
    * Action card "Reveal the type of a tile"
    */
   // line 359 "../../../../../PlayStateUpdatedApril3.ump"
-
    private void doPlayRevealActionCard(Tile tile) throws InvalidInputException{
-	   	TileO tileO = TileOApplication.getTileO();
+    TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		ActionCard currentCard = drawCard(currentGame);
 		try {
@@ -895,9 +894,8 @@ public class PlayController
    * Chun Ming
    */
   // line 381 "../../../../../PlayStateUpdatedApril3.ump"
-   private void doLoseTurnRandomlyActionCard(int p1LostTurns, int p2LostTurns, int p3LostTurns, int p4LostTurns
-		   ){
-	   	TileO tileO = TileOApplication.getTileO();
+   private void doLoseTurnRandomlyActionCard(int p1LostTurns, int p2LostTurns, int p3LostTurns, int p4LostTurns){
+    TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		ActionCard currentCard = drawCard(currentGame);
 
@@ -913,9 +911,9 @@ public class PlayController
    * Action card "Reveal all action tiles for 5 seconds"
    * Chuyang Lee
    */
-  // line 389 "../../../../../PlayStateUpdatedApril3.ump"
-   private void doRevealActionTilesActionCard() throws InvalidInputException {
-	   TileO tileO = TileOApplication.getTileO();
+  // line 397 "../../../../../PlayStateUpdatedApril3.ump"
+   private void doRevealActionTilesActionCard() throws InvalidInputException{
+    TileO tileO = TileOApplication.getTileO();
 	   Game currentGame = tileO.getCurrentGame();
 		try {
 			currentGame.setNextPlayer();
@@ -924,15 +922,15 @@ public class PlayController
 		catch (RuntimeException e) {
 			throw new InvalidInputException(e.getMessage());
 		}
-   }
+  }
 
 
   /**
    * Charles
    */
-  // line 394 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 410 "../../../../../PlayStateUpdatedApril3.ump"
    private void doTurnActionTilesInactiveActionCard(){
-	    TileO tileO = TileOApplication.getTileO();
+    TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();		
 		TurnActionTilesInactiveActionCard turnActionTilesInactiveActionCard = (TurnActionTilesInactiveActionCard) drawCard(currentGame);		
 		turnActionTilesInactiveActionCard.play();
@@ -942,12 +940,12 @@ public class PlayController
 
 
   /**
-   * Justin (Jun Yu) Lei Action card :Click on a tile to know if it
+   * Justin (Jun Yu) Lei Action card �Click on a tile to know if it
    * or one of its neighbour is the WinTile
    */
-  // line 400 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 420 "../../../../../PlayStateUpdatedApril3.ump"
    private void doWinTileHintActionCard(Tile aTile){
-	   	TileO tileO = TileOApplication.getTileO();
+    TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		WinTileHintActionCard winTileHintActionCard = (WinTileHintActionCard) drawCard(currentGame);
 		boolean hint;
@@ -956,8 +954,7 @@ public class PlayController
 		currentGame.setNextPlayer();
 		currentGame.setMode(Game.Mode.GAME);
 		
-		
-		isWinTile = hint;
+		isTheWinTile = hint;
   }
 
 
@@ -965,23 +962,23 @@ public class PlayController
    * Chris Chan
    * Action card "Send a player back to its starting position"
    */
-  // line 408 "../../../../../PlayStateUpdatedApril3.ump"
-   private void doSendBackToStartActionCard(int index) {
-	   TileO tileO = TileOApplication.getTileO();
+  // line 437 "../../../../../PlayStateUpdatedApril3.ump"
+   private void doSendBackToStartActionCard(int index){
+    TileO tileO = TileOApplication.getTileO();
 	   Game currentGame = tileO.getCurrentGame();
 	   SendBackToStartActionCard sendBackToStartActionCard = (SendBackToStartActionCard)drawCard(currentGame);
-		   sendBackToStartActionCard.play(index);
-		   currentGame.setMode(Game.Mode.GAME);
-		   currentGame.setNextPlayer();
+	   sendBackToStartActionCard.play(index);
+	   currentGame.setMode(Game.Mode.GAME);
+	   currentGame.setNextPlayer();
   }
 
 
   /**
    * Victor swag
    */
-  // line 413 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 447 "../../../../../PlayStateUpdatedApril3.ump"
    private void doTeleportOtherActionCard(int playerNumber, Tile aTile){
-	   TileO tileO = TileOApplication.getTileO();
+    TileO tileO = TileOApplication.getTileO();
 	   Game currentGame = tileO.getCurrentGame();
 	   TeleportOtherActionCard teleportOtherActionCard = (TeleportOtherActionCard) drawCard(currentGame);
 	   teleportOtherActionCard.play(playerNumber, aTile);
@@ -994,12 +991,12 @@ public class PlayController
    * 9. Save and load game to continue playing at a later point
    * Li
    */
-  // line 421 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 461 "../../../../../PlayStateUpdatedApril3.ump"
    public void saveGame(){
     TileOApplication.save();
   }
 
-  // line 425 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 465 "../../../../../PlayStateUpdatedApril3.ump"
    public Game loadGame(int index) throws InvalidInputException{
     TileO tileO = TileOApplication.getTileO();
 		try {
@@ -1015,7 +1012,7 @@ public class PlayController
   /**
    * Helper method to check if two tiles are adjacent
    */
-  // line 441 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 481 "../../../../../PlayStateUpdatedApril3.ump"
    public boolean isAdjacent(Tile tile1, Tile tile2){
     int x1 = tile1.getX();
 		int y1 = tile1.getY();
@@ -1038,7 +1035,7 @@ public class PlayController
   /**
    * Helper method to check if two tiles are already connected
    */
-  // line 463 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 503 "../../../../../PlayStateUpdatedApril3.ump"
    public boolean isConnected(Tile tile1, Tile tile2){
     for (Connection c1: tile1.getConnections()){
 			for (Connection c2: tile2.getConnections()){
@@ -1054,7 +1051,7 @@ public class PlayController
   /**
    * Guards
    */
-  // line 475 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 515 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isInGameMode(int gameIndex){
     Game selectedGame = TileOApplication.getTileO().getGame(gameIndex);
 	   if(selectedGame.getMode().equals(Game.Mode.GAME)) {
@@ -1063,7 +1060,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 483 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 523 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isInWonMode(int gameIndex){
     Game selectedGame = TileOApplication.getTileO().getGame(gameIndex);
 	   if(selectedGame.getMode().equals(Game.Mode.GAME_WON)){
@@ -1072,7 +1069,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 491 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 531 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isNotInGameOrWonMode(int gameIndex){
     Game selectedGame = TileOApplication.getTileO().getGame(gameIndex);
 	   if(selectedGame.getMode().equals(Game.Mode.GAME)||selectedGame.getMode().equals(Game.Mode.GAME_WON)){
@@ -1081,7 +1078,7 @@ public class PlayController
 	   return true;
   }
 
-  // line 499 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 539 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isRollDieActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof RollDieActionCard ) {
@@ -1090,7 +1087,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 507 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 547 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isConnectTilesActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof ConnectTilesActionCard ) {
@@ -1099,7 +1096,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 515 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 555 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isRemoveConnectionActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof RemoveConnectionActionCard ) {
@@ -1108,7 +1105,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 523 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 563 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isLoseTurnActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof LoseTurnActionCard ) {
@@ -1117,7 +1114,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 531 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 571 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isRevealActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof RevealActionCard ) {
@@ -1126,7 +1123,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 539 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 579 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isTeleportAndNormalTile(Tile tile){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof TeleportActionCard && tile instanceof NormalTile ) {
@@ -1135,7 +1132,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 547 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 587 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isTeleportAndWinTile(Tile tile){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof TeleportActionCard && tile instanceof WinTile ) {
@@ -1144,7 +1141,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 555 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 595 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isTeleportAndInactiveActionTile(Tile tile){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();   		
    		if (aActionCard instanceof TeleportActionCard && 
@@ -1155,7 +1152,7 @@ public class PlayController
    		return false;
   }
 
-  // line 565 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 605 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isActionTileAndInactive(Tile tile){
     if (tile instanceof ActionTile && ((ActionTile)tile).getActionTileStatus().equals(ActionTileStatus.Inactive)) {
 			return true;
@@ -1163,7 +1160,7 @@ public class PlayController
 		return false;
   }
 
-  // line 572 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 612 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isTeleportAndActiveActionTile(Tile tile){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof TeleportActionCard && 
@@ -1174,7 +1171,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 581 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 621 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isLoseTurnRandomlyActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof LoseTurnRandomlyActionCard ) {
@@ -1183,7 +1180,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 589 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 629 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isRevealActionTilesActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof RevealActionTilesActionCard ) {
@@ -1192,7 +1189,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 597 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 637 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isTurnActionTilesInactiveActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof TurnActionTilesInactiveActionCard ) {
@@ -1201,7 +1198,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 605 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 645 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isWinTileHintActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof WinTileHintActionCard ) {
@@ -1210,7 +1207,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 613 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 653 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isSendBackToStartActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof SendBackToStartActionCard ) {
@@ -1219,7 +1216,7 @@ public class PlayController
 	   return false;
   }
 
-  // line 621 "../../../../../PlayStateUpdatedApril3.ump"
+  // line 661 "../../../../../PlayStateUpdatedApril3.ump"
    private boolean isTeleportOtherActionCard(){
     ActionCard aActionCard = TileOApplication.getTileO().getCurrentGame().getDeck().getCurrentCard();
 	   if(aActionCard instanceof TeleportOtherActionCard ) {
@@ -1228,15 +1225,15 @@ public class PlayController
 	   return false;
   }
 
-   
+  // line 669 "../../../../../PlayStateUpdatedApril3.ump"
    private void cloneGame(){
-	   // TODO the following may have to be adapted to your specific implementation
-	   System.out.println("Game maybe sucessfully cloned");
-	   TileO tileO = TileOApplication.getTileO();
-	   Game cloned = tileO.getCurrentGame().clone();
-	   tileO.addGame(cloned);
-	   tileO.setCurrentGame(cloned);
-   }
+    // TODO the following may have to be adapted to your specific implementation
+   	 	TileO tileO = TileOApplication.getTileO();
+    	Game cloned = tileO.getCurrentGame().clone();
+    	tileO.addGame(cloned);
+    	tileO.setCurrentGame(cloned);
+  }
+
 
   public String toString()
   {
@@ -1244,5 +1241,13 @@ public class PlayController
     return super.toString() + "["+
             "revealedTile" + ":" + getRevealedTile()+ "]"
      + outputString;
-  }
+  }  
+  //------------------------
+  // DEVELOPER CODE - PROVIDED AS-IS
+  //------------------------
+  
+  // line 102 ../../../../../PlayStateUpdatedApril3.ump
+  public boolean isTheWinTile ;
+
+  
 }
