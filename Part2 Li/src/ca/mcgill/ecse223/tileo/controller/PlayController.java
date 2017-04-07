@@ -66,7 +66,7 @@ public class PlayController
     return mode;
   }
 
-  public boolean startGame() throws InvalidInputException
+  public boolean startGame(boolean isCloned) throws InvalidInputException
   {
     boolean wasEventProcessed = false;
     
@@ -75,7 +75,7 @@ public class PlayController
     {
       case Ready:
         // line 9 "../../../../../PlayStateUpdatedApril3.ump"
-        doStartGame(TileOApplication.getTileO().getCurrentGame());
+        doStartGame(TileOApplication.getTileO().getCurrentGame(), isCloned);
         setMode(Mode.Roll);
         wasEventProcessed = true;
         break;
@@ -625,8 +625,11 @@ public class PlayController
   }
 
   // line 125 "../../../../../PlayStateUpdatedApril3.ump"
-   private void doStartGame(Game selectedGame) throws InvalidInputException{
+   private void doStartGame(Game selectedGame, boolean isCloned) throws InvalidInputException{
     //TODO: CHARLES
+	   	if(isCloned){
+	   		cloneGame();
+	   	}
 		String error = "";
 		if(selectedGame.getDeck().numberOfCards() != 32) {
 			error = "The action cards in the deck must be equal to 32.";
@@ -1229,6 +1232,15 @@ public class PlayController
 	   return false;
   }
 
+   
+   private void cloneGame(){
+	   // TODO the following may have to be adapted to your specific implementation
+	   System.out.println("Game maybe sucessfully cloned");
+	   TileO tileO = TileOApplication.getTileO();
+	   Game cloned = tileO.getCurrentGame().clone();
+	   tileO.addGame(cloned);
+	   tileO.setCurrentGame(cloned);
+	  }
 
   public String toString()
   {

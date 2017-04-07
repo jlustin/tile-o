@@ -641,6 +641,14 @@ class PlayController {
 	   }
 	   return false;
    }
+   
+   private void cloneGame() {
+   		// TODO the following may have to be adapted to your specific implementation
+   	 	TileO tileO = TileOApplication.getTileO();
+    	Game cloned = tileO.getCurrentGame().clone();
+    	tileO.addGame(cloned);
+    	tileO.setCurrentGame(cloned);
+  }
               
 }  
 

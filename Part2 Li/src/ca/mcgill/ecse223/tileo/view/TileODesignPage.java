@@ -312,6 +312,26 @@ public class TileODesignPage extends JFrame {
 	    JButton btnStartClone = new JButton("Start & Clone");
 	    btnStartClone.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
+	    		error = "";
+	    		if(startGameCBox.getItemCount() == 0) {
+	    			error = "There are no games to play.";
+	    		}
+	    		else if (startGameCBox.getItemCount() > 0){
+	    			try{
+	    				int gameIndex = startGameCBox.getSelectedIndex();			
+	    				Game selectedGame = TileOApplication.getTileO().getGame(gameIndex);
+	    				TileOApplication.getTileO().setCurrentGame(selectedGame);
+	    				pmc.startGame(true);
+	    				TileOApplication.pp.close();
+	    				close();
+	    				TileOApplication.pp = new TileOPlayPage();
+	    				TileOApplication.pp.setVisible(true);
+	    			}
+	    			catch (InvalidInputException e1) {
+	    				error = e1.getMessage();
+	    			}
+	    		}
+	    		refreshData();	
 	    	}
 	    });
 	    
@@ -797,7 +817,7 @@ public class TileODesignPage extends JFrame {
 				int gameIndex = startGameCBox.getSelectedIndex();			
 				Game selectedGame = TileOApplication.getTileO().getGame(gameIndex);
 				TileOApplication.getTileO().setCurrentGame(selectedGame);
-				pmc.startGame();
+				pmc.startGame(false);
 				TileOApplication.pp.close();
 				close();
 				TileOApplication.pp = new TileOPlayPage();

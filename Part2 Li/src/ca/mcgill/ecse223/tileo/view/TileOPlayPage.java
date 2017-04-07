@@ -79,7 +79,8 @@ public class TileOPlayPage extends JFrame {
 	 * Create the frame.
 	 */
 	public TileOPlayPage() {
-		setTitle("Play Mode");
+		Game currentGame = TileOApplication.getTileO().getCurrentGame();
+		setTitle("Play Mode: Game number " + String.valueOf(TileOApplication.getTileO().indexOfGame(currentGame)+1));
 		initComponents();
 		refreshData();
 	}

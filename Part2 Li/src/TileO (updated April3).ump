@@ -6,8 +6,10 @@ use PlayStateUpdatedApril3.ump;
 
 namespace ca.mcgill.ecse223.tileo.model;
 
+external Cloner {}
+
 class TileO {
-	1 <@>- * Game games;
+	1 -> * Game games;
 	1 -> 0..1 Game currentGame;
 }
 
@@ -86,6 +88,10 @@ class Game {
 		determineNextPlayer();
 		updateTileStatus();
 	};
+	
+	public Game clone() {
+    	return (Game) Cloner.clone(this);
+  	}
 }
 
 class Player {
@@ -95,7 +101,7 @@ class Player {
 			YELLOW{} }
 	1 -> 0..1 Tile startingTile;
 	0..4 -> 0..1 Tile currentTile;
-	unique Integer number;
+	Integer number;
 	Integer turnsUntilActive = 0;
 	
 	public List<Tile> getPossibleMoves(int moveLeft) { 

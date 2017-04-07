@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 import ca.mcgill.ecse223.tileo.model.Player.PlayerStatus;
+import ca.mcgill.ecse223.tileo.util.Cloner;
 
 // line 9 "../../../../../TileOPersistence.ump"
 // line 14 "../../../../../TileO (updated April3).ump"
@@ -624,6 +625,10 @@ public class Game implements Serializable
 	   determineNextPlayer();
 	   updateTileStatus();
   }
+   
+   public Game clone(){
+	   return (Game) Cloner.clone(this);
+   }
 
 
   public String toString()
