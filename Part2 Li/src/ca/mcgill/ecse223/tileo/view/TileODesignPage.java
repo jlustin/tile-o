@@ -118,9 +118,11 @@ public class TileODesignPage extends JFrame {
 	 * Create the frame.
 	 */
 	public TileODesignPage() {
-		Game currentGame = TileOApplication.getTileO().getCurrentGame();
-		setTitle("Design Mode: Game  " + String.valueOf(TileOApplication.getTileO().indexOfGame(currentGame)+1));
-		numberOfPlayers = currentGame.numberOfPlayers();
+		if (TileOApplication.getTileO().getCurrentGame() != null){
+			Game currentGame = TileOApplication.getTileO().getCurrentGame();
+			setTitle("Design Mode: Game  " + String.valueOf(TileOApplication.getTileO().indexOfGame(currentGame)+1));
+			numberOfPlayers = currentGame.numberOfPlayers();
+		}
 		initComponents();
 		refreshData();
 	}
