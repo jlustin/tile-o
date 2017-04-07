@@ -873,7 +873,7 @@ public class PlayController
    */
   // line 359 "../../../../../PlayStateUpdatedApril3.ump"
 
-   public void doPlayRevealActionCard(Tile tile) throws InvalidInputException{
+   private void doPlayRevealActionCard(Tile tile) throws InvalidInputException{
 	   	TileO tileO = TileOApplication.getTileO();
 		Game currentGame = tileO.getCurrentGame();
 		ActionCard currentCard = drawCard(currentGame);
@@ -917,18 +917,14 @@ public class PlayController
    private void doRevealActionTilesActionCard() throws InvalidInputException {
 	   TileO tileO = TileOApplication.getTileO();
 	   Game currentGame = tileO.getCurrentGame();
-		ActionCard currentCard = drawCard(currentGame);
 		try {
-//			if (currentCard instanceof RevealActionTilesActionCard) {
-//				((RevealActionTilesActionCard) currentCard).play();
-//			}
 			currentGame.setNextPlayer();
 			currentGame.setMode(Game.Mode.GAME);	
 		}
 		catch (RuntimeException e) {
 			throw new InvalidInputException(e.getMessage());
 		}
-  }
+   }
 
 
   /**
@@ -941,7 +937,6 @@ public class PlayController
 		TurnActionTilesInactiveActionCard turnActionTilesInactiveActionCard = (TurnActionTilesInactiveActionCard) drawCard(currentGame);		
 		turnActionTilesInactiveActionCard.play();
 		currentGame.setMode(Game.Mode.GAME);
-    
   }
 
 
@@ -1240,7 +1235,7 @@ public class PlayController
 	   Game cloned = tileO.getCurrentGame().clone();
 	   tileO.addGame(cloned);
 	   tileO.setCurrentGame(cloned);
-	  }
+   }
 
   public String toString()
   {

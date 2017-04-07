@@ -90,7 +90,7 @@ public class WinTileHintActionCard extends ActionCard
 				}
 			}
 			return hint;			
-	  }
+	}
   
 
   

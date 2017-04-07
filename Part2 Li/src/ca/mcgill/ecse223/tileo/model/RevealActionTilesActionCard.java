@@ -40,11 +40,6 @@ public class RevealActionTilesActionCard extends ActionCard
    public Game.Mode getActionCardGameMode(){
     return Game.Mode.GAME_REVEALACTIONTILESACTIONCARD;
   }
-
-  // line 400 "../../../../../TileO (updated April3).ump"
-   public void play(){
-	   
-  }
   
   //------------------------
   // DEVELOPER CODE - PROVIDED AS-IS

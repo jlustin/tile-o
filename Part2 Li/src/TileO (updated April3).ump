@@ -128,7 +128,7 @@ class Tile {
 	Integer y;
 	Boolean hasBeenVisited = false;
 	
-	public List<Tile> getNextMoves (int moveLeft,Tile previousTile) {
+	public List<Tile> getNextMoves (int moveLeft, Tile previousTile) {
 		//Create a ArrayList to store the neighbor Tile
 		List<Tile> possibleMoveTiles =  new ArrayList<>();
 		List<Connection> connections = new ArrayList<>();
@@ -389,9 +389,26 @@ class LoseTurnRandomlyActionCard {
 		return Game.Mode.GAME_LOSETURNRANDOMLYACTIONCARD;
 	};
 	
-	public void play(){
-		
-	};
+	public void play(int p1LostTurns, int p2LostTurns, int p3LostTurns, int p4LostTurns){
+	   Game currentGame = getDeck().getGame();
+	   int numberOfPlayers = currentGame.numberOfPlayers();
+	   
+	   if(p1LostTurns > 0){
+		   currentGame.getPlayer(0).loseTurns(p1LostTurns * numberOfPlayers + 1);
+	   }
+	   
+	   if(p2LostTurns > 0){
+		   currentGame.getPlayer(1).loseTurns(p2LostTurns * numberOfPlayers + 1);
+	   }
+	   
+	   if(p3LostTurns > 0 && numberOfPlayers >= 3){
+		   currentGame.getPlayer(2).loseTurns(p3LostTurns * numberOfPlayers + 1);
+	   }
+	   
+	   if(p3LostTurns > 0 && numberOfPlayers == 4){
+		   currentGame.getPlayer(3).loseTurns(p4LostTurns * numberOfPlayers + 1);
+	   }
+  	};	
 }
 
 class RevealActionTilesActionCard {
@@ -399,10 +416,6 @@ class RevealActionTilesActionCard {
 //@Override
 	public Game.Mode getActionCardGameMode() {
 		return Game.Mode.GAME_REVEALACTIONTILESACTIONCARD;
-	};
-	
-	public void play(){
-		
 	};
 }
 
@@ -413,10 +426,15 @@ class TurnActionTilesInactiveActionCard {
 		return Game.Mode.GAME_TURNACTIONTILESINACTIVEACTIONCARD;
 	};
 	
-	public void play(){
-		
-	};
-
+	 public void play(){
+	   Game currentGame = super.getDeck().getGame();
+	   List<Tile> tiles = currentGame.getTiles();
+	   for(Tile aTile:tiles) {
+		   if (aTile instanceof ActionTile){
+			   ((ActionTile) aTile).deactivate();
+		   }
+	   }
+  	};
 }
 
 class WinTileHintActionCard {
@@ -427,8 +445,52 @@ class WinTileHintActionCard {
 		return Game.Mode.GAME_WINTILEHINTACTIONCARD;
 	};
 	
-	public boolean play(Tile aTile){
-		
+	public boolean play(Tile aTile) {
+	   	Game currentGame = super.getDeck().getGame();
+	    boolean hint = false;
+	    Tile topTile = null;
+	    Tile bottomTile = null;
+	    Tile rightTile = null;
+	    Tile leftTile = null;
+			for (Tile tileInGame : currentGame.getTiles()){
+				if ((aTile.getY() == tileInGame.getY() - 1) && (aTile.getX() == tileInGame.getX())){
+					topTile = tileInGame;
+				}
+				if (aTile.getY() == tileInGame.getY() + 1 && (aTile.getX() == tileInGame.getX())){
+					bottomTile = tileInGame;
+				}
+				if (aTile.getX() == tileInGame.getX() - 1 && (aTile.getY() == tileInGame.getY())){
+					leftTile = tileInGame;
+				}
+				if (aTile.getX() == tileInGame.getX() + 1 && (aTile.getY() == tileInGame.getY())){
+					rightTile = tileInGame;
+				}
+			}
+			if (aTile instanceof WinTile) {
+				hint  = true;
+			}
+			if (topTile != null){
+				if (topTile instanceof WinTile) {
+					hint = true;
+				}
+			}
+			if (bottomTile != null) {
+				
+				if (bottomTile instanceof WinTile) {
+					hint = true;
+				}
+			}
+			if (rightTile != null) {
+				if (rightTile instanceof WinTile) {
+					hint = true;
+				}				
+			}
+			if (leftTile != null) {
+				if (leftTile instanceof WinTile) {
+					hint = true;
+				}
+			}
+			return hint;			
 	};
 
 }
@@ -441,8 +503,12 @@ class SendBackToStartActionCard {
 		return Game.Mode.GAME_SENDBACKTOSTARTACTIONCARD;
 	};
 	public void play(int index){
-		
-	};
+	   Game currentGame = super.getDeck().getGame();
+	   Player chosenPlayer;
+	   chosenPlayer = currentGame.getPlayer(index);
+	   Tile startingTile = chosenPlayer.getStartingTile();
+	   chosenPlayer.setCurrentTile(startingTile);
+  	};
 
 }
 
@@ -455,10 +521,11 @@ class TeleportOtherActionCard {
 	};
 	
 	public void play(int playerNumber, Tile aTile){
-    Game currentGame = super.getDeck().getGame();
-    Player chosenPlayer = currentGame.getPlayer(playerNumber);
-    chosenPlayer.setCurrentTile(aTile);
-  }
+    	Game currentGame = super.getDeck().getGame();
+    	Player chosenPlayer = currentGame.getPlayer(playerNumber);
+    	chosenPlayer.setCurrentTile(aTile);
+    	aTile.setHasBeenVisited(true);
+  	}
 
 
 }
