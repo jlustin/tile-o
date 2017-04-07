@@ -50,32 +50,6 @@ class Game {
 		return possibleMoves;
 	};
 	
-	public void determineNextPlayer() {
-		boolean found = false;
-		Player player = getCurrentPlayer();
-		Player nextPlayer;
-		while(!found) {
-			try {
-				nextPlayer = getPlayer(indexOfPlayer(player) + 1);
-			}
-			catch (IndexOutOfBoundsException e) {
-				nextPlayer = getPlayer(0);
-			}
-			if (nextPlayer.getPlayerStatus() == PlayerStatus.Active) {
-				found = true;
-			}
-			else {
-				nextPlayer.takeTurn();
-			}
-			player = nextPlayer;
-		}
-		List<Player> pList = getPlayers();
-		for (Player p: pList) {
-			p.takeTurn();
-		}
-		setCurrentPlayer(player);		
-	};
-	
 	public void updateTileStatus() {
 		for(Tile tile: getTiles()) {
 			if (tile instanceof ActionTile) {
@@ -84,14 +58,35 @@ class Game {
 		}
 	};
 		
-	public void setNextPlayer() {			
-		determineNextPlayer();
-		updateTileStatus();
-	};
+	public void setNextPlayer(){
+	   Player player = getCurrentPlayer();
+	   Player nextPlayer;
+	   
+	   List<Player> pList = getPlayers();
+	   for (Player p: pList) {
+		   p.takeTurn();
+	   }
+	   updateTileStatus();
+	   
+	   try {
+		   nextPlayer = getPlayer(indexOfPlayer(player) + 1);
+	   }
+	   catch (IndexOutOfBoundsException e) {
+		   nextPlayer = getPlayer(0);
+	   }
+	   
+	   if(nextPlayer.getPlayerStatus() == PlayerStatus.Active) {
+		   setCurrentPlayer(nextPlayer);
+	   }
+	   else if (nextPlayer.getPlayerStatus() == PlayerStatus.Inactive){ //must be inactive
+		   setCurrentPlayer(nextPlayer);
+		   setNextPlayer();
+	   } 
+ 	};
 	
 	public Game clone() {
     	return (Game) Cloner.clone(this);
-  	}
+  	};
 }
 
 class Player {
@@ -247,9 +242,8 @@ class Deck {
 	      aCard.delete();
 	      cards.remove(aCard);
 	    }
-	    
 	    currentCard = null;
-   }
+   	};
 }
 
 class ActionCard {
@@ -525,9 +519,7 @@ class TeleportOtherActionCard {
     	Player chosenPlayer = currentGame.getPlayer(playerNumber);
     	chosenPlayer.setCurrentTile(aTile);
     	aTile.setHasBeenVisited(true);
-  	}
-
-
+  	};
 }
 
 
