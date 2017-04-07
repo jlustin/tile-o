@@ -108,6 +108,8 @@ public class TileODesignPage extends JFrame {
 	private JButton startGameBtn;
 	private JLabel unclearLbl;
 	private JButton helpBtn;
+	private JLabel lblNewLabel;
+	private JLabel lblInDesignMode;
 	
 	
 	
@@ -306,6 +308,16 @@ public class TileODesignPage extends JFrame {
 				helpPop.setVisible(true);
 			}
 		});
+	    
+	    JButton btnStartClone = new JButton("Start & Clone");
+	    btnStartClone.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    	}
+	    });
+	    
+	    lblNewLabel = new JLabel("Cloned game has index currentIndex + 1,");
+	    
+	    lblInDesignMode = new JLabel("in Design mode");
 	    GroupLayout gl_savePnl = new GroupLayout(savePnl);
 	    gl_savePnl.setHorizontalGroup(
 	    	gl_savePnl.createParallelGroup(Alignment.LEADING)
@@ -316,36 +328,49 @@ public class TileODesignPage extends JFrame {
 	    					.addComponent(saveLbl))
 	    				.addGroup(gl_savePnl.createSequentialGroup()
 	    					.addGap(31)
-	    					.addComponent(saveBtn)))
-	    			.addGroup(gl_savePnl.createParallelGroup(Alignment.LEADING)
-	    				.addGroup(gl_savePnl.createSequentialGroup()
-	    					.addGap(18)
-	    					.addComponent(startGameCBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-	    					.addPreferredGap(ComponentPlacement.RELATED)
-	    					.addComponent(startGameBtn)
-	    					.addGap(30)
-	    					.addComponent(helpBtn))
-	    				.addGroup(gl_savePnl.createSequentialGroup()
-	    					.addGap(30)
+	    					.addGroup(gl_savePnl.createParallelGroup(Alignment.LEADING)
+	    						.addGroup(gl_savePnl.createSequentialGroup()
+	    							.addGap(6)
+	    							.addComponent(unclearLbl))
+	    						.addGroup(gl_savePnl.createParallelGroup(Alignment.TRAILING)
+	    							.addComponent(helpBtn)
+	    							.addComponent(saveBtn)))))
+	    			.addGap(36)
+	    			.addGroup(gl_savePnl.createParallelGroup(Alignment.LEADING, false)
+	    				.addComponent(lblNewLabel, Alignment.TRAILING)
+	    				.addGroup(Alignment.TRAILING, gl_savePnl.createParallelGroup(Alignment.LEADING)
 	    					.addComponent(startGameLbl)
-	    					.addGap(52)
-	    					.addComponent(unclearLbl)))
-	    			.addGap(32))
+	    					.addGroup(gl_savePnl.createSequentialGroup()
+	    						.addComponent(startGameCBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+	    						.addGap(18)
+	    						.addComponent(startGameBtn)))
+	    				.addGroup(Alignment.TRAILING, gl_savePnl.createSequentialGroup()
+	    					.addComponent(lblInDesignMode)
+	    					.addPreferredGap(ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+	    					.addComponent(btnStartClone)))
+	    			.addContainerGap(30, Short.MAX_VALUE))
 	    );
 	    gl_savePnl.setVerticalGroup(
 	    	gl_savePnl.createParallelGroup(Alignment.TRAILING)
 	    		.addGroup(gl_savePnl.createSequentialGroup()
-	    			.addGap(19)
+	    			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 	    			.addGroup(gl_savePnl.createParallelGroup(Alignment.BASELINE)
 	    				.addComponent(saveLbl)
-	    				.addComponent(startGameLbl)
-	    				.addComponent(unclearLbl))
+	    				.addComponent(startGameLbl))
 	    			.addPreferredGap(ComponentPlacement.RELATED)
 	    			.addGroup(gl_savePnl.createParallelGroup(Alignment.BASELINE)
 	    				.addComponent(saveBtn)
-	    				.addComponent(startGameCBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 	    				.addComponent(startGameBtn)
-	    				.addComponent(helpBtn))
+	    				.addComponent(startGameCBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+	    			.addPreferredGap(ComponentPlacement.RELATED)
+	    			.addGroup(gl_savePnl.createParallelGroup(Alignment.BASELINE)
+	    				.addComponent(unclearLbl)
+	    				.addComponent(lblNewLabel))
+	    			.addPreferredGap(ComponentPlacement.RELATED)
+	    			.addGroup(gl_savePnl.createParallelGroup(Alignment.LEADING)
+	    				.addComponent(helpBtn)
+	    				.addComponent(btnStartClone)
+	    				.addComponent(lblInDesignMode))
 	    			.addContainerGap())
 	    );
 	    savePnl.setLayout(gl_savePnl);
