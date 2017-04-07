@@ -35,6 +35,7 @@ public class RevealTilesPopOut extends JFrame{
 	private JLabel lblAllTheAction;
 	private JLabel errorLbl;
 	private String error = "";
+	private JLabel lblCountdown;
 	private JButton revealBtn;
 	private JButton btnClose;
 	
@@ -84,10 +85,10 @@ public class RevealTilesPopOut extends JFrame{
 					    public void run() {
 					    	try {
 					    		for (int i = 5; i > 0; i--){
-					    			errorLbl.setText(Integer.toString(i));
+					    			lblCountdown.setText(Integer.toString(i));
 					    			Thread.sleep(1000);
 					    		}
-					    		errorLbl.setText("");
+					    		lblCountdown.setText("");
 							} catch (InterruptedException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -129,6 +130,10 @@ public class RevealTilesPopOut extends JFrame{
 			}
 		});
 		
+		lblCountdown = new JLabel("");
+		lblCountdown.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		lblCountdown.setForeground(Color.RED);
+		
 		
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -147,15 +152,19 @@ public class RevealTilesPopOut extends JFrame{
 					.addComponent(lblYouHaveDrawn)
 					.addGap(60))
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(75)
+					.addGap(49)
 					.addComponent(revealBtn)
-					.addGap(70)
+					.addGap(84)
 					.addComponent(btnClose)
-					.addContainerGap(98, Short.MAX_VALUE))
+					.addContainerGap(110, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap(81, Short.MAX_VALUE)
 					.addComponent(errorLbl, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
 					.addGap(72))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(210)
+					.addComponent(lblCountdown)
+					.addContainerGap(230, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -168,7 +177,9 @@ public class RevealTilesPopOut extends JFrame{
 					.addComponent(lblAllTheAction)
 					.addGap(29)
 					.addComponent(errorLbl)
-					.addPreferredGap(ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+					.addComponent(lblCountdown)
+					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(revealBtn)
 						.addComponent(btnClose))
@@ -176,5 +187,4 @@ public class RevealTilesPopOut extends JFrame{
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
-	
 }
