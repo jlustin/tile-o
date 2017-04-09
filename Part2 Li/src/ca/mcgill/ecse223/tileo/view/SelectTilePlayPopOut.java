@@ -115,6 +115,8 @@ public class SelectTilePlayPopOut extends JDialog {
 								TileOPlayPage.getGrid().selectedConnection = null;
 								TileOPlayPage.getGrid().selectedTile = null;
 								
+								TileOPlayPage.rollDieOpen = false;
+								
 								close();
 							} catch (InvalidInputException e) {
 								throw new RuntimeException(e.getMessage());

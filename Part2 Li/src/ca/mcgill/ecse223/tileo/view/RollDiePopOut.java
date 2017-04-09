@@ -51,7 +51,7 @@ public class RollDiePopOut extends JDialog {
 			cancelButton = new JButton("Roll Die");
 			cancelButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					
+//					TileOPlayPage.rollDieOpen = true;
 					pmc.playRollDieActionCard();
 					TileOPlayPage.btnRollDie.doClick();
 					TileOPlayPage.refreshData();

@@ -40,11 +40,13 @@ class Game {
 	const Integer SpareConnectionPieces = 32;
 	Integer currentConnectionPieces;
 	const Integer NumberOfActionCards = 32;
+	lazy Integer currentRolledNumber;
 	
 	public List<Tile> rollDie() {
 		List<Tile> possibleMoves = new ArrayList<Tile>();
-		Die die =this.getDie();
+		Die die = this.getDie();
 		int number = die.roll();
+		currentRolledNumber = number;
 		Player currentPlayer =this.getCurrentPlayer();	  
 		possibleMoves = currentPlayer.getPossibleMoves(number);
 		return possibleMoves;

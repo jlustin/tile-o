@@ -26,6 +26,7 @@ public class Game implements Serializable
 
   //Game Attributes
   private int currentConnectionPieces;
+  private int currentRolledNumber;
 
   //Game State Machines
   public enum Mode { DESIGN, GAME, GAME_WON, GAME_ROLLDIEACTIONCARD, GAME_CONNECTTILESACTIONCARD, GAME_REMOVECONNECTIONACTIONCARD, GAME_TELEPORTACTIONCARD, GAME_LOSETURNACTIONCARD, GAME_REVEALACTIONCARD, GAME_LOSETURNRANDOMLYACTIONCARD, GAME_REVEALACTIONTILESACTIONCARD, GAME_TURNACTIONTILESINACTIVEACTIONCARD, GAME_WINTILEHINTACTIONCARD, GAME_SENDBACKTOSTARTACTIONCARD, GAME_TELEPORTOTHERACTIONCARD }
@@ -48,6 +49,7 @@ public class Game implements Serializable
   public Game(int aCurrentConnectionPieces, Deck aDeck, Die aDie, TileO aTileO)
   {
     currentConnectionPieces = aCurrentConnectionPieces;
+    currentRolledNumber = 0;
     players = new ArrayList<Player>();
     tiles = new ArrayList<Tile>();
     connections = new ArrayList<Connection>();
@@ -72,6 +74,7 @@ public class Game implements Serializable
   public Game(int aCurrentConnectionPieces, TileO aTileO)
   {
     currentConnectionPieces = aCurrentConnectionPieces;
+    currentRolledNumber = 0;
     players = new ArrayList<Player>();
     tiles = new ArrayList<Tile>();
     connections = new ArrayList<Connection>();
@@ -96,9 +99,22 @@ public class Game implements Serializable
     return wasSet;
   }
 
+  public boolean setCurrentRolledNumber(int aCurrentRolledNumber)
+  {
+    boolean wasSet = false;
+    currentRolledNumber = aCurrentRolledNumber;
+    wasSet = true;
+    return wasSet;
+  }
+
   public int getCurrentConnectionPieces()
   {
     return currentConnectionPieces;
+  }
+
+  public int getCurrentRolledNumber()
+  {
+    return currentRolledNumber;
   }
 
   public String getModeFullName()
@@ -574,17 +590,18 @@ public class Game implements Serializable
     placeholderTileO.removeGame(this);
   }
 
-  // line 45 "../../../../../TileO (updated April3).ump"
+  // line 46 "../../../../../TileO (updated April3).ump"
    public List<Tile> rollDie(){
     List<Tile> possibleMoves = new ArrayList<Tile>();
 		Die die = this.getDie();
 		int number = die.roll();
-		Player currentPlayer = this.getCurrentPlayer();	  
+		currentRolledNumber = number;
+		Player currentPlayer =this.getCurrentPlayer();	  
 		possibleMoves = currentPlayer.getPossibleMoves(number);
 		return possibleMoves;
   }
 
-  // line 54 "../../../../../TileO (updated April3).ump"
+  // line 56 "../../../../../TileO (updated April3).ump"
    public void updateTileStatus(){
     for(Tile tile: getTiles()) {
 			if (tile instanceof ActionTile) {
@@ -593,7 +610,7 @@ public class Game implements Serializable
 		}
   }
 
-  // line 62 "../../../../../TileO (updated April3).ump"
+  // line 64 "../../../../../TileO (updated April3).ump"
    public void setNextPlayer(){
     Player player = getCurrentPlayer();
 	   Player nextPlayer;
@@ -620,7 +637,7 @@ public class Game implements Serializable
 	   }
   }
 
-  // line 88 "../../../../../TileO (updated April3).ump"
+  // line 90 "../../../../../TileO (updated April3).ump"
    public Game clone(){
     return (Game) Cloner.clone(this);
   }
@@ -630,7 +647,8 @@ public class Game implements Serializable
   {
     String outputString = "";
     return super.toString() + "["+
-            "currentConnectionPieces" + ":" + getCurrentConnectionPieces()+ "]" + System.getProperties().getProperty("line.separator") +
+            "currentConnectionPieces" + ":" + getCurrentConnectionPieces()+ "," +
+            "currentRolledNumber" + ":" + getCurrentRolledNumber()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "deck = "+(getDeck()!=null?Integer.toHexString(System.identityHashCode(getDeck())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "die = "+(getDie()!=null?Integer.toHexString(System.identityHashCode(getDie())):"null") + System.getProperties().getProperty("line.separator") +
             "  " + "currentPlayer = "+(getCurrentPlayer()!=null?Integer.toHexString(System.identityHashCode(getCurrentPlayer())):"null") + System.getProperties().getProperty("line.separator") +
