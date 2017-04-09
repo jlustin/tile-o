@@ -40,9 +40,10 @@ public class SelectTilePlayPopOut extends JDialog {
 	public void close() { 
 		this.setVisible(false);
 		chosenTile = null;
+		TileOPlayPage.getGrid().aTileIsSelected = false;
 		error = "";
 		errorMessage.setText("");
-//	    this.dispose();
+	    this.dispose();
 	}
 	
 	public SelectTilePlayPopOut() {
