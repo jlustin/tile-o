@@ -83,6 +83,7 @@ public class RevealPopOut extends JFrame{
 						try {
 							pmc.playRevealActionCard(chosenTile);
 							tileType = pmc.getRevealedTile();
+							errorLbl.setText("");
 							chosenTileLbl.setText("The chosen tile is of type: " + tileType);
 							chosen = 1;
 						}

@@ -58,12 +58,16 @@ public class TileOPlayPage extends JFrame {
 //	private static LoseTurnRandomlyPopOut loseTurnRandomlyPO = new LoseTurnRandomlyPopOut();
 	
 	private JPanel contentPane;
+	private JSplitPane splitPane;
 	private static JLabel playerTurnLbl;
 	private static JLabel modeLbl;
 	private static JLabel errorLbl;
 	static JButton btnRollDie;
 	private static JLabel gameModeLbl;
+	private JButton saveBtn;
 	
+	private static JLabel numberLbl;
+	private static JLabel rollLbl;
 	
 	private static JLabel p1InactivityLbl = new JLabel("");
 	private static JLabel p2InactivityLbl = new JLabel("");
@@ -101,7 +105,7 @@ public class TileOPlayPage extends JFrame {
 
 		contentPane.setVisible(true);
 		
-		JSplitPane splitPane = new JSplitPane();
+		splitPane = new JSplitPane();
 		splitPane.setSize(1200, 720);
 	    splitPane.setDividerSize(0);
 	    splitPane.setDividerLocation(710);
@@ -111,14 +115,14 @@ public class TileOPlayPage extends JFrame {
 	    
 	    playerTurnLbl = new JLabel();
 	    playerTurnLbl.setText("It is currently player X's turn.");
-	    playerTurnLbl.setFont(new Font("Lucida Grande", Font.BOLD, 14));
+	    playerTurnLbl.setFont(new Font("Lucida Grande", Font.BOLD, 22));
 	    
 	    errorLbl = new JLabel("");
 	    errorLbl.setForeground(Color.RED);
 	    
-	    modeLbl = new JLabel("");
+	    modeLbl = new JLabel("Mode");
 	    
-	    JButton saveBtn = new JButton("Save");
+	    saveBtn = new JButton("Save");
 	    saveBtn.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent arg0) {
 	    		if(pmc.getMode().equals(PlayController.Mode.Ready) || pmc.getMode().equals(PlayController.Mode.Roll)){
@@ -170,6 +174,12 @@ public class TileOPlayPage extends JFrame {
 	    });
 	    
 	    gameModeLbl = new JLabel("Game.Mode");
+	    
+	    numberLbl = new JLabel("5");
+	    numberLbl.setFont(new Font("Lucida Grande", Font.PLAIN, 26));
+	    
+	    rollLbl = new JLabel("You rolled a..");
+	    rollLbl.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 //	    p1InactivityLbl.setText("Player1 inactivity:");
 //	    
 //	    p2InactivityLbl.setText("Player 2 inactivity:");
@@ -181,54 +191,56 @@ public class TileOPlayPage extends JFrame {
 	    gl_contentPane.setHorizontalGroup(
 	    	gl_contentPane.createParallelGroup(Alignment.LEADING)
 	    		.addGroup(gl_contentPane.createSequentialGroup()
-	    			.addGap(30)
-	    			.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-	    				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-	    					.addComponent(p2InactivityLbl)
-	    					.addComponent(p1InactivityLbl)
-	    					.addComponent(p3InactivityLbl)
-	    					.addComponent(p4InactivityLbl))
-	    				.addGroup(gl_contentPane.createSequentialGroup()
-	    					.addComponent(saveBtn)
-	    					.addGap(33)))
-	    			.addContainerGap(350, Short.MAX_VALUE))
-	    		.addGroup(gl_contentPane.createSequentialGroup()
-	    			.addGap(22)
 	    			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 	    				.addGroup(gl_contentPane.createSequentialGroup()
-	    					.addComponent(btnRollDie)
-	    					.addContainerGap())
-	    				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-	    					.addGroup(gl_contentPane.createSequentialGroup()
-	    						.addComponent(gameModeLbl)
-	    						.addContainerGap())
-	    					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-	    						.addGroup(gl_contentPane.createSequentialGroup()
-	    							.addComponent(modeLbl)
-	    							.addContainerGap())
+	    					.addGap(30)
+	    					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+	    						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+	    							.addComponent(p2InactivityLbl)
+	    							.addComponent(p1InactivityLbl)
+	    							.addComponent(p3InactivityLbl)
+	    							.addComponent(p4InactivityLbl))
 	    						.addGroup(gl_contentPane.createSequentialGroup()
 	    							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-	    								.addComponent(playerTurnLbl)
-	    								.addComponent(errorLbl))
-	    							.addContainerGap(256, Short.MAX_VALUE))))))
+	    								.addComponent(btnRollDie)
+	    								.addComponent(saveBtn))
+	    							.addGap(15))))
+	    				.addGroup(gl_contentPane.createSequentialGroup()
+	    					.addGap(22)
+	    					.addComponent(errorLbl)
+	    					.addGap(18)
+	    					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+	    						.addComponent(playerTurnLbl)
+	    						.addComponent(gameModeLbl)
+	    						.addComponent(modeLbl)))
+	    				.addGroup(gl_contentPane.createSequentialGroup()
+	    					.addGap(179)
+	    					.addComponent(rollLbl))
+	    				.addGroup(gl_contentPane.createSequentialGroup()
+	    					.addGap(232)
+	    					.addComponent(numberLbl)))
+	    			.addContainerGap(121, Short.MAX_VALUE))
 	    );
 	    gl_contentPane.setVerticalGroup(
 	    	gl_contentPane.createParallelGroup(Alignment.LEADING)
 	    		.addGroup(gl_contentPane.createSequentialGroup()
-	    			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+	    			.addGap(25)
+	    			.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 	    				.addGroup(gl_contentPane.createSequentialGroup()
-	    					.addGap(46)
-	    					.addComponent(errorLbl))
-	    				.addGroup(gl_contentPane.createSequentialGroup()
-	    					.addGap(17)
-	    					.addComponent(playerTurnLbl)))
-	    			.addPreferredGap(ComponentPlacement.RELATED)
+	    					.addComponent(errorLbl)
+	    					.addGap(22))
+	    				.addComponent(playerTurnLbl))
+	    			.addGap(34)
 	    			.addComponent(modeLbl)
-	    			.addGap(62)
-	    			.addComponent(gameModeLbl)
 	    			.addGap(29)
+	    			.addComponent(gameModeLbl)
+	    			.addGap(18)
 	    			.addComponent(btnRollDie)
-	    			.addGap(189)
+	    			.addGap(104)
+	    			.addComponent(rollLbl)
+	    			.addGap(18)
+	    			.addComponent(numberLbl)
+	    			.addGap(29)
 	    			.addComponent(p1InactivityLbl)
 	    			.addPreferredGap(ComponentPlacement.RELATED)
 	    			.addComponent(p2InactivityLbl)
@@ -238,7 +250,7 @@ public class TileOPlayPage extends JFrame {
 	    			.addComponent(p4InactivityLbl)
 	    			.addGap(155)
 	    			.addComponent(saveBtn)
-	    			.addContainerGap(86, Short.MAX_VALUE))
+	    			.addContainerGap(115, Short.MAX_VALUE))
 	    );
 	    contentPane.setLayout(gl_contentPane);
 
@@ -266,6 +278,11 @@ public class TileOPlayPage extends JFrame {
 			playerTurnLbl.setText("It is currently player " + currentPlayerNb + "'s turn.");
 			modeLbl.setText("CurrentMode: " + pmc.getModeFullName());
 			gameModeLbl.setText("CurrentGameMode: " + currentGame.getModeFullName());
+			
+			if (pmc.getMode() == PlayController.Mode.Move){
+				rollLbl.setVisible(true);
+				numberLbl.setText(text);
+			}
 			
 //			p1InactivityLbl.setText("Player 1 inactivity: " + currentGame.getPlayer(0).getTurnsUntilActive());
 //			p2InactivityLbl.setText("Player 2 inactivity: " + currentGame.getPlayer(1).getTurnsUntilActive());

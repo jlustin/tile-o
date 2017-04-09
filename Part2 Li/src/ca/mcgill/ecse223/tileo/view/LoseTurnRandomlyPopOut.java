@@ -82,7 +82,7 @@ public class LoseTurnRandomlyPopOut extends JDialog {
 		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
-			JLabel youHaveDrawnLbl = new JLabel("You have drawn a Lose Turn Randomy Action Card!");
+			JLabel youHaveDrawnLbl = new JLabel("You have drawn a Lose Turn Randomly Action Card!");
 			GridBagConstraints gbc_youHaveDrawnLbl = new GridBagConstraints();
 			gbc_youHaveDrawnLbl.insets = new Insets(0, 0, 5, 5);
 			gbc_youHaveDrawnLbl.gridx = 1;

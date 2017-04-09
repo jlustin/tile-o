@@ -177,7 +177,7 @@ public class TileODesignPage extends JFrame {
 				if(!grid.aConnectionIsSelected){
 					error = "Please select a connection to delete.";
 				}			
-				else {
+				else if (grid.aConnectionIsSelected) {
 					try 
 					{
 						dmc.removeConnection(grid.selectedConnection);
@@ -583,10 +583,10 @@ public class TileODesignPage extends JFrame {
 	    		if (!grid.aTileIsSelected){
 	    			error = "Please select a tile to delete.";	    			
 	    		}
-	    		if (grid.selectedTile.hasConnections()){
+	    		if (grid.aTileIsSelected && grid.selectedTile.hasConnections()){
 	    			error = "You cannot delete a tile that has connections.";
 	    		}
-	    		else {
+	    		if (error.length() == 0 && grid.aTileIsSelected) {
 	    			try {
 	    				dmc.removeTileFromGame(grid.selectedTile);
 	    				grid.selectedTile = null;	
@@ -596,6 +596,9 @@ public class TileODesignPage extends JFrame {
 	    			catch (InvalidInputException e1) {
 	    				throw new RuntimeException(e1.getMessage());
 	    			}
+	    		}
+	    		else {	    			
+	    			errorLbl.setText(error);
 	    		}
 	    		refreshData();	    		
 	    	}

@@ -577,9 +577,9 @@ public class Game implements Serializable
   // line 45 "../../../../../TileO (updated April3).ump"
    public List<Tile> rollDie(){
     List<Tile> possibleMoves = new ArrayList<Tile>();
-		Die die =this.getDie();
+		Die die = this.getDie();
 		int number = die.roll();
-		Player currentPlayer =this.getCurrentPlayer();	  
+		Player currentPlayer = this.getCurrentPlayer();	  
 		possibleMoves = currentPlayer.getPossibleMoves(number);
 		return possibleMoves;
   }

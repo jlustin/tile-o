@@ -174,17 +174,7 @@ public class TilePanelPlay extends JPanel{
 					Rectangle2D r = tRectangles.get(aTile);
 					g2d.setColor(Color.GRAY);
 					g2d.fill(r);
-				}
-				
-				//displays the selected tile
-				if (selectedTile != null && selectedTile.equals(aTile)) {
-					aTileIsSelected = true;
-					Rectangle2D rectangle = tRectangles.get(aTile);
-					
-					g2d.setColor(Color.PINK); 
-				
-					g2d.fill(rectangle);						
-				}				
+				}			
 				
 				//show possible moves
 				if(isAPlayerTurn){	//added by Li
@@ -196,6 +186,16 @@ public class TilePanelPlay extends JPanel{
 						}
 					}
 				}
+				
+				//displays the selected tile
+				if (selectedTile != null && selectedTile.equals(aTile)) {
+					aTileIsSelected = true;
+					Rectangle2D rectangle = tRectangles.get(aTile);
+					
+					g2d.setColor(Color.PINK); 
+				
+					g2d.fill(rectangle);						
+				}	
 				
 				//inactivity period show
 //				if (aTile instanceof ActionTile) {
