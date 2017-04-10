@@ -7,6 +7,7 @@ import ca.mcgill.ecse223.tileo.model.ActionTile;
 import ca.mcgill.ecse223.tileo.model.Connection;
 import ca.mcgill.ecse223.tileo.model.Game;
 import ca.mcgill.ecse223.tileo.model.NormalTile;
+import ca.mcgill.ecse223.tileo.model.Player;
 import ca.mcgill.ecse223.tileo.model.Tile;
 import ca.mcgill.ecse223.tileo.model.TileO;
 import ca.mcgill.ecse223.tileo.model.WinTile;
@@ -180,8 +181,8 @@ public class TilePanelDesign extends JPanel{
 					String inactive = String.valueOf(((ActionTile) aTile).getInactivityPeriod());
 					g2d.setColor(Color.BLACK);
 					g2d.drawString(inactive,
-							(int) r.getCenterX(), 
-							(int) r.getCenterY());
+							(int) r.getCenterX()+5, 
+							(int) r.getCenterY()+5);
 				}
 				//-------------end of inactivity period
 				
@@ -195,6 +196,15 @@ public class TilePanelDesign extends JPanel{
 				Rectangle2D rectangle = tRectangles.get(selectedTile);				
 				g2d.setColor(Color.PINK);			
 				g2d.fill(rectangle);
+			}
+			
+			for (Player aPlayer: myGame.getPlayers()){
+				Tile cTile = aPlayer.getCurrentTile();
+				Rectangle2D r = tRectangles.get(cTile);
+				String number = String.valueOf(aPlayer.getNumber());
+				
+				g2d.setColor(Color.WHITE);
+				g2d.drawString(number, (int) r.getCenterX()-13, (int) r.getCenterY()+5);
 			}
 			
 			//iterates through the connections of the game
