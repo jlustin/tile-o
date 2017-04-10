@@ -294,7 +294,8 @@ public class DeckPopOut extends JFrame {
 		int winHintCNum;
 		int total = 0;
 		
-		int numbers[] = new int[]{connectTilesCNum = 0,
+		int numbers[] = new int[]{
+				connectTilesCNum = 0,
 				loseTurnCNum = 0,
 				loseTurnRdmCNum = 0,
 				removeConnectionCNum = 0,
@@ -334,6 +335,7 @@ public class DeckPopOut extends JFrame {
 						 numbers[9], numbers[10], numbers[11]);
 				error = "Deck created!";
 				errorMessage.setText(error);
+				error = "";
 
 				for (int i=0; i<cards.length; i++){
 					cards[i].setText("");
@@ -343,6 +345,7 @@ public class DeckPopOut extends JFrame {
 				error = e.getMessage();
 			}
 		}
+		error = "";
 	}
 }
 	

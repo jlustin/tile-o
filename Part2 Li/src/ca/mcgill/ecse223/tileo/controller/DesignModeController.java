@@ -291,7 +291,8 @@ public class DesignModeController {
 	 * 9. Select 32 cards from predefined choices
 	 * Charles
 	 */
-	public void createDeck(int connectTiles, 
+	public void createDeck(
+			int connectTiles, 
 			int loseTurn,
 			int loseTurnRdm,
 			int removeConnection,

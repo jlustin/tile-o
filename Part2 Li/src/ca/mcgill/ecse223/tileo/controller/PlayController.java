@@ -627,9 +627,6 @@ public class PlayController
   // line 125 "../../../../../PlayStateUpdatedApril3.ump"
    private void doStartGame(Game selectedGame, boolean isCloned) throws InvalidInputException{
     //TODO: CHARLES
-	   	if(isCloned){
-	   		cloneGame();
-	   	}
 		String error = "";
 		if(selectedGame.getDeck().numberOfCards() != 32) {
 			error = "The action cards in the deck must be equal to 32.";
@@ -648,7 +645,7 @@ public class PlayController
 		
 		TileO tileO = TileOApplication.getTileO();
 		try {
-			tileO.setCurrentGame(selectedGame);
+//			tileO.setCurrentGame(selectedGame);
 			Deck deck = selectedGame.getDeck();
 			deck.shuffle();
 			for(int i = 0 ; i < selectedGame.numberOfTiles(); i++){
@@ -664,11 +661,16 @@ public class PlayController
 			selectedGame.setCurrentPlayer(selectedGame.getPlayers().get(0));
 			selectedGame.setCurrentConnectionPieces(Game.SpareConnectionPieces);
 			selectedGame.setMode(Game.Mode.GAME);
+			tileO.setCurrentGame(selectedGame);
 		}
 		catch(RuntimeException e){
 			error = e.getMessage();
 			throw new InvalidInputException(error);
 		}
+		
+		if(isCloned){
+	   		cloneGame();
+	   	}
   }
 
 
