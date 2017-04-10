@@ -199,12 +199,14 @@ public class TilePanelDesign extends JPanel{
 			}
 			
 			for (Player aPlayer: myGame.getPlayers()){
-				Tile cTile = aPlayer.getCurrentTile();
-				Rectangle2D r = tRectangles.get(cTile);
-				String number = String.valueOf(aPlayer.getNumber());
-				
-				g2d.setColor(Color.WHITE);
-				g2d.drawString(number, (int) r.getCenterX()-13, (int) r.getCenterY()+5);
+				if (aPlayer.hasStartingTile()){
+					Tile cTile = aPlayer.getCurrentTile();
+					Rectangle2D r = tRectangles.get(cTile);
+					String number = String.valueOf(aPlayer.getNumber());
+					
+					g2d.setColor(Color.WHITE);
+					g2d.drawString(number, (int) r.getCenterX()-13, (int) r.getCenterY()+5);
+				}
 			}
 			
 			//iterates through the connections of the game
